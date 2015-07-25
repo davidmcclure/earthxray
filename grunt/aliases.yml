@@ -1,0 +1,8 @@
+
+compile:
+  - jade
+  - browserify
+  - less
+
+server:
+  - connect

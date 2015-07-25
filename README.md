@@ -1,3 +1,3 @@
 # Earth X-ray
 
-See through the world!
+It's full of stars!

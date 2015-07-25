@@ -7,5 +7,11 @@
     "email": "davidwilliammcclure@gmail.com",
     "url": "http://dclure.org"
   },
-  "license": "Apache"
+  "license": "Apache",
+  "devDependencies": {
+    "grunt": "^0.4.5",
+    "jit-grunt": "^0.9.1",
+    "load-grunt-config": "^0.17.2",
+    "time-grunt": "^1.2.1"
+  }
 }

@@ -1,0 +1,11 @@
+{
+  "name": "earthxray",
+  "version": "0.0.0",
+  "description": "See through the world.",
+  "author": {
+    "name": "David McClure",
+    "email": "davidwilliammcclure@gmail.com",
+    "url": "http://dclure.org"
+  },
+  "license": "Apache"
+}

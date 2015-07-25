@@ -4,7 +4,7 @@ module.exports = {
 
   dist: {
     options: {
-      base: '.',
+      base: '<%= site %>',
       livereload: true
     }
   }

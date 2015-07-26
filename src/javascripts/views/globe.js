@@ -21,7 +21,6 @@ module.exports = Backbone.View.extend({
     this._initResize();
     this._initSphere();
 
-    this.fit()
     this.render()
 
   },
@@ -53,11 +52,11 @@ module.exports = Backbone.View.extend({
   _initResize: function() {
 
     // Debounce the viewport fitter.
-    var resize = _.debounce(this.fit.bind(this), 500);
+    var resize = _.debounce(this.fitWindow.bind(this), 500);
 
     // Bind to resize.
     $(window).resize(resize);
-    this.fit()
+    this.fitWindow()
 
   },
 
@@ -86,7 +85,7 @@ module.exports = Backbone.View.extend({
   /**
    * Fit the scene to the container.
    */
-  fit: function() {
+  fitWindow: function() {
 
     // Measure container.
     var w = this.$el.width();
@@ -94,7 +93,7 @@ module.exports = Backbone.View.extend({
 
     // Create the camera.
     this.camera = new THREE.PerspectiveCamera(75, w/h, 0.1, 1000);
-    this.camera.position.z = 3;
+    this.camera.position.z = 2;
 
     // Size the renderer.
     this.renderer.setSize(w, h);
@@ -109,9 +108,8 @@ module.exports = Backbone.View.extend({
 
     window.requestAnimationFrame(this.render.bind(this));
 
-    // TODO|dev: Spin the sphere.
-    this.sphere.rotation.x += 0.01;
-    this.sphere.rotation.y += 0.01;
+    // TODO|dev: Spin sphere.
+    this.sphere.rotation.y += 0.003;
 
     this.renderer.render(this.scene, this.camera);
 

@@ -109,8 +109,13 @@ module.exports = Backbone.View.extend({
    * Render a geograpic coordinate.
    */
   addLonLat: function(lon, lat) {
-    console.log(lon, lat);
-    // TODO
+
+    var x = Math.cos(lon) * Math.cos(lat);
+    var y = Math.cos(lon) * Math.sin(lat);
+    var z = Math.sin(lon);
+
+    console.log(x, y, z);
+
   },
 
 

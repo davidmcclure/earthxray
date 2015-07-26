@@ -1,4 +1,6 @@
 
 
-var _ = require('lodash');
-alert('test');
+var Globe = require('./views/globe');
+
+
+new Globe();

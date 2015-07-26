@@ -4,6 +4,7 @@ var _ = require('lodash');
 var $ = require('jquery');
 var Backbone = require('backbone');
 var THREE = require('three');
+var utils = require('../utils');
 
 
 module.exports = Backbone.View.extend({
@@ -24,8 +25,11 @@ module.exports = Backbone.View.extend({
     this.render();
 
     // TODO|dev
-    this.addLonLat(40.72842, -73.93593);
-    this.addLonLat(40.73323, -125.09926);
+    this.addLatLon(37.75594, -122.42546); // SF
+    this.addLatLon(33.93751, -118.15453); // LA
+    this.addLatLon(40.73059, -73.99361); // NYC
+    this.addLatLon(-55.01423, -66.61285); // Cape Horn
+    this.addLatLon(25.35522, -80.80719); // Florida
 
   },
 
@@ -113,20 +117,24 @@ module.exports = Backbone.View.extend({
   /**
    * Render a geograpic coordinate.
    *
-   * @param {Number} lon
    * @param {Number} lat
+   * @param {Number} lon
    */
-  addLonLat: function(lon, lat) {
+  addLatLon: function(lat, lon) {
 
-    // lon/lat -> x/y/z
-    var x = Math.cos(lat) * Math.cos(lon);
-    var y = Math.cos(lat) * Math.sin(lon);
-    var z = Math.sin(lat);
+    // Degrees -> radians.
+    rLat = utils.degToRad(lat);
+    rLon = utils.degToRad(lon);
+
+    // Coordinates -> X/Y/Z.
+    var x = Math.cos(rLat) * Math.cos(rLon);
+    var y = Math.cos(rLat) * Math.sin(rLon);
+    var z = Math.sin(rLat);
 
     // Create the geometry.
-    var geometry = new THREE.SphereGeometry(0.01, 5, 5);
+    var geometry = new THREE.SphereGeometry(0.01, 10, 10);
     var material = new THREE.MeshBasicMaterial({
-      color: 0x7d2534
+      color: 0x000000
     });
 
     // Register the mesh.
@@ -134,7 +142,7 @@ module.exports = Backbone.View.extend({
     this.world.add(mesh);
 
     // Position the point.
-    mesh.position.set(x, y, z);
+    mesh.position.set(-x, z, y);
 
   },
 
@@ -144,7 +152,7 @@ module.exports = Backbone.View.extend({
    */
   render: function() {
 
-    // TODO|dev: Spin sphere.
+    // TODO|dev: Spin world.
     this.world.rotation.y += 0.003;
 
     // Render the new frame.

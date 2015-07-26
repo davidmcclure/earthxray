@@ -67,11 +67,18 @@ module.exports = Backbone.View.extend({
    */
   _initSphere: function() {
 
-    // TODO|dev: Create a cube.
-    var geometry = new THREE.BoxGeometry(1, 1, 1);
-    var material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
-    this.cube = new THREE.Mesh(geometry, material);
-    this.scene.add(this.cube);
+    // Create geometry.
+    var geometry = new THREE.SphereGeometry(1, 32, 32);
+
+    // Create wireframe material.
+    var material = new THREE.MeshBasicMaterial({
+      color: 0x2194ce,
+      wireframe: true,
+    });
+
+    // Register the mesh.
+    this.sphere = new THREE.Mesh(geometry, material);
+    this.scene.add(this.sphere);
 
   },
 
@@ -87,7 +94,7 @@ module.exports = Backbone.View.extend({
 
     // Create the camera.
     this.camera = new THREE.PerspectiveCamera(75, w/h, 0.1, 1000);
-    this.camera.position.z = 10;
+    this.camera.position.z = 3;
 
     // Size the renderer.
     this.renderer.setSize(w, h);
@@ -99,10 +106,15 @@ module.exports = Backbone.View.extend({
    * Render the scene.
    */
   render: function() {
+
     window.requestAnimationFrame(this.render.bind(this));
-    this.cube.rotation.x += 0.01;
-    this.cube.rotation.y += 0.01;
+
+    // TODO|dev: Spin the sphere.
+    this.sphere.rotation.x += 0.01;
+    this.sphere.rotation.y += 0.01;
+
     this.renderer.render(this.scene, this.camera);
+
   },
 
 

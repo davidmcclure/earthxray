@@ -21,10 +21,11 @@ module.exports = Backbone.View.extend({
     this._initResize();
     this._initSphere();
 
-    this.render()
+    this.render();
 
     // TODO|dev
-    this.addLonLat(0, 0)
+    this.addLonLat(40.72842, -73.93593);
+    this.addLonLat(40.73323, -125.09926);
 
   },
 
@@ -69,6 +70,10 @@ module.exports = Backbone.View.extend({
    */
   _initSphere: function() {
 
+    // Top-level mesh group.
+    this.world = new THREE.Object3D();
+    this.scene.add(this.world);
+
     // Create geometry.
     var geometry = new THREE.SphereGeometry(1, 32, 32);
 
@@ -81,7 +86,7 @@ module.exports = Backbone.View.extend({
 
     // Register the mesh.
     this.sphere = new THREE.Mesh(geometry, material);
-    this.scene.add(this.sphere);
+    this.world.add(this.sphere);
 
   },
 
@@ -107,14 +112,29 @@ module.exports = Backbone.View.extend({
 
   /**
    * Render a geograpic coordinate.
+   *
+   * @param {Number} lon
+   * @param {Number} lat
    */
   addLonLat: function(lon, lat) {
 
-    var x = Math.cos(lon) * Math.cos(lat);
-    var y = Math.cos(lon) * Math.sin(lat);
-    var z = Math.sin(lon);
+    // lon/lat -> x/y/z
+    var x = Math.cos(lat) * Math.cos(lon);
+    var y = Math.cos(lat) * Math.sin(lon);
+    var z = Math.sin(lat);
 
-    console.log(x, y, z);
+    // Create the geometry.
+    var geometry = new THREE.SphereGeometry(0.01, 5, 5);
+    var material = new THREE.MeshBasicMaterial({
+      color: 0x7d2534
+    });
+
+    // Register the mesh.
+    var mesh = new THREE.Mesh(geometry, material);
+    this.world.add(mesh);
+
+    // Position the point.
+    mesh.position.set(x, y, z);
 
   },
 
@@ -125,7 +145,7 @@ module.exports = Backbone.View.extend({
   render: function() {
 
     // TODO|dev: Spin sphere.
-    this.sphere.rotation.y += 0.003;
+    this.world.rotation.y += 0.003;
 
     // Render the new frame.
     window.requestAnimationFrame(this.render.bind(this));

@@ -23,6 +23,9 @@ module.exports = Backbone.View.extend({
 
     this.render()
 
+    // TODO|dev
+    this.addLonLat(0, 0)
+
   },
 
 
@@ -71,7 +74,8 @@ module.exports = Backbone.View.extend({
 
     // Create wireframe material.
     var material = new THREE.MeshBasicMaterial({
-      color: 0x2194ce,
+      color: 0x2a7bbf,
+      wireframeLinewidth: 0.5,
       wireframe: true,
     });
 
@@ -102,15 +106,24 @@ module.exports = Backbone.View.extend({
 
 
   /**
+   * Render a geograpic coordinate.
+   */
+  addLonLat: function(lon, lat) {
+    console.log(lon, lat);
+    // TODO
+  },
+
+
+  /**
    * Render the scene.
    */
   render: function() {
 
-    window.requestAnimationFrame(this.render.bind(this));
-
     // TODO|dev: Spin sphere.
     this.sphere.rotation.y += 0.003;
 
+    // Render the new frame.
+    window.requestAnimationFrame(this.render.bind(this));
     this.renderer.render(this.scene, this.camera);
 
   },

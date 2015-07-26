@@ -35,8 +35,13 @@ module.exports = Backbone.View.extend({
     // Create the scene.
     this.scene = new THREE.Scene();
 
-    // Create the  renderer.
-    this.renderer = new THREE.WebGLRenderer({ antialias: true });
+    // Create the renderer.
+    this.renderer = new THREE.WebGLRenderer({
+      alpha: true,
+      antialias: true,
+    });
+
+    // Inject the <canvas>.
     this.$el.append(this.renderer.domElement);
 
   },
@@ -62,7 +67,7 @@ module.exports = Backbone.View.extend({
    */
   _initSphere: function() {
 
-    // DEV: Create a cube.
+    // TODO|dev: Create a cube.
     var geometry = new THREE.BoxGeometry(1, 1, 1);
     var material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
     this.cube = new THREE.Mesh(geometry, material);

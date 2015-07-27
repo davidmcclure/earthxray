@@ -24,6 +24,13 @@ module.exports = Backbone.View.extend({
 
     this.render();
 
+    // TODO|dev
+    this.addLatLon(37.75594, -122.42546); // SF
+    this.addLatLon(33.93751, -118.15453); // LA
+    this.addLatLon(40.73059, -73.99361); // NYC
+    this.addLatLon(-55.01423, -66.61285); // Cape Horn
+    this.addLatLon(25.35522, -80.80719); // Florida
+
   },
 
 
@@ -115,14 +122,8 @@ module.exports = Backbone.View.extend({
    */
   addLatLon: function(lat, lon) {
 
-    // Degrees -> radians.
-    rLat = utils.degToRad(lat);
-    rLon = utils.degToRad(lon);
-
-    // Coordinates -> X/Y/Z.
-    var x = Math.cos(rLat) * Math.cos(rLon);
-    var y = Math.cos(rLat) * Math.sin(rLon);
-    var z = Math.sin(rLat);
+    // Coordinates -> [X, Y, Z].
+    var xyz = utils.latLonToXYZ(lat, lon);
 
     // Create the geometry.
     var geometry = new THREE.SphereGeometry(0.01, 10, 10);
@@ -135,7 +136,7 @@ module.exports = Backbone.View.extend({
     this.world.add(mesh);
 
     // Position the point.
-    mesh.position.set(-x, z, y);
+    mesh.position.set.apply(mesh.position, xyz);
 
   },
 

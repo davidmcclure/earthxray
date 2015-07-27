@@ -24,13 +24,6 @@ module.exports = Backbone.View.extend({
 
     this.render();
 
-    // TODO|dev
-    this.addLatLon(37.75594, -122.42546); // SF
-    this.addLatLon(33.93751, -118.15453); // LA
-    this.addLatLon(40.73059, -73.99361); // NYC
-    this.addLatLon(-55.01423, -66.61285); // Cape Horn
-    this.addLatLon(25.35522, -80.80719); // Florida
-
   },
 
 

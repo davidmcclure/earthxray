@@ -2,14 +2,14 @@
   "name": "earthxray",
   "version": "0.0.0",
   "description": "See through the world.",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/davidmcclure/earthxray.git"
+  },
   "author": {
     "name": "David McClure",
     "email": "davidwilliammcclure@gmail.com",
     "url": "http://dclure.org"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/davidmcclure/earthxray.git"
   },
   "license": "Apache",
   "devDependencies": {

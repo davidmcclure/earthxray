@@ -7,6 +7,10 @@
     "email": "davidwilliammcclure@gmail.com",
     "url": "http://dclure.org"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/davidmcclure/earthxray.git"
+  },
   "license": "Apache",
   "devDependencies": {
     "grunt": "^0.4.5",

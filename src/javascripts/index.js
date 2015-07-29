@@ -1,6 +1,6 @@
 
 
-var Globe = require('./views/globe');
+import Globe from './views/globe';
 
 
 new Globe();

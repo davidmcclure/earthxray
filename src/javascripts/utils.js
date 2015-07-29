@@ -6,7 +6,7 @@
  * @param {Number} degrees
  * @returns {Number}
  */
-exports.degToRad = function(d) {
+export function degToRad(d) {
   return d * Math.PI / 180;
 };
 
@@ -18,7 +18,7 @@ exports.degToRad = function(d) {
  * @param {Number} lon
  * @returns {Array} - [X, Y, Z]
  */
-exports.latLonToXYZ = function(lat, lon) {
+export function latLonToXYZ(lat, lon) {
 
   // Degrees -> radians.
   var rLat = this.degToRad(lat);

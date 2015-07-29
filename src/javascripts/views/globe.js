@@ -1,13 +1,13 @@
 
 
-var _ = require('lodash');
-var $ = require('jquery');
-var Backbone = require('backbone');
-var THREE = require('three');
-var utils = require('../utils');
+import _ from 'lodash';
+import $ from 'jquery';
+import Backbone from 'backbone';
+import THREE from 'three';
+import utils from '../utils';
 
 
-module.exports = Backbone.View.extend({
+export default Backbone.View.extend({
 
 
   el: '#globe',

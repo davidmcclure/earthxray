@@ -4,6 +4,7 @@ module.exports = {
 
   options: {
     watch: true,
+    transform: ['babelify'],
     browserifyOptions: {
       debug: true
     }

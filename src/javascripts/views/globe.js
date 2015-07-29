@@ -135,6 +135,17 @@ export default Backbone.View.extend({
 
 
   /**
+   * Draw a GeoJSON geometry.
+   *
+   * @param {Object} json
+   */
+  drawGeoJSON: function(json) {
+    console.log(json);
+    // TODO
+  },
+
+
+  /**
    * Render the scene.
    */
   render: function() {

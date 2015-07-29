@@ -4,6 +4,7 @@ import _ from 'lodash';
 import $ from 'jquery';
 import Backbone from 'backbone';
 import THREE from 'three';
+import * as opts from './globe.yml';
 import * as utils from '../utils';
 
 
@@ -72,12 +73,16 @@ export default Backbone.View.extend({
     this.scene.add(this.world);
 
     // Create geometry.
-    var geometry = new THREE.SphereGeometry(1, 32, 32);
+    var geometry = new THREE.SphereGeometry(
+      opts.sphere.radius,
+      opts.sphere.segments,
+      opts.sphere.segments
+    );
 
     // Create wireframe material.
     var material = new THREE.MeshBasicMaterial({
-      color: 0xcccccc,
-      wireframeLinewidth: 0.5,
+      color: opts.sphere.lineColor,
+      wireframeLinewidth: opts.sphere.lineWidth,
       wireframe: true,
     });
 
@@ -98,11 +103,18 @@ export default Backbone.View.extend({
     var h = this.$el.height();
 
     // Create the camera.
-    this.camera = new THREE.PerspectiveCamera(75, w/h, 0.1, 1000);
-    this.camera.position.z = 2;
+    this.camera = new THREE.PerspectiveCamera(
+      opts.camera.fov,
+      w / h,
+      opts.camera.near,
+      opts.camera.far,
+    );
 
     // Size the renderer.
     this.renderer.setSize(w, h);
+
+    // TODO|dev: Position.
+    this.camera.position.z = 2;
 
   },
 
@@ -148,7 +160,7 @@ export default Backbone.View.extend({
 
     // Create line material.
     var material = new THREE.LineBasicMaterial({
-      color: 0x2a7bbf,
+      color: opts.borders.lineColor,
     });
 
     var geometry = new THREE.Geometry();

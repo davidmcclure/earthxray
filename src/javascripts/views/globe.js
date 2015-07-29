@@ -76,7 +76,7 @@ export default Backbone.View.extend({
 
     // Create wireframe material.
     var material = new THREE.MeshBasicMaterial({
-      color: 0x2a7bbf,
+      color: 0xcccccc,
       wireframeLinewidth: 0.5,
       wireframe: true,
     });
@@ -108,33 +108,6 @@ export default Backbone.View.extend({
 
 
   /**
-   * Render a geograpic coordinate.
-   *
-   * @param {Number} lon
-   * @param {Number} lat
-   */
-  addLonLat: function(lon, lat) {
-
-    // Coordinates -> [X, Y, Z].
-    var xyz = utils.lonLatToXYZ(lon, lat);
-
-    // Create the geometry.
-    var geometry = new THREE.SphereGeometry(0.01, 10, 10);
-    var material = new THREE.MeshBasicMaterial({
-      color: 0x000000
-    });
-
-    // Register the mesh.
-    var mesh = new THREE.Mesh(geometry, material);
-    this.world.add(mesh);
-
-    // Position the point.
-    mesh.position.set.apply(mesh.position, xyz);
-
-  },
-
-
-  /**
    * Draw a GeoJSON geometry.
    *
    * @param {Object} json
@@ -142,16 +115,23 @@ export default Backbone.View.extend({
   drawGeoJSON: function(json) {
 
     // Walk features.
-    for (var feature of json.features) {
-      switch (feature.geometry.type) {
+    for (var {
+      geometry: {
+        coordinates: coords,
+        type: type,
+      }
+    } of json.features) {
+      switch (type) {
 
         case 'Polygon':
-          this._drawPolygon(feature.geometry.coordinates[0]);
-          break;
+          this.drawPolygon(coords[0]);
+        break;
 
         case 'MultiPolygon':
-          // TODO
-          break;
+          for (var [polygon] of coords) {
+            this.drawPolygon(polygon);
+          }
+        break;
 
       }
     }
@@ -164,10 +144,25 @@ export default Backbone.View.extend({
    *
    * @param {Array} points
    */
-  _drawPolygon: function(points) {
+  drawPolygon: function(points) {
+
+    // Create line material.
+    var material = new THREE.LineBasicMaterial({
+      color: 0x2a7bbf,
+    });
+
+    var geometry = new THREE.Geometry();
+
+    // Add points to line.
     for (var [lon, lat] of points) {
-      this.addLonLat(lon, lat);
+      var [x, y, z] = utils.lonLatToXYZ(lon, lat);
+      geometry.vertices.push(new THREE.Vector3(x, y, z));
     }
+
+    // Register the line.
+    var line = new THREE.Line(geometry, material);
+    this.world.add(line);
+
   },
 
 

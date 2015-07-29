@@ -4,7 +4,7 @@ import _ from 'lodash';
 import $ from 'jquery';
 import Backbone from 'backbone';
 import THREE from 'three';
-import utils from '../utils';
+import * as utils from '../utils';
 
 
 export default Backbone.View.extend({
@@ -110,13 +110,13 @@ export default Backbone.View.extend({
   /**
    * Render a geograpic coordinate.
    *
-   * @param {Number} lat
    * @param {Number} lon
+   * @param {Number} lat
    */
-  addLatLon: function(lat, lon) {
+  addLonLat: function(lon, lat) {
 
     // Coordinates -> [X, Y, Z].
-    var xyz = utils.latLonToXYZ(lat, lon);
+    var xyz = utils.lonLatToXYZ(lon, lat);
 
     // Create the geometry.
     var geometry = new THREE.SphereGeometry(0.01, 10, 10);
@@ -140,8 +140,34 @@ export default Backbone.View.extend({
    * @param {Object} json
    */
   drawGeoJSON: function(json) {
-    console.log(json);
-    // TODO
+
+    // Walk features.
+    for (var feature of json.features) {
+      switch (feature.geometry.type) {
+
+        case 'Polygon':
+          this._drawPolygon(feature.geometry.coordinates[0]);
+          break;
+
+        case 'MultiPolygon':
+          // TODO
+          break;
+
+      }
+    }
+
+  },
+
+
+  /**
+   * Draw a GeoJSON polygon.
+   *
+   * @param {Array} points
+   */
+  _drawPolygon: function(points) {
+    for (var [lon, lat] of points) {
+      this.addLonLat(lon, lat);
+    }
   },
 
 

@@ -14,15 +14,15 @@ export function degToRad(d) {
 /**
  * Convert degrees to radians.
  *
- * @param {Number} lat
  * @param {Number} lon
+ * @param {Number} lat
  * @returns {Array} - [X, Y, Z]
  */
-export function latLonToXYZ(lat, lon) {
+export function lonLatToXYZ(lon, lat) {
 
   // Degrees -> radians.
-  var rLat = this.degToRad(lat);
   var rLon = this.degToRad(lon);
+  var rLat = this.degToRad(lat);
 
   // Coordinates -> X/Y/Z.
   var x = Math.cos(rLat) * Math.cos(rLon);

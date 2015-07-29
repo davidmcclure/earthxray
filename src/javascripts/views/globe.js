@@ -165,7 +165,7 @@ export default Backbone.View.extend({
 
     let geometry = new THREE.Geometry();
 
-    // Add points to line.
+    // Convert lon/lat -> XYZ, add to line.
     for (let [lon, lat] of points) {
       let [x, y, z] = utils.lonLatToXYZ(lon, lat);
       geometry.vertices.push(new THREE.Vector3(x, y, z));

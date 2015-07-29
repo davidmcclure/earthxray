@@ -54,7 +54,7 @@ export default Backbone.View.extend({
   _initResize: function() {
 
     // Debounce the viewport fitter.
-    var resize = _.debounce(this.fitWindow.bind(this), 500);
+    let resize = _.debounce(this.fitWindow.bind(this), 500);
 
     // Bind to resize.
     $(window).resize(resize);
@@ -73,14 +73,14 @@ export default Backbone.View.extend({
     this.scene.add(this.world);
 
     // Create geometry.
-    var geometry = new THREE.SphereGeometry(
+    let geometry = new THREE.SphereGeometry(
       opts.sphere.radius,
       opts.sphere.segments,
       opts.sphere.segments
     );
 
     // Create wireframe material.
-    var material = new THREE.MeshBasicMaterial({
+    let material = new THREE.MeshBasicMaterial({
       color: opts.sphere.lineColor,
       wireframeLinewidth: opts.sphere.lineWidth,
       wireframe: true,
@@ -99,15 +99,15 @@ export default Backbone.View.extend({
   fitWindow: function() {
 
     // Measure container.
-    var w = this.$el.width();
-    var h = this.$el.height();
+    let w = this.$el.width();
+    let h = this.$el.height();
 
     // Create the camera.
     this.camera = new THREE.PerspectiveCamera(
       opts.camera.fov,
       w / h,
       opts.camera.near,
-      opts.camera.far,
+      opts.camera.far
     );
 
     // Size the renderer.
@@ -127,7 +127,7 @@ export default Backbone.View.extend({
   drawGeoJSON: function(json) {
 
     // Walk features.
-    for (var {
+    for (let {
       geometry: {
         coordinates: coords,
         type: type,
@@ -140,7 +140,7 @@ export default Backbone.View.extend({
         break;
 
         case 'MultiPolygon':
-          for (var [polygon] of coords) {
+          for (let [polygon] of coords) {
             this.drawPolygon(polygon);
           }
         break;
@@ -159,20 +159,20 @@ export default Backbone.View.extend({
   drawPolygon: function(points) {
 
     // Create line material.
-    var material = new THREE.LineBasicMaterial({
+    let material = new THREE.LineBasicMaterial({
       color: opts.borders.lineColor,
     });
 
-    var geometry = new THREE.Geometry();
+    let geometry = new THREE.Geometry();
 
     // Add points to line.
-    for (var [lon, lat] of points) {
-      var [x, y, z] = utils.lonLatToXYZ(lon, lat);
+    for (let [lon, lat] of points) {
+      let [x, y, z] = utils.lonLatToXYZ(lon, lat);
       geometry.vertices.push(new THREE.Vector3(x, y, z));
     }
 
     // Register the line.
-    var line = new THREE.Line(geometry, material);
+    let line = new THREE.Line(geometry, material);
     this.world.add(line);
 
   },

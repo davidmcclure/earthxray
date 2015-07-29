@@ -21,13 +21,13 @@ export function degToRad(d) {
 export function lonLatToXYZ(lon, lat) {
 
   // Degrees -> radians.
-  var rLon = this.degToRad(lon);
-  var rLat = this.degToRad(lat);
+  let rLon = this.degToRad(lon);
+  let rLat = this.degToRad(lat);
 
   // Coordinates -> X/Y/Z.
-  var x = Math.cos(rLat) * Math.cos(rLon);
-  var y = Math.cos(rLat) * Math.sin(rLon);
-  var z = Math.sin(rLat);
+  let x = Math.cos(rLat) * Math.cos(rLon);
+  let y = Math.cos(rLat) * Math.sin(rLon);
+  let z = Math.sin(rLat);
 
   // TODO: Why?
   return [-x, z, y];

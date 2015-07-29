@@ -4,7 +4,7 @@ import $ from 'jquery';
 import Globe from './views/globe';
 
 
-var globe = new Globe();
+let globe = new Globe();
 
 
 // TODO|dev

@@ -102,7 +102,7 @@ export default Backbone.View.extend({
     // Get client location.
     window.navigator.geolocation.getCurrentPosition(pos => {
 
-      // TODO|dev - Place dot on location.
+      // TODO|dev
 
       var geometry = new THREE.BoxGeometry(0.01, 0.01, 0.01);
       var material = new THREE.MeshBasicMaterial({

@@ -1,0 +1,13 @@
+{
+  "name": "earthxray",
+  "version": "0.0.0",
+  "homepage": "https://github.com/davidmcclure/earthxray",
+  "authors": [
+    "David McClure <davidwilliammcclure@gmail.com>"
+  ],
+  "description": "See through the world.",
+  "license": "Apache",
+  "dependencies": {
+    "fulltilt": "~0.5.3"
+  }
+}

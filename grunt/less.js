@@ -3,10 +3,7 @@
 export default {
 
   options: {
-    paths: 'node_modules',
-    sourceMap: true,
-    sourceMapFilename: '<%= site %>/style.map',
-    sourceMapURL: 'style.map',
+    paths: 'node_modules'
   },
 
   dist: {

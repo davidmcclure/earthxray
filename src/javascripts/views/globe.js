@@ -22,6 +22,7 @@ export default Backbone.View.extend({
     this._initScene();
     this._initResize();
     this._initSphere();
+    this._initCamera();
 
     this.render();
 
@@ -89,6 +90,18 @@ export default Backbone.View.extend({
     // Register the mesh.
     this.sphere = new THREE.Mesh(geometry, material);
     this.world.add(this.sphere);
+
+  },
+
+
+  /**
+   * Place the camera.
+   */
+  _initCamera: function() {
+
+    window.navigator.geolocation.getCurrentPosition(pos => {
+      console.log(pos);
+    });
 
   },
 

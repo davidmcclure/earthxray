@@ -99,8 +99,26 @@ export default Backbone.View.extend({
    */
   _initCamera: function() {
 
+    // Get client location.
     window.navigator.geolocation.getCurrentPosition(pos => {
-      console.log(pos);
+
+      // TODO|dev - Place dot on location.
+
+      var geometry = new THREE.BoxGeometry(0.01, 0.01, 0.01);
+      var material = new THREE.MeshBasicMaterial({
+        color: 0x000000
+      });
+
+      var mesh = new THREE.Mesh(geometry, material);
+      this.world.add(mesh);
+
+      var [x, y, z] = utils.lonLatToXYZ(
+        pos.coords.longitude,
+        pos.coords.latitude
+      );
+
+      mesh.position.set(x, y, z);
+
     });
 
   },

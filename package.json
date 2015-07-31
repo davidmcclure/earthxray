@@ -30,6 +30,7 @@
     "yamlify": "^0.1.2"
   },
   "dependencies": {
+    "babel": "^5.8.20",
     "backbone": "^1.2.1",
     "jquery": "^2.1.4",
     "lodash": "^3.10.0",

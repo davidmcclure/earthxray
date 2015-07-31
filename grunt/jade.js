@@ -1,6 +1,6 @@
 
 
-module.exports = {
+export default {
 
   dist: {
     src: 'src/templates/index.jade',

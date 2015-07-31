@@ -1,6 +1,6 @@
 
 
-module.exports = {
+export default {
 
   options: {
     paths: 'node_modules',

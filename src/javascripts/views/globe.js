@@ -101,7 +101,7 @@ export default Backbone.View.extend({
    */
   _initCamera: function() {
 
-    // Get client location.
+    // Geolocate.
     window.navigator.geolocation.getCurrentPosition(pos => {
 
       // TODO|dev
@@ -123,7 +123,7 @@ export default Backbone.View.extend({
 
     });
 
-    console.log(fulltilt);
+    /// TODO: Bind to orientation.
 
   },
 

@@ -3,7 +3,9 @@
 import _ from 'lodash';
 import $ from 'jquery';
 import Backbone from 'backbone';
+import fulltilt from 'fulltilt';
 import THREE from 'three';
+
 import * as opts from './globe.yml';
 import * as utils from '../utils';
 
@@ -120,6 +122,8 @@ export default Backbone.View.extend({
       mesh.position.set(x, y, z);
 
     });
+
+    console.log(fulltilt);
 
   },
 

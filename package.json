@@ -14,6 +14,8 @@
   "license": "Apache",
   "devDependencies": {
     "babelify": "^6.1.3",
+    "browserify": "^11.0.1",
+    "browserify-shim": "^3.8.10",
     "grunt": "^0.4.5",
     "grunt-browserify": "^3.8.0",
     "grunt-contrib-clean": "^0.6.0",
@@ -35,5 +37,16 @@
     "jquery": "^2.1.4",
     "lodash": "^3.10.0",
     "three": "^0.71.0"
+  },
+  "browserify": {
+    "transform": [
+      "browserify-shim"
+    ]
+  },
+  "browser": {
+    "fulltilt": "./bower_components/fulltilt/dist/fulltilt.js"
+  },
+  "browserify-shim": {
+    "fulltilt": "global:FULLTILT"
   }
 }

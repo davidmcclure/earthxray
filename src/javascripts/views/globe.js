@@ -123,7 +123,8 @@ export default Backbone.View.extend({
 
     });
 
-    /// TODO: Bind to orientation.
+    // TODO: Bind to orientation.
+    console.log(fulltilt);
 
   },
 

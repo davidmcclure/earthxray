@@ -47,6 +47,6 @@
     "fulltilt": "./bower_components/fulltilt/dist/fulltilt.js"
   },
   "browserify-shim": {
-    "fulltilt": "global:FULLTILT"
+    "fulltilt": "FULLTILT"
   }
 }

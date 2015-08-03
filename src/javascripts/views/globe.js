@@ -3,7 +3,6 @@
 import _ from 'lodash';
 import $ from 'jquery';
 import Backbone from 'backbone';
-import fulltilt from 'fulltilt';
 import THREE from 'three';
 
 import * as opts from './globe.yml';
@@ -106,10 +105,12 @@ export default Backbone.View.extend({
       // TODO: Set camera XYZ.
     });
 
-    // Listen for orientation events.
-    new fulltilt.getDeviceOrientation({ type: 'world' }).then(ctl => {
-      this.orientation = ctl;
-    });
+    // Listen for orientation.
+    if (window.DeviceOrientationEvent) {
+      window.addEventListener('deviceorientation', data => {
+        this.orientation = data;
+      });
+    }
 
   },
 
@@ -204,11 +205,16 @@ export default Backbone.View.extend({
    */
   render: function() {
 
-    // TODO|dev: Spin world.
+    // TODO|dev
     this.world.rotation.y += 0.003;
 
+    // TODO|dev
     if (this.orientation) {
-      // TODO: Apply camera orientation.
+      console.log(
+        this.orientation.alpha,
+        this.orientation.beta,
+        this.orientation.gamma
+      );
     }
 
     // Render the new frame.

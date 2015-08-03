@@ -101,30 +101,15 @@ export default Backbone.View.extend({
    */
   _initCamera: function() {
 
-    // Geolocate.
+    // Geolocate to the client's position.
     window.navigator.geolocation.getCurrentPosition(pos => {
-
-      // TODO|dev
-
-      var geometry = new THREE.BoxGeometry(0.01, 0.01, 0.01);
-      var material = new THREE.MeshBasicMaterial({
-        color: 0x000000
-      });
-
-      var mesh = new THREE.Mesh(geometry, material);
-      this.world.add(mesh);
-
-      var [x, y, z] = utils.lonLatToXYZ(
-        pos.coords.longitude,
-        pos.coords.latitude
-      );
-
-      mesh.position.set(x, y, z);
-
+      // TODO: Set camera XYZ.
     });
 
-    // TODO: Bind to orientation.
-    console.log(fulltilt);
+    // Listen for orientation events.
+    new fulltilt.getDeviceOrientation({ type: 'world' }).then(ctl => {
+      this.orientation = ctl;
+    });
 
   },
 
@@ -221,6 +206,10 @@ export default Backbone.View.extend({
 
     // TODO|dev: Spin world.
     this.world.rotation.y += 0.003;
+
+    if (this.orientation) {
+      // TODO: Apply camera orientation.
+    }
 
     // Render the new frame.
     window.requestAnimationFrame(this.render.bind(this));

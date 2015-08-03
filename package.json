@@ -37,16 +37,5 @@
     "jquery": "^2.1.4",
     "lodash": "^3.10.0",
     "three": "^0.71.0"
-  },
-  "browserify": {
-    "transform": [
-      "browserify-shim"
-    ]
-  },
-  "browser": {
-    "fulltilt": "./bower_components/fulltilt/dist/fulltilt.js"
-  },
-  "browserify-shim": {
-    "fulltilt": "FULLTILT"
   }
 }

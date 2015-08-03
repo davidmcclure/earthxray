@@ -6,7 +6,6 @@ export default {
 
     transform: [
       'babelify',
-      'browserify-shim',
       'yamlify'
     ],
 

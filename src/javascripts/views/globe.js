@@ -21,7 +21,7 @@ export default Backbone.View.extend({
   initialize: function() {
 
     this._initScene();
-    this._initResize();
+    this._initCamera();
     this._initSphere();
     this._initLocation();
     this._initHeading();
@@ -52,16 +52,15 @@ export default Backbone.View.extend({
 
 
   /**
-   * On resize, re-fit the camera.
+   * Create the camera, bind resize.
    */
-  _initResize: function() {
+  _initCamera: function() {
 
-    // Debounce the viewport fitter.
-    let resize = _.debounce(this.fitCamera.bind(this), 500);
-
-    // Bind to resize.
-    $(window).resize(resize);
     this.fitCamera()
+
+    // Re-fit on resize.
+    let resize = _.debounce(this.fitCamera.bind(this), 500);
+    $(window).resize(resize);
 
   },
 
@@ -137,11 +136,10 @@ export default Backbone.View.extend({
 
 
   /**
-   * Fit the scene to the container.
+   * Fit the camera to the container.
    */
   fitCamera: function() {
 
-    // Measure container.
     let w = this.$el.width();
     let h = this.$el.height();
 

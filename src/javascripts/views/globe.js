@@ -23,7 +23,8 @@ export default Backbone.View.extend({
     this._initScene();
     this._initResize();
     this._initSphere();
-    this._initCamera();
+    this._initLocation();
+    this._initHeading();
 
     this.render();
 
@@ -96,14 +97,14 @@ export default Backbone.View.extend({
 
 
   /**
-   * Place the camera.
+   * Geolocate the camera.
    */
-  _initCamera: function() {
+  _initLocation: function() {
 
-    // Geolocate to the client's position.
+    // Get client position.
     window.navigator.geolocation.getCurrentPosition(pos => {
 
-      // Get camera location.
+      // Convert lon/lat -> XYZ.
       let [x, y, z] = utils.lonLatToXYZ(
         pos.coords.longitude,
         pos.coords.latitude
@@ -113,11 +114,23 @@ export default Backbone.View.extend({
 
     });
 
-    // Listen for orientation.
+  },
+
+
+  /**
+   * Listen for device movement.
+   */
+  _initHeading: function() {
+
+    // Bind to `deviceorientation`.
     if (window.DeviceOrientationEvent) {
       window.addEventListener('deviceorientation', data => {
         this.orientation = data;
       });
+    }
+
+    else {
+      // TODO: Flash error.
     }
 
   },
@@ -210,6 +223,7 @@ export default Backbone.View.extend({
    */
   orient: function() {
     // TODO
+    this.camera.lookAt(new THREE.Vector3(0,0,0));
   },
 
 

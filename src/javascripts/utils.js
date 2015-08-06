@@ -1,17 +1,7 @@
 
 
+import THREE from 'three';
 import * as opts from './opts.yml';
-
-
-/**
- * Convert degrees to radians.
- *
- * @param {Number} degrees
- * @returns {Number}
- */
-export function degToRad(d) {
-  return d * Math.PI / 180;
-};
 
 
 /**
@@ -25,8 +15,8 @@ export function degToRad(d) {
 export function lonLatToXYZ(lon, lat, r=opts.earth.radius) {
 
   // Degrees -> radians.
-  let rLon = this.degToRad(lon);
-  let rLat = this.degToRad(lat);
+  let rLon = THREE.Math.degToRad(lon);
+  let rLat = THREE.Math.degToRad(lat);
 
   // Coordinates -> X/Y/Z.
   let x = -r * Math.cos(rLat) * Math.cos(rLon);

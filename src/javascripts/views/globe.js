@@ -110,7 +110,6 @@ export default Backbone.View.extend({
       );
 
       this.camera.position.set(x, y, z);
-      this.camera.lookAt(new THREE.Vector3(0, 0, 0));
 
     });
 
@@ -207,9 +206,19 @@ export default Backbone.View.extend({
 
 
   /**
+   * Orient the camera.
+   */
+  orient: function() {
+    // TODO
+  },
+
+
+  /**
    * Render the scene.
    */
   render: function() {
+
+    this.orient();
 
     // Render the new frame.
     window.requestAnimationFrame(this.render.bind(this));

@@ -5,7 +5,7 @@ import $ from 'jquery';
 import Backbone from 'backbone';
 import THREE from 'three';
 
-import * as opts from './globe.yml';
+import * as opts from '../opts.yml';
 import * as utils from '../utils';
 
 
@@ -76,7 +76,7 @@ export default Backbone.View.extend({
 
     // Create geometry.
     let geometry = new THREE.SphereGeometry(
-      opts.sphere.radius,
+      opts.earth.radius,
       opts.sphere.segments,
       opts.sphere.segments
     );
@@ -103,6 +103,7 @@ export default Backbone.View.extend({
     // Geolocate to the client's position.
     window.navigator.geolocation.getCurrentPosition(pos => {
       // TODO: Set camera XYZ.
+      console.log(pos);
     });
 
     // Listen for orientation.
@@ -136,7 +137,7 @@ export default Backbone.View.extend({
     this.renderer.setSize(w, h);
 
     // TODO|dev: Position.
-    this.camera.position.z = opts.sphere.radius*2;
+    this.camera.position.z = opts.earth.radius*2;
 
   },
 
@@ -189,7 +190,7 @@ export default Backbone.View.extend({
 
     // Convert lon/lat -> XYZ, add to line.
     for (let [lon, lat] of points) {
-      let [x, y, z] = utils.lonLatToXYZ(lon, lat, opts.sphere.radius);
+      let [x, y, z] = utils.lonLatToXYZ(lon, lat);
       geometry.vertices.push(new THREE.Vector3(x, y, z));
     }
 

@@ -1,5 +1,8 @@
 ---
 
+earth:
+  radius: 6371
+
 camera:
   fov: 75
   near: 0.1
@@ -8,7 +11,6 @@ camera:
 sphere:
   lineWidth: 0.5
   lineColor: 0xcccccc
-  radius: 6371
   segments: 32
 
 borders:

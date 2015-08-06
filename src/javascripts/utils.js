@@ -1,5 +1,8 @@
 
 
+import * as opts from './opts.yml';
+
+
 /**
  * Convert degrees to radians.
  *
@@ -19,7 +22,7 @@ export function degToRad(d) {
  * @param {Number} r
  * @returns {Array} - [X, Y, Z]
  */
-export function lonLatToXYZ(lon, lat, r) {
+export function lonLatToXYZ(lon, lat, r=opts.earth.radius) {
 
   // Degrees -> radians.
   let rLon = this.degToRad(lon);

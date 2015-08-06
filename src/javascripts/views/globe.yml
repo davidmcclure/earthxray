@@ -3,12 +3,12 @@
 camera:
   fov: 75
   near: 0.1
-  far: 1000
+  far: 100000
 
 sphere:
   lineWidth: 0.5
   lineColor: 0xcccccc
-  radius: 1
+  radius: 6371
   segments: 32
 
 borders:

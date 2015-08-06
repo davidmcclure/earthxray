@@ -136,7 +136,7 @@ export default Backbone.View.extend({
     this.renderer.setSize(w, h);
 
     // TODO|dev: Position.
-    this.camera.position.z = 2;
+    this.camera.position.z = opts.sphere.radius*2;
 
   },
 
@@ -189,7 +189,7 @@ export default Backbone.View.extend({
 
     // Convert lon/lat -> XYZ, add to line.
     for (let [lon, lat] of points) {
-      let [x, y, z] = utils.lonLatToXYZ(lon, lat);
+      let [x, y, z] = utils.lonLatToXYZ(lon, lat, opts.sphere.radius);
       geometry.vertices.push(new THREE.Vector3(x, y, z));
     }
 
@@ -207,15 +207,6 @@ export default Backbone.View.extend({
 
     // TODO|dev
     this.world.rotation.y += 0.003;
-
-    // TODO|dev
-    if (this.orientation) {
-      console.log(
-        this.orientation.alpha,
-        this.orientation.beta,
-        this.orientation.gamma
-      );
-    }
 
     // Render the new frame.
     window.requestAnimationFrame(this.render.bind(this));

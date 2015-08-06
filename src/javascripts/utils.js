@@ -16,20 +16,20 @@ export function degToRad(d) {
  *
  * @param {Number} lon
  * @param {Number} lat
+ * @param {Number} r
  * @returns {Array} - [X, Y, Z]
  */
-export function lonLatToXYZ(lon, lat) {
+export function lonLatToXYZ(lon, lat, r) {
 
   // Degrees -> radians.
   let rLon = this.degToRad(lon);
   let rLat = this.degToRad(lat);
 
   // Coordinates -> X/Y/Z.
-  let x = Math.cos(rLat) * Math.cos(rLon);
-  let y = Math.cos(rLat) * Math.sin(rLon);
-  let z = Math.sin(rLat);
+  let x = -r * Math.cos(rLat) * Math.cos(rLon);
+  let z =  r * Math.cos(rLat) * Math.sin(rLon);
+  let y =  r * Math.sin(rLat);
 
-  // TODO: Why?
-  return [-x, z, y];
+  return [x, y, z];
 
 };

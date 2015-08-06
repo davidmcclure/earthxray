@@ -102,8 +102,16 @@ export default Backbone.View.extend({
 
     // Geolocate to the client's position.
     window.navigator.geolocation.getCurrentPosition(pos => {
-      // TODO: Set camera XYZ.
-      console.log(pos);
+
+      // Get camera location.
+      let [x, y, z] = utils.lonLatToXYZ(
+        pos.coords.longitude,
+        pos.coords.latitude
+      );
+
+      this.camera.position.set(x, y, z);
+      this.camera.lookAt(new THREE.Vector3(0, 0, 0));
+
     });
 
     // Listen for orientation.
@@ -135,9 +143,6 @@ export default Backbone.View.extend({
 
     // Size the renderer.
     this.renderer.setSize(w, h);
-
-    // TODO|dev: Position.
-    this.camera.position.z = opts.earth.radius*2;
 
   },
 
@@ -205,9 +210,6 @@ export default Backbone.View.extend({
    * Render the scene.
    */
   render: function() {
-
-    // TODO|dev
-    this.world.rotation.y += 0.003;
 
     // Render the new frame.
     window.requestAnimationFrame(this.render.bind(this));

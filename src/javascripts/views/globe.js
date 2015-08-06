@@ -56,11 +56,11 @@ export default Backbone.View.extend({
   _initResize: function() {
 
     // Debounce the viewport fitter.
-    let resize = _.debounce(this.fitWindow.bind(this), 500);
+    let resize = _.debounce(this.fitCamera.bind(this), 500);
 
     // Bind to resize.
     $(window).resize(resize);
-    this.fitWindow()
+    this.fitCamera()
 
   },
 
@@ -127,7 +127,7 @@ export default Backbone.View.extend({
   /**
    * Fit the scene to the container.
    */
-  fitWindow: function() {
+  fitCamera: function() {
 
     // Measure container.
     let w = this.$el.width();

@@ -220,8 +220,16 @@ export default Backbone.View.extend({
    * Orient the camera.
    */
   orient: function() {
-    // TODO
-    this.camera.lookAt(new THREE.Vector3(0,0,0));
+
+    if (!this.orientation) return;
+
+    let a = THREE.Math.degToRad(this.orientation.alpha);
+    let b = THREE.Math.degToRad(this.orientation.beta);
+    let g = THREE.Math.degToRad(this.orientation.gamma);
+
+    let e = new THREE.Euler(b, g, a)
+    this.camera.quaternion.setFromEuler(e);
+
   },
 
 

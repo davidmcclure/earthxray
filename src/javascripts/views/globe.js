@@ -227,8 +227,14 @@ export default Backbone.View.extend({
     let b = THREE.Math.degToRad(this.orientation.beta);
     let g = THREE.Math.degToRad(this.orientation.gamma);
 
-    let e = new THREE.Euler(b, g, a)
+    let z = new THREE.Vector3(0, 0, 1);
+    let e = new THREE.Euler();
+    let q0 = new THREE.Quaternion();
+    let q1 = new THREE.Quaternion(-Math.sqrt(0.5), 0, 0, Math.sqrt(0.5));
+
+    e.set(b, a, -g, 'YXZ');
     this.camera.quaternion.setFromEuler(e);
+    this.camera.quaternion.multiply(q1);
 
   },
 

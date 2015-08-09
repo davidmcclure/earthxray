@@ -23,7 +23,7 @@ export default Backbone.View.extend({
     this._initScene();
     this._initCamera();
     this._initSphere();
-    this._initLocation();
+    //this._initLocation();
     this._initHeading();
 
     this.render();
@@ -227,7 +227,20 @@ export default Backbone.View.extend({
     let b = THREE.Math.degToRad(this.orientation.beta);
     let g = THREE.Math.degToRad(this.orientation.gamma);
 
-    // TODO
+    let ra = new THREE.Matrix4();
+    let rb = new THREE.Matrix4();
+    let rg = new THREE.Matrix4();
+
+    ra.makeRotationZ(a);
+    rb.makeRotationX(b);
+    rg.makeRotationY(g);
+
+    let r = new THREE.Matrix4();
+    r.multiply(ra);
+    r.multiply(rb);
+    r.multiply(rg);
+
+    this.camera.quaternion.setFromRotationMatrix(r);
 
   },
 

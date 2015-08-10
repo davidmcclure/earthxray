@@ -23,7 +23,7 @@ export default Backbone.View.extend({
     this._initScene();
     this._initCamera();
     this._initSphere();
-    //this._initLocation();
+    this._initLocation();
     this._initHeading();
 
     this.render();
@@ -55,6 +55,17 @@ export default Backbone.View.extend({
    * Create the camera, bind resize.
    */
   _initCamera: function() {
+
+    let w = this.$el.width();
+    let h = this.$el.height();
+
+    // Create the camera.
+    this.camera = new THREE.PerspectiveCamera(
+      opts.camera.fov,
+      w / h,
+      opts.camera.near,
+      opts.camera.far
+    );
 
     this.fitCamera()
 
@@ -143,13 +154,9 @@ export default Backbone.View.extend({
     let w = this.$el.width();
     let h = this.$el.height();
 
-    // Create the camera.
-    this.camera = new THREE.PerspectiveCamera(
-      opts.camera.fov,
-      w / h,
-      opts.camera.near,
-      opts.camera.far
-    );
+    // Set aspect ratio.
+    this.camera.aspect = w / h;
+    this.camera.updateProjectionMatrix();
 
     // Size the renderer.
     this.renderer.setSize(w, h);

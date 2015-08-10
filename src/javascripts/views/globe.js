@@ -120,7 +120,18 @@ export default Backbone.View.extend({
         pos.coords.latitude
       );
 
+      // Position the camera, point at origin.
       this.camera.position.set(x, y, z);
+      this.camera.lookAt(new THREE.Vector3(0, 0, 0));
+
+      // Store the default heading.
+      this.eye = this.camera.matrix.clone();
+
+      this.eye.lookAt(
+        new THREE.Vector3(x, y, z),
+        new THREE.Vector3(0, 0, 0),
+        new THREE.Vector3(x, y, z).normalize()
+      );
 
     });
 
@@ -242,7 +253,7 @@ export default Backbone.View.extend({
     rb.makeRotationX(b);
     rg.makeRotationY(g);
 
-    let r = new THREE.Matrix4();
+    let r = this.eye.clone();
     r.multiply(ra);
     r.multiply(rb);
     r.multiply(rg);

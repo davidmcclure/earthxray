@@ -129,7 +129,7 @@ export default Backbone.View.extend({
 
       this.eye.lookAt(
         new THREE.Vector3(x, y, z),
-        new THREE.Vector3(0, 0, 0),
+        new THREE.Vector3(0, 0.001, 0),
         new THREE.Vector3(x, y, z).normalize()
       );
 

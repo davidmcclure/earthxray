@@ -265,6 +265,8 @@ export default Backbone.View.extend({
     let heading = new THREE.Vector3(0, 0, -1);
     heading.applyQuaternion(this.camera.quaternion);
 
+    // TODO: Get far-side intersection.
+
   },
 
 

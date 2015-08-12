@@ -239,7 +239,7 @@ export default Backbone.View.extend({
    */
   orient: function() {
 
-    if (!this.orientation) return;
+    if (!this.orientation || !this.eye) return;
 
     let a = THREE.Math.degToRad(this.orientation.alpha);
     let b = THREE.Math.degToRad(this.orientation.beta);

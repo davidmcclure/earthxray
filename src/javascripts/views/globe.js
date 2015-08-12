@@ -128,9 +128,6 @@ export default Backbone.View.extend({
       this.eye = this.camera.matrix.clone();
 
       // TODO: More direct way to do this?
-
-      // Point the matrix 1m above 0,0,0, which, combined with the up vector,
-      // ensures that the compass orientation will be correct.
       this.eye.lookAt(
         new THREE.Vector3(x, y, z),
         new THREE.Vector3(0, 0.001, 0),

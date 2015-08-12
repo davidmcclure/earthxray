@@ -261,6 +261,16 @@ export default Backbone.View.extend({
 
     this.camera.quaternion.setFromRotationMatrix(r);
 
+    // TODO
+
+    // Get the heading vector.
+    let heading = new THREE.Vector3(0, 0, -1);
+    heading.applyQuaternion(this.camera.quaternion);
+
+    let ray = new THREE.Raycaster(this.camera.position, heading);
+    let intersections = ray.intersectObject(this.sphere);
+    console.log(intersections);
+
   },
 
 

@@ -4,6 +4,7 @@ import _ from 'lodash';
 import $ from 'jquery';
 import Backbone from 'backbone';
 import THREE from 'three';
+import Hammer from 'hammerjs';
 
 import * as opts from '../opts.yml';
 import * as utils from '../utils';
@@ -25,6 +26,7 @@ export default Backbone.View.extend({
     this._initSphere();
     this._initLocation();
     this._initHeading();
+    this._initZoom();
 
     this.render();
 
@@ -154,6 +156,40 @@ export default Backbone.View.extend({
     else {
       // TODO: Flash error.
     }
+
+  },
+
+
+  /**
+   * Listen for pinch zooming.
+   */
+  _initZoom: function() {
+
+    let gesture = new Hammer(this.el);
+
+    gesture.get('pinch').set({
+      enable: true
+    });
+
+    let min = opts.camera.minFov;
+    let max = opts.camera.maxFov;
+    let r = opts.camera.fovRatio;
+
+    // Zoom out.
+    gesture.on('pinchin', e => {
+      if (this.camera.fov <= max) {
+        this.camera.fov += this.camera.fov*r;
+        this.camera.updateProjectionMatrix();
+      }
+    });
+
+    // Zoom in.
+    gesture.on('pinchout', e => {
+      if (this.camera.fov >= min) {
+        this.camera.fov -= this.camera.fov*r;
+        this.camera.updateProjectionMatrix();
+      }
+    });
 
   },
 

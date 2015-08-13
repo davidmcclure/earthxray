@@ -310,25 +310,27 @@ export default Backbone.View.extend({
     let heading = new THREE.Vector3(0, 0, -1);
     heading.applyQuaternion(this.camera.quaternion);
 
-    // D = camera.position
-    // E = heading
-    //
-    // a = heading.dot(heading)
-    // b = heading.multiplyScalar(2) * camera.position
-    // c = camera.position.dot(camera.position) - R^2
-
+    // Get the scaling coefficient.
     let a = heading.dot(heading);
     let b = 2 * heading.dot(this.camera.position);
-    let c = this.camera.position.dot(this.camera.position) - Math.pow(opts.earth.radius, 2);
+    let u = (-2*b) / (2*a);
 
-    //let radicand = b*b - 4*a*c;
-    let radicand = b*b;
+    let distance = Infinity;
+    let point = null;
 
-    // u = (-b - b) / 2a
-    let u = (-2*b) / (2*a)
-    let p = this.camera.position.clone().add(heading.clone().multiplyScalar(u));
-    console.log(this.camera.position.distanceTo(p));
-    console.log(u);
+    // If we're not looking out into space.
+    if (u > 0) {
+
+      // Get the far-side intersection.
+      let delta = heading.clone().multiplyScalar(u);
+      point = this.camera.position.clone().add(delta);
+
+      // Get the distance to the point.
+      distance = this.camera.position.distanceTo(point);
+
+    }
+
+    // TODO: Publish point / distance
 
   },
 

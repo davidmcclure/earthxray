@@ -2,12 +2,11 @@
 
 import $ from 'jquery';
 import Globe from './views/globe';
+import world from './data/world.geo.json';
 
 
 let globe = new Globe();
 
 
 // TODO|dev
-$.getJSON('data/world.geo.json', (world) => {
-  globe.drawGeoJSON(world);
-});
+globe.drawGeoJSON(world);

@@ -3,7 +3,6 @@ compile:
   - jade
   - browserify
   - less
-  - symlink
 
 compile:min:
   - compile

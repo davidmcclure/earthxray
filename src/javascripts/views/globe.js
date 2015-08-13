@@ -310,7 +310,25 @@ export default Backbone.View.extend({
     let heading = new THREE.Vector3(0, 0, -1);
     heading.applyQuaternion(this.camera.quaternion);
 
-    // TODO
+    // D = camera.position
+    // E = heading
+    //
+    // a = heading.dot(heading)
+    // b = heading.multiplyScalar(2) * camera.position
+    // c = camera.position.dot(camera.position) - R^2
+
+    let a = heading.dot(heading);
+    let b = 2 * heading.dot(this.camera.position);
+    let c = this.camera.position.dot(this.camera.position) - Math.pow(opts.earth.radius, 2);
+
+    //let radicand = b*b - 4*a*c;
+    let radicand = b*b;
+
+    // u = (-b - b) / 2a
+    let u = (-2*b) / (2*a)
+    let p = this.camera.position.clone().add(heading.clone().multiplyScalar(u));
+    console.log(this.camera.position.distanceTo(p));
+    console.log(u);
 
   },
 

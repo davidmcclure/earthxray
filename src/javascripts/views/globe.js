@@ -167,6 +167,7 @@ export default Backbone.View.extend({
 
     let gesture = new Hammer(this.el);
 
+    // Enable pinch.
     gesture.get('pinch').set({
       enable: true
     });

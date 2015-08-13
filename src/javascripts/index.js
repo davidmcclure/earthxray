@@ -1,12 +1,7 @@
 
 
 import $ from 'jquery';
-import Globe from './views/globe';
-import world from './data/world.geo.json';
+import Globe from './controllers/globe';
 
 
-let globe = new Globe();
-
-
-// TODO|dev
-globe.drawGeoJSON(world);
+new Globe();

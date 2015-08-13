@@ -273,9 +273,9 @@ export default Backbone.View.extend({
 
 
   /**
-   * Orient the camera.
+   * Point the camera.
    */
-  orient: function() {
+  point: function() {
 
     if (!this.orientation || !this.eye) return;
 
@@ -298,11 +298,19 @@ export default Backbone.View.extend({
 
     this.camera.quaternion.setFromRotationMatrix(r);
 
-    // TODO|dev: Get the heading vector.
+  },
+
+
+  /**
+   * Trace the heading vector.
+   */
+  trace: function() {
+
+    // Get the heading vector.
     let heading = new THREE.Vector3(0, 0, -1);
     heading.applyQuaternion(this.camera.quaternion);
 
-    // TODO: Get far-side intersection.
+    // TODO
 
   },
 
@@ -312,7 +320,8 @@ export default Backbone.View.extend({
    */
   render: function() {
 
-    this.orient();
+    this.point();
+    this.trace();
 
     // Render the new frame.
     window.requestAnimationFrame(this.render.bind(this));

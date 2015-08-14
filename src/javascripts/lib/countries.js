@@ -46,7 +46,7 @@ export default class Countries {
 
       }
 
-      // Link the feature with the point.
+      // Link the points with features.
       for (let c of coords) {
         points.push({
           minX: c[0],
@@ -73,7 +73,7 @@ export default class Countries {
 
 
   /**
-   * Given a XYZ coordinate, try to find a country that contains it.
+   * Given an XYZ coordinate, try to find a country that contains it.
    *
    * @param {Number} x
    * @param {Number} y

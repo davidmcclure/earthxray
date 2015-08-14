@@ -20,7 +20,7 @@ export default class Distance extends React.Component {
 
     this.state = {
       distance: Infinity,
-      country: null,
+      country: null
     };
 
   }

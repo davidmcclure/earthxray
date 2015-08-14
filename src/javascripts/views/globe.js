@@ -337,7 +337,7 @@ export default View.extend({
     // If we're not looking out into space.
     if (u > 0) {
 
-      // Far-side intersection.
+      // Get far-side intersection.
       let delta = heading.clone().multiplyScalar(u);
       let point = this.camera.position.clone().add(delta);
 
@@ -345,7 +345,7 @@ export default View.extend({
       let [x, y, z] = point.toArray();
       country = this.countries.xyzToCountry(x, y, z);
 
-      // Distance to the point.
+      // Get distance to the point.
       distance = this.camera.position.distanceTo(point);
 
     }

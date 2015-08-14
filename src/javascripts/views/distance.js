@@ -31,14 +31,41 @@ export default class Distance extends React.Component {
    */
   render() {
 
-    let distance = '∞';
+    let distance;
 
-    // Convert distance to miles.
+    // If we're below the horizon.
     if (this.state.distance != Infinity) {
-      distance = Math.round(utils.kmToMi(this.state.distance));
+
+      // KM -> miles.
+      let miles = Math.round(utils.kmToMi(this.state.distance));
+
+      distance = (
+        <div className="distance">
+          <span>{miles.toLocaleString()}</span>{' '}
+          <span className="miles">miles</span>
+        </div>
+      );
+
     }
 
-    return <div>{distance}</div>;
+    // If we're looking into space.
+    else {
+      distance = (
+        <div className="distance">∞</div>
+      );
+    }
+
+    return (
+      <div>
+
+        {distance}
+
+        <div className="country">
+          {this.state.country}
+        </div>
+
+      </div>
+    );
 
   }
 

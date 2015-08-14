@@ -39,8 +39,8 @@ export function lonLatToXYZ(lon, lat, r=opts.earth.radius) {
  */
 export function xyzToLonLat(x, y, z, r=opts.earth.radius) {
 
-  let lon = THREE.Math.radToDeg(Math.asin(z/r));
-  let lat = THREE.Math.radToDeg(Math.atan2(y, x));
+  let lon = THREE.Math.radToDeg(Math.asin(y/r));
+  let lat = THREE.Math.radToDeg(Math.atan2(z, -x));
 
   return [lon, lat];
 

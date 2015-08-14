@@ -1,5 +1,6 @@
 
 
+import turf from 'turf';
 import * as utils from '../utils';
 
 
@@ -25,8 +26,30 @@ export default class Borders {
    * @return {String}
    */
   xyzToCountry(x, y, z) {
+
+    // XYZ -> lon/lat.
     let [lon, lat] = utils.xyzToLonLat(x, y, z);
-    console.log(lon, lat);
+
+    let point = {
+      geometry: {
+        type: 'Point',
+        coordinates: [lat, lon]
+      }
+    };
+
+    let country = null;
+
+    // Probe for match.
+    // TODO: Slow. How to optimize?
+    for (let c of this.json.features) {
+      if (turf.inside(point, c)) {
+        country = c.properties.name;
+        break;
+      }
+    }
+
+    return country;
+
   }
 
 

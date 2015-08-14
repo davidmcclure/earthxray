@@ -349,6 +349,8 @@ export default Backbone.View.extend({
       country = this.countries.xyzToCountry(x, y, z);
     }
 
+    // TODO: Broadcast.
+
   },
 
 

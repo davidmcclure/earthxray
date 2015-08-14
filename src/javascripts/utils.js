@@ -50,3 +50,14 @@ export function xyzToLonLat(x, y, z, r=opts.earth.radius) {
   return [dLon, dLat];
 
 };
+
+
+/**
+ * Convert kilometers -> miles.
+ *
+ * @param {Number} km
+ * @returns {Number}
+ */
+export function kmToMi(km) {
+  return km*0.62137;
+};

@@ -1,9 +1,10 @@
 
 
 import turf from 'turf';
-import * as utils from '../utils';
-import rbush from 'rbush';
 import knn from 'rbush-knn';
+import rbush from 'rbush';
+
+import * as utils from '../utils';
 
 
 export default class Countries {

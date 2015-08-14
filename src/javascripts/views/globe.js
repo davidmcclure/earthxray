@@ -2,9 +2,9 @@
 
 import _ from 'lodash';
 import $ from 'jquery';
+import Hammer from 'hammerjs';
 import Backbone from 'backbone';
 import THREE from 'three';
-import Hammer from 'hammerjs';
 
 import View from '../lib/view';
 import Countries from '../lib/countries';

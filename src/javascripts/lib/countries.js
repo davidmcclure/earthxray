@@ -16,8 +16,17 @@ export default class Countries {
    * @param {Object} json
    */
   constructor(json) {
+
     this.json = json;
     this._indexPoints();
+
+    let t1 = new Date();
+    for (let i=0; i<10000; i++) {
+      this.xyzToCountry(-1084.3465867499335, -2116.909066586136, 5910.374732925923);
+    }
+    let t2 = new Date();
+    console.log(t2-t1);
+
   }
 
 
@@ -94,18 +103,15 @@ export default class Countries {
     };
 
     // Get the 2 nearest points.
-    let nn = knn(this.tree, [lat, lon], 2);
+    let nn = knn(this.tree, [lat, lon], 20);
 
     let country = null;
 
-    // Inside the first point's country?
-    if (turf.inside(point, nn[0].feature)) {
-      country = nn[0].feature.properties.name;
-    }
-
-    // If not, then the second point's?
-    else if (turf.inside(point, nn[1].feature)) {
-      country = nn[1].feature.properties.name;
+    for (let n of nn) {
+      if (turf.inside(point, n.feature)) {
+        country = n.feature.properties.name;
+        break;
+      }
     }
 
     return country;

@@ -327,26 +327,23 @@ export default Backbone.View.extend({
     let b = 2 * heading.dot(this.camera.position);
     let u = (-2*b) / (2*a);
 
-    let point = null;
-    let distance = Infinity;
     let country = null;
+    let distance = Infinity;
 
     // If we're not looking out into space.
     if (u > 0) {
 
       // Far-side intersection.
       let delta = heading.clone().multiplyScalar(u);
-      point = this.camera.position.clone().add(delta);
+      let point = this.camera.position.clone().add(delta);
+
+      // Query for a country.
+      let [x, y, z] = point.toArray();
+      country = this.countries.xyzToCountry(x, y, z);
 
       // Distance to the point.
       distance = this.camera.position.distanceTo(point);
 
-    }
-
-    // Query for a country.
-    if (point) {
-      let [x, y, z] = point.toArray();
-      country = this.countries.xyzToCountry(x, y, z);
     }
 
     // TODO: Broadcast.

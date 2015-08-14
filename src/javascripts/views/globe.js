@@ -6,9 +6,10 @@ import Backbone from 'backbone';
 import THREE from 'three';
 import Hammer from 'hammerjs';
 
-import * as utils from '../utils';
 import * as opts from '../opts.yml';
-import World from '../lib/world';
+import * as utils from '../utils';
+import countries from '../data/world.geo.json';
+import Borders from '../lib/borders';
 
 
 export default Backbone.View.extend({
@@ -114,7 +115,8 @@ export default Backbone.View.extend({
    * Draw country borders.
    */
   _initCountries: function() {
-    // TODO
+    this.countries = new Borders(countries);
+    this.drawGeoJSON(countries);
   },
 
 

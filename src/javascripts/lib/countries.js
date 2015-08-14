@@ -1,5 +1,8 @@
 
 
+import * as utils from '../utils';
+
+
 export default class Borders {
 
 
@@ -16,11 +19,14 @@ export default class Borders {
   /**
    * Given a XYZ coordinate, try to find a country that contains it.
    *
-   * @param {Array} xyz
+   * @param {Number} x
+   * @param {Number} y
+   * @param {Number} z
    * @return {String}
    */
-  xyzToCountry(xyz) {
-    // TODO
+  xyzToCountry(x, y, z) {
+    let [lon, lat] = utils.xyzToLonLat(x, y, z);
+    console.log(lon, lat);
   }
 
 

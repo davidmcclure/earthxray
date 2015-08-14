@@ -334,18 +334,19 @@ export default Backbone.View.extend({
     // If we're not looking out into space.
     if (u > 0) {
 
-      // Get the far-side intersection.
+      // Far-side intersection.
       let delta = heading.clone().multiplyScalar(u);
       point = this.camera.position.clone().add(delta);
 
-      // Get the distance to the point.
+      // Distance to the point.
       distance = this.camera.position.distanceTo(point);
 
     }
 
+    // Query for a country.
     if (point) {
-      country = this.borders.xyzToCountry(point.toArray());
-      console.log(country);
+      let [x, y, z] = point.toArray();
+      country = this.countries.xyzToCountry(x, y, z);
     }
 
   },

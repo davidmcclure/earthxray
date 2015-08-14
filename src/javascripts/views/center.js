@@ -1,6 +1,7 @@
 
 
 import _ from 'lodash';
+import classnames from 'classnames';
 import React from 'react';
 
 
@@ -28,9 +29,15 @@ export default class Center extends React.Component {
    * Render the center crosshairs.
    */
   render() {
+
+    let cx = classnames('fa', 'fa-plus', {
+      land: this.state.country
+    });
+
     return (
-      <i className="fa fa-plus center"></i>
+      <i className={cx}></i>
     );
+
   }
 
 

@@ -6,10 +6,10 @@ import Backbone from 'backbone';
 import THREE from 'three';
 import Hammer from 'hammerjs';
 
-import * as opts from '../opts.yml';
+import Countries from '../lib/countries';
+import borders from '../data/world.geo.json';
 import * as utils from '../utils';
-import countries from '../data/world.geo.json';
-import Borders from '../lib/borders';
+import * as opts from '../opts.yml';
 
 
 export default Backbone.View.extend({
@@ -115,8 +115,8 @@ export default Backbone.View.extend({
    * Draw country borders.
    */
   _initCountries: function() {
-    this.countries = new Borders(countries);
-    this.drawGeoJSON(countries);
+    this.countries = new Countries(borders);
+    this.drawGeoJSON(borders);
   },
 
 
@@ -327,8 +327,9 @@ export default Backbone.View.extend({
     let b = 2 * heading.dot(this.camera.position);
     let u = (-2*b) / (2*a);
 
-    let distance = Infinity;
     let point = null;
+    let distance = Infinity;
+    let country = null;
 
     // If we're not looking out into space.
     if (u > 0) {
@@ -342,7 +343,10 @@ export default Backbone.View.extend({
 
     }
 
-    // TODO: Publish point / distance
+    if (point) {
+      country = this.borders.xyzToCountry(point.toArray());
+      console.log(country);
+    }
 
   },
 

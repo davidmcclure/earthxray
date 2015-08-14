@@ -31,15 +31,12 @@ export default class Distance extends React.Component {
    */
   render() {
 
-    let distance;
+    let distance = '∞';
 
     // Convert distance to miles.
     if (this.state.distance != Infinity) {
       distance = Math.round(utils.kmToMi(this.state.distance));
     }
-
-    // Or, use the infinity symbol.
-    else distance = '∞';
 
     return <div>{distance}</div>;
 

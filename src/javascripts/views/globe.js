@@ -346,7 +346,7 @@ export default Backbone.View.extend({
     // Query for a country.
     if (point) {
       let [x, y, z] = point.toArray();
-      country = this.countries.xyzToCountry2(x, y, z);
+      country = this.countries.xyzToCountry(x, y, z);
     }
 
     // TODO: Broadcast.

@@ -80,7 +80,7 @@ export default class Countries {
    * @param {Number} z
    * @return {String}
    */
-  xyzToCountry1(x, y, z) {
+  xyzToCountry(x, y, z) {
 
     // XYZ -> lon/lat.
     let [lon, lat] = utils.xyzToLonLat(x, y, z);
@@ -91,44 +91,23 @@ export default class Countries {
         coordinates: [lat, lon]
       }
     };
+
+    // Get the 2 nearest points.
+    let nn = knn(this.tree, [lat, lon], 2);
 
     let country = null;
 
-    // Probe for match.
-    // TODO: Slow. How to optimize?
-    for (let c of this.json.features) {
-      if (turf.inside(point, c)) {
-        country = c.properties.name;
-        break;
-      }
+    // Inside the first point's country?
+    if (turf.inside(point, nn[0].feature)) {
+      country = nn[0].feature.properties.name;
+    }
+
+    // If not, then the second point's?
+    else if (turf.inside(point, nn[1].feature)) {
+      country = nn[1].feature.properties.name;
     }
 
     return country;
-
-  }
-
-
-  /**
-   * Given a XYZ coordinate, try to find a country that contains it.
-   *
-   * @param {Number} x
-   * @param {Number} y
-   * @param {Number} z
-   * @return {String}
-   */
-  xyzToCountry2(x, y, z) {
-
-    // XYZ -> lon/lat.
-    let [lon, lat] = utils.xyzToLonLat(x, y, z);
-
-    let point = {
-      geometry: {
-        type: 'Point',
-        coordinates: [lat, lon]
-      }
-    };
-
-    let nn = knn(this.tree, [lon, lat], 5);
 
   }
 

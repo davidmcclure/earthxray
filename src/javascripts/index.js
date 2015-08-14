@@ -2,8 +2,8 @@
 
 import $ from 'jquery';
 import Globe from './controllers/globe';
-import Country from './controllers/country';
+import Distance from './controllers/distance';
 
 
 new Globe();
-new Country();
+new Distance();

@@ -6,7 +6,7 @@ import React from 'react';
 import * as utils from '../utils';
 
 
-export default class Country extends React.Component {
+export default class Distance extends React.Component {
 
 
   /**

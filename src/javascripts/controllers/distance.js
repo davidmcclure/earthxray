@@ -2,13 +2,13 @@
 
 import React from 'react';
 import Controller from '../lib/controller';
-import Country from '../views/country';
+import Distance from '../views/distance';
 
 
 export default Controller.extend({
 
 
-  channel: 'country',
+  channel: 'distance',
 
 
   events: {
@@ -24,8 +24,8 @@ export default Controller.extend({
   initialize: function() {
 
     this.view = React.render(
-      <Country />,
-      document.getElementById('country')
+      <Distance />,
+      document.getElementById('distance')
     );
 
     this.start();

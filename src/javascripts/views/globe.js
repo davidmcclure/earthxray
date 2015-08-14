@@ -25,8 +25,9 @@ export default Backbone.View.extend({
     this._initScene();
     this._initCamera();
     this._initSphere();
-    this._initLocation();
+    this._initCountries();
     this._initHeading();
+    this._initLocation();
     this._initZoom();
 
     this.render();
@@ -106,6 +107,14 @@ export default Backbone.View.extend({
     this.sphere = new THREE.Mesh(geometry, material);
     this.world.add(this.sphere);
 
+  },
+
+
+  /**
+   * Draw country borders.
+   */
+  _initCountries: function() {
+    // TODO
   },
 
 

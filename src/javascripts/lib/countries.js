@@ -4,7 +4,7 @@ import turf from 'turf';
 import * as utils from '../utils';
 
 
-export default class Borders {
+export default class Countries {
 
 
   /**

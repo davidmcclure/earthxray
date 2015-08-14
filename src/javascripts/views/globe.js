@@ -6,16 +6,20 @@ import Backbone from 'backbone';
 import THREE from 'three';
 import Hammer from 'hammerjs';
 
+import View from '../lib/view';
 import Countries from '../lib/countries';
 import borders from '../data/world.geo.json';
 import * as utils from '../utils';
 import * as opts from '../opts.yml';
 
 
-export default Backbone.View.extend({
+export default View.extend({
 
 
   el: '#globe',
+
+
+  channels: ['globe'],
 
 
   /**
@@ -346,7 +350,11 @@ export default Backbone.View.extend({
 
     }
 
-    // TODO: Broadcast.
+    // Publish the target.
+    this.channels.globe.trigger('trace', {
+      country: country,
+      distance: distance
+    });
 
   },
 

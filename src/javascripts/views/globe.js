@@ -6,8 +6,9 @@ import Backbone from 'backbone';
 import THREE from 'three';
 import Hammer from 'hammerjs';
 
-import * as opts from '../opts.yml';
 import * as utils from '../utils';
+import * as opts from '../opts.yml';
+import World from '../lib/world';
 
 
 export default Backbone.View.extend({
@@ -50,6 +51,10 @@ export default Backbone.View.extend({
     // Inject the <canvas>.
     this.$el.append(this.renderer.domElement);
 
+    // Top-level mesh group.
+    this.world = new THREE.Object3D();
+    this.scene.add(this.world);
+
   },
 
 
@@ -82,10 +87,6 @@ export default Backbone.View.extend({
    * Create a sphere for the earth.
    */
   _initSphere: function() {
-
-    // Top-level mesh group.
-    this.world = new THREE.Object3D();
-    this.scene.add(this.world);
 
     // Create geometry.
     let geometry = new THREE.SphereGeometry(

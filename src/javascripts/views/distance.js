@@ -19,8 +19,7 @@ export default class Distance extends React.Component {
     super(props);
 
     this.state = {
-      distance: Infinity,
-      country: null
+      distance: Infinity
     };
 
   }
@@ -55,17 +54,7 @@ export default class Distance extends React.Component {
       );
     }
 
-    return (
-      <div>
-
-        {distance}
-
-        <div className="country">
-          {this.state.country}
-        </div>
-
-      </div>
-    );
+    return distance;
 
   }
 

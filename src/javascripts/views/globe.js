@@ -7,7 +7,6 @@ import Backbone from 'backbone';
 import THREE from 'three';
 
 import View from '../lib/view';
-import Countries from '../lib/countries';
 import borders from '../data/world.geo.json';
 import * as utils from '../utils';
 import * as opts from '../opts.yml';
@@ -119,7 +118,6 @@ export default View.extend({
    * Draw country borders.
    */
   _initCountries: function() {
-    this.countries = new Countries(borders);
     this.drawGeoJSON(borders);
   },
 
@@ -180,34 +178,8 @@ export default View.extend({
    * Listen for pinch zooming.
    */
   _initZoom: function() {
-
     let gesture = new Hammer(this.el);
-
-    // Enable pinch.
-    gesture.get('pinch').set({
-      enable: true
-    });
-
-    let min = opts.camera.minFov;
-    let max = opts.camera.maxFov;
-    let r = opts.camera.fovRatio;
-
-    // Zoom out.
-    gesture.on('pinchin', e => {
-      if (this.camera.fov <= max) {
-        this.camera.fov += this.camera.fov*r;
-        this.camera.updateProjectionMatrix();
-      }
-    });
-
-    // Zoom in.
-    gesture.on('pinchout', e => {
-      if (this.camera.fov >= min) {
-        this.camera.fov -= this.camera.fov*r;
-        this.camera.updateProjectionMatrix();
-      }
-    });
-
+    // TODO
   },
 
 
@@ -331,7 +303,6 @@ export default View.extend({
     let b = 2 * heading.dot(this.camera.position);
     let u = (-2*b) / (2*a);
 
-    let country = null;
     let distance = Infinity;
 
     // If we're not looking out into space.
@@ -341,18 +312,13 @@ export default View.extend({
       let delta = heading.clone().multiplyScalar(u);
       let point = this.camera.position.clone().add(delta);
 
-      // Query for a country.
-      let [x, y, z] = point.toArray();
-      country = this.countries.xyzToCountry(x, y, z);
-
       // Get distance to the point.
       distance = this.camera.position.distanceTo(point);
 
     }
 
-    // Publish the target.
+    // Publish the trace.
     this.channels.globe.trigger('trace', {
-      country: country,
       distance: distance
     });
 

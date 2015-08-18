@@ -12,7 +12,7 @@ export default class Center extends React.Component {
    * Render the crosshairs.
    */
   render() {
-    return <i className="fa fa-plus"></i>;
+    return <i className="fa fa-bullseye"></i>;
   }
 
 

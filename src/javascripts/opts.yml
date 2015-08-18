@@ -18,3 +18,4 @@ sphere:
 
 borders:
   lineColor: 0x2a7bbf
+  lineWidth: 2

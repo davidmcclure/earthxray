@@ -243,6 +243,7 @@ export default View.extend({
     // Create line material.
     let material = new THREE.LineBasicMaterial({
       color: opts.borders.lineColor,
+      linewidth: opts.borders.lineWidth,
     });
 
     let geometry = new THREE.Geometry();

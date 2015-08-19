@@ -178,8 +178,31 @@ export default View.extend({
    * Listen for pinch zooming.
    */
   _initZoom: function() {
+
+    // Enable pinch.
     let gesture = new Hammer(this.el);
-    // TODO
+    gesture.get('pinch').set({ enable: true });
+
+    let fov;
+
+    // Store initial FOV.
+    gesture.on('pinchstart', e => {
+      fov = this.camera.fov;
+    });
+
+    // On each pinch tick.
+    gesture.on('pinch', e => {
+
+      let newFov = fov/e.scale;
+
+      // Apply the new FOV, if it's within bounds.
+      if (newFov > opts.camera.minFov && newFov < opts.camera.maxFov) {
+        this.camera.fov = newFov;
+        this.camera.updateProjectionMatrix();
+      }
+
+    });
+
   },
 
 

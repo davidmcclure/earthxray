@@ -7,7 +7,6 @@ camera:
   fov: 75
   minFov: 10
   maxFov: 120
-  fovRatio: 0.03
   near: 0.1
   far: 100000
 

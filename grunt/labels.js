@@ -1,6 +1,7 @@
 
 
 import _ from 'lodash';
+import prettyjson from 'prettyjson';
 
 
 export default (grunt) => {
@@ -24,7 +25,7 @@ export default (grunt) => {
 
       grunt.file.write(
         'src/javascripts/data/labels.geo.json',
-        JSON.stringify(json)
+        JSON.stringify(json, null, 2)
       );
 
     }

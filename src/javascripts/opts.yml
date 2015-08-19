@@ -5,7 +5,7 @@ earth:
 
 camera:
   fov: 75
-  minFov: 10
+  minFov: 5
   maxFov: 120
   near: 0.1
   far: 100000

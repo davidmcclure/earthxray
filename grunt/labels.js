@@ -1,7 +1,7 @@
 
 
 import _ from 'lodash';
-import prettyjson from 'prettyjson';
+import * as utils from '../src/javascripts/utils'
 
 
 export default (grunt) => {
@@ -11,21 +11,36 @@ export default (grunt) => {
     'Filter country labels GeoJSON',
     () => {
 
-      // Load the Overpass JSON.
+      let labels = [];
+
+      // Load OSM JSON.
       let json = grunt.file.readJSON('data/labels.geo.json');
 
-      // Delete all props except for the name.
-      for (let { properties: props } of json.features) {
-        for (let k of _.keys(props)) {
-          if (k != 'name:en') {
-            delete props[k];
-          }
+      // Walk countries.
+      for (let c of json.features) {
+
+        let name = c.properties['name:en'];
+
+        // lon/lat -> XYZ.
+        let [x, y, z] = utils.lonLatToXYZ(
+          c.geometry.coordinates[0],
+          c.geometry.coordinates[1]
+        );
+
+        if (name) {
+          labels.push({
+            name: name,
+            x: x,
+            y: y,
+            z: z,
+          });
         }
+
       }
 
       grunt.file.write(
-        'src/javascripts/data/labels.geo.json',
-        JSON.stringify(json, null, 2)
+        'src/javascripts/data/labels.json',
+        JSON.stringify(labels, null, 2)
       );
 
     }

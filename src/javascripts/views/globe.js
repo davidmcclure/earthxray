@@ -8,6 +8,7 @@ import THREE from 'three';
 
 import View from '../lib/view';
 import borders from '../data/borders.geo.json';
+import labels from '../data/labels.json';
 import * as utils from '../utils';
 import * as opts from '../opts.yml';
 
@@ -33,6 +34,7 @@ export default View.extend({
     this._initHeading();
     this._initLocation();
     this._initZoom();
+    this._initLabels();
 
     this.render();
 
@@ -207,19 +209,30 @@ export default View.extend({
 
 
   /**
+   * TODO: Create label markup.
+   */
+  _initLabels: function() {
+    for (let c of labels) {
+      c.el= $(`<span class="country">${c.name}</span>`)
+      c.el.appendTo(this.$el);
+    }
+  },
+
+
+  /**
    * Fit the camera to the container.
    */
   fitCamera: function() {
 
-    let w = this.$el.width();
-    let h = this.$el.height();
+    this.w = this.$el.width();
+    this.h = this.$el.height();
 
     // Set aspect ratio.
-    this.camera.aspect = w / h;
+    this.camera.aspect = this.w / this.h;
     this.camera.updateProjectionMatrix();
 
     // Size the renderer.
-    this.renderer.setSize(w, h);
+    this.renderer.setSize(this.w, this.h);
 
   },
 
@@ -350,12 +363,34 @@ export default View.extend({
 
 
   /**
+   * TODO: Place labels.
+   */
+  label: function() {
+
+    for (let c of labels) {
+
+      // TODO
+      let v = new THREE.Vector3(c.x, c.y, c.z);
+      v.project(this.camera);
+
+      let x = Math.round((v.x+1)*this.w/2);
+      let y = Math.round((-v.y+1)*this.h/2);
+
+      c.el.css({ top: y, left: x });
+
+    }
+
+  },
+
+
+  /**
    * Render the scene.
    */
   render: function() {
 
     this.point();
     this.trace();
+    this.label();
 
     // Render the new frame.
     window.requestAnimationFrame(this.render.bind(this));

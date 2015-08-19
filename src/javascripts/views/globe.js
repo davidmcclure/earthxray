@@ -7,7 +7,7 @@ import Backbone from 'backbone';
 import THREE from 'three';
 
 import View from '../lib/view';
-import borders from '../data/world.geo.json';
+import borders from '../data/borders.geo.json';
 import * as utils from '../utils';
 import * as opts from '../opts.yml';
 

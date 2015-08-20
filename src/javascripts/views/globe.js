@@ -209,7 +209,7 @@ export default View.extend({
 
 
   /**
-   * Add country label sprites.
+   * Add country / city labels.
    */
   _initLabels: function() {
     // TODO

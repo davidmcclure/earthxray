@@ -215,41 +215,47 @@ export default View.extend({
 
     // TODO
 
-    let size = 150;
+    let size = 30;
     let font = `${size}pt Arial`;
     let height = size*2;
 
-    // Create canvas.
-    let canvas = document.createElement('canvas');
-    let ctx = canvas.getContext('2d');
+    for (let c of labels) {
 
-    // Measure width.
-    ctx.font = font;
-    let width = ctx.measureText('United States').width;
-    canvas.width = width;
-    canvas.height = height;
+      // Create canvas.
+      let canvas = document.createElement('canvas');
+      let ctx = canvas.getContext('2d');
 
-    // Render text.
-    ctx.font = font;
-    ctx.textAlign = 'center';
-    ctx.textBaseline = 'middle';
-    ctx.fillStyle = 'black';
-    ctx.fillText('United States', width/2, height/2);
+      // Measure width.
+      ctx.font = font;
+      let width = ctx.measureText(c.name).width;
 
-    // Create texture.
-    let map = new THREE.Texture(canvas);
-    map.minFilter = THREE.LinearFilter;
-    map.needsUpdate = true;
+      // Size canvas.
+      canvas.width = width;
+      canvas.height = height;
 
-    // Create sprite.
-    let material = new THREE.SpriteMaterial({ map: map });
-    let sprite = new THREE.Sprite(material);
+      // Render text.
+      ctx.font = font;
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      ctx.fillStyle = 'black';
+      ctx.fillText(c.name, width/2, height/2);
 
-    // Postion / scale.
-    sprite.position.set(0, 0, 0);
-    sprite.scale.set(width, height, 1);
+      // Create texture.
+      let map = new THREE.Texture(canvas);
+      map.minFilter = THREE.LinearFilter;
+      map.needsUpdate = true;
 
-    this.scene.add(sprite);
+      // Create sprite.
+      let material = new THREE.SpriteMaterial({ map: map });
+      let sprite = new THREE.Sprite(material);
+
+      // Postion / scale.
+      sprite.position.set(c.x, c.y, c.z);
+      sprite.scale.set(width, height, 1);
+
+      this.world.add(sprite);
+
+    }
 
   },
 

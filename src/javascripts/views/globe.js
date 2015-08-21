@@ -213,11 +213,23 @@ export default View.extend({
    */
   _initLabels: function() {
 
-    let map = THREE.ImageUtils.loadTexture('us.png');
+    let canvas = document.createElement('canvas');
+    canvas.width = 100;
+    canvas.height = 100;
+
+    let ctx = canvas.getContext('2d');
+    ctx.font = '14px Arial';
+    ctx.fillStyle = 'black';
+    ctx.textAlign = 'center';
+    ctx.fillText('United States', 50, 50);
+
+    let map = new THREE.Texture(canvas);
+    map.needsUpdate = true;
+
     let material = new THREE.SpriteMaterial({ map: map });
     let sprite = new THREE.Sprite(material);
     sprite.position.set(0, 0, 0);
-    sprite.scale.set(300, 100, 1);
+    sprite.scale.set(200, 200, 1);
 
     this.scene.add(sprite);
 

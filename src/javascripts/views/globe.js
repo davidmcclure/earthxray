@@ -215,23 +215,25 @@ export default View.extend({
 
     // TODO
 
-    let height = 20;
+    let size = 150;
+    let font = `${size}pt Arial`;
+    let height = size*2;
 
     // Create canvas.
     let canvas = document.createElement('canvas');
     let ctx = canvas.getContext('2d');
 
     // Measure width.
-    ctx.font = `${height}pt Arial`;
+    ctx.font = font;
     let width = ctx.measureText('United States').width;
     canvas.width = width;
     canvas.height = height;
 
     // Render text.
+    ctx.font = font;
     ctx.textAlign = 'center';
     ctx.textBaseline = 'middle';
     ctx.fillStyle = 'black';
-    ctx.font = `${height}pt Arial`;
     ctx.fillText('United States', width/2, height/2);
 
     // Create texture.

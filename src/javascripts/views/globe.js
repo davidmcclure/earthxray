@@ -212,7 +212,15 @@ export default View.extend({
    * Add country / city labels.
    */
   _initLabels: function() {
-    // TODO
+
+    let map = THREE.ImageUtils.loadTexture('us.png');
+    let material = new THREE.SpriteMaterial({ map: map });
+    let sprite = new THREE.Sprite(material);
+    sprite.position.set(0, 0, 0);
+    sprite.scale.set(300, 100, 1);
+
+    this.scene.add(sprite);
+
   },
 
 

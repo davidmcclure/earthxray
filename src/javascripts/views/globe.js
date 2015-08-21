@@ -213,7 +213,7 @@ export default View.extend({
    */
   _initLabels: function() {
 
-    // TODO
+    // TODO: Use point cloud.
 
     let size = 30;
     let font = `${size}pt Arial`;

@@ -213,23 +213,39 @@ export default View.extend({
    */
   _initLabels: function() {
 
+    // TODO
+
+    let height = 20;
+
+    // Create canvas.
     let canvas = document.createElement('canvas');
-    canvas.width = 100;
-    canvas.height = 100;
-
     let ctx = canvas.getContext('2d');
-    ctx.font = '14px Arial';
-    ctx.fillStyle = 'black';
-    ctx.textAlign = 'center';
-    ctx.fillText('United States', 50, 50);
 
+    // Measure width.
+    ctx.font = `${height}pt Arial`;
+    let width = ctx.measureText('United States').width;
+    canvas.width = width;
+    canvas.height = height;
+
+    // Render text.
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    ctx.fillStyle = 'black';
+    ctx.font = `${height}pt Arial`;
+    ctx.fillText('United States', width/2, height/2);
+
+    // Create texture.
     let map = new THREE.Texture(canvas);
+    map.minFilter = THREE.LinearFilter;
     map.needsUpdate = true;
 
+    // Create sprite.
     let material = new THREE.SpriteMaterial({ map: map });
     let sprite = new THREE.Sprite(material);
+
+    // Postion / scale.
     sprite.position.set(0, 0, 0);
-    sprite.scale.set(200, 200, 1);
+    sprite.scale.set(width, height, 1);
 
     this.scene.add(sprite);
 

@@ -223,6 +223,7 @@ export default View.extend({
     }
 
     let map = THREE.ImageUtils.loadTexture('test.png');
+    map.minFilter = THREE.NearestFilter;
 
     let uniforms = {
       texture: {
@@ -232,7 +233,15 @@ export default View.extend({
       repeat: {
         type: 'v2',
         value: new THREE.Vector2(0.25, 0.25)
-      }
+      },
+      scale: {
+        type: 'f',
+        value: this.h/2
+      },
+      size: {
+        type: 'f',
+        value: 50
+      },
     };
 
     let attributes = {
@@ -255,11 +264,12 @@ export default View.extend({
     }
 
     let material = new THREE.ShaderMaterial({
-      uniforms:       uniforms,
-      attributes:     attributes,
-      vertexShader:   spriteVert(),
-      fragmentShader: spriteFrag(),
-      transparent:    true,
+      uniforms:         uniforms,
+      attributes:       attributes,
+      sizeAttenuation:  true,
+      transparent:      true,
+      fragmentShader:   spriteFrag(),
+      vertexShader:     spriteVert(),
     });
 
     let cloud = new THREE.PointCloud(geometry, material);

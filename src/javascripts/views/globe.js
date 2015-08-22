@@ -36,8 +36,8 @@ export default View.extend({
     this._initCountries();
     this._initHeading();
     this._initLocation();
-    this._initZoom();
     this._initLabels();
+    this._initZoom();
 
     this.render();
 
@@ -180,49 +180,11 @@ export default View.extend({
 
 
   /**
-   * Listen for pinch zooming.
-   */
-  _initZoom: function() {
-
-    // Enable pinch.
-    let gesture = new Hammer(this.el);
-    gesture.get('pinch').set({ enable: true });
-
-    let fov, size;
-
-    // Store initial FOV.
-    gesture.on('pinchstart', e => {
-      fov   = this.camera.fov;
-      size  = this.labelMaterial.uniforms.size.value;
-    });
-
-    // On each pinch tick.
-    gesture.on('pinch', e => {
-
-      let newFov  = fov/e.scale;
-      let newSize = size*e.scale;
-
-      // Render the new FOV, if it's within bounds.
-      if (newFov > opts.camera.minFov && newFov < opts.camera.maxFov) {
-
-        // Scale the labels.
-        this.labelMaterial.uniforms.size.value = newSize;
-
-        // Apply the camera FOV.
-        this.camera.fov = newFov;
-        this.camera.updateProjectionMatrix();
-
-      }
-
-    });
-
-  },
-
-
-  /**
    * Add country / city labels.
    */
   _initLabels: function() {
+
+    // TODO|dev
 
     let geometry = new THREE.Geometry();
 
@@ -271,7 +233,7 @@ export default View.extend({
 
     }
 
-    this.labelMaterial = new THREE.ShaderMaterial({
+    this.labels = new THREE.ShaderMaterial({
       uniforms:         uniforms,
       attributes:       attributes,
       sizeAttenuation:  true,
@@ -280,8 +242,52 @@ export default View.extend({
       vertexShader:     spriteVert(),
     });
 
-    let cloud = new THREE.PointCloud(geometry, this.labelMaterial);
+    let cloud = new THREE.PointCloud(geometry, this.labels);
     this.world.add(cloud);
+
+  },
+
+
+  /**
+   * Listen for pinch zooming.
+   */
+  _initZoom: function() {
+
+    // TODO|dev
+
+    // Enable pinch.
+    let gesture = new Hammer(this.el);
+    gesture.get('pinch').set({ enable: true });
+
+    let minFov = opts.camera.minFov;
+    let maxFov = opts.camera.maxFov;
+    let fov, size;
+
+    // Store initial FOV.
+    gesture.on('pinchstart', e => {
+      fov   = this.camera.fov;
+      size  = this.labels.uniforms.size.value;
+    });
+
+    // On each pinch tick.
+    gesture.on('pinch', e => {
+
+      let newFov  = fov / e.scale;
+      let newSize = size * e.scale;
+
+      // Is the new FOV within bounds?
+      if (newFov > minFov && newFov < maxFov) {
+
+        // Scale the labels.
+        this.labels.uniforms.size.value = newSize;
+
+        // Apply the camera FOV.
+        this.camera.fov = newFov;
+        this.camera.updateProjectionMatrix();
+
+      }
+
+    });
 
   },
 

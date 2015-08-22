@@ -215,7 +215,56 @@ export default View.extend({
    * Add country / city labels.
    */
   _initLabels: function() {
-    // TODO
+
+    let geometry = new THREE.Geometry();
+
+    for (let c of labels) {
+      geometry.vertices.push(new THREE.Vector3(c.x, c.y, c.z));
+    }
+
+    let map = THREE.ImageUtils.loadTexture('test.png');
+
+    let uniforms = {
+      texture: {
+        type: 't',
+        value: map
+      },
+      repeat: {
+        type: 'v2',
+        value: new THREE.Vector2(0.25, 0.25)
+      }
+    };
+
+    let attributes = {
+      offset: {
+        type: 'v2',
+        value: []
+      }
+    };
+
+    for (let v of geometry.vertices) {
+
+      let offset = new THREE.Vector2(
+        THREE.Math.randInt(1, 3),
+        THREE.Math.randInt(2, 3)
+      );
+
+      offset.multiplyScalar(0.25);
+      attributes.offset.value.push(offset);
+
+    }
+
+    let material = new THREE.ShaderMaterial({
+      uniforms:       uniforms,
+      attributes:     attributes,
+      vertexShader:   spriteVert(),
+      fragmentShader: spriteFrag(),
+      transparent:    true,
+    });
+
+    let cloud = new THREE.PointCloud(geometry, material);
+    this.world.add(cloud);
+
   },
 
 

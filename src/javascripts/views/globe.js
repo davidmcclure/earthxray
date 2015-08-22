@@ -7,10 +7,13 @@ import Backbone from 'backbone';
 import THREE from 'three';
 
 import View from '../lib/view';
+import * as opts from '../opts.yml';
+import * as utils from '../utils';
+
 import borders from '../data/borders.geo.json';
 import labels from '../data/labels.json';
-import * as utils from '../utils';
-import * as opts from '../opts.yml';
+import spriteFrag from '../shaders/sprite.frag';
+import spriteVert from '../shaders/sprite.vert';
 
 
 export default View.extend({
@@ -212,51 +215,7 @@ export default View.extend({
    * Add country / city labels.
    */
   _initLabels: function() {
-
-    // TODO: Use point cloud.
-
-    let size = 30;
-    let font = `${size}pt Arial`;
-    let height = size*2;
-
-    for (let c of labels) {
-
-      // Create canvas.
-      let canvas = document.createElement('canvas');
-      let ctx = canvas.getContext('2d');
-
-      // Measure width.
-      ctx.font = font;
-      let width = ctx.measureText(c.name).width;
-
-      // Size canvas.
-      canvas.width = width;
-      canvas.height = height;
-
-      // Render text.
-      ctx.font = font;
-      ctx.textAlign = 'center';
-      ctx.textBaseline = 'middle';
-      ctx.fillStyle = 'black';
-      ctx.fillText(c.name, width/2, height/2);
-
-      // Create texture.
-      let map = new THREE.Texture(canvas);
-      map.minFilter = THREE.LinearFilter;
-      map.needsUpdate = true;
-
-      // Create sprite.
-      let material = new THREE.SpriteMaterial({ map: map });
-      let sprite = new THREE.Sprite(material);
-
-      // Postion / scale.
-      sprite.position.set(c.x, c.y, c.z);
-      sprite.scale.set(width, height, 1);
-
-      this.world.add(sprite);
-
-    }
-
+    // TODO
   },
 
 

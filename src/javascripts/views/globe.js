@@ -188,22 +188,30 @@ export default View.extend({
     let gesture = new Hammer(this.el);
     gesture.get('pinch').set({ enable: true });
 
-    let fov;
+    let fov, size;
 
     // Store initial FOV.
     gesture.on('pinchstart', e => {
-      fov = this.camera.fov;
+      fov   = this.camera.fov;
+      size  = this.labelMaterial.uniforms.size.value;
     });
 
     // On each pinch tick.
     gesture.on('pinch', e => {
 
-      let newFov = fov/e.scale;
+      let newFov  = fov/e.scale;
+      let newSize = size*e.scale;
 
-      // Apply the new FOV, if it's within bounds.
+      // Render the new FOV, if it's within bounds.
       if (newFov > opts.camera.minFov && newFov < opts.camera.maxFov) {
+
+        // Scale the labels.
+        this.labelMaterial.uniforms.size.value = newSize;
+
+        // Apply the camera FOV.
         this.camera.fov = newFov;
         this.camera.updateProjectionMatrix();
+
       }
 
     });
@@ -263,7 +271,7 @@ export default View.extend({
 
     }
 
-    let material = new THREE.ShaderMaterial({
+    this.labelMaterial = new THREE.ShaderMaterial({
       uniforms:         uniforms,
       attributes:       attributes,
       sizeAttenuation:  true,
@@ -272,7 +280,7 @@ export default View.extend({
       vertexShader:     spriteVert(),
     });
 
-    let cloud = new THREE.PointCloud(geometry, material);
+    let cloud = new THREE.PointCloud(geometry, this.labelMaterial);
     this.world.add(cloud);
 
   },

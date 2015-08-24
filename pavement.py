@@ -7,10 +7,30 @@ from paver.easy import *
 
 
 @task
-def country_labels():
+def state_borders():
 
     """
-    Generate the country label JSON.
+    3D-ify US state border points.
+    """
+
+    pass # TODO
+
+
+@task
+def country_borders():
+
+    """
+    3D-ify country border points.
+    """
+
+    pass # TODO
+
+
+@task
+def country_points():
+
+    """
+    Write country label points.
     """
 
     labels = []
@@ -41,6 +61,36 @@ def country_labels():
 
     with open('src/javascripts/data/labels.json', 'w') as fh:
         json.dump(labels, fh, indent=2)
+
+
+@task
+def country_sprites():
+
+    """
+    Render country label sprites.
+    """
+
+    pass # TODO
+
+
+@task
+def city_points():
+
+    """
+    Write city label points.
+    """
+
+    pass # TODO
+
+
+@task
+def city_sprites():
+
+    """
+    Render city label sprites.
+    """
+
+    pass # TODO
 
 
 def lon_lat_to_xyz(lon, lat, r=6371):

@@ -1,0 +1,4 @@
+
+ipython
+Paver
+pgmagick

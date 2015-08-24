@@ -17,7 +17,6 @@
     "browserify": "^11.0.1",
     "browserify-shader": "^0.1.0",
     "browserify-shim": "^3.8.10",
-    "gm": "^1.18.1",
     "grunt": "^0.4.5",
     "grunt-browserify": "^3.8.0",
     "grunt-contrib-clean": "^0.6.0",

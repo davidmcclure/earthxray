@@ -275,7 +275,7 @@ export default View.extend({
       let newFov  = fov / e.scale;
       let newSize = size * e.scale;
 
-      // Is the new FOV within bounds?
+      // Is the FOV within bounds?
       if (newFov > minFov && newFov < maxFov) {
 
         // Scale the labels.

@@ -180,71 +180,11 @@ export default View.extend({
 
 
   /**
-   * Add country / city labels.
+   * Initialize the label groups.
    */
   _initLabels: function() {
-
-    // TODO|dev
-
-    let geometry = new THREE.Geometry();
-
-    for (let c of labels) {
-      geometry.vertices.push(new THREE.Vector3(c.x, c.y, c.z));
-    }
-
-    let map = THREE.ImageUtils.loadTexture('test.png');
-    map.minFilter = THREE.NearestFilter;
-
-    let uniforms = {
-      texture: {
-        type: 't',
-        value: map
-      },
-      repeat: {
-        type: 'v2',
-        value: new THREE.Vector2(0.25, 0.25)
-      },
-      scale: {
-        type: 'f',
-        value: this.h/2
-      },
-      size: {
-        type: 'f',
-        value: 50
-      },
-    };
-
-    let attributes = {
-      offset: {
-        type: 'v2',
-        value: []
-      }
-    };
-
-    for (let v of geometry.vertices) {
-
-      let offset = new THREE.Vector2(
-        THREE.Math.randInt(1, 3),
-        THREE.Math.randInt(2, 3)
-      );
-
-      offset.multiplyScalar(0.25);
-      attributes.offset.value.push(offset);
-
-    }
-
-    this.labels = new THREE.ShaderMaterial({
-      uniforms:         uniforms,
-      attributes:       attributes,
-      sizeAttenuation:  true,
-      transparent:      true,
-      fragmentShader:   spriteFrag(),
-      vertexShader:     spriteVert(),
-    });
-
-    let cloud = new THREE.PointCloud(geometry, this.labels);
-    this.world.add(cloud);
-
+    this.labels = {};
+    this.addLabelGroup('countries', labels, 'test.png', 0.25, 50);
   },
 
 
@@ -253,37 +193,44 @@ export default View.extend({
    */
   _initZoom: function() {
 
-    // TODO|dev
-
     // Enable pinch.
     let gesture = new Hammer(this.el);
     gesture.get('pinch').set({ enable: true });
 
     let minFov = opts.camera.minFov;
     let maxFov = opts.camera.maxFov;
-    let fov, size;
+    let fov, sizes;
 
-    // Store initial FOV.
+    // When a pinch starts.
     gesture.on('pinchstart', e => {
-      fov   = this.camera.fov;
-      size  = this.labels.uniforms.size.value;
+
+      // Store camera FOV.
+      fov = this.camera.fov;
+
+      // Store label sizes.
+      sizes = _.object(_.map(this.labels, (v, k) => {
+        return [k, this.labels[k].uniforms.size.value];
+      }));
+
     });
 
     // On each pinch tick.
     gesture.on('pinch', e => {
 
-      let newFov  = fov / e.scale;
-      let newSize = size * e.scale;
+      let newFov = fov / e.scale;
 
       // Is the FOV within bounds?
       if (newFov > minFov && newFov < maxFov) {
 
-        // Scale the labels.
-        this.labels.uniforms.size.value = newSize;
-
         // Apply the camera FOV.
         this.camera.fov = newFov;
         this.camera.updateProjectionMatrix();
+
+        // Apply label sizes.
+        _.each(this.labels, (v, k) => {
+          let newSize = sizes[k] * e.scale;
+          this.labels[k].uniforms.size.value = newSize;
+        });
 
       }
 
@@ -366,6 +313,82 @@ export default View.extend({
     // Register the line.
     let line = new THREE.Line(geometry, material);
     this.world.add(line);
+
+  },
+
+
+  /**
+   * Add a label group.
+   *
+   * @param {String} key
+   * @param {Array} points
+   * @param {String} image
+   * @param {Number} repeat
+   * @param {Number} size
+   */
+  addLabelGroup: function(key, points, image, repeat, size) {
+
+    let geometry = new THREE.Geometry();
+
+    for (let p of points) {
+      geometry.vertices.push(new THREE.Vector3(p.x, p.y, p.z));
+    }
+
+    let map = THREE.ImageUtils.loadTexture(image);
+    map.minFilter = THREE.NearestFilter;
+
+    let uniforms = {
+      texture: {
+        type: 't',
+        value: map
+      },
+      repeat: {
+        type: 'v2',
+        value: new THREE.Vector2(repeat, repeat)
+      },
+      scale: {
+        type: 'f',
+        value: this.h/2
+      },
+      size: {
+        type: 'f',
+        value: size
+      },
+    };
+
+    let attributes = {
+      offset: {
+        type: 'v2',
+        value: []
+      }
+    };
+
+    for (let v of geometry.vertices) {
+
+      // TODO|dev
+      let offset = new THREE.Vector2(
+        THREE.Math.randInt(1, 3),
+        THREE.Math.randInt(2, 3)
+      );
+
+      offset.multiplyScalar(repeat);
+      attributes.offset.value.push(offset);
+
+    }
+
+    let material = new THREE.ShaderMaterial({
+      uniforms:         uniforms,
+      attributes:       attributes,
+      sizeAttenuation:  true,
+      transparent:      true,
+      fragmentShader:   spriteFrag(),
+      vertexShader:     spriteVert(),
+    });
+
+    let cloud = new THREE.PointCloud(geometry, material);
+    this.world.add(cloud);
+
+    this.labels[key] = material;
 
   },
 

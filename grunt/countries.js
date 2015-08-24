@@ -7,7 +7,7 @@ import * as utils from '../src/javascripts/utils'
 export default (grunt) => {
 
   grunt.registerTask(
-    'labels',
+    'countries-data',
     'Filter country labels GeoJSON',
     () => {
 
@@ -42,6 +42,16 @@ export default (grunt) => {
         'src/javascripts/data/labels.json',
         JSON.stringify(labels, null, 2)
       );
+
+    }
+  );
+
+  grunt.registerTask(
+    'countries-sprite',
+    'Render country labels sprite sheet',
+    () => {
+
+      console.log('sprite');
 
     }
   );

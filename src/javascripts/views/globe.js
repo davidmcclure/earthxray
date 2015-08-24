@@ -201,7 +201,6 @@ export default View.extend({
     let maxFov = opts.camera.maxFov;
     let fov, sizes;
 
-    // When a pinch starts.
     gesture.on('pinchstart', e => {
 
       // Store camera FOV.
@@ -214,7 +213,6 @@ export default View.extend({
 
     });
 
-    // On each pinch tick.
     gesture.on('pinch', e => {
 
       let newFov = fov / e.scale;

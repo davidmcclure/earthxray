@@ -47,14 +47,6 @@ def lon_lat_to_xyz(lon, lat, r=6371):
 
     """
     Convert lon/lat -> XYZ.
-
-    Args:
-        lon (float)
-        lat (float)
-        r (float)
-
-    Returns:
-        list: [X, Y, Z]
     """
 
     # Degrees -> radians.

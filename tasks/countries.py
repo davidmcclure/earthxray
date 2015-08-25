@@ -2,8 +2,10 @@
 
 import json
 
-from tasks.utils import lon_lat_to_xyz
+from pgmagick import Image, Geometry, Color, TypeMetric, DrawableText
 from invoke import task
+from tasks.utils import lon_lat_to_xyz
+from tasks import config
 
 
 @task
@@ -41,3 +43,44 @@ def points():
 
     with open('src/javascripts/data/labels.json', 'w') as fh:
         json.dump(labels, fh, indent=2)
+
+
+@task(points)
+def sprites():
+
+    """
+    Render the country label sprite sheet.
+    """
+
+    with open('src/javascripts/data/labels.json') as fh:
+
+        points = json.load(fh)
+
+        # Create a measurement image.
+        img = Image(Geometry(100, 100), 'transparent')
+        img.font(config.font)
+        img.fontPointsize(40)
+
+        # Get widths for all labels.
+        widths = []
+        for p in points:
+            tm = TypeMetric()
+            img.fontTypeMetrics(p['name'], tm)
+            widths.append(tm.textWidth())
+
+        w = int(max(widths))
+        h = int(w*len(points))
+
+        # Create the sprite atlas.
+        img = Image(Geometry(w, h), 'transparent')
+        img.font(config.font)
+        img.fontPointsize(40)
+
+        # Draw the labels.
+        for i, p in enumerate(points):
+            x = (w/2) - widths[i]/2
+            y = w*i + (w/2)
+            text = DrawableText(x, y, p['name'])
+            img.draw(text)
+
+        img.write('_site/countries.png')

@@ -46,7 +46,7 @@ def make_png(w, h):
     """
 
     img = Image(Geometry(int(w), int(h)), 'transparent')
-    img.font(config.font_face)
-    img.fontPointsize(config.font_size)
+    img.font(config.FONT_FACE)
+    img.fontPointsize(config.FONT_SIZE)
 
     return img

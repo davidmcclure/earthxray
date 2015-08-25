@@ -1,3 +1,7 @@
-/node_modules
-/env
-/_site
+node_modules
+_site
+env
+build
+dist
+*.egg-info
+*.pyc

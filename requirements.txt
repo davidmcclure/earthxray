@@ -2,3 +2,5 @@
 ipython
 Paver
 pgmagick
+shovel
+invoke

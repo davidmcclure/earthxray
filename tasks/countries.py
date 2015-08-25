@@ -2,12 +2,12 @@
 
 import json
 
-from invoke import task
 from tasks.utils import lon_lat_to_xyz
+from invoke import task
 
 
 @task
-def country_points():
+def points():
 
     """
     Write country label points.

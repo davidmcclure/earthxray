@@ -2,6 +2,9 @@
 
 import math
 
+from pgmagick import Image, Geometry
+from tasks import config
+
 
 def lon_lat_to_xyz(lon, lat, r=6371):
 
@@ -27,3 +30,23 @@ def lon_lat_to_xyz(lon, lat, r=6371):
     y =  r * math.sin(r_lat)
 
     return [x, y, z]
+
+
+def make_png(w, h):
+
+    """
+    Create an empty, transparent PNG file.
+
+    Args:
+        w (int)
+        h (int)
+
+    Returns:
+        pgmagick.Image
+    """
+
+    img = Image(Geometry(int(w), int(h)), 'transparent')
+    img.font(config.font_face)
+    img.fontPointsize(config.font_size)
+
+    return img

@@ -2,10 +2,9 @@
 
 import json
 
-from pgmagick import Image, Geometry, Color, TypeMetric, DrawableText
+from pgmagick import TypeMetric, DrawableText
 from invoke import task
-from tasks.utils import lon_lat_to_xyz
-from tasks import config
+from tasks.utils import lon_lat_to_xyz, make_png
 
 
 @task
@@ -56,10 +55,8 @@ def sprites():
 
         points = json.load(fh)
 
-        # Create a measurement image.
-        img = Image(Geometry(100, 100), 'transparent')
-        img.font(config.font)
-        img.fontPointsize(40)
+        # Measurement image.
+        img = make_png(100, 100)
 
         # Get widths for all labels.
         widths = []
@@ -71,10 +68,8 @@ def sprites():
         w = int(max(widths))
         h = int(w*len(points))
 
-        # Create the sprite atlas.
-        img = Image(Geometry(w, h), 'transparent')
-        img.font(config.font)
-        img.fontPointsize(40)
+        # Sprite atlas.
+        img = make_png(w, h)
 
         # Draw the labels.
         for i, p in enumerate(points):

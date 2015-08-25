@@ -180,11 +180,72 @@ export default View.extend({
 
 
   /**
-   * Initialize the label groups.
+   * Initialize the country labels.
    */
   _initLabels: function() {
-    this.labels = {};
-    this.addLabelGroup('countries', labels, 'test.png', 0.25, 50);
+
+    // TODO|dev
+
+    let geometry = new THREE.Geometry();
+
+    for (let p of labels) {
+      geometry.vertices.push(new THREE.Vector3(p.x, p.y, p.z));
+    }
+
+    let map = THREE.ImageUtils.loadTexture('test.png');
+    map.minFilter = THREE.NearestFilter;
+
+    let uniforms = {
+      texture: {
+        type: 't',
+        value: map
+      },
+      repeat: {
+        type: 'v2',
+        value: new THREE.Vector2(0.25, 0.25)
+      },
+      scale: {
+        type: 'f',
+        value: this.h/2
+      },
+      size: {
+        type: 'f',
+        value: 50
+      },
+    };
+
+    let attributes = {
+      offset: {
+        type: 'v2',
+        value: []
+      }
+    };
+
+    for (let v of geometry.vertices) {
+
+      // TODO|dev
+      let offset = new THREE.Vector2(
+        THREE.Math.randInt(1, 3),
+        THREE.Math.randInt(2, 3)
+      );
+
+      offset.multiplyScalar(0.25);
+      attributes.offset.value.push(offset);
+
+    }
+
+    this.labels = new THREE.ShaderMaterial({
+      uniforms:         uniforms,
+      attributes:       attributes,
+      sizeAttenuation:  true,
+      transparent:      true,
+      fragmentShader:   spriteFrag(),
+      vertexShader:     spriteVert(),
+    });
+
+    let cloud = new THREE.PointCloud(geometry, this.labels);
+    this.world.add(cloud);
+
   },
 
 
@@ -199,36 +260,28 @@ export default View.extend({
 
     let minFov = opts.camera.minFov;
     let maxFov = opts.camera.maxFov;
-    let fov, sizes;
+    let fov0, size0;
 
+    // Capture initial fov / size.
     gesture.on('pinchstart', e => {
-
-      // Store camera FOV.
-      fov = this.camera.fov;
-
-      // Store label sizes.
-      sizes = _.object(_.map(this.labels, (v, k) => {
-        return [k, this.labels[k].uniforms.size.value];
-      }));
-
+      fov0  = this.camera.fov;
+      size0 = this.labels.uniforms.size.value;
     });
 
     gesture.on('pinch', e => {
 
-      let newFov = fov / e.scale;
+      let fov = fov0 / e.scale;
 
       // Is the FOV within bounds?
-      if (newFov > minFov && newFov < maxFov) {
+      if (fov > minFov && fov < maxFov) {
 
-        // Apply the camera FOV.
-        this.camera.fov = newFov;
+        // Zoom the camera.
+        this.camera.fov = fov;
         this.camera.updateProjectionMatrix();
 
         // Apply label sizes.
-        _.each(this.labels, (v, k) => {
-          let newSize = sizes[k] * e.scale;
-          this.labels[k].uniforms.size.value = newSize;
-        });
+        let size = size0 * e.scale;
+        this.labels.uniforms.size.value = newSize;
 
       }
 

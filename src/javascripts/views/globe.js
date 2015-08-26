@@ -252,19 +252,17 @@ export default View.extend({
 
     let minFov = opts.camera.minFov;
     let maxFov = opts.camera.maxFov;
-
-    // Initial FOV and label size.
-    let __fov, __size;
+    let f, s; // Initial FOV and label size.
 
     // Capture initial fov / size.
     gesture.on('pinchstart', e => {
-      __fov  = this.camera.fov;
-      __size = this.labels.uniforms.size.value;
+      f = this.camera.fov;
+      s = this.labels.uniforms.size.value;
     });
 
     gesture.on('pinch', e => {
 
-      let fov = __fov / e.scale;
+      let fov = f / e.scale;
 
       // Is the FOV within bounds?
       if (fov > minFov && fov < maxFov) {
@@ -274,7 +272,7 @@ export default View.extend({
         this.camera.updateProjectionMatrix();
 
         // Apply label sizes.
-        let size = __size * e.scale;
+        let size = s * e.scale;
         this.labels.uniforms.size.value = newSize;
 
       }

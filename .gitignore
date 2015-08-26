@@ -8,3 +8,4 @@ dist
 *.pyc
 
 /tasks/config/local.py
+/src/javascripts/data

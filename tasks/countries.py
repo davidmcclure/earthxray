@@ -48,7 +48,7 @@ def points():
 def sprites():
 
     """
-    Render the country label sprite sheet.
+    Render a label sprite for each country.
     """
 
     with open('src/javascripts/data/labels.json') as fh:
@@ -82,3 +82,13 @@ def sprites():
             img.draw(text)
 
         img.write('_site/countries.png')
+
+
+@task(points)
+def data_uris():
+
+    """
+    Write data URI strings into the point JSON.
+    """
+
+    pass

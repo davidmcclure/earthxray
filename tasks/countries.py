@@ -41,7 +41,7 @@ def points():
             })
 
     with open('src/javascripts/data/labels.json', 'w') as fh:
-        json.dump(labels, fh, indent=2)
+        json.dump(labels, fh, indent=2, sort_keys=True)
 
 
 @task(points)
@@ -51,7 +51,7 @@ def sprites():
     Render a label sprite for each country.
     """
 
-    utils.reset_dir('_site/images')
+    utils.reset_dir('tmp/images')
 
     with open('src/javascripts/data/labels.json') as fh:
 
@@ -84,10 +84,10 @@ def sprites():
 
             # Write the file.
             name = utils.hash_label(p['name'])
-            img.write('_site/images/{0}.png'.format(name))
+            img.write('tmp/images/{0}.png'.format(name))
 
 
-@task(points)
+@task(sprites)
 def data_uris():
 
     """

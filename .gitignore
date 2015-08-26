@@ -4,6 +4,7 @@ _site
 env
 build
 dist
+tmp
 *.egg-info
 *.pyc
 

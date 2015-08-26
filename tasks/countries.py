@@ -51,6 +51,8 @@ def sprites():
     Render a label sprite for each country.
     """
 
+    utils.reset_dir('_site/images')
+
     with open('src/javascripts/data/labels.json') as fh:
 
         points = json.load(fh)
@@ -69,19 +71,20 @@ def sprites():
             hs.append(tm.textHeight())
 
         w = int(max(ws))
-        h = int(max(hs))
-
-        # Create the atlas.
-        img = utils.make_png(w, h*len(points))
 
         # Draw the labels.
         for i, p in enumerate(points):
-            x = (w/2) - ws[i]/2
-            y = h*i + (h/2)
+
+            # Render the text.
+            img = utils.make_png(w, w)
+            x = w/2 - ws[i]/2
+            y = w/2 - hs[i]/2
             text = DrawableText(x, y, p['name'])
             img.draw(text)
 
-        img.write('_site/countries.png')
+            # Write the file.
+            name = utils.hash_label(p['name'])
+            img.write('_site/images/{0}.png'.format(name))
 
 
 @task(points)

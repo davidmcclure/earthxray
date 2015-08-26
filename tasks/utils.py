@@ -1,9 +1,41 @@
 
 
 import math
+import hashlib
+import shutil
+import os
 
 from pgmagick import Image, Geometry
 from tasks import config
+
+
+def reset_dir(path):
+
+    """
+    Clear and recreate a directory.
+
+    Args:
+        name (path);
+    """
+
+    shutil.rmtree(path, ignore_errors=True)
+    os.makedirs(path)
+
+
+def hash_label(label):
+
+    """
+    Generate a unique hash for a label.
+
+    Args:
+        name (str);
+
+    Returns: str
+    """
+
+    sha1 = hashlib.sha1()
+    sha1.update(label.encode('utf8'))
+    return sha1.hexdigest()
 
 
 def lon_lat_to_xyz(lon, lat, r=6371):

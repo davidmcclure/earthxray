@@ -2,9 +2,9 @@
 
 import json
 
-from pgmagick import TypeMetric, DrawableText
 from invoke import task
-from tasks.utils import lon_lat_to_xyz, make_png
+from pgmagick import TypeMetric, DrawableText
+from tasks import utils
 
 
 @task
@@ -28,7 +28,7 @@ def points():
             if not name: continue
 
             # lon/lat -> XYZ.
-            [x, y, z] = lon_lat_to_xyz(
+            [x, y, z] = utils.lon_lat_to_xyz(
                 c['geometry']['coordinates'][0],
                 c['geometry']['coordinates'][1]
             )
@@ -54,27 +54,30 @@ def sprites():
     with open('src/javascripts/data/labels.json') as fh:
 
         points = json.load(fh)
+        img = utils.make_png(100, 100)
 
-        # Measurement image.
-        img = make_png(100, 100)
-
-        # Get widths for all labels.
-        widths = []
+        # Measure the labels.
+        ws, hs = [], []
         for p in points:
+
+            # Draw the country name.
             tm = TypeMetric()
             img.fontTypeMetrics(p['name'], tm)
-            widths.append(tm.textWidth())
 
-        w = int(max(widths))
-        h = int(w*len(points))
+            # Register the dimensions.
+            ws.append(tm.textWidth())
+            hs.append(tm.textHeight())
 
-        # Sprite atlas.
-        img = make_png(w, h)
+        w = int(max(ws))
+        h = int(max(hs))
+
+        # Create the atlas.
+        img = utils.make_png(w, h*len(points))
 
         # Draw the labels.
         for i, p in enumerate(points):
-            x = (w/2) - widths[i]/2
-            y = w*i + (w/2)
+            x = (w/2) - ws[i]/2
+            y = h*i + (h/2)
             text = DrawableText(x, y, p['name'])
             img.draw(text)
 

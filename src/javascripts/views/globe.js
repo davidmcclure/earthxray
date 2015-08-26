@@ -192,7 +192,7 @@ export default View.extend({
       geometry.vertices.push(new THREE.Vector3(p.x, p.y, p.z));
     }
 
-    let map = THREE.ImageUtils.loadTexture('test.png');
+    let map = THREE.ImageUtils.loadTexture('countries.png');
     map.minFilter = THREE.NearestFilter;
 
     let uniforms = {
@@ -202,7 +202,7 @@ export default View.extend({
       },
       repeat: {
         type: 'v2',
-        value: new THREE.Vector2(0.25, 0.25)
+        value: new THREE.Vector2(1, 1)
       },
       scale: {
         type: 'f',
@@ -221,18 +221,10 @@ export default View.extend({
       }
     };
 
-    for (let v of geometry.vertices) {
-
-      // TODO|dev
-      let offset = new THREE.Vector2(
-        THREE.Math.randInt(1, 3),
-        THREE.Math.randInt(2, 3)
-      );
-
-      offset.multiplyScalar(0.25);
+    _.each(labels, (p, i) => {
+      let offset = new THREE.Vector2(0, i);
       attributes.offset.value.push(offset);
-
-    }
+    });
 
     this.labels = new THREE.ShaderMaterial({
       uniforms:         uniforms,

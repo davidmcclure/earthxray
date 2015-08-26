@@ -14,8 +14,9 @@ def points():
     Write country label points.
     """
 
-    labels = []
+    utils.reset_dir('tmp')
 
+    labels = []
     with open('data/labels.geo.json', 'r') as fh:
 
         countries = json.loads(fh.read())
@@ -40,7 +41,7 @@ def points():
                 'z': z,
             })
 
-    with open('src/javascripts/data/labels.json', 'w') as fh:
+    with open('tmp/labels.json', 'w') as fh:
         json.dump(labels, fh, indent=2, sort_keys=True)
 
 
@@ -53,7 +54,7 @@ def sprites():
 
     utils.reset_dir('tmp/images')
 
-    with open('src/javascripts/data/labels.json') as fh:
+    with open('tmp/labels.json', 'r') as fh:
 
         points = json.load(fh)
         img = utils.make_png(100, 100)
@@ -94,4 +95,20 @@ def data_uris():
     Write data URI strings into the point JSON.
     """
 
-    pass
+    labels = []
+
+    with open('tmp/labels.json', 'r') as fh:
+
+        # Merge the data URIs.
+        for p in json.load(fh):
+
+            # Form the sprite path.
+            name = utils.hash_label(p['name'])
+            path = 'tmp/images/{0}.png'.format(name)
+
+            # Get base-64 encoding.
+            p['sprite'] = utils.png_base64(path)
+            labels.append(p)
+
+    with open('tmp/labels.json', 'w') as fh:
+        json.dump(labels, fh, indent=2, sort_keys=True)

@@ -4,6 +4,7 @@ import math
 import hashlib
 import shutil
 import os
+import base64
 
 from pgmagick import Image, Geometry
 from tasks import config
@@ -15,7 +16,7 @@ def reset_dir(path):
     Clear and recreate a directory.
 
     Args:
-        name (path);
+        name (path)
     """
 
     shutil.rmtree(path, ignore_errors=True)
@@ -28,7 +29,7 @@ def hash_label(label):
     Generate a unique hash for a label.
 
     Args:
-        name (str);
+        name (str)
 
     Returns: str
     """
@@ -82,3 +83,20 @@ def make_png(w, h):
     img.fontPointsize(config.FONT_SIZE)
 
     return img
+
+
+def png_base64(path):
+
+    """
+    Get the base-64 encoding for a PNG file.
+
+    Args:
+        path (str)
+
+    Returns: str
+    """
+
+    prefix = 'data:image/png;base64,'
+
+    with open(path, 'rb') as fh:
+        return prefix+str(base64.b64encode(fh.read()))

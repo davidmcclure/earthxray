@@ -5,6 +5,7 @@ import $ from 'jquery';
 import Hammer from 'hammerjs';
 import Backbone from 'backbone';
 import THREE from 'three';
+import typeface from 'three.regular.helvetiker';
 
 import View from '../lib/view';
 import * as opts from '../opts.yml';
@@ -14,6 +15,8 @@ import borders from '../data/borders.geo.json';
 import labels from '../data/labels.json';
 import spriteFrag from '../shaders/sprite.frag';
 import spriteVert from '../shaders/sprite.vert';
+
+THREE.typeface_js.loadFace(typeface);
 
 
 export default View.extend({
@@ -183,7 +186,25 @@ export default View.extend({
    * Initialize the country labels.
    */
   _initLabels: function() {
-    // TODO
+    for (let p of labels) {
+
+      let g = new THREE.TextGeometry(p.name, {
+        size: 30,
+        font: 'helvetiker',
+        height: 0,
+        curveSegments: 1
+      });
+
+      let m = new THREE.MeshBasicMaterial({
+        color: 0x000000
+      });
+
+      let t = new THREE.Mesh(g, m);
+      t.position.set(p.x, p.y, p.z);
+      t.lookAt(new THREE.Vector3(0, 0, 0));
+      this.scene.add(t);
+
+    }
   },
 
 
@@ -198,16 +219,16 @@ export default View.extend({
 
     let minFov = opts.camera.minFov;
     let maxFov = opts.camera.maxFov;
-    let fov;
+    let _fov;
 
     // Capture initial FOV.
     gesture.on('pinchstart', e => {
-      fov = this.camera.fov;
+      _fov = this.camera.fov;
     });
 
     gesture.on('pinch', e => {
 
-      let fov = start.fov / e.scale;
+      let fov = _fov / e.scale;
 
       // Break if we're out of bounds.
       if (fov < minFov || fov > maxFov) return;

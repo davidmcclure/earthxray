@@ -89,7 +89,7 @@ def sprites():
 
 
 @task(sprites)
-def data_uris():
+def uris():
 
     """
     Write data URI strings into the point JSON.
@@ -110,5 +110,5 @@ def data_uris():
             p['sprite'] = utils.png_base64(path)
             labels.append(p)
 
-    with open('tmp/labels.json', 'w') as fh:
+    with open('src/javascripts/data/labels.json', 'w') as fh:
         json.dump(labels, fh, indent=2, sort_keys=True)

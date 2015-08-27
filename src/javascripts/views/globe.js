@@ -192,17 +192,14 @@ export default View.extend({
       geometry.vertices.push(new THREE.Vector3(p.x, p.y, p.z));
     }
 
-    let map = THREE.ImageUtils.loadTexture('countries.png');
-    map.minFilter = THREE.NearestFilter;
+    let textures = _.map(labels, label => {
+      return new THREE.Texture(label.sprite);
+    });
 
     let uniforms = {
-      texture: {
-        type: 't',
-        value: map
-      },
-      repeat: {
-        type: 'v2',
-        value: new THREE.Vector2(1, 1)
+      textures: {
+        type: 'tv',
+        value: textures
       },
       scale: {
         type: 'f',
@@ -215,16 +212,11 @@ export default View.extend({
     };
 
     let attributes = {
-      offset: {
-        type: 'v2',
-        value: []
+      index: {
+        type: 'f',
+        value: _.range(labels.length)
       }
     };
-
-    _.each(labels, (p, i) => {
-      let offset = new THREE.Vector2(0, i);
-      attributes.offset.value.push(offset);
-    });
 
     this.labels = new THREE.ShaderMaterial({
       uniforms:         uniforms,

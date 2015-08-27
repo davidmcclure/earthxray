@@ -11,6 +11,7 @@ export default {
     ],
 
     watch: true,
+
     browserifyOptions: {
       debug: true
     }

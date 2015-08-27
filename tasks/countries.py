@@ -26,14 +26,16 @@ def points():
             name = c['properties'].get('name:en')
             if not name: continue
 
+            lon = c['geometry']['coordinates'][0]
+            lat = c['geometry']['coordinates'][1]
+
             # lon/lat -> XYZ.
-            [x, y, z] = utils.lon_lat_to_xyz(
-                c['geometry']['coordinates'][0],
-                c['geometry']['coordinates'][1]
-            )
+            [x, y, z] = utils.lon_lat_to_xyz(lon, lat)
 
             labels.append({
                 'name': name,
+                'lon': lon,
+                'lat': lat,
                 'x': x,
                 'y': y,
                 'z': z,

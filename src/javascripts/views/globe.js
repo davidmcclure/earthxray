@@ -7,11 +7,9 @@ import Backbone from 'backbone';
 import THREE from 'three';
 
 import View from '../lib/view';
-import * as opts from '../opts.yml';
-import * as utils from '../utils';
-
 import borders from '../data/borders.geo.json';
-import labels from '../data/labels.json';
+import * as utils from '../utils';
+import * as opts from '../opts.yml';
 
 
 export default View.extend({
@@ -35,7 +33,6 @@ export default View.extend({
     this._initHeading();
     this._initLocation();
     this._initZoom();
-    this._initLabels();
 
     this.render();
 
@@ -208,14 +205,6 @@ export default View.extend({
 
     });
 
-  },
-
-
-  /**
-   * Initialize the country labels.
-   */
-  _initLabels: function() {
-    // TODO
   },
 
 

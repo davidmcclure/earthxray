@@ -46,7 +46,7 @@ export default View.extend({
    * @param {Object} data
    */
   render: function(data) {
-    console.log(data);
+    // TODO
   },
 
 

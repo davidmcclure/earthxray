@@ -329,6 +329,7 @@ export default View.extend({
     let b = 2 * heading.dot(this.camera.position);
     let u = (-2*b) / (2*a);
 
+    let point = null;
     let distance = Infinity;
 
     // If we're not looking out into space.
@@ -336,7 +337,7 @@ export default View.extend({
 
       // Get far-side intersection.
       let delta = heading.clone().multiplyScalar(u);
-      let point = this.camera.position.clone().add(delta);
+      point = this.camera.position.clone().add(delta);
 
       // Get distance to the point.
       distance = this.camera.position.distanceTo(point);
@@ -345,7 +346,8 @@ export default View.extend({
 
     // Publish the trace.
     this.channels.globe.trigger('trace', {
-      distance: distance
+      point: point,
+      distance: distance,
     });
 
   },

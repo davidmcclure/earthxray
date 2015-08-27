@@ -34,8 +34,6 @@ def points():
 
             labels.append({
                 'name': name,
-                'lon': lon,
-                'lat': lat,
                 'x': x,
                 'y': y,
                 'z': z,

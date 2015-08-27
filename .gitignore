@@ -9,4 +9,3 @@ tmp
 *.pyc
 
 /tasks/config/local.py
-/src/javascripts/data

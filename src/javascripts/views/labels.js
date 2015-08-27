@@ -1,10 +1,12 @@
 
 
 import _ from 'lodash';
+import knn from 'rbush-knn';
 import rbush from 'rbush';
 
 import labels from '../data/labels.json';
 import View from '../lib/view';
+import * as utils from '../utils';
 
 
 export default View.extend({
@@ -46,7 +48,13 @@ export default View.extend({
    * @param {Object} data
    */
   render: function(data) {
-    // TODO
+
+    // Get the center lon/lat.
+    let [x, y, z] = data.point.toArray();
+    let [lon, lat] = utils.xyzToLonLat(x, y, z);
+
+    let nn = knn(this.tree, [lon, lat], 50);
+
   },
 
 

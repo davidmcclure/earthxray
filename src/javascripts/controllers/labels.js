@@ -32,7 +32,9 @@ export default Controller.extend({
    * @param {Object} data
    */
   onTrace: function(data) {
-    this.view.render(data);
+    if (data.point) {
+      this.view.render(data);
+    }
   },
 
 

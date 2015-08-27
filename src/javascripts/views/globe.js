@@ -30,7 +30,6 @@ export default View.extend({
     this._initCamera();
     this._initSphere();
     this._initCountries();
-    this._initLabels();
     this._initHeading();
     this._initLocation();
     this._initZoom();
@@ -120,28 +119,6 @@ export default View.extend({
    */
   _initCountries: function() {
     this.drawGeoJSON(borders);
-  },
-
-
-  /**
-   * Draw country labels.
-   */
-  _initLabels: function() {
-    for (let p of labels) {
-
-      let g = new THREE.TextGeometry(p.name, {
-        font: 'Arial'
-      });
-
-      let m = new THREE.BasicMeshMaterial({
-        color: 0x000000
-      });
-
-      let t = new THREE.Mesh(g, m);
-      t.position.set(p.x, p.y, p.z);
-      this.scene.add(t);
-
-    }
   },
 
 

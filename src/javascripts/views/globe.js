@@ -12,8 +12,6 @@ import * as utils from '../utils';
 
 import borders from '../data/borders.geo.json';
 import labels from '../data/labels.json';
-import spriteFrag from '../shaders/sprite.frag';
-import spriteVert from '../shaders/sprite.vert';
 
 
 export default View.extend({
@@ -36,8 +34,8 @@ export default View.extend({
     this._initCountries();
     this._initHeading();
     this._initLocation();
-    this._initLabels();
     this._initZoom();
+    this._initLabels();
 
     this.render();
 
@@ -180,14 +178,6 @@ export default View.extend({
 
 
   /**
-   * Initialize the country labels.
-   */
-  _initLabels: function() {
-    // TODO
-  },
-
-
-  /**
    * Listen for pinch zooming.
    */
   _initZoom: function() {
@@ -198,16 +188,16 @@ export default View.extend({
 
     let minFov = opts.camera.minFov;
     let maxFov = opts.camera.maxFov;
-    let fov;
+    let _fov;
 
     // Capture initial FOV.
     gesture.on('pinchstart', e => {
-      fov = this.camera.fov;
+      _fov = this.camera.fov;
     });
 
     gesture.on('pinch', e => {
 
-      let fov = start.fov / e.scale;
+      let fov = _fov / e.scale;
 
       // Break if we're out of bounds.
       if (fov < minFov || fov > maxFov) return;
@@ -218,6 +208,14 @@ export default View.extend({
 
     });
 
+  },
+
+
+  /**
+   * Initialize the country labels.
+   */
+  _initLabels: function() {
+    // TODO
   },
 
 

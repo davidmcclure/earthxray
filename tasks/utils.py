@@ -99,4 +99,5 @@ def png_base64(path):
     prefix = 'data:image/png;base64,'
 
     with open(path, 'rb') as fh:
-        return prefix+str(base64.b64encode(fh.read()))
+        data = base64.b64encode(fh.read())
+        return prefix+data.decode('utf8')

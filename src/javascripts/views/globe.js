@@ -183,53 +183,7 @@ export default View.extend({
    * Initialize the country labels.
    */
   _initLabels: function() {
-
-    // TODO|dev
-
-    let geometry = new THREE.Geometry();
-
-    for (let p of labels) {
-      geometry.vertices.push(new THREE.Vector3(p.x, p.y, p.z));
-    }
-
-    let textures = _.map(labels, label => {
-      return new THREE.Texture(label.sprite);
-    });
-
-    let uniforms = {
-      textures: {
-        type: 'tv',
-        value: textures
-      },
-      scale: {
-        type: 'f',
-        value: this.h/2
-      },
-      size: {
-        type: 'f',
-        value: 50
-      },
-    };
-
-    let attributes = {
-      index: {
-        type: 'f',
-        value: _.range(labels.length)
-      }
-    };
-
-    this.labels = new THREE.ShaderMaterial({
-      uniforms:         uniforms,
-      attributes:       attributes,
-      sizeAttenuation:  true,
-      transparent:      true,
-      fragmentShader:   spriteFrag(),
-      vertexShader:     spriteVert(),
-    });
-
-    let cloud = new THREE.PointCloud(geometry, this.labels);
-    this.world.add(cloud);
-
+    // TODO
   },
 
 
@@ -244,12 +198,11 @@ export default View.extend({
 
     let minFov = opts.camera.minFov;
     let maxFov = opts.camera.maxFov;
-    let start = {};
+    let fov;
 
-    // Capture initial fov / size.
+    // Capture initial FOV.
     gesture.on('pinchstart', e => {
-      start.fov   = this.camera.fov;
-      start.size  = this.labels.uniforms.size.value;
+      fov = this.camera.fov;
     });
 
     gesture.on('pinch', e => {
@@ -262,10 +215,6 @@ export default View.extend({
       // Zoom the camera.
       this.camera.fov = fov;
       this.camera.updateProjectionMatrix();
-
-      // Apply label sizes.
-      let size = start.size * e.scale;
-      this.labels.uniforms.size.value = size;
 
     });
 

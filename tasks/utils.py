@@ -1,42 +1,6 @@
 
 
 import math
-import hashlib
-import shutil
-import os
-import base64
-
-from pgmagick import Image, Geometry
-from tasks import config
-
-
-def reset_dir(path):
-
-    """
-    Clear and recreate a directory.
-
-    Args:
-        name (path)
-    """
-
-    shutil.rmtree(path, ignore_errors=True)
-    os.makedirs(path)
-
-
-def hash_label(label):
-
-    """
-    Generate a unique hash for a label.
-
-    Args:
-        name (str)
-
-    Returns: str
-    """
-
-    sha1 = hashlib.sha1()
-    sha1.update(label.encode('utf8'))
-    return sha1.hexdigest()
 
 
 def lon_lat_to_xyz(lon, lat, r=6371):
@@ -63,41 +27,3 @@ def lon_lat_to_xyz(lon, lat, r=6371):
     y =  r * math.sin(r_lat)
 
     return [x, y, z]
-
-
-def make_png(w, h):
-
-    """
-    Create an empty, transparent PNG file.
-
-    Args:
-        w (int)
-        h (int)
-
-    Returns:
-        pgmagick.Image
-    """
-
-    img = Image(Geometry(int(w), int(h)), 'transparent')
-    img.font(config.FONT_FACE)
-    img.fontPointsize(config.FONT_SIZE)
-
-    return img
-
-
-def png_base64(path):
-
-    """
-    Get the base-64 encoding for a PNG file.
-
-    Args:
-        path (str)
-
-    Returns: str
-    """
-
-    prefix = 'data:image/png;base64,'
-
-    with open(path, 'rb') as fh:
-        data = base64.b64encode(fh.read())
-        return prefix+data.decode('utf8')

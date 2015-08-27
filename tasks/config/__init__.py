@@ -1,7 +1,7 @@
 
-# Sprites:
-FONT_FACE = '/path/to/font.ttf'
-FONT_SIZE = 40
+
+# TODO
+
 
 # Merge overrides.
 try:

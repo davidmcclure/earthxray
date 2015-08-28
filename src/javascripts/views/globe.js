@@ -8,6 +8,7 @@ import THREE from 'three';
 import helvetiker from 'three.regular.helvetiker';
 
 import View from '../lib/view';
+import Text from '../lib/text';
 import borders from '../data/borders.geo.json';
 import labels from '../data/labels.json';
 import * as utils from '../utils';
@@ -136,26 +137,35 @@ export default View.extend({
 
     // TODO|dev
 
+    //for (let p of labels) {
+
+      //let geometry = new THREE.TextGeometry(p.name, {
+        //curveSegments: 1,
+        //size: 30,
+        //font: 'helvetiker',
+        //height: 0,
+      //});
+
+      //let material = new THREE.MeshBasicMaterial({
+        //color: 0x000000
+      //});
+
+      //let mesh = new THREE.Mesh(geometry, material);
+
+      //mesh.position.set(p.x, p.y, p.z);
+      //mesh.lookAt(new THREE.Vector3(0, 0, 0));
+
+      //this.world.add(mesh);
+
+    //}
+
+    let text = new Text();
+
     for (let p of labels) {
-
-      let geometry = new THREE.TextGeometry(p.name, {
-        curveSegments: 1,
-        size: 30,
-        font: 'helvetiker',
-        height: 0,
-      });
-
-      let material = new THREE.MeshBasicMaterial({
-        color: 0x000000
-      });
-
-      let mesh = new THREE.Mesh(geometry, material);
-
+      let mesh = text.render(p.name);
       mesh.position.set(p.x, p.y, p.z);
       mesh.lookAt(new THREE.Vector3(0, 0, 0));
-
       this.world.add(mesh);
-
     }
 
   },

@@ -5,9 +5,12 @@ import $ from 'jquery';
 import Hammer from 'hammerjs';
 import Backbone from 'backbone';
 import THREE from 'three';
+import work from 'webworkify';
 
 import View from '../lib/view';
 import borders from '../data/borders.geo.json';
+import labels from '../data/labels.json';
+import textWorker from '../workers/text';
 import * as utils from '../utils';
 import * as opts from '../opts.yml';
 
@@ -30,6 +33,7 @@ export default View.extend({
     this._initCamera();
     this._initSphere();
     this._initCountries();
+    this._initLabels();
     this._initHeading();
     this._initLocation();
     this._initZoom();
@@ -119,6 +123,46 @@ export default View.extend({
    */
   _initCountries: function() {
     this.drawGeoJSON(borders);
+  },
+
+
+  /**
+   * Draw country labels.
+   */
+  _initLabels: function() {
+
+    // TODO|dev
+
+    let loader = new THREE.JSONLoader();
+    let worker = work(textWorker);
+
+    // When the worker finishes.
+    worker.addEventListener('message', (e) => {
+
+      let result = loader.parse(e.data.geo.data);
+
+      let material = new THREE.MeshBasicMaterial({
+        color: 0x000000
+      });
+
+      let mesh = new THREE.Mesh(result.geometry, material);
+
+      mesh.position.set(
+        e.data.x,
+        e.data.y,
+        e.data.z
+      );
+
+      mesh.lookAt(new THREE.Vector3(0, 0, 0));
+      this.world.add(mesh);
+
+    });
+
+    // Dispatch work orders.
+    for (let p of labels) {
+      worker.postMessage(p);
+    }
+
   },
 
 

@@ -29,6 +29,7 @@
     "jit-grunt": "^0.9.1",
     "load-grunt-config": "^0.17.2",
     "time-grunt": "^1.2.1",
+    "webworkify": "^1.0.2",
     "yamlify": "^0.1.2"
   },
   "dependencies": {
@@ -44,6 +45,7 @@
     "lodash": "^3.10.0",
     "react": "^0.13.3",
     "reactify": "^1.1.1",
-    "three": "^0.71.0"
+    "three": "^0.71.0",
+    "three.regular.helvetiker": "^1.0.0"
   }
 }

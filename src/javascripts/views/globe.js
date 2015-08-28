@@ -14,10 +14,6 @@ import * as utils from '../utils';
 import * as opts from '../opts.yml';
 
 
-// Register the typeface.
-THREE.typeface_js.loadFace(helvetiker);
-
-
 export default View.extend({
 
 
@@ -134,7 +130,8 @@ export default View.extend({
    */
   _initLabels: function() {
 
-    // TODO|dev
+    // Register the typeface.
+    THREE.typeface_js.loadFace(helvetiker);
 
     let texts = new THREE.Geometry();
 

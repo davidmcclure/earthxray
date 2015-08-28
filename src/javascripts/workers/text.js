@@ -11,7 +11,7 @@ THREE.typeface_js.loadFace(helvetiker);
 export default (self) => {
   self.addEventListener('message', e => {
 
-    // Create the text geometry.
+    // Trace the text.
     let geo = new THREE.TextGeometry(e.data.name, {
       curveSegments: 1,
       size: 30,

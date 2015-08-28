@@ -5,14 +5,17 @@ import $ from 'jquery';
 import Hammer from 'hammerjs';
 import Backbone from 'backbone';
 import THREE from 'three';
-import work from 'webworkify';
+import helvetiker from 'three.regular.helvetiker';
 
 import View from '../lib/view';
 import borders from '../data/borders.geo.json';
 import labels from '../data/labels.json';
-import textWorker from '../workers/text';
 import * as utils from '../utils';
 import * as opts from '../opts.yml';
+
+
+// Register the typeface.
+THREE.typeface_js.loadFace(helvetiker);
 
 
 export default View.extend({
@@ -133,34 +136,26 @@ export default View.extend({
 
     // TODO|dev
 
-    let loader = new THREE.JSONLoader();
-    let worker = work(textWorker);
+    for (let p of labels) {
 
-    // When the worker finishes.
-    worker.addEventListener('message', (e) => {
-
-      let result = loader.parse(e.data.geo.data);
+      let geometry = new THREE.TextGeometry(p.name, {
+        curveSegments: 1,
+        size: 30,
+        font: 'helvetiker',
+        height: 0,
+      });
 
       let material = new THREE.MeshBasicMaterial({
         color: 0x000000
       });
 
-      let mesh = new THREE.Mesh(result.geometry, material);
+      let mesh = new THREE.Mesh(geometry, material);
 
-      mesh.position.set(
-        e.data.x,
-        e.data.y,
-        e.data.z
-      );
-
+      mesh.position.set(p.x, p.y, p.z);
       mesh.lookAt(new THREE.Vector3(0, 0, 0));
+
       this.world.add(mesh);
 
-    });
-
-    // Dispatch work orders.
-    for (let p of labels) {
-      worker.postMessage(p);
     }
 
   },

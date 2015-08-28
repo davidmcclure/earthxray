@@ -136,6 +136,8 @@ export default View.extend({
 
     // TODO|dev
 
+    let texts = new THREE.Geometry();
+
     for (let p of labels) {
 
       let geometry = new THREE.TextGeometry(p.name, {
@@ -145,18 +147,22 @@ export default View.extend({
         height: 0,
       });
 
-      let material = new THREE.MeshBasicMaterial({
-        color: 0x000000
-      });
-
-      let mesh = new THREE.Mesh(geometry, material);
+      let mesh = new THREE.Mesh(geometry);
 
       mesh.position.set(p.x, p.y, p.z);
       mesh.lookAt(new THREE.Vector3(0, 0, 0));
+      mesh.updateMatrix();
 
-      this.world.add(mesh);
+      texts.merge(geometry, mesh.matrix);
 
     }
+
+    let material = new THREE.MeshBasicMaterial({
+      color: 0x000000
+    });
+
+    let mesh = new THREE.Mesh(texts, material);
+    this.world.add(mesh);
 
   },
 

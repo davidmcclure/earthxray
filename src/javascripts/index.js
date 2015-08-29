@@ -6,5 +6,5 @@ import Center from './controllers/center';
 
 
 new Globe();
-//new Distance();
-//new Center();
+new Distance();
+new Center();

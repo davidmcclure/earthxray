@@ -5,12 +5,15 @@ import $ from 'jquery';
 import Hammer from 'hammerjs';
 import Backbone from 'backbone';
 import THREE from 'three';
-import helvetiker from 'three.regular.helvetiker';
 
 import View from '../lib/view';
 import countries from '../data/countries';
 import * as utils from '../utils';
 import * as opts from '../opts.yml';
+
+// Register the typeface.
+import helvetiker from 'three.regular.helvetiker';
+THREE.typeface_js.loadFace(helvetiker);
 
 
 export default View.extend({
@@ -31,14 +34,13 @@ export default View.extend({
     this._initCamera();
     this._initSphere();
     this._initCountries();
-    //this._initLabels();
-    //this._initHeading();
-    //this._initLocation();
-    //this._initZoom();
 
     this.render();
 
   },
+
+
+  // ** Startup:
 
 
   /**
@@ -124,57 +126,60 @@ export default View.extend({
    */
   _initCountries: function() {
 
-    // draw country borders non-blocking
-    // create label geometries
+    let texts = new THREE.Geometry();
 
+    let i = 0;
     for (let c of countries) {
       setTimeout(() => {
 
+        // Draw borders.
         for (let p of c.points) {
           this.drawBorder(p);
         }
 
+        if (c.anchor) {
+
+          // Trace the text.
+          let geometry = new THREE.TextGeometry(c.name, {
+            curveSegments: 1,
+            size: 30,
+            font: 'helvetiker',
+            height: 0,
+          });
+
+          let mesh = new THREE.Mesh(geometry);
+
+          mesh.position.set(
+            c.anchor[0],
+            c.anchor[1],
+            c.anchor[2]
+          );
+
+          mesh.lookAt(new THREE.Vector3(0, 0, 0));
+          mesh.updateMatrix();
+          texts.merge(geometry, mesh.matrix);
+
+        }
+
+        // When finished, add labels.
+        if (++i == countries.length) {
+
+          let material = new THREE.MeshBasicMaterial({
+            color: 0x000000
+          });
+
+          let mesh = new THREE.Mesh(texts, material);
+          this.world.add(mesh);
+
+          // TODO|dev
+          this._initHeading();
+          this._initLocation();
+          this._initZoom();
+
+        }
+
       }, 0);
     }
-
-  },
-
-
-  /**
-   * Draw country labels.
-   */
-  _initLabels: function() {
-
-    // Register the typeface.
-    THREE.typeface_js.loadFace(helvetiker);
-
-    let texts = new THREE.Geometry();
-
-    for (let p of labels) {
-
-      let geometry = new THREE.TextGeometry(p.name, {
-        curveSegments: 1,
-        size: 30,
-        font: 'helvetiker',
-        height: 0,
-      });
-
-      let mesh = new THREE.Mesh(geometry);
-
-      mesh.position.set(p.x, p.y, p.z);
-      mesh.lookAt(new THREE.Vector3(0, 0, 0));
-      mesh.updateMatrix();
-
-      texts.merge(geometry, mesh.matrix);
-
-    }
-
-    let material = new THREE.MeshBasicMaterial({
-      color: 0x000000
-    });
-
-    let mesh = new THREE.Mesh(texts, material);
-    this.world.add(mesh);
 
   },
 
@@ -265,6 +270,9 @@ export default View.extend({
   },
 
 
+  // ** Helpers:
+
+
   /**
    * Fit the camera to the container.
    */
@@ -279,38 +287,6 @@ export default View.extend({
 
     // Size the renderer.
     this.renderer.setSize(this.w, this.h);
-
-  },
-
-
-  /**
-   * Draw a GeoJSON geometry.
-   *
-   * @param {Object} json
-   */
-  drawGeoJSON: function(json) {
-
-    // Walk features.
-    for (let {
-      geometry: {
-        coordinates: coords,
-        type: type,
-      }
-    } of json.features) {
-      switch (type) {
-
-        case 'Polygon':
-          this.drawPolygon(coords[0]);
-        break;
-
-        case 'MultiPolygon':
-          for (let [polygon] of coords) {
-            this.drawPolygon(polygon);
-          }
-        break;
-
-      }
-    }
 
   },
 
@@ -340,6 +316,9 @@ export default View.extend({
     this.world.add(line);
 
   },
+
+
+  // ** Render loop:
 
 
   /**

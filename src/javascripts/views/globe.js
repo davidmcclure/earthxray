@@ -8,10 +8,8 @@ import THREE from 'three';
 import helvetiker from 'three.regular.helvetiker';
 
 import View from '../lib/view';
-import borders from '../data/borders.geo.json';
-import labels from '../data/labels.json';
-import * as utils from '../utils';
 import * as opts from '../opts.yml';
+import * as utils from '../utils';
 
 
 export default View.extend({
@@ -31,11 +29,11 @@ export default View.extend({
     this._initScene();
     this._initCamera();
     this._initSphere();
-    this._initCountries();
-    this._initLabels();
-    this._initHeading();
-    this._initLocation();
-    this._initZoom();
+    //this._initCountries();
+    //this._initLabels();
+    //this._initHeading();
+    //this._initLocation();
+    //this._initZoom();
 
     this.render();
 
@@ -87,6 +85,9 @@ export default View.extend({
     // Re-fit on resize.
     let resize = _.debounce(this.fitCamera.bind(this), 500);
     $(window).resize(resize);
+
+    // Default position.
+    this.camera.position.z = opts.camera.startz;
 
   },
 

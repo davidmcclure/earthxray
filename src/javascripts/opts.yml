@@ -9,6 +9,7 @@ camera:
   maxFov: 120
   near: 0.1
   far: 100000
+  startz: 20000
 
 sphere:
   lineWidth: 0.5

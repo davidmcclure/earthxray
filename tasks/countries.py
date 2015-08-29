@@ -7,37 +7,64 @@ from tasks import utils
 
 
 @task
-def points():
+def data():
 
     """
-    Write country label points.
+    Write country borders and label points.
     """
 
-    labels = []
+    anchors = {}
+
+    # Map labels -> points.
 
     with open('data/labels.geo.json', 'r') as fh:
 
-        countries = json.loads(fh.read())
+        labels = json.loads(fh.read())
 
-        # Walk countries.
-        for c in countries['features']:
+        for f in labels['features']:
 
             # Break if no English name.
-            name = c['properties'].get('name:en')
+            name = f['properties'].get('name:en')
             if not name: continue
 
-            lon = c['geometry']['coordinates'][0]
-            lat = c['geometry']['coordinates'][1]
+            lon = f['geometry']['coordinates'][0]
+            lat = f['geometry']['coordinates'][1]
 
-            # lon/lat -> XYZ.
-            [x, y, z] = utils.lon_lat_to_xyz(lon, lat)
+            # Map name -> XYZ point.
+            point = utils.lon_lat_to_xyz(lon, lat)
+            anchors[name] = point
 
-            labels.append({
-                'name': name,
-                'x': x,
-                'y': y,
-                'z': z,
-            })
+    countries = []
 
-    with open('src/javascripts/data/labels.json', 'w') as fh:
-        json.dump(labels, fh, indent=2, sort_keys=True)
+    # Merge labels with borders, 3D-ify points.
+
+    with open('data/borders.geo.json', 'r') as fh:
+
+        borders = json.loads(fh.read())
+
+        for f in borders['features']:
+
+            country = {
+                'name': f['properties']['name'],
+                'points': [],
+            }
+
+            # Set the label point.
+            country['anchor'] = anchors.get(country['name'])
+
+            # Polygons:
+            if f['geometry']['type'] == 'Polygon':
+                for p in f['geometry']['coordinates']:
+                    country['points'].append(utils.threedify(p))
+
+            # MultiPolygons:
+            elif f['geometry']['type'] == 'MultiPolygon':
+                for mp in f['geometry']['coordinates']:
+                    for p in mp:
+                        country['points'].append(utils.threedify(p))
+
+            countries.append(country)
+
+    # Write the payload.
+    with open('src/javascripts/data/countries.json', 'w') as fh:
+        json.dump(countries, fh, sort_keys=True)

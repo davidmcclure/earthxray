@@ -3,7 +3,7 @@
 import math
 
 
-def lon_lat_to_xyz(lon, lat, r=6371):
+def lon_lat_to_xyz(lon, lat, r=6371, p=2):
 
     """
     Convert lon/lat -> XYZ.
@@ -12,6 +12,7 @@ def lon_lat_to_xyz(lon, lat, r=6371):
         lon (float)
         lat (float)
         r (float)
+        p (int)
 
     Returns:
         list: [X, Y, Z]
@@ -26,4 +27,26 @@ def lon_lat_to_xyz(lon, lat, r=6371):
     z =  r * math.cos(r_lat) * math.sin(r_lon)
     y =  r * math.sin(r_lat)
 
-    return [x, y, z]
+    return [
+        round(x, p),
+        round(y, p),
+        round(z, p),
+    ]
+
+
+def threedify(points):
+
+    """
+    Convert a set of lon/lot points -> XYZ.
+
+    Args:
+        points (list)
+
+    Returns: list
+    """
+
+    xyzs = []
+    for p in points:
+        xyzs.append(lon_lat_to_xyz(p[0], p[1]))
+
+    return xyzs

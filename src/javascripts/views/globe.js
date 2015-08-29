@@ -8,8 +8,9 @@ import THREE from 'three';
 import helvetiker from 'three.regular.helvetiker';
 
 import View from '../lib/view';
-import * as opts from '../opts.yml';
+import countries from '../data/countries';
 import * as utils from '../utils';
+import * as opts from '../opts.yml';
 
 
 export default View.extend({
@@ -29,7 +30,7 @@ export default View.extend({
     this._initScene();
     this._initCamera();
     this._initSphere();
-    //this._initCountries();
+    this._initCountries();
     //this._initLabels();
     //this._initHeading();
     //this._initLocation();
@@ -122,7 +123,20 @@ export default View.extend({
    * Draw country borders.
    */
   _initCountries: function() {
-    this.drawGeoJSON(borders);
+
+    // draw country borders non-blocking
+    // create label geometries
+
+    for (let c of countries) {
+      setTimeout(() => {
+
+        for (let p of c.points) {
+          this.drawBorder(p);
+        }
+
+      }, 0);
+    }
+
   },
 
 
@@ -302,11 +316,11 @@ export default View.extend({
 
 
   /**
-   * Draw a GeoJSON polygon.
+   * Draw a boundary line.
    *
    * @param {Array} points
    */
-  drawPolygon: function(points) {
+  drawBorder: function(points) {
 
     // Create line material.
     let material = new THREE.LineBasicMaterial({
@@ -316,9 +330,8 @@ export default View.extend({
 
     let geometry = new THREE.Geometry();
 
-    // Convert lon/lat -> XYZ, add to line.
-    for (let [lon, lat] of points) {
-      let [x, y, z] = utils.lonLatToXYZ(lon, lat);
+    // Register the vertices.
+    for (let [x, y, z] of points) {
       geometry.vertices.push(new THREE.Vector3(x, y, z));
     }
 

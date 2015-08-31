@@ -1,11 +1,13 @@
 
-node_modules
-_site
-env
-build
-dist
-tmp
 *.egg-info
 *.pyc
+
+/node_modules
+/_site
+/.grunt
+/env
+/build
+/dist
+/tmp
 
 /tasks/config/local.py

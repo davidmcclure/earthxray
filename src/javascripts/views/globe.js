@@ -29,24 +29,49 @@ export default View.extend({
    * Start the globe.
    */
   initialize: function() {
-
-    this._initScene();
-    this._initCamera();
-    this._initSphere();
-    this._initCountries();
-
+    this.load();
     this.render();
+  },
+
+
+  // ** LOAD **
+
+
+  /**
+   * Prepare the scene, render geometry, get location.
+   */
+  load: function() {
+
+    this.loaded = false;
+
+    this._geolocate();
+    this._createScene();
+    this._addCamera();
+    this._drawSphere();
+
+    this._drawCountries(() => {
+      this.loaded = true;
+      this.start();
+    });
 
   },
 
 
-  // ** Startup:
+  /**
+   * Geolocate the client.
+   */
+  _geolocate: function() {
+    window.navigator.geolocation.getCurrentPosition(pos => {
+      this.location = pos;
+      this.start();
+    });
+  },
 
 
   /**
    * Create the scene and renderer.
    */
-  _initScene: function() {
+  _createScene: function() {
 
     // Create the scene.
     this.scene = new THREE.Scene();
@@ -70,7 +95,7 @@ export default View.extend({
   /**
    * Create the camera, bind resize.
    */
-  _initCamera: function() {
+  _addCamera: function() {
 
     // Create the camera.
     this.camera = new THREE.PerspectiveCamera(
@@ -95,7 +120,7 @@ export default View.extend({
   /**
    * Create a sphere for the earth.
    */
-  _initSphere: function() {
+  _drawSphere: function() {
 
     // Create geometry.
     let geometry = new THREE.SphereGeometry(
@@ -120,8 +145,10 @@ export default View.extend({
 
   /**
    * Draw country borders.
+   *
+   * @param {Function} done
    */
-  _initCountries: function() {
+  _drawCountries: function(done) {
 
     let texts = new THREE.Geometry();
 
@@ -168,10 +195,7 @@ export default View.extend({
           let mesh = new THREE.Mesh(texts, material);
           this.world.add(mesh);
 
-          // TODO|dev
-          this._initHeading();
-          this._initLocation();
-          this._initZoom();
+          done();
 
         }
 
@@ -181,35 +205,49 @@ export default View.extend({
   },
 
 
+  // ** START **
+
+
   /**
-   * Geolocate the camera.
+   * Sync the camera with location / orientation.
    */
-  _initLocation: function() {
+  start: function() {
+    if (this.loaded && this.location && !this.started) {
 
-    // Get client position.
-    window.navigator.geolocation.getCurrentPosition(pos => {
+      this._applyLocation();
+      this._listenForOrientation();
+      this._listenForZoom();
 
-      // Convert lon/lat -> XYZ.
-      let [x, y, z] = utils.lonLatToXYZ(
-        pos.coords.longitude,
-        pos.coords.latitude
-      );
+      this.started = true;
 
-      // Position the camera, point at origin.
-      this.camera.position.set(x, y, z);
-      this.camera.lookAt(new THREE.Vector3(0, 0, 0));
+    }
+  },
 
-      // Store the default heading.
-      this.eye = this.camera.matrix.clone();
 
-      // TODO: More direct way to do this?
-      this.eye.lookAt(
-        new THREE.Vector3(x, y, z),
-        new THREE.Vector3(0, 0.001, 0),
-        new THREE.Vector3(x, y, z).normalize()
-      );
+  /**
+   * Sync camera with location.
+   */
+  _applyLocation: function() {
 
-    });
+    // Convert lon/lat -> XYZ.
+    let [x, y, z] = utils.lonLatToXYZ(
+      this.location.coords.longitude,
+      this.location.coords.latitude
+    );
+
+    // Position the camera, point at origin.
+    this.camera.position.set(x, y, z);
+    this.camera.lookAt(new THREE.Vector3(0, 0, 0));
+
+    // Store the default heading.
+    this.eye = this.camera.matrix.clone();
+
+    // TODO: More direct way to do this?
+    this.eye.lookAt(
+      new THREE.Vector3(x, y, z),
+      new THREE.Vector3(0, 0.001, 0),
+      new THREE.Vector3(x, y, z).normalize()
+    );
 
   },
 
@@ -217,7 +255,7 @@ export default View.extend({
   /**
    * Listen for device movement.
    */
-  _initHeading: function() {
+  _listenForOrientation: function() {
 
     // Bind to `deviceorientation`.
     if (window.DeviceOrientationEvent) {
@@ -236,7 +274,7 @@ export default View.extend({
   /**
    * Listen for pinch zooming.
    */
-  _initZoom: function() {
+  _listenForZoom: function() {
 
     // Enable pinch.
     let gesture = new Hammer(this.el);
@@ -265,9 +303,6 @@ export default View.extend({
     });
 
   },
-
-
-  // ** Helpers:
 
 
   /**
@@ -313,9 +348,6 @@ export default View.extend({
     this.world.add(line);
 
   },
-
-
-  // ** Render loop:
 
 
   /**

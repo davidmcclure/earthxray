@@ -5,6 +5,7 @@ import $ from 'jquery';
 import Hammer from 'hammerjs';
 import Backbone from 'backbone';
 import THREE from 'three';
+import Promise from 'bluebird';
 
 import View from '../lib/view';
 import countries from '../data/countries';
@@ -29,42 +30,21 @@ export default View.extend({
    * Start the globe.
    */
   initialize: function() {
-    this.load();
+
+    Promise.all([
+      this._createScene(),
+      this._createCamera(),
+      this._drawSphere(),
+      this._drawGeography(),
+      this._geolocate(),
+    ]).then(() => {
+      this._applyLocation();
+      this._listenForOrientation();
+      this._listenForZoom();
+    });
+
     this.render();
-  },
 
-
-  // ** LOAD **
-
-
-  /**
-   * Prepare the scene, render geometry, get location.
-   */
-  load: function() {
-
-    this.loaded = false;
-
-    this._geolocate();
-    this._createScene();
-    this._addCamera();
-    this._drawSphere();
-
-    this._drawCountries(() => {
-      this.loaded = true;
-      this.start();
-    });
-
-  },
-
-
-  /**
-   * Geolocate the client.
-   */
-  _geolocate: function() {
-    window.navigator.geolocation.getCurrentPosition(pos => {
-      this.location = pos;
-      this.start();
-    });
   },
 
 
@@ -95,7 +75,7 @@ export default View.extend({
   /**
    * Create the camera, bind resize.
    */
-  _addCamera: function() {
+  _createCamera: function() {
 
     // Create the camera.
     this.camera = new THREE.PerspectiveCamera(
@@ -144,12 +124,13 @@ export default View.extend({
 
 
   /**
-   * Draw country borders.
+   * Draw country borders / labels (non-blocking).
    *
    * @param {Function} done
    */
-  _drawCountries: function(done) {
+  _drawGeography: function(done) {
 
+    let deferred = Promise.pending();
     let texts = new THREE.Geometry();
 
     let i = 0;
@@ -185,7 +166,7 @@ export default View.extend({
 
         }
 
-        // When finished, add labels.
+        // Add the labels.
         if (++i == countries.length) {
 
           let material = new THREE.MeshBasicMaterial({
@@ -195,32 +176,32 @@ export default View.extend({
           let mesh = new THREE.Mesh(texts, material);
           this.world.add(mesh);
 
-          done();
+          deferred.resolve();
 
         }
 
       }, 0);
     }
 
+    return deferred.promise;
+
   },
 
 
-  // ** START **
-
-
   /**
-   * Sync the camera with location / orientation.
+   * Geolocate the client.
    */
-  start: function() {
-    if (this.loaded && this.location && !this.started) {
+  _geolocate: function() {
 
-      this._applyLocation();
-      this._listenForOrientation();
-      this._listenForZoom();
+    let deferred = Promise.pending();
 
-      this.started = true;
+    window.navigator.geolocation.getCurrentPosition(pos => {
+      this.location = pos;
+      deferred.resolve();
+    });
 
-    }
+    return deferred.promise;
+
   },
 
 

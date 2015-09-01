@@ -27,20 +27,24 @@ export default View.extend({
 
 
   /**
-   * Start the globe.
+   * Render the scene, then sync the camera.
    */
   initialize: function() {
 
     Promise.all([
+
       this._createScene(),
       this._createCamera(),
       this._drawSphere(),
       this._drawGeography(),
       this._geolocate(),
+
     ]).then(() => {
+
       this._applyLocation();
       this._listenForOrientation();
       this._listenForZoom();
+
     });
 
     this.render();
@@ -53,16 +57,14 @@ export default View.extend({
    */
   _createScene: function() {
 
-    // Create the scene.
     this.scene = new THREE.Scene();
 
-    // Create the renderer.
     this.renderer = new THREE.WebGLRenderer({
       alpha: true,
       antialias: true,
     });
 
-    // Inject the <canvas>.
+    // Inject the WebGL container.
     this.$el.append(this.renderer.domElement);
 
     // Top-level mesh group.
@@ -77,7 +79,6 @@ export default View.extend({
    */
   _createCamera: function() {
 
-    // Create the camera.
     this.camera = new THREE.PerspectiveCamera(
       opts.camera.fov,
       1,
@@ -102,21 +103,18 @@ export default View.extend({
    */
   _drawSphere: function() {
 
-    // Create geometry.
     let geometry = new THREE.SphereGeometry(
       opts.earth.radius,
       opts.sphere.segments,
       opts.sphere.segments
     );
 
-    // Create wireframe material.
     let material = new THREE.MeshBasicMaterial({
       color: opts.sphere.lineColor,
       wireframeLinewidth: opts.sphere.lineWidth,
       wireframe: true,
     });
 
-    // Register the mesh.
     this.sphere = new THREE.Mesh(geometry, material);
     this.world.add(this.sphere);
 
@@ -137,14 +135,14 @@ export default View.extend({
     for (let c of countries) {
       setTimeout(() => {
 
-        // Draw borders.
+        // Draw the borders.
         for (let p of c.points) {
           this.drawBorder(p);
         }
 
+        // Create the label.
         if (c.anchor) {
 
-          // Trace the text.
           let geometry = new THREE.TextGeometry(c.name, {
             curveSegments: 1,
             size: 30,
@@ -166,7 +164,7 @@ export default View.extend({
 
         }
 
-        // Add the labels.
+        // Render the labels.
         if (++i == countries.length) {
 
           let material = new THREE.MeshBasicMaterial({
@@ -199,6 +197,7 @@ export default View.extend({
       this.location = pos;
       deferred.resolve();
     }, err => {
+      console.log(err);
       // TODO: Flash error.
     });
 
@@ -313,7 +312,6 @@ export default View.extend({
    */
   drawBorder: function(points) {
 
-    // Create line material.
     let material = new THREE.LineBasicMaterial({
       color: opts.borders.lineColor,
       linewidth: opts.borders.lineWidth,

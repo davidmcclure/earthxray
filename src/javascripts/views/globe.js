@@ -198,6 +198,8 @@ export default View.extend({
     window.navigator.geolocation.getCurrentPosition(pos => {
       this.location = pos;
       deferred.resolve();
+    }, err => {
+      // TODO: Flash error.
     });
 
     return deferred.promise;

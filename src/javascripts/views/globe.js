@@ -31,6 +31,8 @@ export default View.extend({
    */
   initialize: function() {
 
+    this.channels.globe.trigger('loadstart');
+
     Promise.all([
 
       this._createScene(),
@@ -44,6 +46,8 @@ export default View.extend({
       this._applyLocation();
       this._listenForOrientation();
       this._listenForZoom();
+
+      this.channels.globe.trigger('loadend');
 
     });
 
@@ -67,7 +71,7 @@ export default View.extend({
     // Inject the WebGL container.
     this.$el.append(this.renderer.domElement);
 
-    // Top-level mesh group.
+    // Add a top-level mesh group.
     this.world = new THREE.Object3D();
     this.scene.add(this.world);
 

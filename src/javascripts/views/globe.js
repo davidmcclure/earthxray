@@ -72,13 +72,10 @@ export default View.extend({
    */
   _initCamera: function() {
 
-    let w = this.$el.width();
-    let h = this.$el.height();
-
     // Create the camera.
     this.camera = new THREE.PerspectiveCamera(
       opts.camera.fov,
-      w / h,
+      1,
       opts.camera.near,
       opts.camera.far
     );

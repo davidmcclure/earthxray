@@ -201,7 +201,6 @@ export default View.extend({
       this.location = pos;
       deferred.resolve();
     }, err => {
-      console.log(err);
       // TODO: Flash error.
     });
 

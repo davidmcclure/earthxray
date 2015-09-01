@@ -38,10 +38,10 @@ export default View.extend({
    * Create the scene, render geography.
    */
   load: function() {
-    this._initScene();
-    this._initCamera();
-    this._initSphere();
-    this._initCountries();
+    this._createScene();
+    this._addCamera();
+    this._addSphere();
+    this._addCountries();
   },
 
 
@@ -49,9 +49,9 @@ export default View.extend({
    * Start the viewer.
    */
   start: function() {
-    this._initHeading();
-    this._initLocation();
-    this._initZoom();
+    this._getLocation();
+    this._listenForHeading();
+    this._listenFOrZoom();
   },
 
 
@@ -61,7 +61,7 @@ export default View.extend({
   /**
    * Create the scene and renderer.
    */
-  _initScene: function() {
+  _createScene: function() {
 
     // Create the scene.
     this.scene = new THREE.Scene();
@@ -85,7 +85,7 @@ export default View.extend({
   /**
    * Create the camera, bind resize.
    */
-  _initCamera: function() {
+  _addCamera: function() {
 
     let w = this.$el.width();
     let h = this.$el.height();
@@ -113,7 +113,7 @@ export default View.extend({
   /**
    * Create a sphere for the earth.
    */
-  _initSphere: function() {
+  _addSphere: function() {
 
     // Create geometry.
     let geometry = new THREE.SphereGeometry(
@@ -139,7 +139,7 @@ export default View.extend({
   /**
    * Draw country borders.
    */
-  _initCountries: function() {
+  _addCountries: function() {
 
     let texts = new THREE.Geometry();
 
@@ -202,7 +202,7 @@ export default View.extend({
   /**
    * Geolocate the camera.
    */
-  _initLocation: function() {
+  _getLocation: function() {
 
     // Get client position.
     window.navigator.geolocation.getCurrentPosition(pos => {
@@ -235,7 +235,7 @@ export default View.extend({
   /**
    * Listen for device movement.
    */
-  _initHeading: function() {
+  _listenForHeading: function() {
 
     // Bind to `deviceorientation`.
     if (window.DeviceOrientationEvent) {
@@ -254,7 +254,7 @@ export default View.extend({
   /**
    * Listen for pinch zooming.
    */
-  _initZoom: function() {
+  _listenForZoom: function() {
 
     // Enable pinch.
     let gesture = new Hammer(this.el);
@@ -285,7 +285,7 @@ export default View.extend({
   },
 
 
-  // ** Helpers:
+  // ** Camera:
 
 
   /**
@@ -304,6 +304,9 @@ export default View.extend({
     this.renderer.setSize(this.w, this.h);
 
   },
+
+
+  // ** Helpers:
 
 
   /**

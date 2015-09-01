@@ -29,14 +29,29 @@ export default View.extend({
    * Start the globe.
    */
   initialize: function() {
+    this.load();
+    this.render();
+  },
 
+
+  /**
+   * Create the scene, render geography.
+   */
+  load: function() {
     this._initScene();
     this._initCamera();
     this._initSphere();
     this._initCountries();
+  },
 
-    this.render();
 
+  /**
+   * Start the viewer.
+   */
+  start: function() {
+    this._initHeading();
+    this._initLocation();
+    this._initZoom();
   },
 
 
@@ -161,20 +176,20 @@ export default View.extend({
 
         }
 
-        // When finished, add labels.
+        // When labels are ready.
         if (++i == countries.length) {
 
           let material = new THREE.MeshBasicMaterial({
             color: 0x000000
           });
 
+          // Render the labels.
           let mesh = new THREE.Mesh(texts, material);
           this.world.add(mesh);
 
-          // TODO|dev
-          this._initHeading();
-          this._initLocation();
-          this._initZoom();
+          // ----------
+          this.start();
+          // ----------
 
         }
 

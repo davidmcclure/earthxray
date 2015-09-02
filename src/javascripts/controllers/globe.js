@@ -3,6 +3,7 @@
 import Controller from '../lib/controller';
 import Scene from '../views/scene';
 import Startup from '../views/startup';
+import Xray from '../views/xray';
 
 
 export default Controller.extend({
@@ -17,10 +18,12 @@ export default Controller.extend({
   initialize: function() {
 
     let scene = new Scene();
-
-    // TODO|dev
     let startup = new Startup(scene);
-    startup.start();
+    let xray = new Xray(scene);
+
+    startup.start().then(() => {
+      xray.start();
+    });
 
   },
 

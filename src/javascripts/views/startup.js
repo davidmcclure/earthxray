@@ -105,6 +105,10 @@ export default class Startup {
           this.drawBorder(p);
         }
 
+        if (++i == countries.length) {
+          deferred.resolve();
+        }
+
         // TODO: Labels.
 
       }, 0);

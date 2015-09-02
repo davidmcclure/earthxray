@@ -41,7 +41,7 @@ export default class Scene extends events.EventEmitter {
     });
 
     // Inject the WebGL container.
-    $('#globe').append(this.renderer.domElement);
+    this.$el.append(this.renderer.domElement);
 
     // Add a top-level mesh group.
     this.world = new THREE.Object3D();

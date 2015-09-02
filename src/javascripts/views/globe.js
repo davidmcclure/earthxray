@@ -154,6 +154,8 @@ export default View.extend({
             height: 0,
           });
 
+          geometry.center();
+
           let mesh = new THREE.Mesh(geometry);
 
           mesh.position.set(

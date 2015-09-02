@@ -93,11 +93,13 @@ export default class Startup {
    */
   drawGeography() {
 
-    let deferred = Promise.pending();
-    let texts = new THREE.Geometry();
+    let steps = [];
 
-    let i = 0;
     for (let c of countries) {
+
+      let deferred = Promise.pending();
+      steps.push(deferred.promise);
+
       setTimeout(() => {
 
         // Draw the borders.
@@ -105,16 +107,14 @@ export default class Startup {
           this.drawBorder(p);
         }
 
-        if (++i == countries.length) {
-          deferred.resolve();
-        }
-
+        deferred.resolve();
         // TODO: Labels.
 
       }, 0);
+
     }
 
-    return deferred.promise;
+    return Promise.all(steps);
 
   }
 

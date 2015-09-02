@@ -45,7 +45,7 @@ export default class Startup {
     window.navigator.geolocation.getCurrentPosition(pos => {
 
       // Save the position.
-      this.scene.options.location = pos;
+      this.scene.options.location = pos.coords;
       deferred.resolve();
 
     }, err => {

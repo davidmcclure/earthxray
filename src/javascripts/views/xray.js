@@ -41,10 +41,10 @@ export default class Xray {
    */
   zoomCamera() {
 
-    // Get 3D location.
+    // Get XYZ location.
     let [x, y, z] = utils.lonLatToXYZ(
-      this.scene.options.location.coords.longitude,
-      this.scene.options.location.coords.latitude
+      this.scene.options.location.longitude,
+      this.scene.options.location.latitude
     );
 
     // Position the camera, look at the origin.

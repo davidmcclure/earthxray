@@ -1,5 +1,6 @@
 
 
+import events from 'events';
 import _ from 'lodash';
 import THREE from 'three';
 import $ from 'jquery';
@@ -7,13 +8,15 @@ import $ from 'jquery';
 import * as opts from '../opts.yml';
 
 
-export default class Scene {
+export default class Scene extends events.EventEmitter {
 
 
   /**
    * Create the scene, camera, and renderer.
    */
   constructor() {
+
+    super();
 
     this.$el = $('#globe');
     this.options = {};
@@ -91,7 +94,7 @@ export default class Scene {
    */
   render() {
 
-    // TODO: Trigger event.
+    this.emit('render');
 
     // Render the new frame.
     window.requestAnimationFrame(this.render.bind(this));

@@ -24,9 +24,15 @@ export default class Xray {
    * Position and sync the camera.
    */
   start() {
+
     this.zoomCamera();
     this.listenForOrientation();
     this.listenForZoom();
+
+    this.scene.on('render', () => {
+      this.point();
+    });
+
   }
 
 
@@ -41,8 +47,9 @@ export default class Xray {
       this.scene.options.location.coords.latitude
     );
 
-    // Position the camera.
+    // Position the camera, look at the origin.
     this.scene.camera.position.set(x, y, z);
+    this.scene.camera.lookAt(new THREE.Vector3(0, 0, 0));
 
     // Store the default heading.
     this.eye = this.scene.camera.matrix.clone();
@@ -88,18 +95,17 @@ export default class Xray {
 
     let minFov = opts.camera.minFov;
     let maxFov = opts.camera.maxFov;
-    let _fov;
+    let start;
 
     // Capture initial FOV.
     gesture.on('pinchstart', e => {
-      _fov = this.scene.camera.fov;
+      start = this.scene.camera.fov;
     });
 
     gesture.on('pinch', e => {
 
-      let fov = _fov / e.scale;
-
       // Break if we're out of bounds.
+      let fov = start / e.scale;
       if (fov < minFov || fov > maxFov) return;
 
       // Apply the new FOV.
@@ -138,40 +144,7 @@ export default class Xray {
     r.multiply(rb);
     r.multiply(rg);
 
-    this.camera.quaternion.setFromRotationMatrix(r);
-
-  }
-
-
-  /**
-   * Trace the heading vector.
-   */
-  trace() {
-
-    // Get the heading vector.
-    let heading = new THREE.Vector3(0, 0, -1);
-    heading.applyQuaternion(this.camera.quaternion);
-
-    // Get the scaling coefficient.
-    let a = heading.dot(heading);
-    let b = 2 * heading.dot(this.camera.position);
-    let u = (-2*b) / (2*a);
-
-    let distance = Infinity;
-
-    // If we're not looking out into space.
-    if (u > 0) {
-
-      // Get far-side intersection.
-      let delta = heading.clone().multiplyScalar(u);
-      let point = this.camera.position.clone().add(delta);
-
-      // Get distance to the point.
-      distance = this.camera.position.distanceTo(point);
-
-    }
-
-    // TODO: Publish heading.
+    this.scene.camera.quaternion.setFromRotationMatrix(r);
 
   }
 

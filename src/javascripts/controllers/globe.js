@@ -16,10 +16,11 @@ export default Controller.extend({
    */
   initialize: function() {
 
-    this.scene = new Scene();
+    let scene = new Scene();
 
     // TODO|dev
-    new Startup(this.scene);
+    let startup = new Startup(scene);
+    startup.start();
 
   },
 

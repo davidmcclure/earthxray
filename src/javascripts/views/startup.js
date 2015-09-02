@@ -17,7 +17,6 @@ export default class Startup {
    */
   constructor(scene) {
     this.scene = scene;
-    this.start();
   }
 
 

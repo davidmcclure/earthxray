@@ -106,49 +106,7 @@ export default class Startup {
           this.drawBorder(p);
         }
 
-        // Create the label.
-        if (c.anchor) {
-
-          let geometry = new THREE.TextGeometry(c.name, {
-            curveSegments: 1,
-            size: 30,
-            font: 'helvetiker',
-            height: 0,
-          });
-
-          geometry.center();
-
-          let mesh = new THREE.Mesh(geometry);
-
-          // Move to the label anchor.
-          mesh.position.set(
-            c.anchor[0],
-            c.anchor[1],
-            c.anchor[2]
-          );
-
-          // Face "inward."
-          mesh.lookAt(new THREE.Vector3(0, 0, 0));
-          mesh.updateMatrix();
-
-          // Merge the geometry.
-          texts.merge(geometry, mesh.matrix);
-
-        }
-
-        // Render the labels.
-        if (++i == countries.length) {
-
-          let material = new THREE.MeshBasicMaterial({
-            color: 0x000000
-          });
-
-          let mesh = new THREE.Mesh(texts, material);
-          this.world.add(mesh);
-
-          deferred.resolve();
-
-        }
+        // TODO: Labels.
 
       }, 0);
     }

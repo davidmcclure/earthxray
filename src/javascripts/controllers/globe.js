@@ -1,7 +1,8 @@
 
 
 import Controller from '../lib/controller';
-import Globe from '../views/globe';
+import Scene from '../views/scene';
+import Startup from '../views/startup';
 
 
 export default Controller.extend({
@@ -14,8 +15,12 @@ export default Controller.extend({
    * Spin the globe.
    */
   initialize: function() {
-    this.view = new Globe();
-    this.start();
+
+    this.scene = new Scene();
+
+    // TODO|dev
+    new Startup(this.scene);
+
   },
 
 

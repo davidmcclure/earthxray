@@ -3,21 +3,12 @@
 import THREE from 'three';
 import Hammer from 'hammerjs';
 
+import Step from './step';
 import * as opts from '../opts.yml';
 import * as utils from '../utils';
 
 
-export default class Xray {
-
-
-  /**
-   * Set the scene object.
-   *
-   * @param {Scene} scene
-   */
-  constructor(scene) {
-    this.scene = scene;
-  }
+export default class Xray extends Step {
 
 
   /**
@@ -29,7 +20,7 @@ export default class Xray {
     this.listenForOrientation();
     this.listenForZoom();
 
-    this.scene.on('render', () => {
+    this.events.on('render', () => {
       this.point();
     });
 
@@ -43,16 +34,16 @@ export default class Xray {
 
     // Get XYZ location.
     let [x, y, z] = utils.lonLatToXYZ(
-      this.scene.options.location.longitude,
-      this.scene.options.location.latitude
+      this.options.location.longitude,
+      this.options.location.latitude
     );
 
     // Position the camera, look at the origin.
-    this.scene.camera.position.set(x, y, z);
-    this.scene.camera.lookAt(new THREE.Vector3(0, 0, 0));
+    this.camera.position.set(x, y, z);
+    this.camera.lookAt(new THREE.Vector3(0, 0, 0));
 
     // Store the default heading.
-    this.eye = this.scene.camera.matrix.clone();
+    this.eye = this.camera.matrix.clone();
 
     // TODO: More direct way to do this?
     this.eye.lookAt(
@@ -87,7 +78,7 @@ export default class Xray {
    */
   listenForZoom() {
 
-    let el = this.scene.$el.get(0);
+    let el = this.$el.get(0);
     let gesture = new Hammer(el);
 
     // Enable pinch.
@@ -109,8 +100,8 @@ export default class Xray {
       if (fov < minFov || fov > maxFov) return;
 
       // Apply the new FOV.
-      this.scene.camera.fov = fov;
-      this.scene.camera.updateProjectionMatrix();
+      this.camera.fov = fov;
+      this.camera.updateProjectionMatrix();
 
     });
 
@@ -144,7 +135,7 @@ export default class Xray {
     r.multiply(rb);
     r.multiply(rg);
 
-    this.scene.camera.quaternion.setFromRotationMatrix(r);
+    this.camera.quaternion.setFromRotationMatrix(r);
 
   }
 

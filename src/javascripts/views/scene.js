@@ -1,6 +1,6 @@
 
 
-import events from 'events';
+import EventEmitter from 'events';
 import _ from 'lodash';
 import THREE from 'three';
 import $ from 'jquery';
@@ -8,7 +8,7 @@ import $ from 'jquery';
 import * as opts from '../opts.yml';
 
 
-export default class Scene extends events.EventEmitter {
+export default class Scene {
 
 
   /**
@@ -16,10 +16,9 @@ export default class Scene extends events.EventEmitter {
    */
   constructor() {
 
-    super();
-
-    this.$el = $('#globe');
     this.options = {};
+    this.events = new EventEmitter();
+    this.$el = $('#globe');
 
     this.createScene();
     this.createCamera();
@@ -94,7 +93,7 @@ export default class Scene extends events.EventEmitter {
    */
   render() {
 
-    this.emit('render');
+    this.events.emit('render');
 
     // Render the new frame.
     window.requestAnimationFrame(this.render.bind(this));
@@ -110,6 +109,9 @@ export default class Scene extends events.EventEmitter {
    */
   getMixins() {
     return _.pick(this, [
+      'events',
+      '$el',
+      'options',
       'scene',
       'world',
       'renderer',

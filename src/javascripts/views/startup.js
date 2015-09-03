@@ -3,21 +3,12 @@
 import Promise from 'bluebird';
 import THREE from 'three';
 
+import Step from './step';
 import countries from '../data/countries';
 import * as opts from '../opts.yml';
 
 
-export default class Startup {
-
-
-  /**
-   * Set the scene object.
-   *
-   * @param {Scene} scene
-   */
-  constructor(scene) {
-    this.scene = scene;
-  }
+export default class Startup extends Step {
 
 
   /**
@@ -45,7 +36,7 @@ export default class Startup {
     window.navigator.geolocation.getCurrentPosition(pos => {
 
       // Save the position.
-      this.scene.options.location = pos.coords;
+      this.options.location = pos.coords;
       deferred.resolve();
 
     }, err => {
@@ -61,7 +52,7 @@ export default class Startup {
    * Move the camera back to show the entire earth.
    */
   positionCamera() {
-    this.scene.camera.position.z = opts.camera.startz;
+    this.camera.position.z = opts.camera.startz;
   }
 
 
@@ -83,7 +74,7 @@ export default class Startup {
     });
 
     this.sphere = new THREE.Mesh(geometry, material);
-    this.scene.world.add(this.sphere);
+    this.world.add(this.sphere);
 
   }
 
@@ -140,7 +131,7 @@ export default class Startup {
 
     // Register the line.
     let line = new THREE.Line(geometry, material);
-    this.scene.world.add(line);
+    this.world.add(line);
 
   }
 

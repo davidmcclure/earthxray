@@ -1,9 +1,10 @@
 
 
-import EventEmitter from 'events';
 import _ from 'lodash';
-import THREE from 'three';
 import $ from 'jquery';
+import Promise from 'bluebird';
+import EventEmitter from 'events';
+import THREE from 'three';
 
 import * as opts from '../opts.yml';
 
@@ -112,11 +113,24 @@ export default class Scene {
       'events',
       '$el',
       'options',
-      'scene',
       'world',
       'renderer',
       'camera',
     ]);
+  }
+
+
+  /**
+   * Run a series of steps in sequence.
+   *
+   * @return {Array}
+   */
+  runSteps(steps) {
+    Promise.map(steps, Step => {
+      return new Step(this).start();
+    }, {
+      concurrency: 1
+    });
   }
 
 

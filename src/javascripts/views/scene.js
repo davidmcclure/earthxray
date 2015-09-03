@@ -126,10 +126,8 @@ export default class Scene {
    * @return {Array}
    */
   runSteps(steps) {
-    Promise.map(steps, Step => {
-      return new Step(this).start();
-    }, {
-      concurrency: 1
+    Promise.each(steps, step => {
+      return new step(this).start();
     });
   }
 

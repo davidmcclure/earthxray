@@ -13,11 +13,19 @@ export default Controller.extend({
 
 
   /**
-   * Spin the globe.
+   * Start the scene.
    */
   initialize: function() {
+
     let scene = new Scene();
-    scene.runSteps([Startup, Xray]);
+
+    let startup = new Startup(scene);
+    let xray = new Xray(scene);
+
+    startup.start().then(() => {
+      xray.start();
+    });
+
   },
 
 

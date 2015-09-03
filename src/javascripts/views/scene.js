@@ -120,16 +120,4 @@ export default class Scene {
   }
 
 
-  /**
-   * Run a series of steps in sequence.
-   *
-   * @return {Array}
-   */
-  runSteps(steps) {
-    Promise.each(steps, Step => {
-      return new Step(this).start();
-    });
-  }
-
-
 }

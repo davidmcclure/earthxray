@@ -16,14 +16,4 @@ export default class Step {
   }
 
 
-  /**
-   * Start the step.
-   *
-   * @return {Promise}
-   */
-  start() {
-    throw new Error('Must implement start().');
-  }
-
-
 }

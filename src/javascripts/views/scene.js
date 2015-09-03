@@ -5,6 +5,7 @@ import $ from 'jquery';
 import Promise from 'bluebird';
 import EventEmitter from 'events';
 import THREE from 'three';
+import TWEEN from 'tween.js';
 
 import * as opts from '../opts.yml';
 
@@ -95,6 +96,7 @@ export default class Scene {
   render() {
 
     this.events.emit('render');
+    TWEEN.update();
 
     // Render the new frame.
     window.requestAnimationFrame(this.render.bind(this));

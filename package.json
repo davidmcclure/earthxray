@@ -46,6 +46,7 @@
     "react": "^0.13.3",
     "reactify": "^1.1.1",
     "three": "^0.71.0",
-    "three.regular.helvetiker": "^1.0.0"
+    "three.regular.helvetiker": "^1.0.0",
+    "tween.js": "^15.0.0"
   }
 }

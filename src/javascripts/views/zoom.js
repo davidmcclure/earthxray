@@ -1,7 +1,12 @@
 
 
+import TWEEN from 'tween.js';
+import THREE from 'three';
 import Promise from 'bluebird';
+
 import Step from './step';
+import * as opts from '../opts.yml';
+import * as utils from '../utils';
 
 
 export default class Zoom extends Step {
@@ -25,7 +30,31 @@ export default class Zoom extends Step {
    * @return {Promise}
    */
   zoomCamera() {
-    // TODO
+
+    // Get the target point.
+    let [x, y, z] = utils.lonLatToXYZ(
+      this.shared.location.longitude,
+      this.shared.location.latitude
+    );
+
+    return new Promise((resolve, reject) => {
+
+      new TWEEN.Tween(this.camera.position)
+
+        // Zoom to the location.
+        .to({ x:x, y:y, z:z }, opts.zoom.duration)
+        .easing(TWEEN.Easing.Quadratic.Out)
+
+        // Swivel around the center.
+        .onUpdate(() => {
+          this.camera.lookAt(new THREE.Vector3(0, 0, 0));
+        })
+
+        .onComplete(resolve)
+        .start();
+
+    });
+
   }
 
 

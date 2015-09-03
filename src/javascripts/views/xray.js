@@ -90,7 +90,7 @@ export default class Xray extends Step {
 
     // Capture initial FOV.
     gesture.on('pinchstart', e => {
-      start = this.scene.camera.fov;
+      start = this.camera.fov;
     });
 
     gesture.on('pinch', e => {

@@ -76,15 +76,15 @@ export default class Scene extends events.EventEmitter {
    */
   fitCamera() {
 
-    this.w = this.$el.width();
-    this.h = this.$el.height();
+    let w = this.$el.width();
+    let h = this.$el.height();
 
     // Set aspect ratio.
-    this.camera.aspect = this.w / this.h;
+    this.camera.aspect = w / h;
     this.camera.updateProjectionMatrix();
 
     // Size the renderer.
-    this.renderer.setSize(this.w, this.h);
+    this.renderer.setSize(w, h);
 
   }
 

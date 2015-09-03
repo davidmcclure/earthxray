@@ -34,8 +34,8 @@ export default class Xray extends Step {
 
     // Get XYZ location.
     let [x, y, z] = utils.lonLatToXYZ(
-      this.options.location.longitude,
-      this.options.location.latitude
+      this.shared.location.longitude,
+      this.shared.location.latitude
     );
 
     // Position the camera, look at the origin.

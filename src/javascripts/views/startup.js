@@ -36,7 +36,7 @@ export default class Startup extends Step {
     window.navigator.geolocation.getCurrentPosition(pos => {
 
       // Save the position.
-      this.options.location = pos.coords;
+      this.shared.location = pos.coords;
       deferred.resolve();
 
     }, err => {

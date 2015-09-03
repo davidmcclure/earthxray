@@ -17,7 +17,7 @@ export default class Scene {
    */
   constructor() {
 
-    this.options = {};
+    this.shared = {};
     this.events = new EventEmitter();
     this.$el = $('#globe');
 
@@ -112,7 +112,7 @@ export default class Scene {
     return _.pick(this, [
       'events',
       '$el',
-      'options',
+      'shared',
       'world',
       'renderer',
       'camera',

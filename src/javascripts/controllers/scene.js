@@ -3,6 +3,7 @@
 import Controller from '../lib/controller';
 import Scene from '../views/scene';
 import Startup from '../views/startup';
+import Zoom from '../views/zoom';
 import Xray from '../views/xray';
 
 
@@ -20,11 +21,21 @@ export default Controller.extend({
     let scene = new Scene();
 
     let startup = new Startup(scene);
+    let zoom = new Zoom(scene);
     let xray = new Xray(scene);
 
-    startup.start().then(() => {
-      xray.start();
-    });
+    // Render scene.
+    startup.start()
+
+      // Zoom to location.
+      .then(() => {
+        return zoom.start();
+      })
+
+      // Start VR.
+      .then(() => {
+        xray.start();
+      });
 
   },
 

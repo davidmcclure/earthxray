@@ -103,4 +103,19 @@ export default class Scene extends events.EventEmitter {
   }
 
 
+  /**
+   * Provide shared objects to steps.
+   *
+   * @return {Object}
+   */
+  getMixins() {
+    return _.pick(this, [
+      'scene',
+      'world',
+      'renderer',
+      'camera',
+    ]);
+  }
+
+
 }

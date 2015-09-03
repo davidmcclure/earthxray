@@ -1,6 +1,6 @@
 
 
-import Globe from './controllers/globe';
+import Scene from './controllers/scene';
 
 
-new Globe();
+new Scene();

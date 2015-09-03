@@ -126,8 +126,8 @@ export default class Scene {
    * @return {Array}
    */
   runSteps(steps) {
-    Promise.each(steps, step => {
-      return new step(this).start();
+    Promise.each(steps, Step => {
+      return new Step(this).start();
     });
   }
 

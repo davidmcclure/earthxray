@@ -9,7 +9,7 @@ import Xray from '../views/xray';
 export default Controller.extend({
 
 
-  channel: 'globe',
+  channel: 'scene',
 
 
   /**

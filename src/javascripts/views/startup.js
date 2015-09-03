@@ -31,19 +31,20 @@ export default class Startup extends Step {
    */
   getLocation() {
 
-    let deferred = Promise.pending();
+    return new Promise((resolve, reject) => {
+      window.navigator.geolocation.getCurrentPosition(pos => {
 
-    window.navigator.geolocation.getCurrentPosition(pos => {
+        // Save the position.
+        this.shared.location = pos.coords;
+        resolve();
 
-      // Save the position.
-      this.shared.location = pos.coords;
-      deferred.resolve();
+      }, err => {
 
-    }, err => {
-      // TODO: Error.
+        // TODO: Flash error.
+        reject();
+
+      });
     });
-
-    return deferred.promise;
 
   }
 
@@ -88,20 +89,19 @@ export default class Startup extends Step {
 
     for (let c of countries) {
 
-      let deferred = Promise.pending();
-      steps.push(deferred.promise);
+      steps.push(new Promise((resolve, reject) => {
+        setTimeout(() => {
 
-      setTimeout(() => {
+          // Draw the borders.
+          for (let p of c.points) {
+            this.drawBorder(p);
+          }
 
-        // Draw the borders.
-        for (let p of c.points) {
-          this.drawBorder(p);
-        }
+          // TODO: Labels.
+          resolve();
 
-        deferred.resolve();
-        // TODO: Labels.
-
-      }, 0);
+        }, 0);
+      }));
 
     }
 

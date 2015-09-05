@@ -3,7 +3,6 @@
 import json
 
 from invoke import task
-from tasks import utils
 
 
 @task

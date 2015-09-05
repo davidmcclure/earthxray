@@ -22,7 +22,7 @@ export default class Startup extends Step {
       this.getLocation(),
       this.positionCamera(),
       this.drawSphere(),
-      this.drawGeography()
+      this.drawCountries()
     ]);
   }
 
@@ -84,9 +84,7 @@ export default class Startup extends Step {
   /**
    * Render countries and labels.
    */
-  drawGeography() {
-
-    this.shared.materials = {};
+  drawCountries() {
 
     let steps = [];
     for (let c of countries.features) {
@@ -95,7 +93,7 @@ export default class Startup extends Step {
         setTimeout(() => {
 
           // Draw borders.
-          this.drawFeature(c);
+          this.drawCountry(c);
 
           // TODO: Labels.
           resolve();
@@ -111,10 +109,32 @@ export default class Startup extends Step {
 
 
   /**
+   * Draw country borders.
+   *
+   * @param {Object} country
+   */
+  drawCountry(country) {
+
+    let material = new THREE.LineBasicMaterial({
+      color: opts.borders.lineColor,
+      linewidth: opts.borders.lineWidth,
+    });
+
+    let geos = this.drawFeature(country);
+
+    for (let g of geos) {
+      let line = new THREE.Line(g, material);
+      this.world.add(line);
+    }
+
+  }
+
+
+  /**
    * Draw a GeoJSON feature.
    *
    * @param {Object} feature
-   * @return {Array} - The generated meshes.
+   * @return {Array} - The border geometries.
    */
   drawFeature(feature) {
 
@@ -135,18 +155,7 @@ export default class Startup extends Step {
 
     }
 
-    let material = new THREE.LineBasicMaterial({
-      color: opts.borders.lineColor,
-      linewidth: opts.borders.lineWidth,
-    });
-
-    for (let g of geos) {
-      let line = new THREE.Line(g, material);
-      this.world.add(line);
-    }
-
-    // Map country code -> material.
-    this.shared.materials[feature.id] = material;
+    return geos;
 
   }
 
@@ -155,7 +164,7 @@ export default class Startup extends Step {
    * Draw a polygon.
    *
    * @param {Array} points
-   * @return {THREE.Line}
+   * @return {THREE.Geometry}
    */
   drawPolygon(points) {
 

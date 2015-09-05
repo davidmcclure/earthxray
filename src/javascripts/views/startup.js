@@ -94,7 +94,7 @@ export default class Startup extends Step {
         setTimeout(() => {
 
           // Draw borders.
-          this.drawFeature(c);
+          let meshes = this.drawFeature(c);
 
           // TODO: Labels.
           resolve();
@@ -113,24 +113,28 @@ export default class Startup extends Step {
    * Draw a GeoJSON feature.
    *
    * @param {Object} feature
+   * @return {Array} - The generated meshes.
    */
   drawFeature(feature) {
 
     let coords = feature.geometry.coordinates;
+    let meshes = []
 
     switch (feature.geometry.type) {
 
       case 'Polygon':
-        this.drawPolygon(coords[0]);
+        meshes.push(this.drawPolygon(coords[0]));
       break;
 
       case 'MultiPolygon':
         for (let [polygon] of coords) {
-          this.drawPolygon(polygon);
+          meshes.push(this.drawPolygon(polygon));
         }
       break;
 
     }
+
+    return meshes;
 
   }
 
@@ -139,6 +143,7 @@ export default class Startup extends Step {
    * Draw a polygon.
    *
    * @param {Array} points
+   * @return {THREE.Line}
    */
   drawPolygon(points) {
 
@@ -159,33 +164,9 @@ export default class Startup extends Step {
     let line = new THREE.Line(geometry, material);
     this.world.add(line);
 
+    return line;
+
   }
-
-
-  /**
-   * Draw a border line.
-   *
-   * @param {Array} points
-   */
-  //drawBorder(points) {
-
-    //let material = new THREE.LineBasicMaterial({
-      //color: opts.borders.lineColor,
-      //linewidth: opts.borders.lineWidth,
-    //});
-
-    //let geometry = new THREE.Geometry();
-
-    //// Register the vertices.
-    //for (let [x, y, z] of points) {
-      //geometry.vertices.push(new THREE.Vector3(x, y, z));
-    //}
-
-    //// Register the line.
-    //let line = new THREE.Line(geometry, material);
-    //this.world.add(line);
-
-  //}
 
 
 }

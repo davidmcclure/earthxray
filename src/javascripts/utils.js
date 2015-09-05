@@ -87,7 +87,7 @@ export function lonLatsToGeom(lonlats) {
  * Convert a GeoJSON feature into an array of geometries.
  *
  * @param {Object} feature
- * @returns {Array}
+ * @returns {Array} - [THREE.Geometry, ...]
  */
 export function featureToGeoms(feature) {
 

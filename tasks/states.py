@@ -10,15 +10,15 @@ from tasks import utils
 def borders():
 
     """
-    Write country borders.
+    Write state borders.
     """
 
     # TODO|dev
-    borders = open_countries()
-    write_countries(borders)
+    borders = open_states()
+    write_states(borders)
 
 
-def open_countries():
+def open_states():
 
     """
     Open the borders GeoJSON.
@@ -26,18 +26,18 @@ def open_countries():
     Returns: dict
     """
 
-    with open('data/countries.geo.json', 'r') as fh:
+    with open('data/states.geo.json', 'r') as fh:
         return json.loads(fh.read())
 
 
-def write_countries(data):
+def write_states(data):
 
     """
-    Write the countries GeoJSON.
+    Write the states GeoJSON.
 
     Args:
         data (dict)
     """
 
-    with open('src/javascripts/data/countries.json', 'w') as fh:
+    with open('src/javascripts/data/states.json', 'w') as fh:
         json.dump(data, fh, sort_keys=True)

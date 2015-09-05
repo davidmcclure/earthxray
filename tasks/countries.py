@@ -6,8 +6,30 @@ from invoke import task
 
 
 @task
-def test():
-    print(cca3_to_area())
+def build():
+
+    """
+    Merge borders with area, anchor points, and populations.
+    """
+
+    borders = open_borders()
+
+    # TODO: Merge metadata.
+
+    with open('src/javascripts/data/countries.json', 'w') as fh:
+        json.dump(borders, fh, sort_keys=True)
+
+
+def open_borders():
+
+    """
+    Read the borders GeoJSON.
+
+    Returns: dict
+    """
+
+    with open('data/countries/borders.json', 'r') as fh:
+        return json.loads(fh.read())
 
 
 def open_mledoze():

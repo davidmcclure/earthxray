@@ -7,7 +7,6 @@ export default {
     transform: [
       'babelify',
       'yamlify',
-      'reactify',
     ],
 
     watch: true,

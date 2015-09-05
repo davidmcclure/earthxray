@@ -6,6 +6,7 @@ import THREE from 'three';
 import Step from './step';
 import countries from '../data/countries';
 import * as opts from '../opts.yml';
+import * as utils from '../utils.js';
 
 
 export default class Startup extends Step {
@@ -87,15 +88,13 @@ export default class Startup extends Step {
 
     let steps = [];
 
-    for (let c of countries) {
+    for (let c of countries.features) {
 
       steps.push(new Promise((resolve, reject) => {
         setTimeout(() => {
 
-          // Draw the borders.
-          for (let p of c.points) {
-            this.drawBorder(p);
-          }
+          // Draw borders.
+          this.drawFeature(c);
 
           // TODO: Labels.
           resolve();
@@ -111,11 +110,37 @@ export default class Startup extends Step {
 
 
   /**
-   * Draw a border line.
+   * Draw a GeoJSON feature.
+   *
+   * @param {Object} feature
+   */
+  drawFeature(feature) {
+
+    let coords = feature.geometry.coordinates;
+
+    switch (feature.geometry.type) {
+
+      case 'Polygon':
+        this.drawPolygon(coords[0]);
+      break;
+
+      case 'MultiPolygon':
+        for (let [polygon] of coords) {
+          this.drawPolygon(polygon);
+        }
+      break;
+
+    }
+
+  }
+
+
+  /**
+   * Draw a polygon.
    *
    * @param {Array} points
    */
-  drawBorder(points) {
+  drawPolygon(points) {
 
     let material = new THREE.LineBasicMaterial({
       color: opts.borders.lineColor,
@@ -125,15 +150,42 @@ export default class Startup extends Step {
     let geometry = new THREE.Geometry();
 
     // Register the vertices.
-    for (let [x, y, z] of points) {
+    for (let [lon, lat] of points) {
+      let [x, y, z] = utils.lonLatToXYZ(lon, lat);
       geometry.vertices.push(new THREE.Vector3(x, y, z));
     }
 
-    // Register the line.
+    // Create the line.
     let line = new THREE.Line(geometry, material);
     this.world.add(line);
 
   }
+
+
+  /**
+   * Draw a border line.
+   *
+   * @param {Array} points
+   */
+  //drawBorder(points) {
+
+    //let material = new THREE.LineBasicMaterial({
+      //color: opts.borders.lineColor,
+      //linewidth: opts.borders.lineWidth,
+    //});
+
+    //let geometry = new THREE.Geometry();
+
+    //// Register the vertices.
+    //for (let [x, y, z] of points) {
+      //geometry.vertices.push(new THREE.Vector3(x, y, z));
+    //}
+
+    //// Register the line.
+    //let line = new THREE.Line(geometry, material);
+    //this.world.add(line);
+
+  //}
 
 
 }

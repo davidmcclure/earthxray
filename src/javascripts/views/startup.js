@@ -5,6 +5,7 @@ import THREE from 'three';
 
 import Step from './step';
 import countries from '../data/countries';
+import states from '../data/states';
 import * as opts from '../opts.yml';
 import * as utils from '../utils.js';
 
@@ -22,7 +23,8 @@ export default class Startup extends Step {
       this.getLocation(),
       this.positionCamera(),
       this.drawSphere(),
-      this.drawCountries()
+      this.drawCountries(),
+      this.drawStates(),
     ]);
   }
 
@@ -103,6 +105,14 @@ export default class Startup extends Step {
 
     return Promise.all(steps);
 
+  }
+
+
+  /**
+   * Render US sates.
+   */
+  drawStates() {
+    // TODO
   }
 
 

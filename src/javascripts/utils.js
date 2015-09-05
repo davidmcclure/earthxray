@@ -61,3 +61,53 @@ export function xyzToLonLat(x, y, z, r=opts.earth.radius) {
 export function kmToMi(km) {
   return km*0.62137;
 };
+
+
+/**
+ * Make a geometry from an array of lon/lats.
+ *
+ * @param {Array} lonlats
+ * @returns {THREE.Geometry}
+ */
+export function lonLatsToGeom(lonlats) {
+
+  let geometry = new THREE.Geometry();
+
+  for (let [lon, lat] of lonlats) {
+    let [x, y, z] = lonLatToXYZ(lon, lat);
+    geometry.vertices.push(new THREE.Vector3(x, y, z));
+  }
+
+  return geometry;
+
+};
+
+
+/**
+ * Convert a GeoJSON feature into an array of geometries.
+ *
+ * @param {Object} feature
+ * @returns {Array}
+ */
+export function featureToGeoms(feature) {
+
+  let coords = feature.geometry.coordinates;
+
+  let geoms = []
+  switch (feature.geometry.type) {
+
+    case 'Polygon':
+      geoms.push(lonLatsToGeom(coords[0]));
+    break;
+
+    case 'MultiPolygon':
+      for (let [polygon] of coords) {
+        geoms.push(lonLatsToGeom(polygon));
+      }
+    break;
+
+  }
+
+  return geoms;
+
+};

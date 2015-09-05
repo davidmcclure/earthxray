@@ -118,63 +118,12 @@ export default class Startup extends Step {
       linewidth: opts.borders.lineWidth,
     });
 
-    let geos = this.drawFeature(country);
+    let geos = utils.featureToGeoms(country);
 
     for (let g of geos) {
       let line = new THREE.Line(g, material);
       this.world.add(line);
     }
-
-  }
-
-
-  /**
-   * Draw a GeoJSON feature.
-   *
-   * @param {Object} feature
-   * @return {Array} - The border geometries.
-   */
-  drawFeature(feature) {
-
-    let coords = feature.geometry.coordinates;
-
-    let geos = []
-    switch (feature.geometry.type) {
-
-      case 'Polygon':
-        geos.push(this.drawPolygon(coords[0]));
-      break;
-
-      case 'MultiPolygon':
-        for (let [polygon] of coords) {
-          geos.push(this.drawPolygon(polygon));
-        }
-      break;
-
-    }
-
-    return geos;
-
-  }
-
-
-  /**
-   * Draw a polygon.
-   *
-   * @param {Array} points
-   * @return {THREE.Geometry}
-   */
-  drawPolygon(points) {
-
-    let geometry = new THREE.Geometry();
-
-    // Register the vertices.
-    for (let [lon, lat] of points) {
-      let [x, y, z] = utils.lonLatToXYZ(lon, lat);
-      geometry.vertices.push(new THREE.Vector3(x, y, z));
-    }
-
-    return geometry;
 
   }
 

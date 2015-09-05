@@ -6,37 +6,49 @@ from invoke import task
 
 
 @task
-def borders():
+def test():
+    print(cca3_to_anchor())
+
+
+def open_mledoze():
 
     """
-    Write country borders.
-    """
-
-    # TODO|dev
-    borders = open_countries()
-    write_countries(borders)
-
-
-def open_countries():
-
-    """
-    Open the borders GeoJSON.
+    Read the country metadata.
 
     Returns: dict
     """
 
-    with open('data/world.geo.json/countries.geo.json', 'r') as fh:
+    with open('data/countries/mledoze.json', 'r') as fh:
         return json.loads(fh.read())
 
 
-def write_countries(data):
+def cca3_to_area():
 
     """
-    Write the countries GeoJSON.
+    Map country code -> area.
 
-    Args:
-        data (dict)
+    Returns: dict
     """
 
-    with open('src/javascripts/data/countries.json', 'w') as fh:
-        json.dump(data, fh, sort_keys=True)
+    areas = {}
+
+    for c in open_mledoze():
+        areas[c['cca3']] = c['area']
+
+    return areas
+
+
+def cca3_to_anchor():
+
+    """
+    Map country code -> population.
+
+    Returns: dict
+    """
+
+    anchors = {}
+
+    for c in open_mledoze():
+        anchors[c['cca3']] = c['latlng']
+
+    return anchors

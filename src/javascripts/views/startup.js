@@ -86,15 +86,16 @@ export default class Startup extends Step {
    */
   drawGeography() {
 
-    let steps = [];
+    this.shared.materials = {};
 
+    let steps = [];
     for (let c of countries.features) {
 
       steps.push(new Promise((resolve, reject) => {
         setTimeout(() => {
 
           // Draw borders.
-          let meshes = this.drawFeature(c);
+          this.drawFeature(c);
 
           // TODO: Labels.
           resolve();
@@ -118,23 +119,34 @@ export default class Startup extends Step {
   drawFeature(feature) {
 
     let coords = feature.geometry.coordinates;
-    let meshes = []
 
+    let geos = []
     switch (feature.geometry.type) {
 
       case 'Polygon':
-        meshes.push(this.drawPolygon(coords[0]));
+        geos.push(this.drawPolygon(coords[0]));
       break;
 
       case 'MultiPolygon':
         for (let [polygon] of coords) {
-          meshes.push(this.drawPolygon(polygon));
+          geos.push(this.drawPolygon(polygon));
         }
       break;
 
     }
 
-    return meshes;
+    let material = new THREE.LineBasicMaterial({
+      color: opts.borders.lineColor,
+      linewidth: opts.borders.lineWidth,
+    });
+
+    for (let g of geos) {
+      let line = new THREE.Line(g, material);
+      this.world.add(line);
+    }
+
+    // Map country code -> material.
+    this.shared.materials[feature.id] = material;
 
   }
 
@@ -147,11 +159,6 @@ export default class Startup extends Step {
    */
   drawPolygon(points) {
 
-    let material = new THREE.LineBasicMaterial({
-      color: opts.borders.lineColor,
-      linewidth: opts.borders.lineWidth,
-    });
-
     let geometry = new THREE.Geometry();
 
     // Register the vertices.
@@ -160,11 +167,7 @@ export default class Startup extends Step {
       geometry.vertices.push(new THREE.Vector3(x, y, z));
     }
 
-    // Create the line.
-    let line = new THREE.Line(geometry, material);
-    this.world.add(line);
-
-    return line;
+    return geometry;
 
   }
 

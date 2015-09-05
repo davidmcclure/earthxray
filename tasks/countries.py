@@ -26,7 +26,7 @@ def open_countries():
     Returns: dict
     """
 
-    with open('data/countries.geo.json', 'r') as fh:
+    with open('data/world.geo.json/countries.geo.json', 'r') as fh:
         return json.loads(fh.read())
 
 

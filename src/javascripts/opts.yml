@@ -12,7 +12,7 @@ camera:
   startz: 20000
 
 sphere:
-  lineWidth: 0.5
+  lineWidth: 1
   lineColor: 0xcccccc
   segments: 32
 

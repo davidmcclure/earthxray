@@ -94,8 +94,6 @@ export default class Startup extends Step {
 
           // Draw borders.
           this.drawCountry(c);
-
-          // TODO: Labels.
           resolve();
 
         }, 0);

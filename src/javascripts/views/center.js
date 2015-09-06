@@ -10,7 +10,13 @@ export default class Center extends React.Component {
    * Render the center.
    */
   render() {
-    return <i className="fa fa-bullseye"></i>;
+    return (
+      <div>
+        <i className="crosshair fa fa-bullseye"></i>
+        <div className="stats">stats</div>
+      </div>
+    );
+
   }
 
 

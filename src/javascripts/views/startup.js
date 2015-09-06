@@ -4,8 +4,8 @@ import Promise from 'bluebird';
 import THREE from 'three';
 
 import Step from './step';
+import Borders from '../lib/borders';
 import countries from '../data/countries';
-import states from '../data/states';
 import * as opts from '../opts.yml';
 import * as utils from '../utils.js';
 
@@ -23,8 +23,8 @@ export default class Startup extends Step {
       this.getLocation(),
       this.positionCamera(),
       this.drawSphere(),
+      this.indexCountries(),
       this.drawCountries(),
-      this.drawStates(),
     ]);
   }
 
@@ -84,6 +84,16 @@ export default class Startup extends Step {
 
 
   /**
+   * Index country borders.
+   */
+  indexCountries() {
+    let index = new Borders();
+    index.indexFeatures(countries.features);
+    this.shared.borders = index;
+  }
+
+
+  /**
    * Render countries and labels.
    */
   drawCountries() {
@@ -105,14 +115,6 @@ export default class Startup extends Step {
 
     return Promise.all(steps);
 
-  }
-
-
-  /**
-   * Render US sates.
-   */
-  drawStates() {
-    // TODO
   }
 
 

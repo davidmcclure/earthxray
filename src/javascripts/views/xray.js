@@ -117,20 +117,30 @@ export default class Xray extends Step {
    */
   highlightCountry(feature) {
 
-    // TODO: Just unselect previous.
-    _.each(_.values(this.shared.countries), c => {
-      c.material.setValues({
-        linewidth: 2,
-        color: 0x2a7bbf,
-      });
-    });
+    // Unhighlight previous country.
+    if (this.country) {
 
-    if (feature) {
-      let line = this.shared.countries[feature.id];
+      let line = this.shared.countries[this.country.id];
+
       line.material.setValues({
-        linewidth: 4,
-        color: 0xff0000,
+        linewidth: opts.borders.lineWidth,
+        color: opts.borders.lineColor,
       });
+
+    }
+
+    // Highlight current country.
+    if (feature) {
+
+      let line = this.shared.countries[feature.id];
+
+      line.material.setValues({
+        linewidth: opts.borders.hl.lineWidth,
+        color: opts.borders.hl.lineColor,
+      });
+
+      this.country = feature;
+
     }
 
   }

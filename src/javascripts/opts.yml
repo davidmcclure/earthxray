@@ -19,6 +19,9 @@ sphere:
 borders:
   lineColor: 0x2a7bbf
   lineWidth: 2
+  hl:
+    lineColor: 0xff0000
+    lineWidth: 4
 
 zoom:
   duration: 5000

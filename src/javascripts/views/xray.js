@@ -23,6 +23,7 @@ export default class Xray extends Step {
 
     this.events.on('render', () => {
       this.point();
+      this.trace();
     });
 
     Radio.trigger('xray', 'start');
@@ -136,6 +137,40 @@ export default class Xray extends Step {
     r.multiply(rg);
 
     this.camera.quaternion.setFromRotationMatrix(r);
+
+  }
+
+
+  /**
+   * Trace the far-side intersection point.
+   */
+  trace() {
+
+    // Heading vector.
+    let heading = new THREE.Vector3(0, 0, -1);
+    heading.applyQuaternion(this.camera.quaternion);
+
+    // Scaling coefficient.
+    let a = heading.dot(heading);
+    let b = 2 * heading.dot(this.camera.position);
+    let u = (-2*b) / (2*a);
+
+    let point = null;
+    let distance = Infinity;
+
+    // If we're not looking into space.
+    if (u > 0) {
+
+      // Get far-side intersection.
+      let delta = heading.multiplyScalar(u);
+      point = this.camera.position.clone().add(delta);
+
+      // Get distance to the point.
+      distance = this.camera.position.distanceTo(point);
+
+    }
+
+    console.log(distance);
 
   }
 

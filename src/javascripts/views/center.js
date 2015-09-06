@@ -49,7 +49,9 @@ export default class Center extends React.Component {
     // If we're looking into space.
     else {
       distance = (
-        <div className="distance">Outer space!</div>
+        <div className="distance">
+          <div className="space">Outer space!</div>
+        </div>
       );
     }
 

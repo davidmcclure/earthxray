@@ -96,7 +96,7 @@ export default class Borders {
     // Probe for a parent country.
     for (let n of nn) {
       if (turf.inside(point, n.feature)) {
-        country = n.feature.properties;
+        country = n.feature;
         break;
       }
     }

@@ -1,5 +1,6 @@
 
 
+import _ from 'lodash';
 import Radio from 'backbone.radio';
 import THREE from 'three';
 import Hammer from 'hammerjs';
@@ -109,6 +110,32 @@ export default class Xray extends Step {
   }
 
 
+  /**
+   * Render a country highlight.
+   *
+   * @param {Object} feature
+   */
+  highlightCountry(feature) {
+
+    // TODO: Just unselect previous.
+    _.each(_.values(this.shared.countries), c => {
+      c.material.setValues({
+        linewidth: 2,
+        color: 0x2a7bbf,
+      });
+    });
+
+    if (feature) {
+      let line = this.shared.countries[feature.id];
+      line.material.setValues({
+        linewidth: 4,
+        color: 0xff0000,
+      });
+    }
+
+  }
+
+
   // ** Render loop:
 
 
@@ -166,10 +193,7 @@ export default class Xray extends Step {
     // Get the enclosing country.
     let [x, y, z] = point.toArray();
     let country = this.shared.borders.query(x, y, z);
-
-    if (country) {
-      // highlight
-    }
+    this.highlightCountry(country);
 
     Radio.trigger('xray', 'trace', {
       point: point,

@@ -98,6 +98,8 @@ export default class Startup extends Step {
    */
   drawCountries() {
 
+    this.shared.countries = {};
+
     let steps = [];
     for (let c of countries.features) {
 
@@ -133,8 +135,14 @@ export default class Startup extends Step {
     let geos = utils.featureToGeoms(country);
 
     for (let g of geos) {
+
+      // Render the borders.
       let line = new THREE.Line(g, material);
       this.world.add(line);
+
+      // Index country code -> mesh.
+      this.shared.countries[country.id] = line;
+
     }
 
   }

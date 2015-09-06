@@ -13,6 +13,13 @@ export default Controller.extend({
   channel: 'center',
 
 
+  events: {
+    xray: {
+      trace: 'onTrace'
+    }
+  },
+
+
   /**
    * Start the view.
    */
@@ -30,6 +37,16 @@ export default Controller.extend({
 
     });
 
+  },
+
+
+  /**
+   * When the camera moves.
+   *
+   * @param {Object} data
+   */
+  onTrace: function(data) {
+    this.view.setState(data);
   },
 
 

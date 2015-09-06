@@ -196,23 +196,27 @@ export default class Xray extends Step {
     let b = 2 * heading.dot(this.camera.position);
     let u = (-2*b) / (2*a);
 
+    let distance, country;
+
     // Over the horizon?
-    if (u < 0) return;
-    heading.multiplyScalar(u);
+    if (u > 0) {
 
-    // Get far-side intersection.
-    let point = this.camera.position.clone().add(heading);
-    let distance = this.camera.position.distanceTo(point);
+      heading.multiplyScalar(u);
 
-    // Get the enclosing country.
-    let [x, y, z] = point.toArray();
-    let country = this.shared.borders.query(x, y, z);
-    this.highlightCountry(country);
+      // Get far-side intersection.
+      let point = this.camera.position.clone().add(heading);
+      distance = this.camera.position.distanceTo(point);
+
+      // Get the enclosing country.
+      let [x, y, z] = point.toArray();
+      country = this.shared.borders.query(x, y, z);
+      this.highlightCountry(country);
+
+    }
 
     Radio.trigger('xray', 'trace', {
-      point: point,
-      distance: distance,
       country: country,
+      distance: distance,
     });
 
   }

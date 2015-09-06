@@ -16,7 +16,7 @@ export default class Xray extends Step {
    */
   start() {
 
-    this.zoomCamera();
+    this.positionCamera();
     this.listenForOrientation();
     this.listenForZoom();
 
@@ -30,7 +30,7 @@ export default class Xray extends Step {
   /**
    * Move the camera into place.
    */
-  zoomCamera() {
+  positionCamera() {
 
     // Get XYZ location.
     let [x, y, z] = utils.lonLatToXYZ(
@@ -38,11 +38,8 @@ export default class Xray extends Step {
       this.shared.location.latitude
     );
 
-    // Position the camera, look at the origin.
-    this.camera.position.set(x, y, z);
-    this.camera.lookAt(new THREE.Vector3(0, 0, 0));
-
     // Store the default heading.
+    this.camera.lookAt(new THREE.Vector3(0, 0, 0));
     this.eye = this.camera.matrix.clone();
 
     // TODO: More direct way to do this?

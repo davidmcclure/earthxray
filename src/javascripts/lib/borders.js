@@ -85,12 +85,12 @@ export default class Borders {
     let point = {
       geometry: {
         type: 'Point',
-        coordinates: [lat, lon]
+        coordinates: [lon, lat]
       }
     };
 
     // Get the N nearest points.
-    let nn = knn(this.tree, [lat, lon], 20);
+    let nn = knn(this.tree, [lon, lat], 20);
     let country = null;
 
     // Probe for a parent country.

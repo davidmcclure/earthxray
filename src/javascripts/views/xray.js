@@ -1,5 +1,6 @@
 
 
+import Radio from 'backbone.radio';
 import THREE from 'three';
 import Hammer from 'hammerjs';
 
@@ -23,6 +24,8 @@ export default class Xray extends Step {
     this.events.on('render', () => {
       this.point();
     });
+
+    Radio.trigger('xray', 'start');
 
   }
 

@@ -1,6 +1,8 @@
 
 
 import THREE from 'three';
+import Radio from 'backbone.radio';
+
 import * as opts from './opts.yml';
 
 
@@ -110,4 +112,18 @@ export function featureToGeoms(feature) {
 
   return geoms;
 
+};
+
+
+/**
+ * Wait for a backbone.radio event to fire.
+ *
+ * @param {String} channel
+ * @param {String} event
+ * @returns {Promise}
+ */
+export function waitOnce(channel, event) {
+  return new Promise((resolve, reject) => {
+    Radio.channel(channel).once(event, resolve);
+  });
 };

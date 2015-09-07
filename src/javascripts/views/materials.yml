@@ -9,7 +9,7 @@ country:
     color: 0x2a7bbf
     linewidth: 2
   hl:
-    color: 0xff0000
+    color: 0x990000
     linewidth: 4
 
 state:

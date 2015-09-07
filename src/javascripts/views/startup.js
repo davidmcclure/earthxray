@@ -74,6 +74,11 @@ export default class Startup extends Step {
       this.drawLonRing(i*10);
     });
 
+    _.times(3, i => {
+      this.drawLatRing(i*30);
+      this.drawLatRing(-i*30);
+    });
+
   }
 
 
@@ -187,11 +192,26 @@ export default class Startup extends Step {
    *
    * @param {Number} degrees
    */
-  drawLatRing(degrees) {
+  drawLatRing(degrees=0) {
 
-    // get radius of circle at offset
-    // draw the circle
-    // move down into place
+    let rDeg = THREE.Math.degToRad(degrees);
+
+    let offset = Math.sin(rDeg) * opts.earth.radius;
+    let radius = Math.cos(rDeg) * opts.earth.radius;
+
+    let geometry = utils.drawCircle(
+      100,
+      'y',
+      radius
+    );
+
+    let material = new THREE.LineBasicMaterial(mats.lonlat);
+
+    let ring = new THREE.Line(geometry, material);
+
+    // Move up/down.
+    ring.position.y = offset;
+    this.world.add(ring);
 
   }
 

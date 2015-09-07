@@ -1,7 +1,8 @@
 
 
-import THREE from 'three';
+import _ from 'lodash';
 import Radio from 'backbone.radio';
+import THREE from 'three';
 
 import * as opts from './opts.yml';
 
@@ -126,4 +127,32 @@ export function waitOnce(channel, event) {
   return new Promise((resolve, reject) => {
     Radio.channel(channel).once(event, resolve);
   });
+};
+
+
+/**
+ * Trace out a circle geometry.
+ *
+ * @param {Number} segments
+ * @param {Number} radius
+ * @returns {THREE.Geometry}
+ */
+export function drawCircle(segments, radius) {
+
+  let geometry = new THREE.Geometry();
+
+  _.times(segments+1, i => {
+
+    let theta = (i / segments) * Math.PI * 2;
+
+    geometry.vertices.push(new THREE.Vector3(
+      Math.cos(theta) * radius,
+      Math.sin(theta) * radius,
+      0
+    ));
+
+  });
+
+  return geometry;
+
 };

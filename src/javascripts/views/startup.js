@@ -1,5 +1,6 @@
 
 
+import _ from 'lodash';
 import Promise from 'bluebird';
 import THREE from 'three';
 
@@ -24,7 +25,6 @@ export default class Startup extends Step {
     return Promise.all([
       this.getLocation(),
       this.positionCamera(),
-      //this.drawSphere(),
       this.drawGlobe(),
       this.indexCountries(),
       this.drawCountries(),
@@ -65,27 +65,15 @@ export default class Startup extends Step {
 
 
   /**
-   * Render a sphere for the earth.
-   */
-  drawSphere() {
-
-    let geometry = new THREE.SphereGeometry(
-      opts.earth.radius, 32, 32
-    );
-
-    let material = new THREE.MeshBasicMaterial(mats.sphere);
-
-    this.sphere = new THREE.Mesh(geometry, material);
-    this.world.add(this.sphere);
-
-  }
-
-
-  /**
    * Draw lon / lat lines.
    */
   drawGlobe() {
-    // TODO
+
+    // Longitude:
+    _.times(11, i => {
+      this.drawLonRing(i*10);
+    });
+
   }
 
 
@@ -200,7 +188,11 @@ export default class Startup extends Step {
    * @param {Number} degrees
    */
   drawLatRing(degrees) {
-    // TODO
+
+    // get radius of circle at offset
+    // draw the circle
+    // move down into place
+
   }
 
 
@@ -209,8 +201,17 @@ export default class Startup extends Step {
    *
    * @param {Number} degrees
    */
-  drawLonRing(degrees) {
-    // TODO
+  drawLonRing(degrees=0) {
+
+    let geometry = utils.drawCircle(100, 6371);
+
+    let material = new THREE.LineBasicMaterial(mats.lonlat);
+
+    let ring = new THREE.Line(geometry, material);
+    ring.rotation.y = degrees;
+
+    this.world.add(ring);
+
   }
 
 

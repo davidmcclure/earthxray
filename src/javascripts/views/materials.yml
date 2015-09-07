@@ -1,9 +1,8 @@
 ---
 
-sphere:
+lonlat:
   color: 0xcccccc
-  wireframeLinewidth: 1
-  wireframe: true
+  linewidth: 1
 
 country:
   def:

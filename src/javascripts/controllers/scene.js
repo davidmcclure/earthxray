@@ -28,14 +28,14 @@ export default Controller.extend({
     startup.start()
 
       // Zoom to location.
-      //.then(() => {
-        //return zoom.start();
-      //})
+      .then(() => {
+        return zoom.start();
+      })
 
       // Start VR.
-      //.then(() => {
-        //xray.start();
-      //});
+      .then(() => {
+        xray.start();
+      });
 
   },
 

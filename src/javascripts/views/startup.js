@@ -132,18 +132,20 @@ export default class Startup extends Step {
       linewidth: opts.borders.lineWidth,
     });
 
-    let geos = utils.featureToGeoms(country);
+    let geometries = utils.featureToGeoms(country);
 
-    for (let g of geos) {
+    let lines = new THREE.Object3D();
+    lines.material = material;
 
-      // Render the borders.
+    // Create the borders.
+    for (let g of geometries) {
       let line = new THREE.Line(g, material);
-      this.world.add(line);
-
-      // Index country code -> mesh.
-      this.shared.countries[country.id] = line;
-
+      lines.add(line);
     }
+
+    // Index country -> object.
+    this.shared.countries[country.id] = lines;
+    this.world.add(lines);
 
   }
 

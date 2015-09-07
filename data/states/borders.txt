@@ -1,1 +1,1 @@
-https://github.com/johan/world.geo.json
+https://github.com/alignedleft/d3-book

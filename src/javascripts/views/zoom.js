@@ -5,7 +5,6 @@ import THREE from 'three';
 import Promise from 'bluebird';
 
 import Step from './step';
-import * as opts from '../opts.yml';
 import * as utils from '../utils';
 
 
@@ -42,7 +41,7 @@ export default class Zoom extends Step {
       new TWEEN.Tween(this.camera.position)
 
         // Zoom to the location.
-        .to({ x:x, y:y, z:z }, opts.zoom.duration)
+        .to({ x:x, y:y, z:z }, 5000)
         .easing(TWEEN.Easing.Quadratic.Out)
 
         // Swivel around the center.

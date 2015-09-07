@@ -6,9 +6,8 @@ import THREE from 'three';
 import Hammer from 'hammerjs';
 
 import Step from './step';
-import * as opts from '../opts.yml';
-import * as utils from '../utils';
 import * as mats from './materials.yml';
+import * as utils from '../utils';
 
 
 export default class Xray extends Step {
@@ -87,8 +86,6 @@ export default class Xray extends Step {
     // Enable pinch.
     gesture.get('pinch').set({ enable: true });
 
-    let minFov = opts.camera.minFov;
-    let maxFov = opts.camera.maxFov;
     let start;
 
     // Capture initial FOV.
@@ -100,7 +97,7 @@ export default class Xray extends Step {
 
       // Break if we're out of bounds.
       let fov = start / e.scale;
-      if (fov < minFov || fov > maxFov) return;
+      if (fov < 5 || fov > 120) return;
 
       // Apply the new FOV.
       this.camera.fov = fov;

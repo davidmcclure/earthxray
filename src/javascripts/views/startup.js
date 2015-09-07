@@ -7,9 +7,9 @@ import Step from './step';
 import Borders from '../lib/borders';
 import countryJSON from '../data/countries';
 import stateJSON from '../data/states';
-import * as opts from '../opts.yml';
 import * as utils from '../utils.js';
 import * as mats from './materials.yml';
+import * as opts from '../opts.yml';
 
 
 export default class Startup extends Step {
@@ -59,7 +59,7 @@ export default class Startup extends Step {
    * Move the camera back to show the entire earth.
    */
   positionCamera() {
-    this.camera.position.z = opts.camera.startz;
+    this.camera.position.z = 20000;
   }
 
 
@@ -69,9 +69,7 @@ export default class Startup extends Step {
   drawSphere() {
 
     let geometry = new THREE.SphereGeometry(
-      opts.earth.radius,
-      opts.sphere.segments,
-      opts.sphere.segments
+      opts.earth.radius, 32, 32
     );
 
     let material = new THREE.MeshBasicMaterial(mats.sphere);

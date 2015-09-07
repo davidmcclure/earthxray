@@ -7,8 +7,6 @@ import EventEmitter from 'events';
 import THREE from 'three';
 import TWEEN from 'tween.js';
 
-import * as opts from '../opts.yml';
-
 
 export default class Scene {
 
@@ -57,10 +55,7 @@ export default class Scene {
   createCamera() {
 
     this.camera = new THREE.PerspectiveCamera(
-      opts.camera.fov,
-      1,
-      opts.camera.near,
-      opts.camera.far
+      75, 1, 0.1, 100000
     );
 
     this.fitCamera()

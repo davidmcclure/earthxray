@@ -2,17 +2,3 @@
 
 earth:
   radius: 6371
-
-sphere:
-  segments: 32
-
-camera:
-  fov: 75
-  minFov: 5
-  maxFov: 120
-  near: 0.1
-  far: 100000
-  startz: 20000
-
-zoom:
-  duration: 5000

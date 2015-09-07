@@ -203,13 +203,18 @@ export default class Startup extends Step {
    */
   drawLonRing(degrees=0) {
 
-    let geometry = utils.drawCircle(100, 6371);
+    let geometry = utils.drawCircle(
+      100,
+      'z',
+      opts.earth.radius
+    );
 
     let material = new THREE.LineBasicMaterial(mats.lonlat);
 
     let ring = new THREE.Line(geometry, material);
-    ring.rotation.y = degrees;
 
+    // Spin the ring.
+    ring.rotation.y = degrees;
     this.world.add(ring);
 
   }

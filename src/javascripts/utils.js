@@ -134,10 +134,11 @@ export function waitOnce(channel, event) {
  * Trace out a circle geometry.
  *
  * @param {Number} segments
- * @param {Number} radius
+ * @param {Number} axis
+ * @param {Number} r
  * @returns {THREE.Geometry}
  */
-export function drawCircle(segments, radius) {
+export function drawCircle(segments, axis, r) {
 
   let geometry = new THREE.Geometry();
 
@@ -145,11 +146,36 @@ export function drawCircle(segments, radius) {
 
     let theta = (i / segments) * Math.PI * 2;
 
-    geometry.vertices.push(new THREE.Vector3(
-      Math.cos(theta) * radius,
-      Math.sin(theta) * radius,
-      0
-    ));
+    let point;
+    switch (axis) {
+
+      case 'x':
+        point = new THREE.Vector3(
+          0,
+          Math.cos(theta) * r,
+          Math.sin(theta) * r
+        );
+      break;
+
+      case 'y':
+        point = new THREE.Vector3(
+          Math.cos(theta) * r,
+          0,
+          Math.sin(theta) * r
+        );
+      break;
+
+      case 'z':
+        point = new THREE.Vector3(
+          Math.cos(theta) * r,
+          Math.sin(theta) * r,
+          0
+        );
+      break;
+
+    }
+
+    geometry.vertices.push(point);
 
   });
 

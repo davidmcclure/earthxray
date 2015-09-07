@@ -161,9 +161,25 @@ export default class Startup extends Step {
    */
   drawStates() {
 
-    for (let s of stateJSON.features) {
-      this.drawState(s);
+    // Get an array of line geometries.
+    let segments = stateJSON.features.reduce((all, current) => {
+      return all.concat(utils.featureToGeoms(current));
+    }, []);
+
+    let geometry = new THREE.Geometry();
+
+    for (let s of segments) {
+      _.times(s.vertices.length-1, i => {
+        let pair = s.vertices.slice(i, i+2);
+        geometry.vertices.push(pair[0], pair[1]);
+      });
     }
+
+    let material = new THREE.LineBasicMaterial(mats.state)
+
+    let states = new THREE.Line(geometry, material, THREE.LinePieces);
+
+    this.world.add(states);
 
   }
 

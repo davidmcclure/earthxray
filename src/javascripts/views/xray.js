@@ -120,17 +120,14 @@ export default class Xray extends Step {
     // Unhighlight previous country.
     if (this.country) {
 
-      let border = this.shared.countries[this.country.id];
+      let line = this.shared.countries[this.country.id];
 
-      border.material.setValues({
+      line.material.setValues({
         linewidth: opts.borders.lineWidth,
         color: opts.borders.lineColor,
       });
 
-      for (let c of border.lines) {
-        c.renderOrder = 0;
-      }
-
+      line.renderOrder = 0;
       this.country = null;
 
     }
@@ -138,17 +135,14 @@ export default class Xray extends Step {
     // Highlight current country.
     if (feature) {
 
-      let border = this.shared.countries[feature.id];
+      let line = this.shared.countries[feature.id];
 
-      border.material.setValues({
+      line.material.setValues({
         linewidth: opts.borders.hl.lineWidth,
         color: opts.borders.hl.lineColor,
       });
 
-      for (let c of border.lines) {
-        c.renderOrder = 1;
-      }
-
+      line.renderOrder = 1;
       this.country = feature;
 
     }

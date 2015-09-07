@@ -6,7 +6,6 @@ import THREE from 'three';
 import Step from './step';
 import Borders from '../lib/borders';
 import countries from '../data/countries';
-import states from '../data/states';
 import * as opts from '../opts.yml';
 import * as utils from '../utils.js';
 
@@ -26,7 +25,6 @@ export default class Startup extends Step {
       this.drawSphere(),
       this.indexCountries(),
       this.drawCountries(),
-      this.drawStates(),
     ]);
   }
 
@@ -108,21 +106,8 @@ export default class Startup extends Step {
       steps.push(new Promise((resolve, reject) => {
         setTimeout(() => {
 
-          // Separate material for each country.
-          let material = new THREE.LineBasicMaterial({
-            color: opts.borders.lineColor,
-            linewidth: opts.borders.lineWidth,
-          });
-
           // Draw borders.
-          let lines = this.drawBorder(c, material);
-
-          // Index country -> border.
-          this.shared.countries[c.id] = {
-            lines: lines,
-            material: material,
-          };
-
+          this.drawCountry(c);
           resolve();
 
         }, 0);
@@ -135,58 +120,30 @@ export default class Startup extends Step {
   }
 
 
-  // TODO|dev
-
-
   /**
-   * Render US states.
+   * Draw country borders.
+   *
+   * @param {Object} country
    */
-  drawStates() {
+  drawCountry(country) {
 
-    // One material for all states.
     let material = new THREE.LineBasicMaterial({
-      color: 0xaaaaaa,
-      linewidth: 1,
+      color: opts.borders.lineColor,
+      linewidth: opts.borders.lineWidth,
     });
 
-    let steps = [];
-    for (let s of states.features) {
+    let geos = utils.featureToGeoms(country);
 
-      steps.push(new Promise((resolve, reject) => {
-        setTimeout(() => {
-
-          // Draw borders.
-          this.drawBorder(s, material);
-          resolve();
-
-        }, 0);
-      }));
-
-    }
-
-    return Promise.all(steps);
-
-  }
-
-
-  /**
-   * Draw a border for a feature.
-   *
-   * @param {Object} feature
-   * @param {Object} material
-   */
-  drawBorder(feature, material) {
-
-    let geos = utils.featureToGeoms(feature);
-
-    let lines = [];
     for (let g of geos) {
+
+      // Render the borders.
       let line = new THREE.Line(g, material);
       this.world.add(line);
-      lines.push(line);
-    }
 
-    return lines;
+      // Index country code -> mesh.
+      this.shared.countries[country.id] = line;
+
+    }
 
   }
 

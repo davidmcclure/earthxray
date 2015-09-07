@@ -96,7 +96,7 @@ export default class Startup extends Step {
 
 
   /**
-   * Render countries and labels.
+   * Render countries (non-blocking).
    */
   drawCountries() {
 
@@ -160,22 +160,9 @@ export default class Startup extends Step {
    */
   drawStates() {
 
-    let steps = [];
     for (let s of states.features) {
-
-      steps.push(new Promise((resolve, reject) => {
-        setTimeout(() => {
-
-          // Draw borders.
-          this.drawState(s);
-          resolve();
-
-        }, 0);
-      }));
-
+      this.drawState(s);
     }
-
-    return Promise.all(steps);
 
   }
 

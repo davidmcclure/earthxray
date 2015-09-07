@@ -5,8 +5,8 @@ import THREE from 'three';
 
 import Step from './step';
 import Borders from '../lib/borders';
-import countries from '../data/countries';
-import states from '../data/states';
+import countryJSON from '../data/countries';
+import stateJSON from '../data/states';
 import * as opts from '../opts.yml';
 import * as utils from '../utils.js';
 
@@ -90,7 +90,7 @@ export default class Startup extends Step {
    */
   indexCountries() {
     let index = new Borders();
-    index.indexFeatures(countries.features);
+    index.indexFeatures(countryJSON.features);
     this.shared.borders = index;
   }
 
@@ -103,7 +103,7 @@ export default class Startup extends Step {
     this.shared.countries = {};
 
     let steps = [];
-    for (let c of countries.features) {
+    for (let c of countryJSON.features) {
 
       steps.push(new Promise((resolve, reject) => {
         setTimeout(() => {
@@ -160,7 +160,7 @@ export default class Startup extends Step {
    */
   drawStates() {
 
-    for (let s of states.features) {
+    for (let s of stateJSON.features) {
       this.drawState(s);
     }
 

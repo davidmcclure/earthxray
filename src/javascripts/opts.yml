@@ -3,6 +3,9 @@
 earth:
   radius: 6371
 
+sphere:
+  segments: 32
+
 camera:
   fov: 75
   minFov: 5
@@ -10,18 +13,6 @@ camera:
   near: 0.1
   far: 100000
   startz: 20000
-
-sphere:
-  lineWidth: 1
-  lineColor: 0xcccccc
-  segments: 32
-
-borders:
-  lineColor: 0x2a7bbf
-  lineWidth: 2
-  hl:
-    lineColor: 0xff0000
-    lineWidth: 4
 
 zoom:
   duration: 5000

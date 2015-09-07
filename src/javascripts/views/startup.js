@@ -9,6 +9,7 @@ import countryJSON from '../data/countries';
 import stateJSON from '../data/states';
 import * as opts from '../opts.yml';
 import * as utils from '../utils.js';
+import * as mats from './materials.yml';
 
 
 export default class Startup extends Step {
@@ -73,11 +74,7 @@ export default class Startup extends Step {
       opts.sphere.segments
     );
 
-    let material = new THREE.MeshBasicMaterial({
-      color: opts.sphere.lineColor,
-      wireframeLinewidth: opts.sphere.lineWidth,
-      wireframe: true,
-    });
+    let material = new THREE.MeshBasicMaterial(mats.sphere);
 
     this.sphere = new THREE.Mesh(geometry, material);
     this.world.add(this.sphere);
@@ -129,14 +126,13 @@ export default class Startup extends Step {
    */
   drawCountry(country) {
 
-    let material = new THREE.LineBasicMaterial({
-      color: opts.borders.lineColor,
-      linewidth: opts.borders.lineWidth,
-    });
-
     let geometries = utils.featureToGeoms(country);
 
+    let material = new THREE.LineBasicMaterial(mats.country.def);
+
     let lines = new THREE.Object3D();
+
+    // Alias the material.
     lines.material = material;
 
     // Create the borders.
@@ -174,13 +170,9 @@ export default class Startup extends Step {
    */
   drawState(state) {
 
-    // TODO|dev
-    let material = new THREE.LineBasicMaterial({
-      color: 0xaaaaaa,
-      linewidth: 1,
-    });
-
     let geometries = utils.featureToGeoms(state);
+
+    let material = new THREE.LineBasicMaterial(mats.state)
 
     let lines = new THREE.Object3D();
 

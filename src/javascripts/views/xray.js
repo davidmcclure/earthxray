@@ -8,6 +8,7 @@ import Hammer from 'hammerjs';
 import Step from './step';
 import * as opts from '../opts.yml';
 import * as utils from '../utils';
+import * as mats from './materials.yml';
 
 
 export default class Xray extends Step {
@@ -121,11 +122,7 @@ export default class Xray extends Step {
     if (this.country) {
 
       let lines = this.shared.countries[this.country.id];
-
-      lines.material.setValues({
-        linewidth: opts.borders.lineWidth,
-        color: opts.borders.lineColor,
-      });
+      lines.material.setValues(mats.country.def);
 
       // Clear render order.
       for (let c of lines.children) {
@@ -140,11 +137,7 @@ export default class Xray extends Step {
     if (feature) {
 
       let lines = this.shared.countries[feature.id];
-
-      lines.material.setValues({
-        linewidth: opts.borders.hl.lineWidth,
-        color: opts.borders.hl.lineColor,
-      });
+      lines.material.setValues(mats.country.hl);
 
       // Bump render order.
       for (let c of lines.children) {

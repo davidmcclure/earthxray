@@ -1,0 +1,18 @@
+---
+
+sphere:
+  color: 0xcccccc
+  wireframeLinewidth: 1
+  wireframe: true
+
+country:
+  def:
+    color: 0x2a7bbf
+    linewidth: 2
+  hl:
+    color: 0xff0000
+    linewidth: 4
+
+state:
+  color: 0xaaaaaa
+  linewidth: 1

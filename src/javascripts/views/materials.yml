@@ -1,8 +1,12 @@
 ---
 
 lonlat:
-  color: 0xdddddd
-  linewidth: 1
+  thin:
+    color: 0xdddddd
+    linewidth: 1
+  thick:
+    color: 0x555555
+    linewidth: 1
 
 country:
   def:

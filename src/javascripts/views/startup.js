@@ -69,15 +69,23 @@ export default class Startup extends Step {
    */
   drawGlobe() {
 
+    let thin = new THREE.LineBasicMaterial(mats.lonlat.thin);
+
     // Longitude:
     _.times(18, i => {
-      this.drawLonRing(i*10);
+      this.drawLonRing(i*10, thin);
     });
 
-    _.times(9, i => {
-      this.drawLatRing(i*10);
-      this.drawLatRing(-i*10);
-    });
+    // Latitude:
+    for (let i of _.range(1, 9)) {
+      this.drawLatRing( i*10, thin);
+      this.drawLatRing(-i*10, thin);
+    }
+
+    let thick = new THREE.LineBasicMaterial(mats.lonlat.thick);
+
+    // Equator:
+    this.drawLatRing(0, thick);
 
   }
 
@@ -191,8 +199,9 @@ export default class Startup extends Step {
    * Draw a latitude ring.
    *
    * @param {Number} degrees
+   * @param {THREE.Material} material
    */
-  drawLatRing(degrees=0) {
+  drawLatRing(degrees, material) {
 
     let rDeg = THREE.Math.degToRad(degrees);
 
@@ -204,8 +213,6 @@ export default class Startup extends Step {
       'y',
       radius
     );
-
-    let material = new THREE.LineBasicMaterial(mats.lonlat);
 
     let ring = new THREE.Line(geometry, material);
 
@@ -220,8 +227,9 @@ export default class Startup extends Step {
    * Draw a longitude ring.
    *
    * @param {Number} degrees
+   * @param {THREE.Material} material
    */
-  drawLonRing(degrees=0) {
+  drawLonRing(degrees, material) {
 
     let rDeg = THREE.Math.degToRad(degrees);
 
@@ -230,8 +238,6 @@ export default class Startup extends Step {
       'z',
       opts.earth.radius
     );
-
-    let material = new THREE.LineBasicMaterial(mats.lonlat);
 
     let ring = new THREE.Line(geometry, material);
 

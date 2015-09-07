@@ -70,13 +70,13 @@ export default class Startup extends Step {
   drawGlobe() {
 
     // Longitude:
-    _.times(11, i => {
+    _.times(18, i => {
       this.drawLonRing(i*10);
     });
 
-    _.times(3, i => {
-      this.drawLatRing(i*30);
-      this.drawLatRing(-i*30);
+    _.times(9, i => {
+      this.drawLatRing(i*10);
+      this.drawLatRing(-i*10);
     });
 
   }
@@ -223,6 +223,8 @@ export default class Startup extends Step {
    */
   drawLonRing(degrees=0) {
 
+    let rDeg = THREE.Math.degToRad(degrees);
+
     let geometry = utils.drawCircle(
       100,
       'z',
@@ -234,7 +236,7 @@ export default class Startup extends Step {
     let ring = new THREE.Line(geometry, material);
 
     // Spin the ring.
-    ring.rotation.y = degrees;
+    ring.rotation.y = rDeg;
     this.world.add(ring);
 
   }

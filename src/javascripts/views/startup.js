@@ -161,49 +161,23 @@ export default class Startup extends Step {
    */
   drawStates() {
 
-    // Get an array of line geometries.
-    let segments = stateJSON.features.reduce((all, current) => {
-      return all.concat(utils.featureToGeoms(current));
+    // Get an array of border geometries.
+    let segments = stateJSON.features.reduce((all, s) => {
+      return all.concat(utils.featureToGeoms(s));
     }, []);
 
-    let geometry = new THREE.Geometry();
-
-    for (let s of segments) {
-      _.times(s.vertices.length-1, i => {
-        let pair = s.vertices.slice(i, i+2);
-        geometry.vertices.push(pair[0], pair[1]);
-      });
-    }
+    // Merge the segments.
+    let geometry = utils.mergeLines(segments);
 
     let material = new THREE.LineBasicMaterial(mats.state)
 
-    let states = new THREE.Line(geometry, material, THREE.LinePieces);
+    let states = new THREE.Line(
+      geometry,
+      material,
+      THREE.LinePieces
+    );
 
     this.world.add(states);
-
-  }
-
-
-  /**
-   * Draw state borders.
-   *
-   * @param {Object} state
-   */
-  drawState(state) {
-
-    let geometries = utils.featureToGeoms(state);
-
-    let material = new THREE.LineBasicMaterial(mats.state)
-
-    let lines = new THREE.Object3D();
-
-    // Create the borders.
-    for (let g of geometries) {
-      let line = new THREE.Line(g, material);
-      lines.add(line);
-    }
-
-    this.world.add(lines);
 
   }
 

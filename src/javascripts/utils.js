@@ -182,3 +182,28 @@ export function drawCircle(segments, axis, r) {
   return geometry;
 
 };
+
+
+/**
+ * Merge a set of line segments.
+ *
+ * @param {Array} segments
+ * @returns {THREE.Geometry}
+ */
+export function mergeLines(segments) {
+
+  let geometry = new THREE.Geometry();
+
+  for (let s of segments) {
+
+    // Add 1-2, 2-3, 3-4, etc.
+    _.times(s.vertices.length-1, i => {
+      let pair = s.vertices.slice(i, i+2);
+      geometry.vertices.push(pair[0], pair[1]);
+    });
+
+  }
+
+  return geometry;
+
+};

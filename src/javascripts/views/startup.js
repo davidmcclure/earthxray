@@ -24,7 +24,8 @@ export default class Startup extends Step {
     return Promise.all([
       this.getLocation(),
       this.positionCamera(),
-      this.drawSphere(),
+      //this.drawSphere(),
+      this.drawGlobe(),
       this.indexCountries(),
       this.drawCountries(),
       this.drawStates(),
@@ -77,6 +78,14 @@ export default class Startup extends Step {
     this.sphere = new THREE.Mesh(geometry, material);
     this.world.add(this.sphere);
 
+  }
+
+
+  /**
+   * Draw lon / lat lines.
+   */
+  drawGlobe() {
+    // TODO
   }
 
 
@@ -146,9 +155,6 @@ export default class Startup extends Step {
   }
 
 
-  // TODO|dev
-
-
   /**
    * Render state borders.
    */
@@ -182,6 +188,29 @@ export default class Startup extends Step {
 
     this.world.add(lines);
 
+  }
+
+
+  // TODO|dev
+
+
+  /**
+   * Draw a latitude ring.
+   *
+   * @param {Number} degrees
+   */
+  drawLatRing(degrees) {
+    // TODO
+  }
+
+
+  /**
+   * Draw a longitude ring.
+   *
+   * @param {Number} degrees
+   */
+  drawLonRing(degrees) {
+    // TODO
   }
 
 

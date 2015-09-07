@@ -6,6 +6,7 @@ import THREE from 'three';
 import Step from './step';
 import Borders from '../lib/borders';
 import countries from '../data/countries';
+import states from '../data/states';
 import * as opts from '../opts.yml';
 import * as utils from '../utils.js';
 
@@ -25,6 +26,7 @@ export default class Startup extends Step {
       this.drawSphere(),
       this.indexCountries(),
       this.drawCountries(),
+      this.drawStates(),
     ]);
   }
 
@@ -145,6 +147,62 @@ export default class Startup extends Step {
 
     // Index country -> object.
     this.shared.countries[country.id] = lines;
+    this.world.add(lines);
+
+  }
+
+
+  // TODO|dev
+
+
+  /**
+   * Render state borders.
+   */
+  drawStates() {
+
+    let steps = [];
+    for (let s of states.features) {
+
+      steps.push(new Promise((resolve, reject) => {
+        setTimeout(() => {
+
+          // Draw borders.
+          this.drawState(s);
+          resolve();
+
+        }, 0);
+      }));
+
+    }
+
+    return Promise.all(steps);
+
+  }
+
+
+  /**
+   * Draw state borders.
+   *
+   * @param {Object} state
+   */
+  drawState(state) {
+
+    // TODO|dev
+    let material = new THREE.LineBasicMaterial({
+      color: 0xaaaaaa,
+      linewidth: 1,
+    });
+
+    let geometries = utils.featureToGeoms(state);
+
+    let lines = new THREE.Object3D();
+
+    // Create the borders.
+    for (let g of geometries) {
+      let line = new THREE.Line(g, material);
+      lines.add(line);
+    }
+
     this.world.add(lines);
 
   }

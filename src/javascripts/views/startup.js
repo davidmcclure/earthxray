@@ -192,9 +192,6 @@ export default class Startup extends Step {
   }
 
 
-  // TODO|dev
-
-
   /**
    * Draw a latitude ring.
    *

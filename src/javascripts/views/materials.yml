@@ -4,7 +4,7 @@ lonlat:
   thin:
     color: 0xdddddd
     linewidth: 1
-  thick:
+  bold:
     color: 0x555555
     linewidth: 1
 

@@ -70,34 +70,30 @@ export default class Startup extends Step {
   drawGlobe() {
 
     let thin = new THREE.LineBasicMaterial(mats.lonlat.thin);
+    let bold = new THREE.LineBasicMaterial(mats.lonlat.bold);
 
     // Longitude:
-    let lonGeos = _.range(18).map(i => {
+
+    let lons = _.range(18).map(i => {
       return utils.drawLonRing(i*10);
     });
 
-    let mergedLonGeos = utils.mergeLines(lonGeos);
-
-    let lons = new THREE.Line(mergedLonGeos, thin, THREE.LinePieces);
-    this.world.add(lons);
+    this.drawLines(lons, thin);
 
     // Latitude:
-    let latGeos = [];
+
+    let lats = [];
     for (let i of _.range(1, 9)) {
-      latGeos.push(utils.drawLatRing( i*10, thin));
-      latGeos.push(utils.drawLatRing(-i*10, thin));
+      lats.push(utils.drawLatRing( i*10, thin));
+      lats.push(utils.drawLatRing(-i*10, thin));
     }
 
-    let mergedLatGeos = utils.mergeLines(latGeos);
-
-    let lats = new THREE.Line(mergedLatGeos, thin, THREE.LinePieces);
-    this.world.add(lats);
-
-    let thick = new THREE.LineBasicMaterial(mats.lonlat.thick);
+    this.drawLines(lats, thin);
 
     // Equator:
+
     let equatorGeo = utils.drawLatRing(0);
-    let equator = new THREE.Line(equatorGeo, thick);
+    let equator = new THREE.Line(equatorGeo, bold);
     this.world.add(equator);
 
   }
@@ -179,18 +175,25 @@ export default class Startup extends Step {
       return all.concat(utils.featureToGeoms(s));
     }, []);
 
-    // Merge the segments.
-    let geometry = utils.mergeLines(segments);
+    let material = new THREE.LineBasicMaterial(mats.state);
 
-    let material = new THREE.LineBasicMaterial(mats.state)
+    this.drawLines(segments, material);
 
-    let states = new THREE.Line(
-      geometry,
-      material,
-      THREE.LinePieces
-    );
+  }
 
-    this.world.add(states);
+
+  /**
+   * Merge and render a set of line geoemtries.
+   *
+   * @param {THREE.Geometry[]} geometries
+   * @param {THREE.Material} material
+   */
+  drawLines(geometries, material) {
+
+    let merged = utils.mergeLines(geometries);
+
+    let line = new THREE.Line(merged, material, THREE.LinePieces);
+    this.world.add(line);
 
   }
 

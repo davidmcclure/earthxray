@@ -69,6 +69,8 @@ def cca3_to_anchor():
 
     anchors = {}
     for c in open_mledoze():
-        anchors[c['cca3']] = c['latlng']
+
+        # Swap to (lon, lat).
+        anchors[c['cca3']] = [c['latlng'][1], c['latlng'][0]]
 
     return anchors

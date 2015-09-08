@@ -72,20 +72,33 @@ export default class Startup extends Step {
     let thin = new THREE.LineBasicMaterial(mats.lonlat.thin);
 
     // Longitude:
-    _.times(18, i => {
-      this.drawLonRing(i*10, thin);
+    let lonGeos = _.range(18).map(i => {
+      return utils.drawLonRing(i*10);
     });
 
+    let mergedLonGeos = utils.mergeLines(lonGeos);
+
+    let lons = new THREE.Line(mergedLonGeos, thin, THREE.LinePieces);
+    this.world.add(lons);
+
     // Latitude:
+    let latGeos = [];
     for (let i of _.range(1, 9)) {
-      this.drawLatRing( i*10, thin);
-      this.drawLatRing(-i*10, thin);
+      latGeos.push(utils.drawLatRing( i*10, thin));
+      latGeos.push(utils.drawLatRing(-i*10, thin));
     }
+
+    let mergedLatGeos = utils.mergeLines(latGeos);
+
+    let lats = new THREE.Line(mergedLatGeos, thin, THREE.LinePieces);
+    this.world.add(lats);
 
     let thick = new THREE.LineBasicMaterial(mats.lonlat.thick);
 
     // Equator:
-    this.drawLatRing(0, thick);
+    let equatorGeo = utils.drawLatRing(0);
+    let equator = new THREE.Line(equatorGeo, thick);
+    this.world.add(equator);
 
   }
 
@@ -178,63 +191,6 @@ export default class Startup extends Step {
     );
 
     this.world.add(states);
-
-  }
-
-
-  /**
-   * Draw a latitude ring.
-   *
-   * @param {Number} degrees
-   * @param {THREE.Material} material
-   */
-  drawLatRing(degrees, material) {
-
-    let rDeg = THREE.Math.degToRad(degrees);
-
-    let offset = Math.sin(rDeg) * opts.earth.radius;
-    let radius = Math.cos(rDeg) * opts.earth.radius;
-
-    let geometry = utils.drawCircle(
-      100,
-      'y',
-      radius
-    );
-
-    // Move up/down.
-    let shift = new THREE.Matrix4();
-    shift.setPosition(new THREE.Vector3(0, offset, 0));
-    geometry.applyMatrix(shift);
-
-    let ring = new THREE.Line(geometry, material);
-    this.world.add(ring);
-
-  }
-
-
-  /**
-   * Draw a longitude ring.
-   *
-   * @param {Number} degrees
-   * @param {THREE.Material} material
-   */
-  drawLonRing(degrees, material) {
-
-    let rDeg = THREE.Math.degToRad(degrees);
-
-    let geometry = utils.drawCircle(
-      100,
-      'z',
-      opts.earth.radius
-    );
-
-    // Spin the ring.
-    let shift = new THREE.Matrix4();
-    shift.makeRotationY(rDeg);
-    geometry.applyMatrix(shift);
-
-    let ring = new THREE.Line(geometry, material);
-    this.world.add(ring);
 
   }
 

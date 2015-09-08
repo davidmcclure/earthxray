@@ -185,6 +185,61 @@ export function drawCircle(segments, axis, r) {
 
 
 /**
+ * Draw a longitude ring.
+ *
+ * @param {Number} degrees
+ * @returns {THREE.Geometry}
+ */
+export function drawLonRing(degrees) {
+
+  let rDeg = THREE.Math.degToRad(degrees);
+
+  let geometry = drawCircle(
+    100,
+    'z',
+    opts.earth.radius
+  );
+
+  // Spin the ring.
+  let shift = new THREE.Matrix4();
+  shift.makeRotationY(rDeg);
+  geometry.applyMatrix(shift);
+
+  return geometry;
+
+};
+
+
+/**
+ * Draw a latitude ring.
+ *
+ * @param {Number} degrees
+ * @returns {THREE.Geometry}
+ */
+export function drawLatRing(degrees) {
+
+  let rDeg = THREE.Math.degToRad(degrees);
+
+  let offset = Math.sin(rDeg) * opts.earth.radius;
+  let radius = Math.cos(rDeg) * opts.earth.radius;
+
+  let geometry = drawCircle(
+    100,
+    'y',
+    radius
+  );
+
+  // Move up/down.
+  let shift = new THREE.Matrix4();
+  shift.setPosition(new THREE.Vector3(0, offset, 0));
+  geometry.applyMatrix(shift);
+
+  return geometry;
+
+};
+
+
+/**
  * Merge a set of line segments.
  *
  * @param {Array} segments

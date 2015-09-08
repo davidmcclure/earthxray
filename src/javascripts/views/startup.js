@@ -25,7 +25,9 @@ export default class Startup extends Step {
     return Promise.all([
       this.getLocation(),
       this.positionCamera(),
-      this.drawGlobe(),
+      this.drawLonLines(),
+      this.drawLatLines(),
+      this.drawEquator(),
       this.indexCountries(),
       this.drawCountries(),
       this.drawStates(),
@@ -65,35 +67,49 @@ export default class Startup extends Step {
 
 
   /**
-   * Draw lon / lat lines.
+   * Draw longitude lines.
    */
-  drawGlobe() {
+  drawLonLines() {
 
-    let thin = new THREE.LineBasicMaterial(mats.lonlat.thin);
-    let bold = new THREE.LineBasicMaterial(mats.lonlat.bold);
+    let material = new THREE.LineBasicMaterial(mats.lonlat.thin);
 
-    // Longitude:
-
-    let lons = _.range(18).map(i => {
+    let geometries = _.range(18).map(i => {
       return utils.drawLonRing(i*10);
     });
 
-    this.drawLines(lons, thin);
+    this.drawLines(geometries, material);
 
-    // Latitude:
+  }
 
-    let lats = [];
+
+  /**
+   * Draw latitude lines.
+   */
+  drawLatLines() {
+
+    let material = new THREE.LineBasicMaterial(mats.lonlat.thin);
+
+    let geometries = [];
     for (let i of _.range(1, 9)) {
-      lats.push(utils.drawLatRing( i*10, thin));
-      lats.push(utils.drawLatRing(-i*10, thin));
+      geometries.push(utils.drawLatRing( i*10));
+      geometries.push(utils.drawLatRing(-i*10));
     }
 
-    this.drawLines(lats, thin);
+    this.drawLines(geometries, material);
 
-    // Equator:
+  }
 
-    let equatorGeo = utils.drawLatRing(0);
-    let equator = new THREE.Line(equatorGeo, bold);
+
+  /**
+   * Draw the equator.
+   */
+  drawEquator() {
+
+    let material = new THREE.LineBasicMaterial(mats.lonlat.thick);
+
+    let geometry = utils.drawLatRing(0);
+
+    let equator = new THREE.Line(geometry, material);
     this.world.add(equator);
 
   }

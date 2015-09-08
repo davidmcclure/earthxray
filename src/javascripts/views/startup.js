@@ -138,8 +138,10 @@ export default class Startup extends Step {
       steps.push(new Promise((resolve, reject) => {
         setTimeout(() => {
 
-          // Draw borders.
+          // Draw geometry.
           this.drawCountry(c);
+          this.drawLabel(c);
+
           resolve();
 
         }, 0);
@@ -178,6 +180,16 @@ export default class Startup extends Step {
     this.shared.countries[country.id] = lines;
     this.world.add(lines);
 
+  }
+
+
+  /**
+   * Draw a country label.
+   *
+   * @param {Object} country
+   */
+  drawLabel(country) {
+    // TODO|dev
   }
 
 

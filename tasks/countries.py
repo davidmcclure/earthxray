@@ -13,8 +13,11 @@ def build():
     """
 
     borders = open_borders()
+    anchors = cca3_to_anchor()
 
-    # TODO: Merge metadata.
+    # Merge label anchors.
+    for b in borders['features']:
+        b['properties']['anchor'] = anchors.get(b['id'])
 
     with open('src/javascripts/data/countries.json', 'w') as fh:
         json.dump(borders, fh, sort_keys=True)
@@ -71,6 +74,7 @@ def cca3_to_anchor():
     for c in open_mledoze():
 
         # Swap to (lon, lat).
-        anchors[c['cca3']] = [c['latlng'][1], c['latlng'][0]]
+        a = c['latlng']
+        if a: anchors[c['cca3']] = [a[1], a[0]]
 
     return anchors

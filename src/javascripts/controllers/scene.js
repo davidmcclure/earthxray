@@ -27,15 +27,15 @@ export default Controller.extend({
     // Render scene.
     startup.start()
 
-      // Zoom to location.
-      .then(() => {
-        return zoom.start();
-      })
+      //// Zoom to location.
+      //.then(() => {
+        //return zoom.start();
+      //})
 
-      // Start VR.
-      .then(() => {
-        xray.start();
-      });
+      //// Start VR.
+      //.then(() => {
+        //xray.start();
+      //});
 
   },
 

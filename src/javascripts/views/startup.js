@@ -201,10 +201,12 @@ export default class Startup extends Step {
       radius
     );
 
-    let ring = new THREE.Line(geometry, material);
-
     // Move up/down.
-    ring.position.y = offset;
+    let shift = new THREE.Matrix4();
+    shift.setPosition(new THREE.Vector3(0, offset, 0));
+    geometry.applyMatrix(shift);
+
+    let ring = new THREE.Line(geometry, material);
     this.world.add(ring);
 
   }
@@ -226,10 +228,12 @@ export default class Startup extends Step {
       opts.earth.radius
     );
 
-    let ring = new THREE.Line(geometry, material);
-
     // Spin the ring.
-    ring.rotation.y = rDeg;
+    let shift = new THREE.Matrix4();
+    shift.makeRotationY(rDeg);
+    geometry.applyMatrix(shift);
+
+    let ring = new THREE.Line(geometry, material);
     this.world.add(ring);
 
   }

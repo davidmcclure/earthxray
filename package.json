@@ -42,11 +42,13 @@
     "hammerjs": "^2.0.4",
     "jquery": "^2.1.4",
     "lesshat": "^3.0.2",
+    "load-bmfont": "^1.2.3",
     "lodash": "^3.10.0",
     "rbush": "^1.4.0",
     "rbush-knn": "^1.0.2",
     "react": "^0.13.3",
     "three": "^0.71.0",
+    "three-bmfont-text": "^1.2.0",
     "three.regular.helvetiker": "^1.0.0",
     "turf": "^2.0.2",
     "tween.js": "^15.0.0"

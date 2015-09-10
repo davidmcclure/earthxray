@@ -3,6 +3,8 @@
 import _ from 'lodash';
 import Promise from 'bluebird';
 import THREE from 'three';
+import createGeometry from 'three-bmfont-text';
+import loadFont from 'load-bmfont';
 
 import Step from './step';
 import Borders from '../lib/borders';
@@ -11,10 +13,6 @@ import stateJSON from '../data/states';
 import * as utils from '../utils.js';
 import * as mats from './materials.yml';
 import * as opts from '../opts.yml';
-
-// Register the typeface.
-import helvetiker from 'three.regular.helvetiker';
-THREE.typeface_js.loadFace(helvetiker);
 
 
 export default class Startup extends Step {
@@ -146,6 +144,43 @@ export default class Startup extends Step {
       }));
 
     }
+
+    // TODO|dev
+
+    let texture = THREE.ImageUtils.loadTexture('fonts/DejaVu-sdf.png');
+
+    loadFont('fonts/DejaVu-sdf.fnt', (err, font) => {
+      for (let c of countryJSON.features) {
+
+        if (c.properties.anchor) {
+
+          let [x, y, z] = utils.lonLatToXYZ(
+            c.properties.anchor[0],
+            c.properties.anchor[1]
+          );
+
+          let geometry = createGeometry({
+            font: font,
+            text: c.properties.name,
+            width: 5000,
+          });
+
+          let material = new THREE.MeshBasicMaterial({
+            map: texture,
+            transparent: true,
+            color: 0x000000,
+          });
+
+          let mesh = new THREE.Mesh(geometry, material);
+          mesh.position.set(x, y, z);
+          //mesh.lookAt(new THREE.Vector3(0, 0, 0));
+
+          this.world.add(mesh);
+
+        }
+
+      }
+    });
 
   }
 

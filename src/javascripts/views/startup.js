@@ -137,64 +137,15 @@ export default class Startup extends Step {
     // CCA3 -> border.
     this.shared.countries = {};
 
-    let labels = new THREE.Geometry();
-
     let borders = [];
     for (let c of countryJSON.features) {
 
       borders.push(new Promise((resolve, reject) => {
-        setTimeout(() => {
-
-          // Draw borders.
-          this.drawCountry(c);
-
-          // Create label.
-          if (c.properties.anchor) {
-
-            // Trace the text.
-            let geometry = new THREE.TextGeometry(c.name, {
-              curveSegments: 1,
-              size: 30,
-              font: 'helvetiker',
-              height: 0,
-            });
-
-            geometry.center();
-
-            let mesh = new THREE.Mesh(geometry);
-
-            let [x, y, z] = utils.lonLatToXYZ(
-              c.properties.anchor[0],
-              c.properties.anchor[1]
-            );
-
-            mesh.position.set(x, y, z);
-
-            mesh.lookAt(new THREE.Vector3(0, 0, 0));
-            mesh.updateMatrix();
-            labels.merge(geometry, mesh.matrix);
-
-          }
-
-          resolve();
-
-        }, 0);
+        this.drawCountry(c);
+        resolve();
       }));
 
     }
-
-    return Promise.all(borders).then(() => {
-
-      let material = new THREE.MeshBasicMaterial({
-        color: 0x000000
-      });
-
-      let mesh = new THREE.Mesh(labels, material);
-      this.world.add(mesh);
-
-      console.log('test');
-
-    });
 
   }
 

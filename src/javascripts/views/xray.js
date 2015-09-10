@@ -21,6 +21,7 @@ export default class Xray extends Step {
     this.positionCamera();
     this.listenForOrientation();
     this.listenForZoom();
+    this.drawCenterDot();
 
     this.events.on('render', () => {
       this.point();
@@ -108,6 +109,28 @@ export default class Xray extends Step {
   }
 
 
+  /**
+   * Draw the 3d "center" dot.
+   */
+  drawCenterDot() {
+
+    let light = new THREE.PointLight(0xffffff, 1, 0);
+    light.position.copy(this.camera.position);
+
+    let geometry = new THREE.SphereGeometry(30, 32, 32);
+
+    let material = new THREE.MeshLambertMaterial({
+      color: 0xff0000
+    });
+
+    this.dot = new THREE.Mesh(geometry, material);
+    this.dot.visible = false;
+
+    this.world.add(this.dot, light);
+
+  }
+
+
   // ** Render loop:
 
 
@@ -156,15 +179,24 @@ export default class Xray extends Step {
 
     let distance;
 
-    // Over the horizon?
+    // Looking down.
     if (u > 0) {
 
       heading.multiplyScalar(u);
 
       // Get far-side intersection.
-      let point = this.camera.position.clone().add(heading);
-      distance = this.camera.position.distanceTo(point);
+      let c = this.camera.position.clone().add(heading);
+      distance = this.camera.position.distanceTo(c);
 
+      // Update center dot.
+      this.dot.position.copy(c);
+      this.dot.visible = true;
+
+    }
+
+    // Looking into space.
+    else {
+      this.dot.visible = false;
     }
 
     Radio.trigger('xray', 'trace', {

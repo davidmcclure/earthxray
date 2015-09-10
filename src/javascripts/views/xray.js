@@ -21,6 +21,7 @@ export default class Xray extends Step {
     this.positionCamera();
     this.listenForOrientation();
     this.listenForZoom();
+    this.drawCenterDot();
 
     this.events.on('render', () => {
       this.point();
@@ -104,6 +105,29 @@ export default class Xray extends Step {
       this.camera.updateProjectionMatrix();
 
     });
+
+  }
+
+
+  /**
+   * TODO|dev
+   */
+  drawCenterDot() {
+
+    let light = new THREE.PointLight(0xffffff, 1, 0);
+    light.position.set(this.camera.position.x, this.camera.position.y,
+                       this.camera.position.z);
+
+    this.world.add(light);
+
+    let geometry = new THREE.SphereGeometry(30, 32, 32);
+
+    let material = new THREE.MeshLambertMaterial({
+      color: 0xff0000
+    });
+
+    this.dot = new THREE.Mesh(geometry, material);
+    this.world.add(this.dot);
 
   }
 
@@ -205,13 +229,20 @@ export default class Xray extends Step {
       let point = this.camera.position.clone().add(heading);
       distance = this.camera.position.distanceTo(point);
 
-      // Get the enclosing country.
-      let [x, y, z] = point.toArray();
-      country = this.shared.borders.query(x, y, z);
+      this.dot.position.set(point.x, point.y, point.z);
+      this.dot.visible = true;
 
-      // Render the highlight.
-      this.highlightCountry(country);
+      //// Get the enclosing country.
+      //let [x, y, z] = point.toArray();
+      //country = this.shared.borders.query(x, y, z);
 
+      //// Render the highlight.
+      //this.highlightCountry(country);
+
+    }
+
+    else {
+      this.dot.visible = false;
     }
 
     Radio.trigger('xray', 'trace', {

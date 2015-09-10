@@ -58,8 +58,6 @@ export default class Center extends React.Component {
     return (
       <div>
 
-        <i className="crosshair fa fa-bullseye"></i>
-
         <div className="stats">
           {distance}
         </div>

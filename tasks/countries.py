@@ -14,10 +14,12 @@ def build():
 
     borders = open_borders()
     anchors = cca3_to_anchor()
+    areas = cca3_to_area()
 
     # Merge label anchors.
     for b in borders['features']:
         b['properties']['anchor'] = anchors.get(b['id'])
+        b['properties']['area'] = areas.get(b['id'])
 
     with open('src/javascripts/data/countries.json', 'w') as fh:
         json.dump(borders, fh, sort_keys=True)

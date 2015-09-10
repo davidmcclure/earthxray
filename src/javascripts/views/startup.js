@@ -202,11 +202,13 @@ export default class Startup extends Step {
           });
 
           let mesh = new THREE.Mesh(geometry, material);
-          mesh.scale.multiplyScalar(2);
+          let scale = Math.sqrt(c.properties.area)*0.002;
+
+          mesh.scale.multiplyScalar(scale);
           mesh.position.set(x, y, z);
           mesh.up.set(0, -1, 0);
           mesh.lookAt(mesh.position.clone().multiplyScalar(2));
-          mesh.translateX(-(geometry.layout.width/2)*2);
+          mesh.translateX(-(geometry.layout.width/2)*scale);
 
           this.world.add(mesh);
 

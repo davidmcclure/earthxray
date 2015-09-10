@@ -1,7 +1,6 @@
 
 
 import React from 'react';
-import classNames from 'classnames';
 import {kmToMi} from '../utils';
 
 
@@ -57,13 +56,9 @@ export default class Center extends React.Component {
 
     return (
       <div>
-
-        <i className="crosshair fa fa-bullseye"></i>
-
         <div className="stats">
           {distance}
         </div>
-
       </div>
     );
 

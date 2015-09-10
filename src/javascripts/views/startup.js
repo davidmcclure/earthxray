@@ -137,15 +137,9 @@ export default class Startup extends Step {
     // CCA3 -> border.
     this.shared.countries = {};
 
-    let borders = [];
     for (let c of countryJSON.features) {
-
-      borders.push(new Promise((resolve, reject) => {
-        this.drawCountry(c);
-        resolve();
-      }));
-
-    }
+      this.drawCountry(c);
+    };
 
   }
 

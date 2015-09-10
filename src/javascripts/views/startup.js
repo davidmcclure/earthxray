@@ -126,7 +126,7 @@ export default class Startup extends Step {
       return all.concat(utils.featureToGeoms(c));
     }, []);
 
-    let material = new THREE.LineBasicMaterial(mats.country.def);
+    let material = new THREE.LineBasicMaterial(mats.country);
 
     this.drawLines(segments, material);
 

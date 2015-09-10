@@ -3,8 +3,9 @@
 import _ from 'lodash';
 import Promise from 'bluebird';
 import THREE from 'three';
-import createGeometry from 'three-bmfont-text';
+import createText from 'three-bmfont-text';
 import loadFont from 'load-bmfont';
+import Shader from 'three-bmfont-text/shaders/sdf';
 
 import Step from './step';
 import Borders from '../lib/borders';
@@ -147,9 +148,15 @@ export default class Startup extends Step {
 
     // TODO|dev
 
-    let texture = THREE.ImageUtils.loadTexture('fonts/DejaVu-sdf.png');
+    let texture = THREE.ImageUtils.loadTexture('fonts/lato.png');
 
-    loadFont('fonts/DejaVu-sdf.fnt', (err, font) => {
+    texture.needsUpdate = true;
+    texture.minFilter = THREE.LinearMipMapLinearFilter;
+    texture.magFilter = THREE.LinearFilter;
+    texture.generateMipmaps = true;
+    texture.anisotropy = this.renderer.getMaxAnisotropy();
+
+    loadFont('fonts/Lato-Regular-64.fnt', (err, font) => {
       for (let c of countryJSON.features) {
 
         if (c.properties.anchor) {
@@ -159,21 +166,24 @@ export default class Startup extends Step {
             c.properties.anchor[1]
           );
 
-          let geometry = createGeometry({
+          let geometry = createText({
             font: font,
             text: c.properties.name,
-            width: 5000,
           });
 
           let material = new THREE.MeshBasicMaterial({
             map: texture,
             transparent: true,
             color: 0x000000,
+            side: THREE.DoubleSide,
           });
 
           let mesh = new THREE.Mesh(geometry, material);
+          mesh.scale.multiplyScalar(2);
           mesh.position.set(x, y, z);
-          //mesh.lookAt(new THREE.Vector3(0, 0, 0));
+          mesh.up.set(0, -1, 0);
+          mesh.lookAt(mesh.position.clone().multiplyScalar(2));
+          mesh.translateX(-(geometry.layout.width/2)*2);
 
           this.world.add(mesh);
 

@@ -12,6 +12,10 @@ import * as utils from '../utils.js';
 import * as mats from './materials.yml';
 import * as opts from '../opts.yml';
 
+// Register the typeface.
+import helvetiker from 'three.regular.helvetiker';
+THREE.typeface_js.loadFace(helvetiker);
+
 
 export default class Startup extends Step {
 
@@ -130,17 +134,47 @@ export default class Startup extends Step {
    */
   drawCountries() {
 
+    // CCA3 -> border.
     this.shared.countries = {};
 
-    let steps = [];
+    let labels = new THREE.Geometry();
+
+    let borders = [];
     for (let c of countryJSON.features) {
 
-      steps.push(new Promise((resolve, reject) => {
+      borders.push(new Promise((resolve, reject) => {
         setTimeout(() => {
 
-          // Draw geometry.
+          // Draw borders.
           this.drawCountry(c);
-          this.drawLabel(c);
+
+          // Create label.
+          if (c.properties.anchor) {
+
+            // Trace the text.
+            let geometry = new THREE.TextGeometry(c.name, {
+              curveSegments: 1,
+              size: 30,
+              font: 'helvetiker',
+              height: 0,
+            });
+
+            geometry.center();
+
+            let mesh = new THREE.Mesh(geometry);
+
+            let [x, y, z] = utils.lonLatToXYZ(
+              c.properties.anchor[0],
+              c.properties.anchor[1]
+            );
+
+            mesh.position.set(x, y, z);
+
+            mesh.lookAt(new THREE.Vector3(0, 0, 0));
+            mesh.updateMatrix();
+            labels.merge(geometry, mesh.matrix);
+
+          }
 
           resolve();
 
@@ -149,7 +183,18 @@ export default class Startup extends Step {
 
     }
 
-    return Promise.all(steps);
+    return Promise.all(borders).then(() => {
+
+      let material = new THREE.MeshBasicMaterial({
+        color: 0x000000
+      });
+
+      let mesh = new THREE.Mesh(labels, material);
+      this.world.add(mesh);
+
+      console.log('test');
+
+    });
 
   }
 
@@ -180,16 +225,6 @@ export default class Startup extends Step {
     this.shared.countries[country.id] = lines;
     this.world.add(lines);
 
-  }
-
-
-  /**
-   * Draw a country label.
-   *
-   * @param {Object} country
-   */
-  drawLabel(country) {
-    // TODO|dev
   }
 
 

@@ -108,46 +108,6 @@ export default class Xray extends Step {
   }
 
 
-  /**
-   * Render a country highlight.
-   *
-   * @param {Object} feature
-   */
-  highlightCountry(feature) {
-
-    // Unhighlight previous country.
-    if (this.country) {
-
-      let lines = this.shared.countries[this.country.id];
-      lines.material.setValues(mats.country.def);
-
-      // Clear render order.
-      for (let c of lines.children) {
-        c.renderOrder = 0;
-      }
-
-      this.country = null;
-
-    }
-
-    // Highlight current country.
-    if (feature) {
-
-      let lines = this.shared.countries[feature.id];
-      lines.material.setValues(mats.country.hl);
-
-      // Bump render order.
-      for (let c of lines.children) {
-        c.renderOrder = 1;
-      }
-
-      this.country = feature;
-
-    }
-
-  }
-
-
   // ** Render loop:
 
 
@@ -194,7 +154,7 @@ export default class Xray extends Step {
     let b = 2 * heading.dot(this.camera.position);
     let u = (-2*b) / (2*a);
 
-    let distance, country;
+    let distance;
 
     // Over the horizon?
     if (u > 0) {
@@ -205,17 +165,9 @@ export default class Xray extends Step {
       let point = this.camera.position.clone().add(heading);
       distance = this.camera.position.distanceTo(point);
 
-      // Get the enclosing country.
-      let [x, y, z] = point.toArray();
-      country = this.shared.borders.query(x, y, z);
-
-      // Render the highlight.
-      this.highlightCountry(country);
-
     }
 
     Radio.trigger('xray', 'trace', {
-      country: country,
       distance: distance,
     });
 

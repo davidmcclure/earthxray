@@ -5,16 +5,11 @@ import Promise from 'bluebird';
 import THREE from 'three';
 
 import Step from './step';
-import Borders from '../lib/borders';
 import countryJSON from '../data/countries';
 import stateJSON from '../data/states';
 import * as utils from '../utils.js';
 import * as mats from './materials.yml';
 import * as opts from '../opts.yml';
-
-// Register the typeface.
-import helvetiker from 'three.regular.helvetiker';
-THREE.typeface_js.loadFace(helvetiker);
 
 
 export default class Startup extends Step {
@@ -32,7 +27,6 @@ export default class Startup extends Step {
       this.drawLonLines(),
       this.drawLatLines(),
       this.drawEquator(),
-      this.indexCountries(),
       this.drawCountries(),
       this.drawStates(),
     ]);
@@ -119,14 +113,7 @@ export default class Startup extends Step {
   }
 
 
-  /**
-   * Index country borders.
-   */
-  indexCountries() {
-    let index = new Borders();
-    index.indexFeatures(countryJSON.features);
-    this.shared.borders = index;
-  }
+  // TODO: Dry this up?
 
 
   /**

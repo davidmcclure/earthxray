@@ -134,41 +134,14 @@ export default class Startup extends Step {
    */
   drawCountries() {
 
-    // CCA3 -> border.
-    this.shared.countries = {};
-
-    for (let c of countryJSON.features) {
-      this.drawCountry(c);
-    };
-
-  }
-
-
-  /**
-   * Draw country borders.
-   *
-   * @param {Object} country
-   */
-  drawCountry(country) {
-
-    let geometries = utils.featureToGeoms(country);
+    // Get an array of border geometries.
+    let segments = countryJSON.features.reduce((all, c) => {
+      return all.concat(utils.featureToGeoms(c));
+    }, []);
 
     let material = new THREE.LineBasicMaterial(mats.country.def);
 
-    let lines = new THREE.Object3D();
-
-    // Alias the material.
-    lines.material = material;
-
-    // Create the borders.
-    for (let g of geometries) {
-      let line = new THREE.Line(g, material);
-      lines.add(line);
-    }
-
-    // Index country -> object.
-    this.shared.countries[country.id] = lines;
-    this.world.add(lines);
+    this.drawLines(segments, material);
 
   }
 

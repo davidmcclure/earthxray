@@ -5,7 +5,6 @@ import Promise from 'bluebird';
 import THREE from 'three';
 import createText from 'three-bmfont-text';
 import loadFont from 'load-bmfont';
-import Shader from 'three-bmfont-text/shaders/sdf';
 
 import Step from './step';
 import Borders from '../lib/borders';
@@ -33,6 +32,7 @@ export default class Startup extends Step {
       this.drawEquator(),
       this.indexCountries(),
       this.drawCountries(),
+      this.drawLabels(),
       this.drawStates(),
     ]);
   }
@@ -136,25 +136,48 @@ export default class Startup extends Step {
     // CCA3 -> border.
     this.shared.countries = {};
 
-    let borders = [];
     for (let c of countryJSON.features) {
+      this.drawCountry(c);
+    };
 
-      borders.push(new Promise((resolve, reject) => {
-        this.drawCountry(c);
-        resolve();
-      }));
+  }
 
+
+  /**
+   * Draw country borders.
+   *
+   * @param {Object} country
+   */
+  drawCountry(country) {
+
+    let geometries = utils.featureToGeoms(country);
+
+    let material = new THREE.LineBasicMaterial(mats.country.def);
+
+    let lines = new THREE.Object3D();
+
+    // Alias the material.
+    lines.material = material;
+
+    // Create the borders.
+    for (let g of geometries) {
+      let line = new THREE.Line(g, material);
+      lines.add(line);
     }
 
-    // TODO|dev
+    // Index country -> object.
+    this.shared.countries[country.id] = lines;
+    this.world.add(lines);
+
+  }
+
+
+  /**
+   * Render country labels.
+   */
+  drawLabels() {
 
     let texture = THREE.ImageUtils.loadTexture('fonts/lato.png');
-
-    texture.needsUpdate = true;
-    texture.minFilter = THREE.LinearMipMapLinearFilter;
-    texture.magFilter = THREE.LinearFilter;
-    texture.generateMipmaps = true;
-    texture.anisotropy = this.renderer.getMaxAnisotropy();
 
     loadFont('fonts/Lato-Regular-64.fnt', (err, font) => {
       for (let c of countryJSON.features) {
@@ -191,35 +214,6 @@ export default class Startup extends Step {
 
       }
     });
-
-  }
-
-
-  /**
-   * Draw country borders.
-   *
-   * @param {Object} country
-   */
-  drawCountry(country) {
-
-    let geometries = utils.featureToGeoms(country);
-
-    let material = new THREE.LineBasicMaterial(mats.country.def);
-
-    let lines = new THREE.Object3D();
-
-    // Alias the material.
-    lines.material = material;
-
-    // Create the borders.
-    for (let g of geometries) {
-      let line = new THREE.Line(g, material);
-      lines.add(line);
-    }
-
-    // Index country -> object.
-    this.shared.countries[country.id] = lines;
-    this.world.add(lines);
 
   }
 

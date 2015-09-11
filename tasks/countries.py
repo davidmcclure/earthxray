@@ -15,14 +15,12 @@ def build():
     borders = open_borders()
     anchors = cca3_to_anchor()
     areas = cca3_to_area()
+    labels = cca3_to_label()
 
     for b in borders['features']:
-
-        # Merge label anchors.
         b['properties']['anchor'] = anchors.get(b['id'])
-
-        # Merge physical areas.
         b['properties']['area'] = areas.get(b['id'])
+        b['properties']['label'] = labels.get(b['id'])
 
     with open('src/javascripts/data/countries.json', 'w') as fh:
         json.dump(borders, fh, sort_keys=True)
@@ -83,3 +81,18 @@ def cca3_to_anchor():
         if a: anchors[c['cca3']] = [a[1], a[0]]
 
     return anchors
+
+
+def cca3_to_label():
+
+    """
+    Map country code -> common name.
+
+    Returns: dict
+    """
+
+    labels = {}
+    for c in open_mledoze():
+        labels[c['cca3']] = c['name']['common']
+
+    return labels

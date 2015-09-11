@@ -163,7 +163,7 @@ export default class Startup extends Step {
 
         let geometry = createText({
           font: font,
-          text: c.properties.name,
+          text: c.properties.label,
         });
 
         let material = new THREE.MeshBasicMaterial({

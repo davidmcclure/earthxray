@@ -3,6 +3,8 @@
 import _ from 'lodash';
 import Promise from 'bluebird';
 import THREE from 'three';
+import createText from 'three-bmfont-text';
+import loadFont from 'load-bmfont';
 
 import Step from './step';
 import countryJSON from '../data/countries';
@@ -28,6 +30,7 @@ export default class Startup extends Step {
       this.drawEquator(),
       this.drawCountries(),
       this.drawStates(),
+      this.drawLabels(),
     ]);
   }
 
@@ -83,7 +86,7 @@ export default class Startup extends Step {
 
     let material = new THREE.LineBasicMaterial(mats.lonlat.thin);
 
-    this.drawLines(geometries, material);
+    this._drawLines(geometries, material);
 
   }
 
@@ -118,7 +121,7 @@ export default class Startup extends Step {
 
     let material = new THREE.LineBasicMaterial(mats.country);
 
-    this.drawLines(segments, material);
+    this._drawLines(segments, material);
 
   }
 
@@ -135,8 +138,16 @@ export default class Startup extends Step {
 
     let material = new THREE.LineBasicMaterial(mats.state);
 
-    this.drawLines(segments, material);
+    this._drawLines(segments, material);
 
+  }
+
+
+  /**
+   * Draw country labels.
+   */
+  drawLabels() {
+    // TODO
   }
 
 
@@ -146,7 +157,7 @@ export default class Startup extends Step {
    * @param {THREE.Geometry[]} geometries
    * @param {THREE.Material} material
    */
-  drawLines(geometries, material) {
+  _drawLines(geometries, material) {
 
     let merged = utils.mergeLines(geometries);
 

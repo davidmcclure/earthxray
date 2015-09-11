@@ -2,9 +2,14 @@
 
 export default {
 
-  fonts: {
+  fontawesome: {
     src: 'node_modules/font-awesome/fonts',
-    dest: '<%= site %>/fonts'
-  }
+    dest: '<%= site %>/fa-fonts'
+  },
+
+  bmfont: {
+    src: 'fonts',
+    dest: '<%= site %>/bm-fonts'
+  },
 
 };

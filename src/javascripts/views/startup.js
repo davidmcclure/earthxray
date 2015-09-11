@@ -174,14 +174,16 @@ export default class Startup extends Step {
         });
 
         let mesh = new THREE.Mesh(geometry, material);
+        mesh.up.set(0, -1, 0);
+
+        // Scale by area.
+        let scale = Math.sqrt(c.properties.area)*0.0015;
+        mesh.scale.multiplyScalar(scale);
 
         // Face the origin.
         mesh.position.set(x, y, z);
-        mesh.up.set(0, -1, 0);
         mesh.lookAt(mesh.position.clone().multiplyScalar(2));
-
-        // Center on the anchor point.
-        mesh.translateX(-geometry.layout.width/2);
+        mesh.translateX(-(geometry.layout.width/2)*scale);
 
         this.world.add(mesh);
 

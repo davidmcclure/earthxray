@@ -147,7 +147,47 @@ export default class Startup extends Step {
    * Draw country labels.
    */
   drawLabels() {
-    // TODO
+
+    let texture = THREE.ImageUtils.loadTexture('bm-fonts/lato.png');
+
+    loadFont('bm-fonts/Lato-Regular-64.fnt', (err, font) => {
+      for (let c of countryJSON.features) {
+
+        if (!c.properties.anchor) continue;
+
+        // Get 3D anchor.
+        let [x, y, z] = utils.lonLatToXYZ(
+          c.properties.anchor[0],
+          c.properties.anchor[1]
+        );
+
+        let geometry = createText({
+          font: font,
+          text: c.properties.name,
+        });
+
+        let material = new THREE.MeshBasicMaterial({
+          map: texture,
+          side: THREE.DoubleSide,
+          color: 0x000000,
+          transparent: true,
+        });
+
+        let mesh = new THREE.Mesh(geometry, material);
+
+        // Face the origin.
+        mesh.position.set(x, y, z);
+        mesh.up.set(0, -1, 0);
+        mesh.lookAt(mesh.position.clone().multiplyScalar(2));
+
+        // Center on the anchor point.
+        mesh.translateX(-geometry.layout.width/2);
+
+        this.world.add(mesh);
+
+      }
+    });
+
   }
 
 

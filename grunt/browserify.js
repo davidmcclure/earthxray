@@ -5,8 +5,13 @@ export default {
   options: {
 
     transform: [
-      'babelify',
+
+      ['babelify', {
+        optional: ['es7.classProperties']
+      }],
+
       'yamlify',
+
     ],
 
     watch: true,

@@ -14,7 +14,7 @@ import * as mats from './materials.yml';
 import * as opts from '../opts.yml';
 
 
-export default class Startup extends Step {
+export default class extends Step {
 
 
   /**

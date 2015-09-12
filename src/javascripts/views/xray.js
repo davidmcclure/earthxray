@@ -10,7 +10,7 @@ import * as mats from './materials.yml';
 import * as utils from '../utils';
 
 
-export default class Xray extends Step {
+export default class extends Step {
 
 
   /**

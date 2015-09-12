@@ -8,7 +8,7 @@ import THREE from 'three';
 import TWEEN from 'tween.js';
 
 
-export default class Scene {
+export default class {
 
 
   /**

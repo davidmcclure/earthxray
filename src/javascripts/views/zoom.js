@@ -8,7 +8,7 @@ import Step from './step';
 import * as utils from '../utils';
 
 
-export default class Zoom extends Step {
+export default class extends Step {
 
 
   /**

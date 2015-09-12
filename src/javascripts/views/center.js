@@ -4,7 +4,7 @@ import React from 'react';
 import { kmToMi } from '../utils';
 
 
-export default class Center extends React.Component {
+export default class extends React.Component {
 
 
   /**

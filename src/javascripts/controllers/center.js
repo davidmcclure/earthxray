@@ -4,7 +4,7 @@ import React from 'react';
 
 import Controller from '../lib/controller';
 import Center from '../views/center';
-import {waitOnce} from '../utils';
+import { waitOnce } from '../utils';
 
 
 export default Controller.extend({

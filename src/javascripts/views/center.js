@@ -1,7 +1,7 @@
 
 
 import React from 'react';
-import {kmToMi} from '../utils';
+import { kmToMi } from '../utils';
 
 
 export default class Center extends React.Component {

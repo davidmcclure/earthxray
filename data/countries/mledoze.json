@@ -3067,7 +3067,7 @@
 			"spa": {"official": "Rep\u00fablica \u00c1rabe de Egipto", "common": "Egipto"},
 			"fin": {"official": "Egyptin arabitasavalta", "common": "Egypti"}
 		},
-		"latlng": [27, 30],
+		"latlng": [26.80674, 29.84064],
 		"demonym": "Egyptian",
 		"landlocked": false,
 		"borders": ["ISR", "LBY", "SDN"],
@@ -3325,7 +3325,7 @@
 			"spa": {"official": "Rep\u00fablica Democr\u00e1tica Federal de Etiop\u00eda", "common": "Etiop\u00eda"},
 			"fin": {"official": "Etiopian demokraattinen liittotasavalta", "common": "Etiopia"}
 		},
-		"latlng": [8, 38],
+		"latlng": [8.56182, 39.59650],
 		"demonym": "Ethiopian",
 		"landlocked": true,
 		"borders": ["DJI", "ERI", "KEN", "SOM", "SSD", "SDN"],
@@ -6738,7 +6738,7 @@
 			"spa": {"official": "Rep\u00fablica de Mal\u00ed", "common": "Mali"},
 			"fin": {"official": "Malin tasavalta", "common": "Mali"}
 		},
-		"latlng": [17, -4],
+		"latlng": [17.79297, -1.79999],
 		"demonym": "Malian",
 		"landlocked": true,
 		"borders": ["DZA", "BFA", "GIN", "CIV", "MRT", "NER", "SEN"],
@@ -7054,7 +7054,7 @@
 			"spa": {"official": "Rep\u00fablica Isl\u00e1mica de Mauritania", "common": "Mauritania"},
 			"fin": {"official": "Mauritanian islamilainen tasavalta", "common": "Mauritania"}
 		},
-		"latlng": [20, -12],
+		"latlng": [20.24398, -10.32538],
 		"demonym": "Mauritanian",
 		"landlocked": false,
 		"borders": ["DZA", "MLI", "SEN", "ESH"],
@@ -7501,7 +7501,7 @@
 			"spa": {"official": "Rep\u00fablica de N\u00edger", "common": "N\u00edger"},
 			"fin": {"official": "Nigerin tasavalta", "common": "Niger"}
 		},
-		"latlng": [16, 8],
+		"latlng": [17.45791, 9.31817],
 		"demonym": "Nigerien",
 		"landlocked": true,
 		"borders": ["DZA", "BEN", "BFA", "TCD", "LBY", "MLI", "NGA"],
@@ -8929,7 +8929,7 @@
 			"spa": {"official": "Rep\u00fablica de Sud\u00e1n", "common": "Sud\u00e1n"},
 			"fin": {"official": "Sudanin tasavalta", "common": "Sudan"}
 		},
-		"latlng": [15, 30],
+		"latlng": [16.40692, 30.28009],
 		"demonym": "Sudanese",
 		"landlocked": false,
 		"borders": ["CAF", "TCD", "EGY", "ERI", "ETH", "LBY", "SSD"],

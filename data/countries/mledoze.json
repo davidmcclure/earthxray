@@ -714,7 +714,7 @@
 			"spa": {"official": "Rep\u00fablica de Austria", "common": "Austria"},
 			"fin": {"official": "It\u00e4vallan tasavalta", "common": "It\u00e4valta"}
 		},
-		"latlng": [47.33333333, 13.33333333],
+		"latlng": [47.71685, 14.89923],
 		"demonym": "Austrian",
 		"landlocked": true,
 		"borders": ["CZE", "DEU", "HUN", "ITA", "LIE", "SVK", "SVN", "CHE"],
@@ -1042,7 +1042,7 @@
 			"spa": {"official": "Rep\u00fablica de Bulgaria", "common": "Bulgaria"},
 			"fin": {"official": "Bulgarian tasavalta", "common": "Bulgaria"}
 		},
-		"latlng": [43, 25],
+		"latlng": [42.63900, 25.12750],
 		"demonym": "Bulgarian",
 		"landlocked": false,
 		"borders": ["GRC", "MKD", "ROU", "SRB", "TUR"],
@@ -1276,7 +1276,7 @@
 			"spa": {"official": "Rep\u00fablica de Belar\u00fas", "common": "Bielorrusia"},
 			"fin": {"official": "Valko-Ven\u00e4j\u00e4n tasavalta", "common": "Valko-Ven\u00e4j\u00e4"}
 		},
-		"latlng": [53, 28],
+		"latlng": [53.51979, 28.22565],
 		"demonym": "Belarusian",
 		"landlocked": true,
 		"borders": ["LVA", "LTU", "POL", "RUS", "UKR"],
@@ -1749,7 +1749,7 @@
 			"spa": {"official": "Rep\u00fablica Centroafricana", "common": "Rep\u00fablica Centroafricana"},
 			"fin": {"official": "Keski-Afrikan tasavalta", "common": "Keski-Afrikan tasavalta"}
 		},
-		"latlng": [7, 21],
+		"latlng": [6.61710, 20.48028],
 		"demonym": "Central African",
 		"landlocked": true,
 		"borders": ["CMR", "TCD", "COD", "COG", "SSD", "SDN"],
@@ -2198,7 +2198,7 @@
 			"spa": {"official": "Rep\u00fablica del Congo", "common": "Congo"},
 			"fin": {"official": "Kongon tasavalta", "common": "Kongo-Brazzaville"}
 		},
-		"latlng": [-1, 15],
+		"latlng": [0.34768, 16.01983],
 		"demonym": "Congolese",
 		"landlocked": false,
 		"borders": ["AGO", "CMR", "CAF", "COD", "GAB"],
@@ -2754,7 +2754,7 @@
 			"spa": {"official": "Rep\u00fablica Federal de Alemania", "common": "Alemania"},
 			"fin": {"official": "Saksan liittotasavalta", "common": "Saksa"}
 		},
-		"latlng": [51, 9],
+		"latlng": [51.10324, 10.43878],
 		"demonym": "German",
 		"landlocked": false,
 		"borders": ["AUT", "BEL", "CZE", "DNK", "FRA", "LUX", "NLD", "POL", "CHE"],
@@ -2891,7 +2891,7 @@
 			"spa": {"official": "Reino de Dinamarca", "common": "Dinamarca"},
 			"fin": {"official": "Tanskan kuningaskunta", "common": "Tanska"}
 		},
-		"latlng": [56, 10],
+		"latlng": [56.25145, 9.23028],
 		"demonym": "Danish",
 		"landlocked": false,
 		"borders": ["DEU"],
@@ -3281,7 +3281,7 @@
 			"spa": {"official": "Rep\u00fablica de Estonia", "common": "Estonia"},
 			"fin": {"official": "Viron tasavalta", "common": "Viro"}
 		},
-		"latlng": [59, 26],
+		"latlng": [58.78581, 25.69879],
 		"demonym": "Estonian",
 		"landlocked": false,
 		"borders": ["LVA", "RUS"],
@@ -3373,7 +3373,7 @@
 			"spa": {"official": "Rep\u00fablica de Finlandia", "common": "Finlandia"},
 			"fin": {"official": "Suomen tasavalta", "common": "Suomi"}
 		},
-		"latlng": [64, 26],
+		"latlng": [62.68083, 26.23712],
 		"demonym": "Finnish",
 		"landlocked": false,
 		"borders": ["NOR", "SWE", "RUS"],
@@ -4097,7 +4097,7 @@
 			"spa": {"official": "Rep\u00fablica de Guinea Ecuatorial", "common": "Guinea Ecuatorial"},
 			"fin": {"official": "P\u00e4iv\u00e4ntasaajan Guinean tasavalta", "common": "P\u00e4iv\u00e4ntasaajan Guinea"}
 		},
-		"latlng": [2, 10],
+		"latlng": [1.58344, 10.47174],
 		"demonym": "Equatorial Guinean",
 		"landlocked": false,
 		"borders": ["CMR", "GAB"],
@@ -4586,7 +4586,7 @@
 			"spa": {"official": "Rep\u00fablica de Croacia", "common": "Croacia"},
 			"fin": {"official": "Kroatian tasavalta", "common": "Kroatia"}
 		},
-		"latlng": [45.16666666, 15.5],
+		"latlng": [45.61823, 16.93170],
 		"demonym": "Croatian",
 		"landlocked": false,
 		"borders": ["BIH", "HUN", "MNE", "SRB", "SVN"],
@@ -4677,7 +4677,7 @@
 			"spa": {"official": "Hungr\u00eda", "common": "Hungr\u00eda"},
 			"fin": {"official": "Unkari", "common": "Unkari"}
 		},
-		"latlng": [47, 20],
+		"latlng": [47.04251, 19.16192],
 		"demonym": "Hungarian",
 		"landlocked": true,
 		"borders": ["AUT", "HRV", "ROU", "SRB", "SVK", "SVN", "UKR"],
@@ -5152,7 +5152,7 @@
 			"spa": {"official": "Rep\u00fablica Italiana", "common": "Italia"},
 			"fin": {"official": "Italian tasavalta", "common": "Italia"}
 		},
-		"latlng": [42.83333333, 12.83333333],
+		"latlng": [43.02842, 12.39435],
 		"demonym": "Italian",
 		"landlocked": false,
 		"borders": ["AUT", "FRA", "SMR", "SVN", "CHE", "VAT"],
@@ -5435,7 +5435,7 @@
 			"spa": {"official": "Rep\u00fablica de Kenya", "common": "Kenia"},
 			"fin": {"official": "Kenian tasavalta", "common": "Kenia"}
 		},
-		"latlng": [1, 38],
+		"latlng": [0.48930, 37.90460],
 		"demonym": "Kenyan",
 		"landlocked": false,
 		"borders": ["ETH", "SOM", "SSD", "TZA", "UGA"],
@@ -6149,7 +6149,7 @@
 			"spa": {"official": "Rep\u00fablica de Lituania", "common": "Lituania"},
 			"fin": {"official": "Liettuan tasavalta", "common": "Liettua"}
 		},
-		"latlng": [56, 24],
+		"latlng": [55.37969, 24.09479],
 		"demonym": "Lithuanian",
 		"landlocked": false,
 		"borders": ["BLR", "LVA", "POL", "RUS"],
@@ -6245,7 +6245,7 @@
 			"spa": {"official": "Rep\u00fablica de Letonia", "common": "Letonia"},
 			"fin": {"official": "Latvian tasavalta", "common": "Latvia"}
 		},
-		"latlng": [57, 25],
+		"latlng": [56.89756, 26.13824],
 		"demonym": "Latvian",
 		"landlocked": false,
 		"borders": ["BLR", "EST", "LTU", "RUS"],
@@ -6470,7 +6470,7 @@
 			"spa": {"official": "Rep\u00fablica de Moldova", "common": "Moldavia"},
 			"fin": {"official": "Moldovan tasavalta", "common": "Moldova"}
 		},
-		"latlng": [47, 29],
+		"latlng": [47.59654, 28.35748],
 		"demonym": "Moldovan",
 		"landlocked": true,
 		"borders": ["ROU", "UKR"],
@@ -6695,7 +6695,7 @@
 			"spa": {"official": "Rep\u00fablica de Macedonia", "common": "Macedonia"},
 			"fin": {"official": "Makedonian tasavalta", "common": "Makedonia"}
 		},
-		"latlng": [41.83333333, 22],
+		"latlng": [41.63378, 21.73273],
 		"demonym": "Macedonian",
 		"landlocked": true,
 		"borders": ["ALB", "BGR", "GRC", "KOS", "SRB"],
@@ -6872,7 +6872,7 @@
 			"spa": {"official": "Montenegro", "common": "Montenegro"},
 			"fin": {"official": "Montenegro", "common": "Montenegro"}
 		},
-		"latlng": [42.5, 19.3],
+		"latlng": [42.86576, 19.31573],
 		"demonym": "Montenegrin",
 		"landlocked": false,
 		"borders": ["ALB", "BIH", "HRV", "KOS", "SRB"],
@@ -7241,7 +7241,7 @@
 			"spa": {"official": "Rep\u00fablica de Malawi", "common": "Malawi"},
 			"fin": {"official": "Malawin tasavalta", "common": "Malawi"}
 		},
-		"latlng": [-13.5, 34],
+		"latlng": [-13.61639, 33.70782],
 		"demonym": "Malawian",
 		"landlocked": true,
 		"borders": ["MOZ", "TZA", "ZMB"],
@@ -7779,7 +7779,7 @@
 			"spa": {"official": "Reino de Noruega", "common": "Noruega"},
 			"fin": {"official": "Norjan kuningaskunta", "common": "Norja"}
 		},
-		"latlng": [62, 10],
+		"latlng": [61.12906, 8.61505],
 		"demonym": "Norwegian",
 		"landlocked": false,
 		"borders": ["FIN", "SWE", "RUS"],
@@ -8345,7 +8345,7 @@
 			"spa": {"official": "Rep\u00fablica de Polonia", "common": "Polonia"},
 			"fin": {"official": "Puolan tasavalta", "common": "Puola"}
 		},
-		"latlng": [52, 20],
+		"latlng": [52.15276, 19.34869],
 		"demonym": "Polish",
 		"landlocked": false,
 		"borders": ["BLR", "CZE", "DEU", "LTU", "RUS", "SVK", "UKR"],
@@ -8479,7 +8479,7 @@
 			"spa": {"official": "Rep\u00fablica Portuguesa", "common": "Portugal"},
 			"fin": {"official": "Portugalin tasavalta", "common": "Portugali"}
 		},
-		"latlng": [39.5, -8],
+		"latlng": [39.03591, -8.17206],
 		"demonym": "Portuguese",
 		"landlocked": false,
 		"borders": ["ESP"],
@@ -8742,7 +8742,7 @@
 			"spa": {"official": "Rumania", "common": "Rumania"},
 			"fin": {"official": "Romania", "common": "Romania"}
 		},
-		"latlng": [46, 25],
+		"latlng": [45.97119, 24.90777],
 		"demonym": "Romanian",
 		"landlocked": false,
 		"borders": ["BGR", "HUN", "MDA", "SRB", "UKR"],
@@ -10616,7 +10616,7 @@
 			"spa": {"official": "Rep\u00fablica de Uganda", "common": "Uganda"},
 			"fin": {"official": "Ugandan tasavalta", "common": "Uganda"}
 		},
-		"latlng": [1, 32],
+		"latlng": [1.27850, 32.49933],
 		"demonym": "Ugandan",
 		"landlocked": true,
 		"borders": ["COD", "KEN", "RWA", "SSD", "TZA"],

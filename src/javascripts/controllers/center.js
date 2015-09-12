@@ -3,27 +3,29 @@
 import React from 'react';
 
 import Controller from '../lib/controller';
-import Center from '../views/center';
 import { waitOnce } from '../utils';
+import Center from '../views/center';
 
 
-export default Controller.extend({
+export default class extends Controller {
 
 
-  channel: 'center',
+  static channelName = 'center';
 
 
-  events: {
+  static events = {
     xray: {
       trace: 'onTrace'
     }
-  },
+  };
 
 
   /**
    * Start the view.
    */
-  initialize: function() {
+  constructor() {
+
+    super();
 
     // Wait for the VR to start.
     waitOnce('xray', 'start').then(() => {
@@ -37,7 +39,7 @@ export default Controller.extend({
 
     });
 
-  },
+  }
 
 
   /**
@@ -45,9 +47,9 @@ export default Controller.extend({
    *
    * @param {Object} data
    */
-  onTrace: function(data) {
+  onTrace(data) {
     this.view.setState(data);
-  },
+  }
 
 
-});
+};

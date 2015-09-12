@@ -7,16 +7,18 @@ import Zoom from '../views/zoom';
 import Xray from '../views/xray';
 
 
-export default Controller.extend({
+export default class extends Controller {
 
 
-  channel: 'scene',
+  static channelName = 'scene';
 
 
   /**
    * Start the scene.
    */
-  initialize: function() {
+  constructor() {
+
+    super();
 
     let scene = new Scene();
 
@@ -37,7 +39,7 @@ export default Controller.extend({
         xray.start();
       });
 
-  },
+  };
 
 
-});
+}

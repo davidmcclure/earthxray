@@ -670,7 +670,7 @@
 			"spa": {"official": "Mancomunidad de Australia", "common": "Australia"},
 			"fin": {"official": "Australian liittovaltio", "common": "Australia"}
 		},
-		"latlng": [-27, 133],
+		"latlng": [-24.91135, 134.37824],
 		"demonym": "Australian",
 		"landlocked": false,
 		"borders": [],
@@ -2144,7 +2144,7 @@
 			"spa": {"official": "Rep\u00fablica Democr\u00e1tica del Congo", "common": "Congo (Rep. Dem.)"},
 			"fin": {"official": "Kongon demokraattinen tasavalta", "common": "Kongon demokraattinen tasavalta"}
 		},
-		"latlng": [0, 25],
+		"latlng": [-2.79491, 23.63605],
 		"demonym": "Congolese",
 		"landlocked": false,
 		"borders": ["AGO", "BDI", "CAF", "COG", "RWA", "SSD", "TZA", "UGA", "ZMB"],
@@ -5924,7 +5924,7 @@
 			"spa": {"official": "Estado de Libia", "common": "Libia"},
 			"fin": {"official": "Libyan valtio", "common": "Libya"}
 		},
-		"latlng": [25, 17],
+		"latlng": [27.04078, 17.43977],
 		"demonym": "Libyan",
 		"landlocked": false,
 		"borders": ["DZA", "TCD", "EGY", "NER", "SDN", "TUN"],

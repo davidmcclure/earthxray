@@ -95,7 +95,7 @@
 			"spa": {"official": "Rep\u00fablica Isl\u00e1mica de Afganist\u00e1n", "common": "Afganist\u00e1n"},
 			"fin": {"official": "Afganistanin islamilainen tasavalta", "common": "Afganistan"}
 		},
-		"latlng": [33, 65],
+		"latlng": [33.85508, 65.46380],
 		"demonym": "Afghan",
 		"landlocked": true,
 		"borders": ["IRN", "PAK", "TKM", "UZB", "TJK", "CHN"],
@@ -139,7 +139,7 @@
 			"spa": {"official": "Rep\u00fablica de Angola", "common": "Angola"},
 			"fin": {"official": "Angolan tasavalta", "common": "Angola"}
 		},
-		"latlng": [-12.5, 18.5],
+		"latlng": [-12.37425, 17.63757],
 		"demonym": "Angolan",
 		"landlocked": false,
 		"borders": ["COG", "COD", "ZMB", "NAM"],
@@ -866,7 +866,7 @@
 			"spa": {"official": "Reino de B\u00e9lgica", "common": "B\u00e9lgica"},
 			"fin": {"official": "Belgian kuningaskunta", "common": "Belgia"}
 		},
-		"latlng": [50.83333333, 4],
+		"latlng": [50.62031, 4.62427],
 		"demonym": "Belgian",
 		"landlocked": false,
 		"borders": ["FRA", "DEU", "LUX", "NLD"],
@@ -910,7 +910,7 @@
 			"spa": {"official": "Rep\u00fablica de Benin", "common": "Ben\u00edn"},
 			"fin": {"official": "Beninin tasavalta", "common": "Benin"}
 		},
-		"latlng": [9.5, 2.25],
+		"latlng": [10.52963, 2.34460],
 		"demonym": "Beninese",
 		"landlocked": false,
 		"borders": ["BFA", "NER", "NGA", "TGO"],
@@ -954,7 +954,7 @@
 			"spa": {"official": "Burkina Faso", "common": "Burkina Faso"},
 			"fin": {"official": "Burkina Faso", "common": "Burkina Faso"}
 		},
-		"latlng": [13, -2],
+		"latlng": [12.61752, -1.39075],
 		"demonym": "Burkinabe",
 		"landlocked": true,
 		"borders": ["BEN", "CIV", "GHA", "MLI", "NER", "TGO"],
@@ -1565,7 +1565,7 @@
 			"spa": {"official": "Naci\u00f3n de Brunei, Morada de la Paz", "common": "Brunei"},
 			"fin": {"official": "Brunei Darussalamin valtio", "common": "Brunei"}
 		},
-		"latlng": [4.5, 114.66666666],
+		"latlng": [4.54681, 114.80890],
 		"demonym": "Bruneian",
 		"landlocked": false,
 		"borders": ["MYS"],
@@ -1749,7 +1749,7 @@
 			"spa": {"official": "Rep\u00fablica Centroafricana", "common": "Rep\u00fablica Centroafricana"},
 			"fin": {"official": "Keski-Afrikan tasavalta", "common": "Keski-Afrikan tasavalta"}
 		},
-		"latlng": [6.61710, 20.48028],
+		"latlng": [6.40295, 20.47204],
 		"demonym": "Central African",
 		"landlocked": true,
 		"borders": ["CMR", "TCD", "COD", "COG", "SSD", "SDN"],
@@ -1798,7 +1798,7 @@
 			"spa": {"official": "Canad\u00e1", "common": "Canad\u00e1"},
 			"fin": {"official": "Kanada", "common": "Kanada"}
 		},
-		"latlng": [60, -95],
+		"latlng": [52.64214, -107.69613],
 		"demonym": "Canadian",
 		"landlocked": false,
 		"borders": ["USA"],
@@ -1900,7 +1900,7 @@
 			"spa": {"official": "Confederaci\u00f3n Suiza", "common": "Suiza"},
 			"fin": {"official": "Sveitsin valaliitto", "common": "Sveitsi"}
 		},
-		"latlng": [47, 8],
+		"latlng": [46.80996, 8.13989],
 		"demonym": "Swiss",
 		"landlocked": true,
 		"borders": ["AUT", "FRA", "ITA", "LIE", "DEU"],
@@ -2031,7 +2031,7 @@
 			"spa": {"official": "Rep\u00fablica de C\u00f4te d' Ivoire", "common": "Costa de Marfil"},
 			"fin": {"official": "Norsunluurannikon tasavalta", "common": "Norsunluurannikko"}
 		},
-		"latlng": [8, -5],
+		"latlng": [7.65430, -5.54358],
 		"demonym": "Ivorian",
 		"landlocked": false,
 		"borders": ["BFA", "GHA", "GIN", "LBR", "MLI"],
@@ -2080,7 +2080,7 @@
 			"spa": {"official": "Rep\u00fablica de Camer\u00fan", "common": "Camer\u00fan"},
 			"fin": {"official": "Kamerunin tasavalta", "common": "Kamerun"}
 		},
-		"latlng": [6, 12],
+		"latlng": [4.78477, 12.12244],
 		"demonym": "Cameroonian",
 		"landlocked": false,
 		"borders": ["CAF", "TCD", "COG", "GNQ", "GAB", "NGA"],
@@ -2662,7 +2662,7 @@
 			"spa": {"official": "Rep\u00fablica de Chipre", "common": "Chipre"},
 			"fin": {"official": "Kyproksen tasavalta", "common": "Kypros"}
 		},
-		"latlng": [35, 33],
+		"latlng": [34.91432, 32.97449],
 		"demonym": "Cypriot",
 		"landlocked": false,
 		"borders": ["GBR"],
@@ -3174,7 +3174,7 @@
 			"spa": {"official": "Rep\u00fablica \u00c1rabe Saharaui Democr\u00e1tica", "common": "Sahara Occidental"},
 			"fin": {"official": "L\u00e4nsi-Sahara", "common": "L\u00e4nsi-Sahara"}
 		},
-		"latlng": [24.5, -13],
+		"latlng": [23.64009, -13.92615],
 		"demonym": "Sahrawi",
 		"landlocked": false,
 		"borders": ["DZA", "MRT", "MAR"],
@@ -3689,7 +3689,7 @@
 			"spa": {"official": "Reino Unido de Gran Breta\u00f1a e Irlanda del Norte", "common": "Reino Unido"},
 			"fin": {"official": "Ison-Britannian ja Pohjois-Irlannin yhdistynyt kuningaskunta", "common": "Yhdistynyt kuningaskunta"}
 		},
-		"latlng": [54, -2],
+		"latlng": [52.20921, -1.40723],
 		"demonym": "British",
 		"landlocked": false,
 		"borders": ["IRL"],
@@ -3828,7 +3828,7 @@
 			"spa": {"official": "Rep\u00fablica de Ghana", "common": "Ghana"},
 			"fin": {"official": "Ghanan tasavalta", "common": "Ghana"}
 		},
-		"latlng": [8, -2],
+		"latlng": [8.01432, -1.12708],
 		"demonym": "Ghanaian",
 		"landlocked": false,
 		"borders": ["BFA", "CIV", "TGO"],
@@ -3914,7 +3914,7 @@
 			"spa": {"official": "Rep\u00fablica de Guinea", "common": "Guinea"},
 			"fin": {"official": "Guinean tasavalta", "common": "Guinea"}
 		},
-		"latlng": [11, -10],
+		"latlng": [11.06753, -11.46521],
 		"demonym": "Guinean",
 		"landlocked": false,
 		"borders": ["CIV", "GNB", "LBR", "MLI", "SEN", "SLE"],
@@ -4000,7 +4000,7 @@
 			"spa": {"official": "Rep\u00fablica de Gambia", "common": "Gambia"},
 			"fin": {"official": "Gambian tasavalta", "common": "Gambia"}
 		},
-		"latlng": [13.46666666, -16.56666666],
+		"latlng": [13.37422, -16.22229],
 		"demonym": "Gambian",
 		"landlocked": false,
 		"borders": ["SEN"],
@@ -5099,7 +5099,7 @@
 			"spa": {"official": "Estado de Israel", "common": "Israel"},
 			"fin": {"official": "Israelin valtio", "common": "Israel"}
 		},
-		"latlng": [31.47, 35.13],
+		"latlng": [30.99261, 34.86139],
 		"demonym": "Israeli",
 		"landlocked": false,
 		"borders": ["EGY", "JOR", "LBN", "SYR"],
@@ -5296,7 +5296,7 @@
 			"spa": {"official": "Reino Hachemita de Jordania", "common": "Jordania"},
 			"fin": {"official": "Jordanian ha\u0161emiittinen kunigaskunta", "common": "Jordania"}
 		},
-		"latlng": [31, 36],
+		"latlng": [30.55803, 36.47088],
 		"demonym": "Jordanian",
 		"landlocked": false,
 		"borders": ["IRQ", "ISR", "SAU", "SYR"],
@@ -5483,7 +5483,7 @@
 			"spa": {"official": "Rep\u00fablica Kirguisa", "common": "Kirguizist\u00e1n"},
 			"fin": {"official": "Kirgisian tasavalta", "common": "Kirgisia"}
 		},
-		"latlng": [41, 75],
+		"latlng": [41.65527, 74.95599],
 		"demonym": "Kirghiz",
 		"landlocked": true,
 		"borders": ["CHN", "KAZ", "TJK", "UZB"],
@@ -5527,7 +5527,7 @@
 			"spa": {"official": "Reino de Camboya", "common": "Camboya"},
 			"fin": {"official": "Kambod\u017ean kuningaskunta", "common": "Kambod\u017ea"}
 		},
-		"latlng": [13, 105],
+		"latlng": [12.84543, 105.06402],
 		"demonym": "Cambodian",
 		"landlocked": false,
 		"borders": ["LAO", "THA", "VNM"],
@@ -5790,7 +5790,7 @@
 			"spa": {"official": "Rep\u00fablica Democr\u00e1tica Popular Lao", "common": "Laos"},
 			"fin": {"official": "Laosin demokraattinen kansantasavalta", "common": "Laos"}
 		},
-		"latlng": [18, 105],
+		"latlng": [19.61226, 102.63055],
 		"demonym": "Laotian",
 		"landlocked": true,
 		"borders": ["MMR", "KHM", "CHN", "THA", "VNM"],
@@ -5838,7 +5838,7 @@
 			"spa": {"official": "Rep\u00fablica Libanesa", "common": "L\u00edbano"},
 			"fin": {"official": "Libanonin tasavalta", "common": "Libanon"}
 		},
-		"latlng": [33.83333333, 35.83333333],
+		"latlng": [34.19901, 36.10834],
 		"demonym": "Lebanese",
 		"landlocked": false,
 		"borders": ["ISR", "SYR"],
@@ -6106,7 +6106,7 @@
 			"spa": {"official": "Reino de Lesotho", "common": "Lesotho"},
 			"fin": {"official": "Lesothon kuningaskunta", "common": "Lesotho"}
 		},
-		"latlng": [-29.5, 28.5],
+		"latlng": [-29.57745, 28.23938],
 		"demonym": "Mosotho",
 		"landlocked": true,
 		"borders": ["ZAF"],
@@ -6384,7 +6384,7 @@
 			"spa": {"official": "Reino de Marruecos", "common": "Marruecos"},
 			"fin": {"official": "Marokon kuningaskunta", "common": "Marokko"}
 		},
-		"latlng": [32, -5],
+		"latlng": [32.72986, -5.21948],
 		"demonym": "Moroccan",
 		"landlocked": false,
 		"borders": ["DZA", "ESH", "ESP"],
@@ -6829,7 +6829,7 @@
 			"spa": {"official": "Rep\u00fablica de la Uni\u00f3n de Myanmar", "common": "Myanmar"},
 			"fin": {"official": "Myanmarin liiton tasavalta", "common": "Myanmar"}
 		},
-		"latlng": [22, 98],
+		"latlng": [21.40687, 96.48370],
 		"demonym": "Bamar",
 		"landlocked": false,
 		"borders": ["BGD", "CHN", "IND", "LAO", "THA"],
@@ -7011,7 +7011,7 @@
 			"spa": {"official": "Rep\u00fablica de Mozambique", "common": "Mozambique"},
 			"fin": {"official": "Mosambikin tasavalta", "common": "Mosambik"}
 		},
-		"latlng": [-18.25, 35],
+		"latlng": [-13.27741, 37.80847],
 		"demonym": "Mozambican",
 		"landlocked": false,
 		"borders": ["MWI", "ZAF", "SWZ", "TZA", "ZMB", "ZWE"],
@@ -7054,7 +7054,7 @@
 			"spa": {"official": "Rep\u00fablica Isl\u00e1mica de Mauritania", "common": "Mauritania"},
 			"fin": {"official": "Mauritanian islamilainen tasavalta", "common": "Mauritania"}
 		},
-		"latlng": [20.24398, -10.32538],
+		"latlng": [19.10142, -10.97632],
 		"demonym": "Mauritanian",
 		"landlocked": false,
 		"borders": ["DZA", "MLI", "SEN", "ESH"],
@@ -7289,7 +7289,7 @@
 			"spa": {"official": "Malasia", "common": "Malasia"},
 			"fin": {"official": "Malesia", "common": "Malesia"}
 		},
-		"latlng": [2.5, 112.5],
+		"latlng": [2.28985, 113.24884],
 		"demonym": "Malaysian",
 		"landlocked": false,
 		"borders": ["BRN", "IDN", "THA"],
@@ -8302,7 +8302,7 @@
 			"spa": {"official": "Estado Independiente de Pap\u00faa Nueva Guinea", "common": "Pap\u00faa Nueva Guinea"},
 			"fin": {"official": "Papua-Uuden-Guinean Itsen\u00e4inen valtio", "common": "Papua-Uusi-Guinea"}
 		},
-		"latlng": [-6.31856, 144.10943],
+		"latlng": [-6.49475, 144.10669],
 		"demonym": "Papua New Guinean",
 		"landlocked": false,
 		"borders": ["IDN"],
@@ -8570,7 +8570,7 @@
 			"spa": {"official": "Estado de Palestina", "common": "Palestina"},
 			"fin": {"official": "Palestiinan valtio", "common": "Palestiina"}
 		},
-		"latlng": [31.9, 35.2],
+		"latlng": [32.13133, 35.30908],
 		"demonym": "Palestinian",
 		"landlocked": false,
 		"borders": ["ISR", "EGY", "JOR"],
@@ -8972,7 +8972,7 @@
 			"spa": {"official": "Rep\u00fablica de Senegal", "common": "Senegal"},
 			"fin": {"official": "Senegalin tasavalta", "common": "Senegal"}
 		},
-		"latlng": [14, -14],
+		"latlng": [14.88047, -14.79956],
 		"demonym": "Senegalese",
 		"landlocked": false,
 		"borders": ["GMB", "GIN", "GNB", "MLI", "MRT"],
@@ -9202,7 +9202,7 @@
 			"spa": {"official": "Rep\u00fablica de Sierra Leona", "common": "Sierra Leone"},
 			"fin": {"official": "Sierra Leonen tasavalta", "common": "Sierra Leone"}
 		},
-		"latlng": [8.5, -11.5],
+		"latlng": [8.58879, -11.84973],
 		"demonym": "Sierra Leonean",
 		"landlocked": false,
 		"borders": ["GIN", "LBR"],
@@ -9729,7 +9729,7 @@
 			"spa": {"official": "Reino de Swazilandia", "common": "Suazilandia"},
 			"fin": {"official": "Swazimaan kuningaskunta", "common": "Swazimaa"}
 		},
-		"latlng": [-26.5, 31.5],
+		"latlng": [-26.56427, 31.49408],
 		"demonym": "Swazi",
 		"landlocked": true,
 		"borders": ["MOZ", "ZAF"],
@@ -9877,7 +9877,7 @@
 			"spa": {"official": "Rep\u00fablica \u00c1rabe Siria", "common": "Siria"},
 			"fin": {"official": "Syyrian arabitasavalta", "common": "Syyria"}
 		},
-		"latlng": [35, 38],
+		"latlng": [35.01698, 38.50336],
 		"demonym": "Syrian",
 		"landlocked": false,
 		"borders": ["IRQ", "ISR", "JOR", "LBN", "TUR"],
@@ -10055,7 +10055,7 @@
 			"spa": {"official": "Reino de Tailandia", "common": "Tailandia"},
 			"fin": {"official": "Thaimaan kuningaskunta", "common": "Thaimaa"}
 		},
-		"latlng": [15, 100],
+		"latlng": [15.85714, 101.81207],
 		"demonym": "Thai",
 		"landlocked": false,
 		"borders": ["MMR", "KHM", "LAO", "MYS"],
@@ -10103,7 +10103,7 @@
 			"spa": {"official": "Rep\u00fablica de Tayikist\u00e1n", "common": "Tayikist\u00e1n"},
 			"fin": {"official": "Tad\u017eikistanin tasavalta", "common": "Tad\u017eikistan"}
 		},
-		"latlng": [39, 71],
+		"latlng": [38.85554, 70.97894],
 		"demonym": "Tadzhik",
 		"landlocked": true,
 		"borders": ["AFG", "CHN", "KGZ", "UZB"],
@@ -10204,7 +10204,7 @@
 			"spa": {"official": "Turkmenist\u00e1n", "common": "Turkmenist\u00e1n"},
 			"fin": {"official": "Turkmenistan", "common": "Turkmenistan"}
 		},
-		"latlng": [40, 60],
+		"latlng": [39.49098, 58.63031],
 		"demonym": "Turkmen",
 		"landlocked": true,
 		"borders": ["AFG", "IRN", "KAZ", "UZB"],
@@ -10841,7 +10841,7 @@
 			"spa": {"official": "Rep\u00fablica de Uzbekist\u00e1n", "common": "Uzbekist\u00e1n"},
 			"fin": {"official": "Uzbekistanin tasavalta", "common": "Uzbekistan"}
 		},
-		"latlng": [41, 64],
+		"latlng": [41.87460, 63.39837],
 		"demonym": "Uzbekistani",
 		"landlocked": true,
 		"borders": ["AFG", "KAZ", "KGZ", "TJK", "TKM"],
@@ -11104,7 +11104,7 @@
 			"spa": {"official": "Rep\u00fablica Socialista de Vietnam", "common": "Vietnam"},
 			"fin": {"official": "Vietnamin sosialistinen tasavalta", "common": "Vietnam"}
 		},
-		"latlng": [16.16666666, 107.83333333],
+		"latlng": [11.46176, 107.47552],
 		"demonym": "Vietnamese",
 		"landlocked": false,
 		"borders": ["KHM", "CHN", "LAO"],
@@ -11384,7 +11384,7 @@
 			"spa": {"official": "Rep\u00fablica de Sud\u00e1frica", "common": "Rep\u00fablica de Sud\u00e1frica"},
 			"fin": {"official": "Etel\u00e4-Afrikan tasavalta", "common": "Etel\u00e4-Afrikka"}
 		},
-		"latlng": [-29, 24],
+		"latlng": [-30.72796, 22.94946],
 		"demonym": "South African",
 		"landlocked": false,
 		"borders": ["BWA", "LSO", "MOZ", "NAM", "SWZ", "ZWE"],

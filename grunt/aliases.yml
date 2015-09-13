@@ -1,9 +1,12 @@
 
 compile:
+  - clean
+  - symlink
+  - copy
+  - shell
   - jade
   - browserify
   - less
-  - symlink
 
 compile:min:
   - compile
@@ -19,6 +22,5 @@ deploy:
   - gh-pages
 
 default:
-  - clean
   - compile
   - server

@@ -1,5 +1,6 @@
 
 
 export default {
-  dist: '<%= site %>'
+  site: '<%= site %>',
+  data: 'src/javascripts/data/*.json'
 };

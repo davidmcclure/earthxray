@@ -55,7 +55,7 @@ export default class {
   createCamera() {
 
     this.camera = new THREE.PerspectiveCamera(
-      75, 1, 0.1, 100000
+      120, 1, 0.1, 100000
     );
 
     this.fitCamera()

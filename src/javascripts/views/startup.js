@@ -148,9 +148,18 @@ export default class extends Step {
    */
   drawLabels() {
 
-    let texture = THREE.ImageUtils.loadTexture('bm-fonts/lato.png');
+    let texture = new Promise(resolve => {
+      THREE.ImageUtils.loadTexture('bm-fonts/lato.png', null, resolve);
+    });
 
-    loadFont('bm-fonts/Lato-Regular-64.fnt', (err, font) => {
+    let font = new Promise(resolve => {
+      loadFont('bm-fonts/Lato-Regular-64.fnt', (err, font) => {
+        resolve(font);
+      });
+    });
+
+    // Wait for the texture and font.
+    return Promise.all([texture, font]).spread((texture, font) => {
       for (let c of countryJSON.features) {
 
         if (!c.properties.anchor) continue;

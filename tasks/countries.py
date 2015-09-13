@@ -6,27 +6,59 @@ from invoke import task
 
 
 @task
-def build():
+def merge_labels():
 
     """
-    Merge borders with area, anchor points, and populations.
+    Merge label names.
     """
 
-    borders = open_borders()
-    anchors = cca3_to_anchor()
-    areas = cca3_to_area()
+    countries = open_countries()
+
     labels = cca3_to_label()
+    for c in countries['features']:
+        c['properties']['label'] = labels.get(c['id'])
 
-    for b in borders['features']:
-        b['properties']['anchor'] = anchors.get(b['id'])
-        b['properties']['area'] = areas.get(b['id'])
-        b['properties']['label'] = labels.get(b['id'])
-
-    with open('src/javascripts/data/countries.json', 'w') as fh:
-        json.dump(borders, fh, sort_keys=True)
+    write_countries(countries)
 
 
-def open_borders():
+@task
+def merge_areas():
+
+    """
+    Merge country areas.
+    """
+
+    countries = open_countries()
+
+    areas = cca3_to_area()
+    for c in countries['features']:
+        c['properties']['area'] = areas.get(c['id'])
+
+    write_countries(countries)
+
+
+@task
+def merge_anchors():
+
+    """
+    Merge label anchor points.
+    """
+
+    countries = open_countries()
+
+    anchors = cca3_to_anchor()
+    for c in countries['features']:
+        c['properties']['anchor'] = anchors.get(c['id'])
+
+    write_countries(countries)
+
+
+@task(merge_labels, merge_anchors, merge_areas)
+def merge():
+    pass
+
+
+def open_countries():
 
     """
     Read the borders GeoJSON.
@@ -34,8 +66,21 @@ def open_borders():
     Returns: dict
     """
 
-    with open('data/countries/borders.json', 'r') as fh:
+    with open('src/javascripts/data/countries.json', 'r') as fh:
         return json.loads(fh.read())
+
+
+def write_countries(countries):
+
+    """
+    Write updated GeoJSON.
+
+    Args:
+        countries (dict)
+    """
+
+    with open('src/javascripts/data/countries.json', 'w') as fh:
+        json.dump(countries, fh, sort_keys=True)
 
 
 def open_mledoze():

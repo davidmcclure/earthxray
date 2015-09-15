@@ -273,9 +273,8 @@ export function mergeLines(segments) {
  * @param {Number} lat1
  * @param {Number} lon2
  * @param {Number} lat2
- * @param {Number} r
  */
-export function greatCircleDistance(lon1, lat1, lon2, lat2, r) {
+export function angularDistance(lon1, lat1, lon2, lat2) {
 
   let φ1 = THREE.Math.degToRad(lat1);
   let φ2 = THREE.Math.degToRad(lat2);
@@ -290,12 +289,10 @@ export function greatCircleDistance(lon1, lat1, lon2, lat2, r) {
           Math.sin(Δλ/2) *
           Math.sin(Δλ/2);
 
-  let c = 2 * Math.atan2(
+  return 2 * Math.atan2(
     Math.sqrt(a),
     Math.sqrt(1-a)
   );
-
-  return c * r;
 
 };
 
@@ -304,7 +301,7 @@ export function greatCircleDistance(lon1, lat1, lon2, lat2, r) {
  * Get the coordinates of the point that lies at a given fraction of the
  * spherical distance between two points.
  *
- * http://www.movable-type.co.uk/scripts/latlong.html
+ * http://williams.best.vwh.net/avform.htm#Intermediate
  *
  * @param {Number} lon1
  * @param {Number} lat1
@@ -313,6 +310,34 @@ export function greatCircleDistance(lon1, lat1, lon2, lat2, r) {
  * @param {Number} r
  * @param {Number} f
  */
-export function greatCircleWaypoint(lon1, lat1, lon2, lat2, r, f) {
-  // TODO
+export function intermediatePoint(lon1, lat1, lon2, lat2, f) {
+
+  let δ = angularDistance(lon1, lat1, lon2, lat2);
+
+  let φ1 = THREE.Math.degToRad(lat1);
+  let φ2 = THREE.Math.degToRad(lat2);
+
+  let λ1 = THREE.Math.degToRad(lon1);
+  let λ2 = THREE.Math.degToRad(lon2);
+
+  let a = Math.sin((1-f)*δ) / Math.sin(δ);
+  let b = Math.sin(f*δ) / Math.sin(δ);
+
+  let x = (a * Math.cos(φ1) * Math.cos(λ1)) +
+          (b * Math.cos(φ2) * Math.cos(λ2));
+
+  let y = (a * Math.cos(φ1) * Math.sin(λ1)) +
+          (b * Math.cos(φ2) * Math.sin(λ2));
+
+  let z = (a * Math.sin(φ1)) +
+          (b * Math.sin(φ2));
+
+  let lon = Math.atan2(y, x);
+  let lat = Math.atan2(z, Math.sqrt(x*x + y*y));
+
+  let dLon = THREE.Math.radToDeg(lon);
+  let dLat = THREE.Math.radToDeg(lat);
+
+  return [dLon, dLat];
+
 };

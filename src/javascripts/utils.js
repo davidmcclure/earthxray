@@ -262,3 +262,57 @@ export function mergeLines(segments) {
   return geometry;
 
 };
+
+
+/**
+ * Calculate the Haversine distance between two coordinates.
+ *
+ * http://www.movable-type.co.uk/scripts/latlong.html
+ *
+ * @param {Number} lon1
+ * @param {Number} lat1
+ * @param {Number} lon2
+ * @param {Number} lat2
+ * @param {Number} r
+ */
+export function greatCircleDistance(lon1, lat1, lon2, lat2, r) {
+
+  let φ1 = THREE.Math.degToRad(lat1);
+  let φ2 = THREE.Math.degToRad(lat2);
+
+  let Δφ = THREE.Math.degToRad(lat2-lat1);
+  let Δλ = THREE.Math.degToRad(lon2-lon1);
+
+  let a = Math.sin(Δφ/2) *
+          Math.sin(Δφ/2) +
+          Math.cos(φ1) *
+          Math.cos(φ2) *
+          Math.sin(Δλ/2) *
+          Math.sin(Δλ/2);
+
+  let c = 2 * Math.atan2(
+    Math.sqrt(a),
+    Math.sqrt(1-a)
+  );
+
+  return c * r;
+
+};
+
+
+/**
+ * Get the coordinates of the point that lies at a given fraction of the
+ * spherical distance between two points.
+ *
+ * http://www.movable-type.co.uk/scripts/latlong.html
+ *
+ * @param {Number} lon1
+ * @param {Number} lat1
+ * @param {Number} lon2
+ * @param {Number} lat2
+ * @param {Number} r
+ * @param {Number} f
+ */
+export function greatCircleWaypoint(lon1, lat1, lon2, lat2, r, f) {
+  // TODO
+};

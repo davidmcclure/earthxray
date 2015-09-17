@@ -19,18 +19,6 @@ export default class extends Step {
    * @return {Promise}
    */
   start() {
-    return Promise.all([
-      this.zoomCamera(),
-    ]);
-  }
-
-
-  /**
-   * Tween the camera to the client location.
-   *
-   * @return {Promise}
-   */
-  zoomCamera() {
 
     // Get the swivel destination point.
 
@@ -64,7 +52,7 @@ export default class extends Step {
     // Generate a spline for the swivel.
 
     let points = [];
-    for (let i of _.range(21)) {
+    _.times(21, i => {
 
       let [lon, lat] = utils.intermediatePoint(
         lon1, lat1, lon2, lat2, i/20
@@ -73,7 +61,7 @@ export default class extends Step {
       let [x, y, z] = utils.lonLatToXYZ(lon, lat, r);
       points.push(new THREE.Vector3(x, y, z+cz));
 
-    }
+    });
 
     let spline = new THREE.SplineCurve3(points);
 

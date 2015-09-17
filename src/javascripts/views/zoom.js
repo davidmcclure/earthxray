@@ -33,17 +33,12 @@ export default class extends Step {
   zoomCamera() {
 
     // get pivot sphere end point
+    // http://www.ccs.neu.edu/home/fell/CSU540/programs/RayTracingFormulas.htm
 
     let d = this.camera.position.z + (opts.earth.radius*1.5);
     let r = d/2;
 
-    let cx = 0;
-    let cy = 0;
     let cz = this.camera.position.z - r;
-
-    let x0 = 0;
-    let y0 = 0;
-    let z0 = 0;
 
     let [dx, dy, dz] = utils.lonLatToXYZ(
       this.shared.location.longitude,
@@ -51,20 +46,14 @@ export default class extends Step {
     );
 
     let a = dx*dx + dy*dy + dz*dz;;
-    let b = 2*dx*(x0-cx) +  2*dy*(y0-cy) +  2*dz*(z0-cz);
-    let c = cx*cx + cy*cy + cz*cz + x0*x0 + y0*y0 + z0*z0 + -2*(cx*x0 + cy*y0 + cz*z0) - r*r;
+    let b = 2*dz*-cz;
+    let c = cz*cz - r*r;
 
     let t = (-b + Math.sqrt(b*b - 4*a*c)) / (2*a);
 
     let x = t*dx;
     let y = t*dy;
     let z = t*dz;
-
-    let geometry = new THREE.SphereGeometry(500, 32, 32);
-    let material = new THREE.MeshBasicMaterial({ color: 0xff0000 });
-    let mesh = new THREE.Mesh(geometry, material);
-    mesh.position.set(x, y, z);
-    this.world.add(mesh);
 
     // get start / end coordinates
 
@@ -87,7 +76,6 @@ export default class extends Step {
       );
 
       let [x, y, z] = utils.lonLatToXYZ(lon, lat, r);
-
       points.push(new THREE.Vector3(x, y, z+cz));
 
     }

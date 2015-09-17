@@ -84,18 +84,16 @@ export default class extends Step {
 
     // animate the camera
 
-    let camera = this.camera;
-
-    let t1 = new TWEEN.Tween({ f: 0 })
+    let t1 = new TWEEN.Tween()
 
       // Zoom to pivot sphere end point.
-      .to({ f: 1 }, 3000)
+      .to(null, 3000)
       .easing(TWEEN.Easing.Quadratic.Out)
 
       // Keep the camera pointed at the center.
-      .onUpdate(function() {
-        camera.position.copy(spline.getPoint(this.f))
-        camera.lookAt(new THREE.Vector3(0, 0, 0));
+      .onUpdate(f => {
+        this.camera.position.copy(spline.getPoint(f))
+        this.camera.lookAt(new THREE.Vector3(0, 0, 0));
       });
 
     let t2 = new TWEEN.Tween(this.camera.position)
@@ -104,7 +102,10 @@ export default class extends Step {
       .to({ x:dx, y:dy, z:dz }, 2000)
       .easing(TWEEN.Easing.Quadratic.Out);
 
-    t1.chain(t2).start();
+    return new Promise(resolve => {
+      t2.onComplete(resolve);
+      t1.chain(t2).start();
+    });
 
   }
 

@@ -35,9 +35,9 @@ export default class extends Controller {
       })
 
       // Start VR.
-      //.then(() => {
-        //xray.start();
-      //});
+      .then(() => {
+        xray.start();
+      });
 
   };
 

@@ -4,7 +4,6 @@ import _ from 'lodash';
 import TWEEN from 'tween.js';
 import THREE from 'three';
 import Promise from 'bluebird';
-
 import Step from './step';
 
 

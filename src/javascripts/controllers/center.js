@@ -1,7 +1,6 @@
 
 
 import React from 'react';
-
 import Controller from '../lib/controller';
 import { waitOnce } from '../utils';
 import Center from '../views/center';

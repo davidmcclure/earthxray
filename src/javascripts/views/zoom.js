@@ -65,9 +65,9 @@ export default class extends Step {
 
     let spline = new THREE.SplineCurve3(points);
 
-    // Swivel:
+    // Create the splines.
 
-    let t1 = new TWEEN.Tween()
+    let swivel = new TWEEN.Tween()
       .to(null, 3000)
       .easing(TWEEN.Easing.Quadratic.Out)
       .onUpdate(f => {
@@ -75,15 +75,15 @@ export default class extends Step {
         this.camera.lookAt(new THREE.Vector3(0, 0, 0));
       });
 
-    // Zoom down:
-
-    let t2 = new TWEEN.Tween(this.camera.position)
+    let zoom = new TWEEN.Tween(this.camera.position)
       .to({ x:gx, y:gy, z:gz }, 2000)
       .easing(TWEEN.Easing.Quadratic.Out);
 
+    // Run the animation.
+
     return new Promise(resolve => {
-      t2.onComplete(resolve);
-      t1.chain(t2).start();
+      zoom.onComplete(resolve);
+      swivel.chain(zoom).start();
     });
 
   }

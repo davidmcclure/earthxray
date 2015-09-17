@@ -32,26 +32,25 @@ export default class extends Step {
    */
   zoomCamera() {
 
-    // get pivot sphere end point
-    // http://www.ccs.neu.edu/home/fell/CSU540/programs/RayTracingFormulas.htm
+    // Get the swivel destination point.
 
     let d = this.camera.position.z + (opts.earth.radius*1.5);
     let r = d/2;
 
+    let [gx, gy, gz] = this.shared.location;
     let cz = this.camera.position.z - r;
-    let [dx, dy, dz] = this.shared.location;
 
-    let a = dx*dx + dy*dy + dz*dz;;
-    let b = 2*dz*-cz;
+    let a = gx*gx + gy*gy + gz*gz;
+    let b = 2*gz*-cz;
     let c = cz*cz - r*r;
 
     let t = (-b + Math.sqrt(b*b - 4*a*c)) / (2*a);
 
-    let x = t*dx;
-    let y = t*dy;
-    let z = t*dz;
+    let x = t*gx;
+    let y = t*gy;
+    let z = t*gz;
 
-    // get start / end coordinates
+    // Get start and end coordinates.
 
     let [lon1, lat1] = utils.xyzToLonLat(
       this.camera.position.x,
@@ -62,7 +61,7 @@ export default class extends Step {
 
     let [lon2, lat2] = utils.xyzToLonLat(x, y, z-cz, r);
 
-    // interpolate points
+    // Generate a spline for the swivel.
 
     let points = [];
     for (let i of _.range(21)) {
@@ -78,24 +77,20 @@ export default class extends Step {
 
     let spline = new THREE.SplineCurve3(points);
 
-    // animate the camera
+    // Swivel:
 
     let t1 = new TWEEN.Tween()
-
-      // Zoom to pivot sphere end point.
       .to(null, 3000)
       .easing(TWEEN.Easing.Quadratic.Out)
-
-      // Keep the camera pointed at the center.
       .onUpdate(f => {
         this.camera.position.copy(spline.getPoint(f))
         this.camera.lookAt(new THREE.Vector3(0, 0, 0));
       });
 
-    let t2 = new TWEEN.Tween(this.camera.position)
+    // Zoom down:
 
-      // Zoom to GPS location.
-      .to({ x:dx, y:dy, z:dz }, 2000)
+    let t2 = new TWEEN.Tween(this.camera.position)
+      .to({ x:gx, y:gy, z:gz }, 2000)
       .easing(TWEEN.Easing.Quadratic.Out);
 
     return new Promise(resolve => {

@@ -38,11 +38,7 @@ export default class extends Step {
    */
   positionCamera() {
 
-    // Get XYZ location.
-    let [x, y, z] = utils.lonLatToXYZ(
-      this.shared.location.longitude,
-      this.shared.location.latitude
-    );
+    let [x, y, z] = this.shared.location;
 
     // Store the default heading.
     this.camera.lookAt(new THREE.Vector3(0, 0, 0));

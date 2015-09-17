@@ -44,7 +44,11 @@ export default class extends Step {
       window.navigator.geolocation.getCurrentPosition(pos => {
 
         // Save the position.
-        this.shared.location = pos.coords;
+        this.shared.location = utils.lonLatToXYZ(
+          pos.coords.longitude,
+          pos.coords.latitude
+        );
+
         resolve();
 
       }, err => {

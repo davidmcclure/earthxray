@@ -39,11 +39,7 @@ export default class extends Step {
     let r = d/2;
 
     let cz = this.camera.position.z - r;
-
-    let [dx, dy, dz] = utils.lonLatToXYZ(
-      this.shared.location.longitude,
-      this.shared.location.latitude
-    );
+    let [dx, dy, dz] = this.shared.location;
 
     let a = dx*dx + dy*dy + dz*dz;;
     let b = 2*dz*-cz;

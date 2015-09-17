@@ -5,9 +5,8 @@ import Radio from 'backbone.radio';
 import THREE from 'three';
 import Hammer from 'hammerjs';
 
+import mats from './materials.yml';
 import Step from './step';
-import * as mats from './materials.yml';
-import * as utils from '../utils';
 
 
 export default class extends Step {

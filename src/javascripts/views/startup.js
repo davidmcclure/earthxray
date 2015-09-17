@@ -10,8 +10,8 @@ import Step from './step';
 import countryJSON from '../data/countries';
 import stateJSON from '../data/states';
 import * as utils from '../utils.js';
-import * as mats from './materials.yml';
-import * as opts from '../opts.yml';
+import opts from '../opts.yml';
+import mats from './materials.yml';
 
 
 export default class extends Step {
@@ -43,7 +43,7 @@ export default class extends Step {
     return new Promise((resolve, reject) => {
       window.navigator.geolocation.getCurrentPosition(pos => {
 
-        // Save the position.
+        // Share the position.
         this.shared.location = utils.lonLatToXYZ(
           pos.coords.longitude,
           pos.coords.latitude

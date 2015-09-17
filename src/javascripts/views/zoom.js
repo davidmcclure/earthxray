@@ -6,8 +6,6 @@ import THREE from 'three';
 import Promise from 'bluebird';
 
 import Step from './step';
-import * as utils from '../utils';
-import opts from '../opts.yml';
 
 
 export default class extends Step {

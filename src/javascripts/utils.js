@@ -4,7 +4,7 @@ import _ from 'lodash';
 import Radio from 'backbone.radio';
 import THREE from 'three';
 
-import * as opts from './opts.yml';
+import opts from './opts.yml';
 
 
 /**

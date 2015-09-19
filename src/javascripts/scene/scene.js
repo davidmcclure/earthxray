@@ -13,12 +13,15 @@ export default class {
 
   /**
    * Create the scene, camera, and renderer.
+   *
+   * @param {Object} el
    */
-  constructor() {
+  constructor(el) {
 
-    this.shared = {};
+    this.$el = $(el);
+
     this.events = new EventEmitter();
-    this.$el = $('#globe');
+    this.shared = {};
 
     this.createScene();
     this.createCamera();

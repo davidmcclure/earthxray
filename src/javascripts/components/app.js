@@ -1,6 +1,7 @@
 
 
 import React, {Component} from 'react';
+import Scene from './scene';
 
 
 export default class extends Component {
@@ -11,7 +12,7 @@ export default class extends Component {
    */
   render() {
     return (
-      <h1>EX</h1>
+      <Scene />
     );
   }
 

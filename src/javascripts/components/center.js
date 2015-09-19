@@ -5,9 +5,7 @@ import { connect } from 'react-redux';
 import { kmToMi } from '../utils';
 
 
-@connect(state => ({
-  distance: state.xray.distance
-}))
+@connect(state => state.xray)
 export default class extends React.Component {
 
 
@@ -15,6 +13,9 @@ export default class extends React.Component {
    * Render the center.
    */
   render() {
+
+    // Wait for the VR to start.
+    if (!this.props.active) return null;
 
     let distance;
 

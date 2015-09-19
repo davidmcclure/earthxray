@@ -1,6 +1,19 @@
 
 
-import { XRAY_TRACE_CENTER } from '../constants';
+import {
+  XRAY_START,
+  XRAY_TRACE_CENTER
+} from '../constants';
+
+
+/**
+ * When the VR starts.
+ */
+export function start() {
+  return {
+    type: XRAY_START,
+  };
+}
 
 
 /**

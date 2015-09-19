@@ -6,7 +6,7 @@ import THREE from 'three';
 import Hammer from 'hammerjs';
 
 import { store } from '../';
-import { traceCenter } from '../actions/xray';
+import { start, traceCenter } from '../actions/xray';
 import Step from './step';
 import mats from './materials.yml';
 
@@ -29,7 +29,7 @@ export default class extends Step {
       this.trace();
     });
 
-    Radio.trigger('xray', 'start');
+    store.dispatch(start());
 
   }
 

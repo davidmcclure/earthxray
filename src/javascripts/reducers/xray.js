@@ -1,17 +1,18 @@
 
 
 import { createReducer } from '../utils';
-import * as constants from '../constants';
+import { XRAY_TRACE_CENTER } from '../constants';
 
 
 const initialState = {
-  distance: null
+  active: false,
+  distance: null,
 };
 
 
 const handlers = {
 
-  [constants.XRAY_TRACE_CENTER]: (state, action) => ({
+  [XRAY_TRACE_CENTER]: (state, action) => ({
     distance: action.distance
   })
 

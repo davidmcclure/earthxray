@@ -1,26 +1,14 @@
 
 
 import React from 'react';
+import { connect } from 'react-redux';
 import { kmToMi } from '../utils';
 
 
+@connect(state => ({
+  distance: state.xray.distance
+}))
 export default class extends React.Component {
-
-
-  /**
-   * Set default state.
-   *
-   * @param {Object} props
-   */
-  constructor(props) {
-
-    super(props);
-
-    this.state = {
-      distance: null
-    };
-
-  }
 
 
   /**
@@ -31,10 +19,10 @@ export default class extends React.Component {
     let distance;
 
     // If we're below the horizon.
-    if (this.state.distance) {
+    if (this.props.distance) {
 
       // KM -> miles.
-      let miles = Math.round(kmToMi(this.state.distance));
+      let miles = Math.round(kmToMi(this.props.distance));
 
       distance = (
         <div className="distance">
@@ -55,7 +43,7 @@ export default class extends React.Component {
     }
 
     return (
-      <div>
+      <div id="center">
         <div className="stats">
           {distance}
         </div>

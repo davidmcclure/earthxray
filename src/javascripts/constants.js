@@ -1,3 +1,3 @@
 
 
-export const TRACE_CENTER = 'TRACE_CENTER';
+export const XRAY_TRACE_CENTER = 'XRAY_TRACE_CENTER';

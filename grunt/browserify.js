@@ -7,7 +7,10 @@ export default {
     transform: [
 
       ['babelify', {
-        optional: ['es7.classProperties']
+        optional: [
+          'es7.classProperties',
+          'es7.decorators',
+        ]
       }],
 
       'yamlify',

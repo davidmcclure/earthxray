@@ -1,6 +1,6 @@
 
 
-import { TRACE_CENTER } from '../constants';
+import { XRAY_TRACE_CENTER } from '../constants';
 
 
 /**
@@ -10,7 +10,7 @@ import { TRACE_CENTER } from '../constants';
  */
 export function traceCenter(distance) {
   return {
-    type: TRACE_CENTER,
+    type: XRAY_TRACE_CENTER,
     distance: distance,
   };
 }

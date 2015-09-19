@@ -196,7 +196,7 @@ export default class extends Step {
       this.dot.visible = false;
     }
 
-    traceCenter(distance);
+    store.dispatch(traceCenter(distance));
 
   }
 

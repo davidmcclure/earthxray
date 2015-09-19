@@ -2,6 +2,7 @@
 
 import React, {Component} from 'react';
 import Scene from './scene';
+import Center from './center';
 
 
 export default class extends Component {
@@ -12,7 +13,10 @@ export default class extends Component {
    */
   render() {
     return (
-      <Scene />
+      <div className="wrapper">
+        <Scene />
+        <Center />
+      </div>
     );
   }
 

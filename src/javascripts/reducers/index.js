@@ -1,9 +1,9 @@
 
 
 import { combineReducers } from 'redux';
-import trace from './trace';
+import xray from './xray';
 
 
 export default combineReducers({
-  trace,
+  xray,
 });

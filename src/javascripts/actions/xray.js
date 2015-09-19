@@ -1,8 +1,8 @@
 
 
 import {
-  XRAY_START,
-  XRAY_TRACE_CENTER
+  START_XRAY,
+  TRACE_XRAY_CENTER
 } from '../constants';
 
 
@@ -11,7 +11,7 @@ import {
  */
 export function start() {
   return {
-    type: XRAY_START,
+    type: START_XRAY,
   };
 }
 
@@ -23,7 +23,7 @@ export function start() {
  */
 export function traceCenter(distance) {
   return {
-    type: XRAY_TRACE_CENTER,
+    type: TRACE_XRAY_CENTER,
     distance: distance,
   };
 }

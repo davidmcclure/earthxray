@@ -1,4 +1,4 @@
 
 
-export const XRAY_START = 'XRAY_START';
-export const XRAY_TRACE_CENTER = 'XRAY_TRACE_CENTER';
+export const START_XRAY = 'START_XRAY';
+export const TRACE_XRAY_CENTER = 'TRACE_XRAY_CENTER';

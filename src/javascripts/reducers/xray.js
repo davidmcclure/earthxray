@@ -3,8 +3,8 @@
 import { createReducer } from '../utils';
 
 import {
-  XRAY_START,
-  XRAY_TRACE_CENTER,
+  START_XRAY,
+  TRACE_XRAY_CENTER,
 } from '../constants';
 
 
@@ -16,11 +16,11 @@ const initialState = {
 
 const handlers = {
 
-  [XRAY_START]: () => ({
+  [START_XRAY]: () => ({
     active: true
   }),
 
-  [XRAY_TRACE_CENTER]: (state, action) => ({
+  [TRACE_XRAY_CENTER]: (state, action) => ({
     distance: action.distance
   }),
 

@@ -20,6 +20,8 @@ export default class extends Step {
    */
   start() {
 
+    this.addDot();
+
     // Camera coordinates.
     let [x0, y0, z0] = this.camera.position.toArray();
     let [lon0, lat0] = utils.xyzToLonLat(x0, y0, z0);
@@ -47,8 +49,10 @@ export default class extends Step {
         // Get new 3d point.
         let [x, y, z] = utils.lonLatToXYZ(lon, lat, r);
 
+        // Position the camera and light.
         this.camera.position.set(x, y, z);
         this.camera.lookAt(new THREE.Vector3(0, 0, 0));
+        this.light.position.copy(this.camera.position);
 
       });
 
@@ -56,11 +60,52 @@ export default class extends Step {
       .to({ x:x1, y:y1, z:z1 })
       .easing(TWEEN.Easing.Quadratic.Out);
 
+    // Chain the tweens.
     return new Promise(resolve => {
-      zoom.onComplete(resolve);
+
+      zoom.onComplete(() => {
+        this.removeDot();
+        resolve();
+      });
+
       swivel.chain(zoom).start();
+
     });
 
+  }
+
+
+  /**
+   * Render a dot on the GPS location.
+   */
+  addDot() {
+
+    let geometry = new THREE.SphereGeometry(50, 32, 32);
+
+    let material = new THREE.MeshLambertMaterial({
+      color: 0xff0000
+    });
+
+    this.dot = new THREE.Mesh(geometry, material);
+
+    // Place dot on GPS location.
+    let [x, y, z] = this.shared.location;
+    this.dot.position.set(x, y, z);
+
+    // Sync light with camera.
+    this.light = new THREE.PointLight(0xffffff, 1, 0);
+    this.light.position.copy(this.camera.position);
+
+    this.world.add(this.dot, this.light);
+
+  }
+
+
+  /**
+   * Remove the dot.
+   */
+  removeDot() {
+    this.world.remove(this.dot, this.light);
   }
 
 

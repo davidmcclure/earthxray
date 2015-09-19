@@ -5,8 +5,10 @@ import Radio from 'backbone.radio';
 import THREE from 'three';
 import Hammer from 'hammerjs';
 
-import mats from './materials.yml';
+import { store } from '../';
+import { traceCenter } from '../actions/xray';
 import Step from './step';
+import mats from './materials.yml';
 
 
 export default class extends Step {
@@ -194,9 +196,7 @@ export default class extends Step {
       this.dot.visible = false;
     }
 
-    Radio.trigger('xray', 'trace', {
-      distance: distance,
-    });
+    traceCenter(distance);
 
   }
 

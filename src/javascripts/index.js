@@ -7,7 +7,7 @@ import reducers from './reducers';
 import App from './components/app';
 
 
-const store = createStore(reducers);
+export const store = createStore(reducers);
 
 
 React.render(

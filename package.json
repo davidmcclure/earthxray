@@ -49,6 +49,7 @@
     "rbush": "^1.4.0",
     "rbush-knn": "^1.0.2",
     "react": "^0.13.3",
+    "react-bootstrap": "^0.25.2",
     "three": "^0.71.0",
     "three-bmfont-text": "davidmcclure/three-bmfont-text",
     "turf": "^2.0.2",

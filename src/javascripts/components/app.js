@@ -19,17 +19,17 @@ export default class extends Component {
    */
   render() {
 
+    // Show error when geolocation fails.
+    let gpsError = this.props.gpsError ? <GPSError /> : null;
+
+    // Show center stats when VR is active.
+    let center = this.props.started ? <Center /> : null;
+
     return (
       <div className="wrapper">
-
         <Scene />
-
-        // GPS error modal.
-        {this.props.gpsError ? <GPSError /> : null}
-
-        // Show center when VR is active.
-        {this.props.started ? <Center /> : null}
-
+        {gpsError}
+        {center}
       </div>
     );
 

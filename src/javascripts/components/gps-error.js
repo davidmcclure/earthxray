@@ -1,6 +1,7 @@
 
 
 import React, { Component } from 'react';
+import { Modal } from 'react-bootstrap';
 
 
 export default class extends Component {
@@ -11,7 +12,13 @@ export default class extends Component {
    */
   render() {
     return (
-      <h1>GPS Error</h1>
+      <Modal show={true}>
+        <Modal.Body>
+          <div className="alert alert-danger">
+            <strong>Whoops, no GPS!</strong>
+          </div>
+        </Modal.Body>
+      </Modal>
     );
   }
 

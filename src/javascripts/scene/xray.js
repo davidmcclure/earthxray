@@ -78,7 +78,7 @@ export default class extends Step {
       });
 
       // Save the orientation data.
-      $(window).bind('deviceorientation.register', e => {
+      $(window).bind('deviceorientation', e => {
         this.orientation = e.originalEvent;
       });
 

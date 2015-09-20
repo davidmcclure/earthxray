@@ -11,7 +11,9 @@ export default class extends Component {
    */
   render() {
     return (
-      <h1>Whoops, no accelerometer!</h1>
+      <div className="error">
+        <h1>Whoops, no accelerometer!</h1>
+      </div>
     );
   }
 

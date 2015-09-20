@@ -1,6 +1,24 @@
 
 
 .error {
-  .centered();
-  .translate(-50%, -50%);
+
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100vw;
+
+  text-align: center;
+  background: rgba(0, 0, 0, 0.8);
+  color: darken(white, 15%);
+
+  .content {
+    .centered();
+    .translate(-50%, -50%);
+  }
+
+  i {
+    font-size: 6em;
+  }
+
 }

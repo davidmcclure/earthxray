@@ -51,12 +51,7 @@ export default class extends Step {
 
         resolve();
 
-      }, err => {
-
-        // TODO: Flash error.
-        reject();
-
-      });
+      }, reject);
     });
 
   }

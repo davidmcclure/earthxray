@@ -3,6 +3,8 @@
 import $ from 'jquery';
 import React, { Component, findDOMNode } from 'react';
 
+import { store } from '../';
+import { showGPSError } from '../actions/errors';
 import Scene from '../scene/scene';
 import Startup from '../scene/startup';
 import Zoom from '../scene/zoom';
@@ -34,6 +36,11 @@ export default class extends Component {
       // Start VR.
       .then(() => {
         xray.start();
+      })
+
+      // No GPS.
+      .catch(PositionError => {
+        store.dispatch(showGPSError());
       });
 
   }

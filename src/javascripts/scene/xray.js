@@ -1,6 +1,7 @@
 
 
 import _ from 'lodash';
+import $ from 'jquery';
 import Radio from 'backbone.radio';
 import THREE from 'three';
 import Promise from 'bluebird';
@@ -65,20 +66,20 @@ export default class extends Step {
     if (window.DeviceOrientationEvent) {
 
       // Check for the accelerometer.
-      $(window).bind('deviceorientation.check', data => {
+      $(window).bind('deviceorientation.check', e => {
 
         // If no data, show modal.
-        if (!data.alpha) {
+        if (!e.originalEvent.alpha) {
           store.dispatch(showOrientationError());
         }
 
-        this.unbind('deviceorientation.check');
+        $(window).unbind('deviceorientation.check');
 
       });
 
-      // Save the orientation event.
-      $(window).bind('deviceorientation.register', data => {
-        this.orientation = data;
+      // Save the orientation data.
+      $(window).bind('deviceorientation.register', e => {
+        this.orientation = e.originalEvent;
       });
 
     }

@@ -8,6 +8,7 @@ import Hammer from 'hammerjs';
 
 import { store } from '../';
 import { start, traceCenter } from '../actions/xray';
+import { showOrientationError } from '../actions/errors';
 import Step from './step';
 import mats from './materials.yml';
 
@@ -20,12 +21,10 @@ export default class extends Step {
    */
   start() {
 
-    let init = Promise.all([
-      this.positionCamera(),
-      this.listenForOrientation(),
-      this.listenForZoom(),
-      this.drawCenterDot(),
-    ]);
+    this.positionCamera(),
+    this.listenForOrientation(),
+    this.listenForZoom(),
+    this.drawCenterDot(),
 
     this.events.on('render', () => {
       this.point();
@@ -33,8 +32,6 @@ export default class extends Step {
     });
 
     store.dispatch(start());
-
-    return init;
 
   }
 
@@ -66,13 +63,28 @@ export default class extends Step {
   listenForOrientation() {
 
     if (window.DeviceOrientationEvent) {
-      window.addEventListener('deviceorientation', data => {
+
+      // Check for the accelerometer.
+      $(window).bind('deviceorientation.check', data => {
+
+        // If no data, show modal.
+        if (!data.alpha) {
+          store.dispatch(showOrientationError());
+        }
+
+        this.unbind('deviceorientation.check');
+
+      });
+
+      // Save the orientation event.
+      $(window).bind('deviceorientation.register', data => {
         this.orientation = data;
       });
+
     }
 
     else {
-      // TODO: Error.
+      store.dispatch(showOrientationError());
     }
 
   }

@@ -19,7 +19,7 @@ export function showGPSError() {
 /**
  * When `deviceorientation` fails.
  */
-export function showAccelerometerError() {
+export function showOrientationError() {
   return {
     type: SHOW_ORIENTATION_ERROR,
   };

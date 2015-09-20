@@ -16,17 +16,16 @@ export default class extends Component {
    * Render the top-level application structure.
    */
   render() {
-
-    // Show center stats when VR is active.
-    let center = this.props.started ?  <Center /> : null;
-
     return (
       <div className="wrapper">
+
         <Scene />
-        {center}
+
+        // Show center when VR is active.
+        {this.props.started ? <Center /> : null}
+
       </div>
     );
-
   }
 
 

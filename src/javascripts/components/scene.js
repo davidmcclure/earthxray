@@ -34,10 +34,6 @@ export default class extends Component {
       // Start VR.
       .then(() => {
         xray.start();
-      })
-
-      .catch(e => {
-        // TODO
       });
 
   }

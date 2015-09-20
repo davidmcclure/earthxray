@@ -3,6 +3,7 @@
 import _ from 'lodash';
 import Radio from 'backbone.radio';
 import THREE from 'three';
+import Promise from 'bluebird';
 import Hammer from 'hammerjs';
 
 import { store } from '../';
@@ -19,10 +20,12 @@ export default class extends Step {
    */
   start() {
 
-    this.positionCamera();
-    this.listenForOrientation();
-    this.listenForZoom();
-    this.drawCenterDot();
+    let init = Promise.all([
+      this.positionCamera(),
+      this.listenForOrientation(),
+      this.listenForZoom(),
+      this.drawCenterDot(),
+    ]);
 
     this.events.on('render', () => {
       this.point();
@@ -30,6 +33,8 @@ export default class extends Step {
     });
 
     store.dispatch(start());
+
+    return init;
 
   }
 

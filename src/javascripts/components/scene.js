@@ -35,7 +35,7 @@ export default class extends Component {
 
       // Start VR.
       .then(() => {
-        xray.start();
+        return xray.start();
       })
 
       // No GPS.

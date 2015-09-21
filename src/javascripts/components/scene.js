@@ -8,6 +8,8 @@ import Startup from '../scene/startup';
 import Zoom from '../scene/zoom';
 import Xray from '../scene/xray';
 
+import { GPSError, OrientationError } from '../errors';
+
 
 export default class extends Component {
 
@@ -34,6 +36,14 @@ export default class extends Component {
       // Start VR.
       .then(() => {
         return xray.start();
+      })
+
+      .catch(GPSError, err => {
+        alert('gps error');
+      })
+
+      .catch(OrientationError, err => {
+        alert('orientation error');
       });
 
       // TODO: Trigger start, catch errors.

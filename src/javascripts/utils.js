@@ -145,20 +145,6 @@ export function featureToGeoms(feature) {
 
 
 /**
- * Wait for a backbone.radio event to fire.
- *
- * @param {String} channel
- * @param {String} event
- * @returns {Promise}
- */
-export function waitOnce(channel, event) {
-  return new Promise((resolve, reject) => {
-    Radio.channel(channel).once(event, resolve);
-  });
-};
-
-
-/**
  * Trace out a circle geometry.
  *
  * @param {Number} segments

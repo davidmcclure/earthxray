@@ -9,6 +9,7 @@ import Zoom from '../scene/zoom';
 import Xray from '../scene/xray';
 
 import { store } from '../';
+import { startXray } from '../actions/xray';
 import { showGPSError, showOrientationError } from '../actions/errors';
 import { GPSError, OrientationError } from '../errors';
 
@@ -38,6 +39,11 @@ export default class extends Component {
       // Start VR.
       .then(() => {
         return xray.start();
+      })
+
+      // Notify started.
+      .then(() => {
+        store.dispatch(startXray());
       })
 
       // No GPS.

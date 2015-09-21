@@ -8,8 +8,8 @@ import Promise from 'bluebird';
 import Hammer from 'hammerjs';
 
 import { store } from '../';
-import { startXray, traceCenter } from '../actions/xray';
 import { OrientationError } from '../errors';
+import { traceCenter } from '../actions/xray';
 import Step from './step';
 import mats from './materials.yml';
 
@@ -155,9 +155,6 @@ export default class extends Step {
       this.point();
       this.trace();
     });
-
-    // TODO|dev
-    store.dispatch(startXray());
 
   }
 

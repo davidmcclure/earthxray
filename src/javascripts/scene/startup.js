@@ -8,6 +8,7 @@ import loadFont from 'load-bmfont';
 
 import { store } from '../';
 import { showGPSError } from '../actions/errors';
+import { GPSError } from '../errors';
 import Step from './step';
 import countryJSON from '../data/countries';
 import stateJSON from '../data/states';

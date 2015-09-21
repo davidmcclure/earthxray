@@ -10,6 +10,7 @@ import Hammer from 'hammerjs';
 import { store } from '../';
 import { startXray, traceCenter } from '../actions/xray';
 import { showOrientationError } from '../actions/errors';
+import { OrientationError } from '../errors';
 import Step from './step';
 import mats from './materials.yml';
 

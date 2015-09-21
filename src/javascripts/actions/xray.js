@@ -9,7 +9,7 @@ import {
 /**
  * When the VR starts.
  */
-export function start() {
+export function startXray() {
   return {
     type: START_XRAY,
   };

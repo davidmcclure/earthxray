@@ -15,7 +15,7 @@ export default class extends Component {
 
         <div className="content">
           <i className="fa fa-exclamation-circle"></i>
-          <h1>Whoops, no accelerometer!</h1>
+          <h1>Whoops, no accelerometer</h1>
           <h4>Try it on your phone!</h4>
         </div>
 

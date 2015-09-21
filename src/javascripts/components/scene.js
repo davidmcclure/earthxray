@@ -36,6 +36,8 @@ export default class extends Component {
         return xray.start();
       });
 
+      // TODO: Trigger start, catch errors.
+
   }
 
 

@@ -21,19 +21,13 @@ export default class extends Step {
    * Position and sync the camera.
    */
   start() {
-
-    this.positionCamera(),
-    this.listenForOrientation(),
-    this.listenForZoom(),
-    this.drawCenterDot(),
-
-    this.events.on('render', () => {
-      this.point();
-      this.trace();
-    });
-
-    store.dispatch(start());
-
+    return Promise.all([
+      this.positionCamera(),
+      this.drawCenterDot(),
+      this.listenForOrientation(),
+      this.listenForZoom(),
+      this.listenForRender(),
+    ]);
   }
 
 
@@ -54,6 +48,28 @@ export default class extends Step {
       new THREE.Vector3(0, 0.001, 0),
       new THREE.Vector3(x, y, z).normalize()
     );
+
+  }
+
+
+  /**
+   * Draw the 3d "center" dot.
+   */
+  drawCenterDot() {
+
+    let light = new THREE.PointLight(0xffffff, 1, 0);
+    light.position.copy(this.camera.position);
+
+    let geometry = new THREE.SphereGeometry(30, 32, 32);
+
+    let material = new THREE.MeshLambertMaterial({
+      color: 0xff0000
+    });
+
+    this.dot = new THREE.Mesh(geometry, material);
+    this.dot.visible = false;
+
+    this.world.add(this.dot, light);
 
   }
 
@@ -125,23 +141,17 @@ export default class extends Step {
 
 
   /**
-   * Draw the 3d "center" dot.
+   * Orient the camera on render.
    */
-  drawCenterDot() {
+  listenForRender() {
 
-    let light = new THREE.PointLight(0xffffff, 1, 0);
-    light.position.copy(this.camera.position);
-
-    let geometry = new THREE.SphereGeometry(30, 32, 32);
-
-    let material = new THREE.MeshLambertMaterial({
-      color: 0xff0000
+    this.events.on('render', () => {
+      this.point();
+      this.trace();
     });
 
-    this.dot = new THREE.Mesh(geometry, material);
-    this.dot.visible = false;
-
-    this.world.add(this.dot, light);
+    // TODO|dev
+    store.dispatch(start());
 
   }
 

@@ -8,6 +8,8 @@ import Startup from '../scene/startup';
 import Zoom from '../scene/zoom';
 import Xray from '../scene/xray';
 
+import { store } from '../';
+import { showGPSError, showOrientationError } from '../actions/errors';
 import { GPSError, OrientationError } from '../errors';
 
 
@@ -38,15 +40,15 @@ export default class extends Component {
         return xray.start();
       })
 
+      // No GPS.
       .catch(GPSError, err => {
-        alert('gps error');
+        store.dispatch(showGPSError());
       })
 
+      // No accelerometer.
       .catch(OrientationError, err => {
-        alert('orientation error');
+        store.dispatch(showOrientationError());
       });
-
-      // TODO: Trigger start, catch errors.
 
   }
 

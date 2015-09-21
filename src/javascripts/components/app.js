@@ -20,15 +20,12 @@ export default class extends Component {
    */
   render() {
 
-    // Toggle geolocation error.
     let gpsError = this.props.errors.gps ?
       <GPSError /> : null;
 
-    // Toggle accelerometer error.
     let orientationError = this.props.errors.orientation ?
       <OrientationError /> : null;
 
-    // Show stats when VR starts.
     let center = this.props.started ?
       <Center /> : null;
 

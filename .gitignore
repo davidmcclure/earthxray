@@ -9,5 +9,3 @@
 /build
 /dist
 /tmp
-
-/tasks/config/local.py

@@ -42,7 +42,7 @@ export default class extends Step {
     this.camera.lookAt(new THREE.Vector3(0, 0, 0));
     this.eye = this.camera.matrix.clone();
 
-    // TODO: More direct way to do this?
+    // Compass north, winter in my blood.
     this.eye.lookAt(
       new THREE.Vector3(x, y, z),
       new THREE.Vector3(0, 0.001, 0),

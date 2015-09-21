@@ -84,7 +84,7 @@ export default class extends Step {
       // Check for the accelerometer.
       $(window).bind('deviceorientation.check', e => {
 
-        // If no data, show modal.
+        // Flash error if no data.
         if (!e.originalEvent.alpha) {
           store.dispatch(showOrientationError());
         }

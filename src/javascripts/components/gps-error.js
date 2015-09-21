@@ -11,15 +11,7 @@ export default class extends Component {
    */
   render() {
     return (
-      <div className="error">
-
-        <div className="content">
-          <i className="fa fa-exclamation-circle"></i>
-          <h1>Whoops, no GPS</h1>
-          <h4>Try it on your phone!</h4>
-        </div>
-
-      </div>
+      <h1>No GPS!</h1>
     );
   }
 

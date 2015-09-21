@@ -9,7 +9,6 @@ import Hammer from 'hammerjs';
 
 import { store } from '../';
 import { startXray, traceCenter } from '../actions/xray';
-import { showOrientationError } from '../actions/errors';
 import { OrientationError } from '../errors';
 import Step from './step';
 import mats from './materials.yml';
@@ -80,30 +79,36 @@ export default class extends Step {
    */
   listenForOrientation() {
 
-    if (window.DeviceOrientationEvent) {
+    return new Promise((resolve, reject) => {
 
-      // Check for the accelerometer.
-      $(window).bind('deviceorientation.check', e => {
+      if (window.DeviceOrientationEvent) {
 
-        // Flash error if no data.
-        if (!e.originalEvent.alpha) {
-          store.dispatch(showOrientationError());
-        }
+        // Check for the accelerometer.
+        $(window).bind('deviceorientation.check', e => {
 
-        $(window).unbind('deviceorientation.check');
+          // Flash error if no data.
+          if (!e.originalEvent.alpha) {
+            reject(new OrientationError());
+          } else {
+            resolve();
+          }
 
-      });
+          $(window).unbind('deviceorientation.check');
 
-      // Save the orientation data.
-      $(window).bind('deviceorientation', e => {
-        this.orientation = e.originalEvent;
-      });
+        });
 
-    }
+        // Save the orientation data.
+        $(window).bind('deviceorientation', e => {
+          this.orientation = e.originalEvent;
+        });
 
-    else {
-      store.dispatch(showOrientationError());
-    }
+      }
+
+      else {
+        reject(new OrientationError());
+      }
+
+    });
 
   }
 

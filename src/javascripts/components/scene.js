@@ -22,7 +22,7 @@ export default class extends Component {
    */
   componentDidMount() {
 
-    let scene = new Scene(findDOMNode(this.refs.scene));
+    let scene = new Scene(findDOMNode(this));
 
     let startup = new Startup(scene);
     let zoom = new Zoom(scene);
@@ -63,7 +63,7 @@ export default class extends Component {
    * Render the scene container.
    */
   render() {
-    return <div id="scene" ref="scene"></div>
+    return <div id="scene"></div>
   }
 
 

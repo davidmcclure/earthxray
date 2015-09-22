@@ -2,7 +2,6 @@
 
 import _ from 'lodash';
 import $ from 'jquery';
-import Promise from 'bluebird';
 import EventEmitter from 'events';
 import THREE from 'three';
 import TWEEN from 'tween.js';

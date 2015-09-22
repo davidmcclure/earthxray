@@ -2,13 +2,32 @@
 
 import _ from 'lodash';
 import $ from 'jquery';
-import React, { Component, findDOMNode } from 'react';
+import React, { Component, findDOMNode, PropTypes } from 'react';
 import THREE from 'three';
 import EventEmitter from 'events';
 import TWEEN from 'tween.js';
 
+import Startup from './startup';
+
 
 export default class extends Component {
+
+
+  static childContextTypes = {
+    world: PropTypes.object,
+    camera: PropTypes.object,
+  }
+
+
+  /**
+   * Set initial state.
+   *
+   * @param {Object} props
+   */
+  constructor(props) {
+    super(props);
+    this.state = { mounted: false };
+  }
 
 
   /**
@@ -22,6 +41,8 @@ export default class extends Component {
     this.createScene();
     this.createCamera();
     this.animate();
+
+    this.setState({ mounted: true });
 
   }
 
@@ -93,9 +114,22 @@ export default class extends Component {
     TWEEN.update();
 
     // Render the new frame.
-    window.requestAnimationFrame(this.render.bind(this));
+    window.requestAnimationFrame(this.animate.bind(this));
     this.renderer.render(this.scene, this.camera);
 
+  }
+
+
+  /**
+   * Expose shared components.
+   *
+   * @return {Object}
+   */
+  getChildContext() {
+    return _.pick(this, [
+      'world',
+      'camera',
+    ]);
   }
 
 
@@ -103,7 +137,22 @@ export default class extends Component {
    * Render the scene container.
    */
   render() {
-    return <div id="scene"></div>
+
+    if (this.state.mounted) {
+
+      return (
+        <div id="scene">
+          <Startup />
+        </div>
+      );
+
+    }
+
+    else return (
+      <div id="scene">
+      </div>
+    )
+
   }
 
 

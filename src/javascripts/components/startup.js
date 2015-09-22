@@ -1,10 +1,26 @@
 
 
-import React, { Component } from 'react';
+import _ from 'lodash';
+import React, { Component, PropTypes } from 'react';
 import Promise from 'bluebird';
+import THREE from 'three';
+import createText from 'three-bmfont-text';
+import loadFont from 'load-bmfont';
+
+import * as utils from '../utils';
+import countryJSON from '../data/countries';
+import stateJSON from '../data/states';
+import opts from '../opts.yml';
+import mats from './materials.yml';
 
 
 export default class extends Component {
+
+
+  static contextTypes = {
+    world: PropTypes.object.isRequired,
+    camera: PropTypes.object.isRequired,
+  }
 
 
   /**
@@ -53,7 +69,7 @@ export default class extends Component {
    * Move the camera back to show the entire earth.
    */
   positionCamera() {
-    this.camera.position.z = 20000;
+    this.context.camera.position.z = 20000;
   }
 
 
@@ -92,7 +108,7 @@ export default class extends Component {
     let material = new THREE.LineBasicMaterial(mats.lonlat.thick);
 
     let equator = new THREE.Line(geometry, material);
-    this.world.add(equator);
+    this.context.world.add(equator);
 
   }
 
@@ -185,7 +201,7 @@ export default class extends Component {
         mesh.lookAt(mesh.position.clone().multiplyScalar(2));
         mesh.translateX(-(geometry.layout.width/2)*scale);
 
-        this.world.add(mesh);
+        this.context.world.add(mesh);
 
       }
     });
@@ -204,7 +220,7 @@ export default class extends Component {
     let merged = utils.mergeLines(geometries);
 
     let line = new THREE.Line(merged, material, THREE.LinePieces);
-    this.world.add(line);
+    this.context.world.add(line);
 
   }
 

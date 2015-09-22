@@ -1,0 +1,17 @@
+---
+
+lonlat:
+  thin:
+    color: 0xdddddd
+    linewidth: 1
+  thick:
+    color: 0x555555
+    linewidth: 1
+
+country:
+  color: 0x2a7bbf
+  linewidth: 2
+
+state:
+  color: 0xaaaaaa
+  linewidth: 1

@@ -17,7 +17,6 @@ export default class extends Component {
   componentDidMount() {
 
     this.$el = $(findDOMNode(this));
-
     this.events = new EventEmitter();
 
     this.createScene();

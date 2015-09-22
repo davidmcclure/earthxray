@@ -44,9 +44,7 @@ export default class extends React.Component {
 
     return (
       <div id="center">
-        <div className="stats">
-          {distance}
-        </div>
+        {distance}
       </div>
     );
 

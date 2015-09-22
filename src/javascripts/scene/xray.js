@@ -7,7 +7,7 @@ import THREE from 'three';
 import Promise from 'bluebird';
 import Hammer from 'hammerjs';
 
-import { store } from '../';
+import store from '../store';
 import { OrientationError } from '../errors';
 import { traceCenter } from '../actions/xray';
 import Step from './step';

@@ -8,7 +8,7 @@ import Startup from '../scene/startup';
 import Zoom from '../scene/zoom';
 import Xray from '../scene/xray';
 
-import { store } from '../';
+import store from '../store';
 import { startXray } from '../actions/xray';
 import { showGPSError, showOrientationError } from '../actions/errors';
 import { GPSError, OrientationError } from '../errors';

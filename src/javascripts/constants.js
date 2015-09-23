@@ -1,5 +1,8 @@
 
 
+export const GEOLOCATE = 'GEOLOCATE';
+export const FINISH_STARTUP = 'FINISH_STARTUP';
+
 export const START_XRAY = 'START_XRAY';
 export const TRACE_XRAY_CENTER = 'TRACE_XRAY_CENTER';
 

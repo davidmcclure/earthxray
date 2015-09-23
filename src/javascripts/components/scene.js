@@ -6,10 +6,14 @@ import React, { Component, findDOMNode, PropTypes } from 'react';
 import THREE from 'three';
 import EventEmitter from 'events';
 import TWEEN from 'tween.js';
+import { connect } from 'react-redux';
 
 import Startup from './startup';
 
 
+@connect(state => ({
+  drivers: state.scene.drivers
+}))
 export default class extends Component {
 
 
@@ -142,7 +146,7 @@ export default class extends Component {
 
       return (
         <div id="scene">
-          <Startup />
+          {this.props.drivers.startup ? <Startup /> : null}
         </div>
       );
 

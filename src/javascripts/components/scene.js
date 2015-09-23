@@ -10,6 +10,7 @@ import { connect } from 'react-redux';
 
 import Startup from './startup';
 import Zoom from './zoom';
+import Xray from './xray';
 
 
 @connect(state => ({
@@ -149,6 +150,7 @@ export default class extends Component {
         <div id="scene">
           {this.props.drivers.startup ? <Startup /> : null}
           {this.props.drivers.zoom ? <Zoom /> : null}
+          {this.props.drivers.xray ? <Xray /> : null}
         </div>
       );
 

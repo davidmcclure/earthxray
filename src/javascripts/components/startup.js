@@ -67,6 +67,10 @@ export default class extends Component {
         this.props.dispatch(geolocate(location));
         resolve();
 
+      }, () => {
+
+        // TODO: Error.
+
       });
     });
 

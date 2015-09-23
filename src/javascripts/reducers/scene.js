@@ -5,6 +5,7 @@ import { createReducer } from '../utils';
 import {
   GEOLOCATE,
   FINISH_STARTUP,
+  FINISH_ZOOM,
 } from '../constants';
 
 
@@ -28,6 +29,12 @@ const handlers = {
   [FINISH_STARTUP]: () => ({
     drivers: {
       zoom: true
+    }
+  }),
+
+  [FINISH_ZOOM]: () => ({
+    drivers: {
+      xray: true
     }
   }),
 

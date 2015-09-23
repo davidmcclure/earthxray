@@ -2,7 +2,8 @@
 
 import {
   GEOLOCATE,
-  FINISH_STARTUP
+  FINISH_STARTUP,
+  FINISH_ZOOM
 } from '../constants';
 
 
@@ -20,10 +21,20 @@ export function geolocate(location) {
 
 
 /**
- * When the startup driver finishes.
+ * When startup finishes.
  */
 export function finishStartup() {
   return {
     type: FINISH_STARTUP,
+  };
+}
+
+
+/**
+ * When the zoom finishes.
+ */
+export function finishZoom() {
+  return {
+    type: FINISH_ZOOM,
   };
 }

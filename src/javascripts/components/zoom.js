@@ -3,6 +3,10 @@
 import { connect } from 'react-redux';
 import React, { Component, PropTypes } from 'react';
 import THREE from 'three';
+import TWEEN from 'tween.js';
+
+import * as utils from '../utils';
+import opts from '../opts.yml';
 
 
 @connect(state => ({
@@ -24,9 +28,9 @@ export default class extends Component {
 
     this.addDot();
 
-    //this.zoom().then(() => {
-      //this.removeDot();
-    //});
+    this.zoom().then(() => {
+      this.removeDot();
+    });
 
   }
 
@@ -61,7 +65,7 @@ export default class extends Component {
    * Remove the location dot.
    */
   removeDot() {
-    // TODO
+    this.context.world.remove(this.dot, this.light);
   }
 
 
@@ -69,7 +73,53 @@ export default class extends Component {
    * Zoom into place.
    */
   zoom() {
-    // TODO
+
+    let camera = this.context.camera;
+
+    // Camera coordinates.
+    let [x0, y0, z0] = camera.position.toArray();
+    let [lon0, lat0] = utils.xyzToLonLat(x0, y0, z0);
+
+    // GPS coordinates.
+    let [x1, y1, z1] = this.props.location;
+    let [lon1, lat1] = utils.xyzToLonLat(x1, y1, z1);
+
+    let r0 = camera.position.z;
+    let r1 = opts.earth.radius * 1.5;
+    let dr = r1-r0;
+
+    let swivel = new TWEEN.Tween()
+      .to(null, 3000)
+      .easing(TWEEN.Easing.Quadratic.Out)
+      .onUpdate(f => {
+
+        let r = r0 + dr*f;
+
+        let [lon, lat] = utils.intermediatePoint(
+          lon0, lat0, lon1, lat1, f
+        );
+
+        let [x, y, z] = utils.lonLatToXYZ(lon, lat, r);
+
+        // Update the camera position.
+        camera.position.set(x, y, z);
+        camera.lookAt(new THREE.Vector3(0, 0, 0));
+
+        // Sync light with camera.
+        this.light.position.copy(camera.position);
+
+      });
+
+    let zoom = new TWEEN.Tween(camera.position)
+      .to({ x:x1, y:y1, z:z1 })
+      .easing(TWEEN.Easing.Quadratic.Out);
+
+    // Run the tweens.
+    return new Promise(resolve => {
+      zoom.onComplete(resolve);
+      swivel.chain(zoom).start();
+    });
+
   }
 
 

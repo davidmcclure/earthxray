@@ -6,6 +6,7 @@ import Promise from 'bluebird';
 import THREE from 'three';
 import createText from 'three-bmfont-text';
 import loadFont from 'load-bmfont';
+import { connect } from 'react-redux';
 
 import * as utils from '../utils';
 import countryJSON from '../data/countries';
@@ -13,7 +14,10 @@ import stateJSON from '../data/states';
 import opts from '../opts.yml';
 import mats from './materials.yml';
 
+import { geolocate } from '../actions/scene';
 
+
+@connect()
 export default class extends Component {
 
 
@@ -55,8 +59,8 @@ export default class extends Component {
           pos.coords.latitude
         );
 
-        // TODO: Set in store.
-
+        // Set in store.
+        this.props.dispatch(geolocate(location));
         resolve();
 
       });

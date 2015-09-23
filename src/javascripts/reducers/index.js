@@ -1,11 +1,13 @@
 
 
 import { combineReducers } from 'redux';
-import xray from './xray';
+import scene from './scene';
 import errors from './errors';
+import xray from './xray';
 
 
 export default combineReducers({
-  xray,
+  scene,
   errors,
+  xray,
 });

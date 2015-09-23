@@ -9,6 +9,7 @@ import TWEEN from 'tween.js';
 import { connect } from 'react-redux';
 
 import Startup from './startup';
+import Zoom from './zoom';
 
 
 @connect(state => ({
@@ -147,6 +148,7 @@ export default class extends Component {
       return (
         <div id="scene">
           {this.props.drivers.startup ? <Startup /> : null}
+          {this.props.drivers.zoom ? <Zoom /> : null}
         </div>
       );
 

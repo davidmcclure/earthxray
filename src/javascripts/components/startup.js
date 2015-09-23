@@ -14,7 +14,7 @@ import stateJSON from '../data/states';
 import opts from '../opts.yml';
 import mats from './materials.yml';
 
-import { geolocate } from '../actions/scene';
+import { geolocate, finishStartup } from '../actions/scene';
 
 
 @connect()
@@ -40,7 +40,11 @@ export default class extends Component {
       this.drawCountries(),
       this.drawStates(),
       this.drawLabels(),
-    ]);
+    ])
+
+    .then(() => {
+      this.props.dispatch(finishStartup());
+    });
 
   }
 

@@ -17,3 +17,13 @@ export function geolocate(location) {
     location: location,
   };
 }
+
+
+/**
+ * When the startup driver finishes.
+ */
+export function finishStartup() {
+  return {
+    type: FINISH_STARTUP,
+  };
+}

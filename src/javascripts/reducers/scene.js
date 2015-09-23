@@ -25,6 +25,12 @@ const handlers = {
     location: action.location
   }),
 
+  [FINISH_STARTUP]: () => ({
+    drivers: {
+      zoom: true
+    }
+  }),
+
 };
 
 

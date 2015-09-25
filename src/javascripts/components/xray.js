@@ -40,9 +40,7 @@ export default class extends Component {
       this.listenForRender(),
     ])
 
-    .then(() => {
-      this.props.startXray();
-    });
+    .then(this.props.startXray);
 
   }
 

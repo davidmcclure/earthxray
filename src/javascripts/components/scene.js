@@ -23,6 +23,7 @@ export default class extends Component {
     world: PropTypes.object,
     camera: PropTypes.object,
     $el: PropTypes.object,
+    events: PropTypes.object,
   }
 
 
@@ -36,6 +37,7 @@ export default class extends Component {
       'world',
       'camera',
       '$el',
+      'events',
     ]);
   }
 

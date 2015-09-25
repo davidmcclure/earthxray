@@ -6,10 +6,15 @@ import React, { Component, PropTypes } from 'react';
 import THREE from 'three';
 import Hammer from 'hammerjs';
 
+import * as actions from '../actions/xray';
 
-@connect(state => ({
-  location: state.scene.location
-}))
+
+@connect(
+  state => ({
+    location: state.scene.location
+  }),
+  actions
+)
 export default class extends Component {
 
 
@@ -17,6 +22,7 @@ export default class extends Component {
     world: PropTypes.object.isRequired,
     camera: PropTypes.object.isRequired,
     $el: PropTypes.object.isRequired,
+    events: PropTypes.object.isRequired,
   }
 
 
@@ -28,7 +34,7 @@ export default class extends Component {
     this.drawCenterDot();
     this.listenForOrientation();
     this.listenForZoom();
-    //this.listenForRender();
+    this.listenForRender();
   }
 
 
@@ -137,6 +143,94 @@ export default class extends Component {
       this.context.camera.updateProjectionMatrix();
 
     });
+
+  }
+
+
+  /**
+   * Orient the camera on render.
+   */
+  listenForRender() {
+
+    this.context.events.on('render', () => {
+      this.point();
+      this.trace();
+    });
+
+  }
+
+
+  // ** Render loop:
+
+
+  /**
+   * Point the camera.
+   */
+  point() {
+
+    if (!this.orientation || !this.eye) return;
+
+    let a = THREE.Math.degToRad(this.orientation.alpha);
+    let b = THREE.Math.degToRad(this.orientation.beta);
+    let g = THREE.Math.degToRad(this.orientation.gamma);
+
+    let ra = new THREE.Matrix4();
+    let rb = new THREE.Matrix4();
+    let rg = new THREE.Matrix4();
+
+    ra.makeRotationZ(a);
+    rb.makeRotationX(b);
+    rg.makeRotationY(g);
+
+    let r = this.eye.clone();
+    r.multiply(ra);
+    r.multiply(rb);
+    r.multiply(rg);
+
+    this.context.camera.quaternion.setFromRotationMatrix(r);
+
+  }
+
+
+  /**
+   * Trace the far-side intersection point.
+   */
+  trace() {
+
+    let camera = this.context.camera;
+
+    // Heading vector.
+    let heading = new THREE.Vector3(0, 0, -1);
+    heading.applyQuaternion(camera.quaternion);
+
+    // Scaling coefficient.
+    let a = heading.dot(heading);
+    let b = 2 * heading.dot(camera.position);
+    let u = (-2*b) / (2*a);
+
+    let distance;
+
+    // Looking down.
+    if (u > 0) {
+
+      heading.multiplyScalar(u);
+
+      // Get far-side intersection.
+      let c = camera.position.clone().add(heading);
+      distance = camera.position.distanceTo(c);
+
+      // Update center dot.
+      this.dot.position.copy(c);
+      this.dot.visible = true;
+
+    }
+
+    // Looking into space.
+    else {
+      this.dot.visible = false;
+    }
+
+    // dispatch trace
 
   }
 

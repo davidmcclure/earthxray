@@ -4,6 +4,7 @@ import $ from 'jquery';
 import { connect } from 'react-redux';
 import React, { Component, PropTypes } from 'react';
 import THREE from 'three';
+import Promise from 'bluebird';
 import Hammer from 'hammerjs';
 
 import * as actions from '../actions/xray';
@@ -30,11 +31,19 @@ export default class extends Component {
    * Mount the VR.
    */
   componentDidMount() {
-    this.initializeHeading();
-    this.drawCenterDot();
-    this.listenForOrientation();
-    this.listenForZoom();
-    this.listenForRender();
+
+    Promise.all([
+      this.initializeHeading(),
+      this.drawCenterDot(),
+      this.listenForOrientation(),
+      this.listenForZoom(),
+      this.listenForRender(),
+    ])
+
+    .then(() => {
+      this.props.startXray();
+    });
+
   }
 
 
@@ -87,29 +96,35 @@ export default class extends Component {
    */
   listenForOrientation() {
 
-    if (window.DeviceOrientationEvent) {
+    return new Promise((resolve, reject) => {
 
-      // Check for the accelerometer.
-      $(window).bind('deviceorientation.check', e => {
+      if (window.DeviceOrientationEvent) {
 
-        if (!e.originalEvent.alpha) {
-          // TODO: Dispatch error.
-        }
+        // Check for the accelerometer.
+        $(window).bind('deviceorientation.check', e => {
 
-        $(window).unbind('deviceorientation.check');
+          if (!e.originalEvent.alpha) {
+            // TODO: Dispatch error.
+          } else {
+            resolve();
+          }
 
-      });
+          $(window).unbind('deviceorientation.check');
 
-      // Save the orientation data.
-      $(window).bind('deviceorientation', e => {
-        this.orientation = e.originalEvent;
-      });
+        });
 
-    }
+        // Save the orientation data.
+        $(window).bind('deviceorientation', e => {
+          this.orientation = e.originalEvent;
+        });
 
-    else {
-      // TODO: Dispatch error.
-    }
+      }
+
+      else {
+        // TODO: Dispatch error.
+      }
+
+    });
 
   }
 

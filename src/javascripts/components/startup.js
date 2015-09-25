@@ -8,16 +8,15 @@ import createText from 'three-bmfont-text';
 import loadFont from 'load-bmfont';
 import { connect } from 'react-redux';
 
-import * as utils from '../utils';
 import countryJSON from '../data/countries';
 import stateJSON from '../data/states';
+import * as utils from '../utils';
+import * as actions from '../actions/scene';
 import opts from '../opts.yml';
 import mats from './materials.yml';
 
-import { geolocate, finishStartup } from '../actions/scene';
 
-
-@connect()
+@connect(null, actions)
 export default class extends Component {
 
 
@@ -43,7 +42,7 @@ export default class extends Component {
     ])
 
     .then(() => {
-      this.props.dispatch(finishStartup());
+      this.props.finishStartup();
     });
 
   }
@@ -64,7 +63,7 @@ export default class extends Component {
         );
 
         // Set in store.
-        this.props.dispatch(geolocate(location));
+        this.props.geolocate(location);
         resolve();
 
       }, () => {

@@ -7,12 +7,13 @@ import TWEEN from 'tween.js';
 
 import * as utils from '../utils';
 import opts from '../opts.yml';
-import { finishZoom } from '../actions/scene';
+import * as actions from '../actions/scene';
 
 
-@connect(state => ({
-  location: state.scene.location
-}))
+@connect(
+  state => ({ location: state.scene.location }),
+  actions
+)
 export default class extends Component {
 
 
@@ -31,7 +32,7 @@ export default class extends Component {
 
     this.zoom().then(() => {
       this.removeDot();
-      this.props.dispatch(finishZoom());
+      this.props.finishZoom();
     });
 
   }

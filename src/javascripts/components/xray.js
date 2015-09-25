@@ -4,6 +4,7 @@ import $ from 'jquery';
 import { connect } from 'react-redux';
 import React, { Component, PropTypes } from 'react';
 import THREE from 'three';
+import Hammer from 'hammerjs';
 
 
 @connect(state => ({
@@ -15,6 +16,7 @@ export default class extends Component {
   static contextTypes = {
     world: PropTypes.object.isRequired,
     camera: PropTypes.object.isRequired,
+    $el: PropTypes.object.isRequired,
   }
 
 
@@ -25,7 +27,7 @@ export default class extends Component {
     this.initializeHeading();
     this.drawCenterDot();
     this.listenForOrientation();
-    //this.listenForZoom();
+    this.listenForZoom();
     //this.listenForRender();
   }
 
@@ -102,6 +104,39 @@ export default class extends Component {
     else {
       // TODO: Dispatch error.
     }
+
+  }
+
+
+  /**
+   * Pinch to zoom.
+   */
+  listenForZoom() {
+
+    let el = this.context.$el.get(0);
+    let gesture = new Hammer(el);
+
+    // Enable pinch.
+    gesture.get('pinch').set({ enable: true });
+
+    let start;
+
+    // Capture initial FOV.
+    gesture.on('pinchstart', e => {
+      start = this.context.camera.fov;
+    });
+
+    gesture.on('pinch', e => {
+
+      // Break if we're out of bounds.
+      let fov = start / e.scale;
+      if (fov < 5 || fov > 120) return;
+
+      // Apply the new FOV.
+      this.context.camera.fov = fov;
+      this.context.camera.updateProjectionMatrix();
+
+    });
 
   }
 

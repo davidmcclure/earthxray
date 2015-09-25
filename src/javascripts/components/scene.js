@@ -22,6 +22,21 @@ export default class extends Component {
   static childContextTypes = {
     world: PropTypes.object,
     camera: PropTypes.object,
+    $el: PropTypes.object,
+  }
+
+
+  /**
+   * Expose shared components.
+   *
+   * @return {Object}
+   */
+  getChildContext() {
+    return _.pick(this, [
+      'world',
+      'camera',
+      '$el',
+    ]);
   }
 
 
@@ -123,19 +138,6 @@ export default class extends Component {
     window.requestAnimationFrame(this.animate.bind(this));
     this.renderer.render(this.scene, this.camera);
 
-  }
-
-
-  /**
-   * Expose shared components.
-   *
-   * @return {Object}
-   */
-  getChildContext() {
-    return _.pick(this, [
-      'world',
-      'camera',
-    ]);
   }
 
 

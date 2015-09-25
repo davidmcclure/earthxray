@@ -3,18 +3,28 @@
 import $ from 'jquery';
 import { connect } from 'react-redux';
 import React, { Component, PropTypes } from 'react';
+import { bindActionCreators } from 'redux';
 import THREE from 'three';
 import Promise from 'bluebird';
 import Hammer from 'hammerjs';
 
-import * as actions from '../actions/xray';
+import * as xrayActions from '../actions/xray';
+import * as errorActions from '../actions/errors';
 
 
 @connect(
+
   state => ({
     location: state.scene.location
   }),
-  actions
+
+  dispatch => {
+    return bindActionCreators({
+      ...xrayActions,
+      ...errorActions,
+    }, dispatch);
+  }
+
 )
 export default class extends Component {
 
@@ -101,8 +111,9 @@ export default class extends Component {
         // Check for the accelerometer.
         $(window).bind('deviceorientation.check', e => {
 
+          // Error if no data.
           if (!e.originalEvent.alpha) {
-            // TODO: Dispatch error.
+            this.props.showOrientationError();
           } else {
             resolve();
           }
@@ -119,7 +130,7 @@ export default class extends Component {
       }
 
       else {
-        // TODO: Dispatch error.
+        this.props.showOrientationError();
       }
 
     });

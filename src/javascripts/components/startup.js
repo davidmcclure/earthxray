@@ -2,21 +2,29 @@
 
 import _ from 'lodash';
 import React, { Component, PropTypes } from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import Promise from 'bluebird';
 import THREE from 'three';
 import createText from 'three-bmfont-text';
 import loadFont from 'load-bmfont';
-import { connect } from 'react-redux';
 
-import countryJSON from '../data/countries';
 import stateJSON from '../data/states';
+import countryJSON from '../data/countries';
 import * as utils from '../utils';
-import * as actions from '../actions/scene';
 import opts from '../opts.yml';
 import mats from './materials.yml';
 
+import * as sceneActions from '../actions/scene';
+import * as errorActions from '../actions/errors';
 
-@connect(null, actions)
+
+@connect(null, dispatch => {
+  return bindActionCreators({
+    ...sceneActions,
+    ...errorActions,
+  }, dispatch);
+})
 export default class extends Component {
 
 
@@ -68,7 +76,8 @@ export default class extends Component {
 
       }, () => {
 
-        // TODO: Error.
+        // Flash error.
+        this.props.showGPSError();
 
       });
     });

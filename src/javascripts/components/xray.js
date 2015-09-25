@@ -1,5 +1,6 @@
 
 
+import $ from 'jquery';
 import { connect } from 'react-redux';
 import React, { Component, PropTypes } from 'react';
 import THREE from 'three';
@@ -23,7 +24,7 @@ export default class extends Component {
   componentDidMount() {
     this.initializeHeading();
     this.drawCenterDot();
-    //this.listenForOrientation();
+    this.listenForOrientation();
     //this.listenForZoom();
     //this.listenForRender();
   }
@@ -69,6 +70,38 @@ export default class extends Component {
     // Sync light with camera.
     light.position.copy(this.context.camera.position);
     this.context.world.add(this.dot, light);
+
+  }
+
+
+  /**
+   * Bind to device orientation.
+   */
+  listenForOrientation() {
+
+    if (window.DeviceOrientationEvent) {
+
+      // Check for the accelerometer.
+      $(window).bind('deviceorientation.check', e => {
+
+        if (!e.originalEvent.alpha) {
+          // TODO: Dispatch error.
+        }
+
+        $(window).unbind('deviceorientation.check');
+
+      });
+
+      // Save the orientation data.
+      $(window).bind('deviceorientation', e => {
+        this.orientation = e.originalEvent;
+      });
+
+    }
+
+    else {
+      // TODO: Dispatch error.
+    }
 
   }
 

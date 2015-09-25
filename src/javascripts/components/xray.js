@@ -230,7 +230,7 @@ export default class extends Component {
       this.dot.visible = false;
     }
 
-    // dispatch trace
+    this.props.traceCenter(distance);
 
   }
 

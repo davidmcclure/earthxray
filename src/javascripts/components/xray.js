@@ -12,6 +12,7 @@ export default class extends Component {
 
 
   static contextTypes = {
+    world: PropTypes.object.isRequired,
     camera: PropTypes.object.isRequired,
   }
 
@@ -21,7 +22,7 @@ export default class extends Component {
    */
   componentDidMount() {
     this.initializeHeading();
-    //this.drawCenterDot();
+    this.drawCenterDot();
     //this.listenForOrientation();
     //this.listenForZoom();
     //this.listenForRender();
@@ -45,6 +46,29 @@ export default class extends Component {
       new THREE.Vector3(0, 0.001, 0),
       new THREE.Vector3(x, y, z).normalize()
     );
+
+  }
+
+
+  /**
+   * Draw the 3d "center" dot.
+   */
+  drawCenterDot() {
+
+    let light = new THREE.PointLight(0xffffff, 1, 0);
+
+    let geometry = new THREE.SphereGeometry(30, 32, 32);
+
+    let material = new THREE.MeshLambertMaterial({
+      color: 0xff0000
+    });
+
+    this.dot = new THREE.Mesh(geometry, material);
+    this.dot.visible = false;
+
+    // Sync light with camera.
+    light.position.copy(this.context.camera.position);
+    this.context.world.add(this.dot, light);
 
   }
 

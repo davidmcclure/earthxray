@@ -20,9 +20,9 @@ export default class extends Component {
 
 
   static childContextTypes = {
-    world: PropTypes.object,
+    world:  PropTypes.object,
     camera: PropTypes.object,
-    $el: PropTypes.object,
+    $el:    PropTypes.object,
     events: PropTypes.object,
   }
 

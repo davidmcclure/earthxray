@@ -19,9 +19,9 @@ export default class extends Component {
 
 
   static contextTypes = {
-    world: PropTypes.object.isRequired,
+    world:  PropTypes.object.isRequired,
     camera: PropTypes.object.isRequired,
-    $el: PropTypes.object.isRequired,
+    $el:    PropTypes.object.isRequired,
     events: PropTypes.object.isRequired,
   }
 

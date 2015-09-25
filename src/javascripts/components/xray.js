@@ -129,6 +129,7 @@ export default class extends Component {
 
       }
 
+      // Error if no support.
       else {
         this.props.showOrientationError();
       }

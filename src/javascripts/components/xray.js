@@ -10,6 +10,7 @@ import Hammer from 'hammerjs';
 
 import * as xrayActions from '../actions/xray';
 import * as errorActions from '../actions/errors';
+import * as events from '../events/xray';
 
 
 @connect(
@@ -255,7 +256,7 @@ export default class extends Component {
       this.dot.visible = false;
     }
 
-    this.props.traceCenter(distance);
+    events.traceXrayCenter(distance);
 
   }
 

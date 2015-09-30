@@ -1,14 +1,44 @@
 
 
 import React from 'react';
-import { connect } from 'react-redux';
+import RadioComponent from '../lib/radio-component';
 import { kmToMi } from '../utils';
 
+import {
+  TRACE_XRAY_CENTER,
+} from '../constants';
 
-@connect(state => ({
-  distance: state.xray.distance
-}))
-export default class extends React.Component {
+
+export default class extends RadioComponent {
+
+
+  static channelName = 'center'
+
+
+  static events = {
+    xray: {
+      [TRACE_XRAY_CENTER]: 'trace'
+    }
+  }
+
+
+  /**
+   * Set initial state.
+   */
+  constructor(props) {
+    super(props);
+    this.state = { distance: null };
+  }
+
+
+  /**
+   * Set the distance.
+   *
+   * @param {Number} distance
+   */
+  trace(distance) {
+    this.setState({ distance });
+  }
 
 
   /**
@@ -19,10 +49,10 @@ export default class extends React.Component {
     let distance;
 
     // If we're below the horizon.
-    if (this.props.distance) {
+    if (this.state.distance) {
 
       // KM -> miles.
-      let miles = Math.round(kmToMi(this.props.distance));
+      let miles = Math.round(kmToMi(this.state.distance));
 
       distance = (
         <div className="distance">

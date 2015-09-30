@@ -14,16 +14,3 @@ export function startXray() {
     type: START_XRAY,
   };
 }
-
-
-/**
- * When the far-side intersection is traced.
- *
- * @param {Number} distance
- */
-export function traceCenter(distance) {
-  return {
-    type: TRACE_XRAY_CENTER,
-    distance: distance,
-  };
-}

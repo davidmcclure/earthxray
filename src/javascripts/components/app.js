@@ -24,13 +24,15 @@ export default class extends Component {
       <div className="wrapper">
 
         <Scene />
-        <Nav />
 
         {this.props.errors.gps ?
           <GPSError /> : null}
 
         {this.props.errors.orientation ?
           <OrientationError /> : null}
+
+        {this.props.started ?
+          <Nav /> : null}
 
         {this.props.started ?
           <Center /> : null}

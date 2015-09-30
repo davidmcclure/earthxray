@@ -2,7 +2,6 @@
 
 import {
   START_XRAY,
-  TRACE_XRAY_CENTER
 } from '../constants';
 
 

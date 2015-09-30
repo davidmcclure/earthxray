@@ -35,7 +35,7 @@
   },
   "dependencies": {
     "backbone": "^1.2.3",
-    "backbone.radio": "^1.0.1",
+    "backbone.radio": "^1.0.2",
     "bluebird": "^2.9.34",
     "bootstrap": "^3.3.5",
     "classnames": "^2.1.3",

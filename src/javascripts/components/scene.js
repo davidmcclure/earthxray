@@ -11,10 +11,12 @@ import { connect } from 'react-redux';
 import Startup from './startup';
 import Zoom from './zoom';
 import Xray from './xray';
+import Spin from './spin';
 
 
 @connect(state => ({
-  drivers: state.scene.drivers
+  drivers: state.scene.drivers,
+  errors: state.errors,
 }))
 export default class extends Component {
 
@@ -150,11 +152,15 @@ export default class extends Component {
 
     if (this.state.mounted) {
 
+      // Is an error visible?
+      let isError = _.includes(this.props.errors, true);
+
       return (
         <div id="scene">
           {this.props.drivers.startup ? <Startup /> : null}
           {this.props.drivers.zoom ? <Zoom /> : null}
           {this.props.drivers.xray ? <Xray /> : null}
+          {isError ? <Spin /> : null}
         </div>
       );
 

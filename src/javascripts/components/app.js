@@ -6,6 +6,7 @@ import Scene from './scene';
 import GPSError from './gps-error';
 import OrientationError from './orientation-error';
 import Center from './center';
+import Nav from './nav';
 
 
 @connect(state => ({
@@ -23,6 +24,7 @@ export default class extends Component {
       <div className="wrapper">
 
         <Scene />
+        <Nav />
 
         {this.props.errors.gps ?
           <GPSError /> : null}

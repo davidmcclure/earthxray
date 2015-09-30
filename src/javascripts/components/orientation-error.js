@@ -7,10 +7,9 @@ export default class extends Component {
 
 
   /**
-   * Render the GPS error modal.
+   * Render the orientation error modal.
    */
   render() {
-    alert('No accelerometer!');
     return (
       <h1>No accelerometer!</h1>
     );

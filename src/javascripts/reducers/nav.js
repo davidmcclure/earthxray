@@ -3,6 +3,7 @@
 import { createReducer } from '../utils';
 
 import {
+  START_XRAY,
   TOGGLE_NAV,
 } from '../constants';
 
@@ -13,6 +14,10 @@ const initialState = {
 
 
 const handlers = {
+
+  [START_XRAY]: () => ({
+    active: true
+  }),
 
   [TOGGLE_NAV]: (state) => ({
     active: !state.active

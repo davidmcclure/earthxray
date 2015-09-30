@@ -12,7 +12,9 @@ export default class extends Component {
    */
   render() {
     return (
-      <h1>Navigation</h1>
+      <Overlay>
+        <h1>Earth Xray</h1>
+      </Overlay>
     );
   }
 

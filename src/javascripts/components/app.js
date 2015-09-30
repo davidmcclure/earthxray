@@ -1,11 +1,17 @@
 
 
+import { connect } from 'react-redux';
 import React, { Component } from 'react';
 import Scene from './scene';
-import Errors from './errors';
-import Stats from './stats';
+import GPSError from './gps-error';
+import OrientationError from './orientation-error';
+import Center from './center';
 
 
+@connect(state => ({
+  started: state.xray.active,
+  errors: state.errors,
+}))
 export default class extends Component {
 
 
@@ -15,9 +21,18 @@ export default class extends Component {
   render() {
     return (
       <div className="wrapper">
+
         <Scene />
-        <Errors />
-        <Stats />
+
+        {this.props.errors.gps ?
+          <GPSError /> : null}
+
+        {this.props.errors.orientation ?
+          <OrientationError /> : null}
+
+        {this.props.started ?
+          <Center /> : null}
+
       </div>
     );
   }

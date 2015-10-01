@@ -1,18 +1,20 @@
 
 
 import React, { Component } from 'react';
-import Info from './info';
+import Overlay from './overlay';
 
 
 export default class extends Component {
 
 
   /**
-   * Render navigation.
+   * Render the overlay info.
    */
   render() {
     return (
-      <Info />
+      <Overlay className="info">
+        <h1>Earth Xray</h1>
+      </Overlay>
     );
   }
 

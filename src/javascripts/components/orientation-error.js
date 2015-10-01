@@ -12,7 +12,7 @@ export default class extends Component {
    */
   render() {
     return (
-      <Overlay>
+      <Overlay className="error">
         <i className="fa fa-exclamation-circle"></i>
         <h1>Whoops, no accelerometer</h1>
         <p>Try it on your phone!</p>

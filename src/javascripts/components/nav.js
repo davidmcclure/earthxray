@@ -12,7 +12,7 @@ export default class extends Component {
    */
   render() {
     return (
-      <Overlay>
+      <Overlay className="nav">
         <h1>Earth Xray</h1>
       </Overlay>
     );

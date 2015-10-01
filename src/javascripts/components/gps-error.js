@@ -14,7 +14,7 @@ export default class extends Component {
     return (
       <Overlay>
         <i className="fa fa-exclamation-circle"></i>
-        <h1 className="error">Whoops, can't get a GPS location</h1>
+        <h1>Whoops, can't get a GPS location</h1>
         <p>Try it on your phone!</p>
       </Overlay>
     );

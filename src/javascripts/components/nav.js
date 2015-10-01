@@ -1,7 +1,7 @@
 
 
 import React, { Component } from 'react';
-import Info from './info';
+import Overlay from './overlay';
 
 
 export default class extends Component {
@@ -12,7 +12,15 @@ export default class extends Component {
    */
   render() {
     return (
-      <Info />
+      <div className="nav">
+
+        <i className="toggle fa fa-bars"></i>
+
+        <Overlay className="info">
+          <h1>Earth Xray</h1>
+        </Overlay>
+
+      </div>
     );
   }
 

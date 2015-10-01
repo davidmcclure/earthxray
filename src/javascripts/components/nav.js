@@ -18,19 +18,29 @@ export default class extends Component {
    * Render navigation.
    */
   render() {
-    return (
-      <div className="nav">
 
-        <Tappable onTap={this.toggle}>
-          <i className="toggle fa fa-bars"></i>
-        </Tappable>
+    let info = null;
 
+    if (this.props.active) {
+      info = (
         <Overlay className="info">
           <h1>Earth Xray</h1>
         </Overlay>
+      );
+    }
+
+    return (
+      <div className="nav">
+
+        <Tappable onTap={this.toggle.bind(this)}>
+          <i className="toggle fa fa-bars"></i>
+        </Tappable>
+
+        {info}
 
       </div>
     );
+
   }
 
 
@@ -38,7 +48,7 @@ export default class extends Component {
    * Toggle the info.
    */
   toggle() {
-    console.log('toggle');
+    this.props.toggleNav();
   }
 
 

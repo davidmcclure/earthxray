@@ -9,5 +9,6 @@ export const FINISH_ZOOM = 'FINISH_ZOOM';
 
 export const START_XRAY = 'START_XRAY';
 export const TRACE_XRAY_CENTER = 'TRACE_XRAY_CENTER';
+export const ZOOM_XRAY = 'ZOOM_XRAY';
 
 export const TOGGLE_NAV = 'TOGGLE_NAV';

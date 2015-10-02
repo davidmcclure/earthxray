@@ -157,6 +157,7 @@ export default class extends Component {
     // Capture initial FOV.
     gesture.on('pinchstart', e => {
       start = this.context.camera.fov;
+      this.props.zoomXray();
     });
 
     gesture.on('pinch', e => {

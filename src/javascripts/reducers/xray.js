@@ -19,6 +19,10 @@ const handlers = {
     active: true
   }),
 
+  [ZOOM_XRAY]: () => ({
+    hasZoomed: true
+  }),
+
 };
 
 

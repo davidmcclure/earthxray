@@ -2,6 +2,7 @@
 
 import {
   START_XRAY,
+  ZOOM_XRAY,
 } from '../constants';
 
 
@@ -11,5 +12,15 @@ import {
 export function startXray() {
   return {
     type: START_XRAY,
+  };
+}
+
+
+/**
+ * When scene is zoomed.
+ */
+export function zoomXray() {
+  return {
+    type: ZOOM_XRAY,
   };
 }

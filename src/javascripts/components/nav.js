@@ -32,7 +32,7 @@ export default class extends Component {
           }} />
 
           <Tappable onTap={this.props.toggleNav}>
-            <button className="btn btn-default btn-lg">Got it</button>
+            <button className="btn btn-primary btn-lg">Got it</button>
           </Tappable>
 
         </Overlay>

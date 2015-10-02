@@ -28,6 +28,7 @@ export default class extends Component {
    */
   componentDidMount() {
     this.interval = setInterval(this.pulse.bind(this), 3000);
+    this.pulse();
   }
 
 
@@ -64,6 +65,7 @@ export default class extends Component {
 
     return (
       <div className={cx}>
+        <img src="images/pinch.png" />
         <span>Pinch to zoom</span>
       </div>
     );

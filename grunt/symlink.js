@@ -12,4 +12,9 @@ export default {
     dest: '<%= site %>/bm-fonts'
   },
 
+  images: {
+    src: 'src/images',
+    dest: '<%= site %>/images'
+  },
+
 };

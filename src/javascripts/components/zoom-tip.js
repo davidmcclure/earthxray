@@ -28,7 +28,6 @@ export default class extends Component {
    */
   componentDidMount() {
     this.interval = setInterval(this.pulse.bind(this), 3000);
-    this.pulse();
   }
 
 

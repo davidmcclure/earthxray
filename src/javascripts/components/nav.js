@@ -27,7 +27,7 @@ export default class extends Component {
     return (
       <div className={cx}>
 
-        <Tappable onTap={this.toggle.bind(this)}>
+        <Tappable onTap={this.props.toggleNav}>
           <i className="toggle fa fa-bars"></i>
         </Tappable>
 
@@ -36,14 +36,6 @@ export default class extends Component {
       </div>
     );
 
-  }
-
-
-  /**
-   * Toggle the info.
-   */
-  toggle() {
-    this.props.toggleNav();
   }
 
 

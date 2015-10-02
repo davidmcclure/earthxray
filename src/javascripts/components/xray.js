@@ -1,5 +1,6 @@
 
 
+import _ from 'lodash';
 import $ from 'jquery';
 import { connect } from 'react-redux';
 import React, { Component, PropTypes } from 'react';
@@ -113,7 +114,7 @@ export default class extends Component {
         $(window).bind('deviceorientation.check', e => {
 
           // Error if no data.
-          if (!e.originalEvent.alpha) {
+          if (_.isNull(e.originalEvent.alpha)) {
             this.props.showOrientationError();
           } else {
             resolve();

@@ -6,6 +6,7 @@ import classNames from 'classnames';
 import Tappable from 'react-tappable';
 import * as actions from '../actions/nav';
 import Overlay from './overlay';
+import markdown from './nav.md';
 
 
 @connect(
@@ -26,8 +27,9 @@ export default class extends Component {
       info = (
         <Overlay className="info" animation="zoomIn">
 
-          <h1>Earth Xray</h1>
-          <p>See through the world!</p>
+          <div dangerouslySetInnerHTML={{
+            __html: markdown
+          }} />
 
           <Tappable onTap={this.props.toggleNav}>
             <button className="btn btn-default btn-lg">Got it</button>

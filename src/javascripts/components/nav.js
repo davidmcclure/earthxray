@@ -24,7 +24,7 @@ export default class extends Component {
 
     if (this.props.active) {
       info = (
-        <Overlay className="info">
+        <Overlay className="info" animation="zoomIn">
 
           <h1>Earth Xray</h1>
           <p>See through the world!</p>

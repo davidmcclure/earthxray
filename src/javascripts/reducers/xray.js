@@ -9,6 +9,7 @@ import {
 
 const initialState = {
   active: false,
+  hasZoomed: false,
 };
 
 

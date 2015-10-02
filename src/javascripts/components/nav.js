@@ -37,15 +37,20 @@ export default class extends Component {
       );
     }
 
-    let cx = classNames('nav', {
+    let wrapperCx = classNames('nav', {
       active: this.props.active
     });
 
+    let toggleCx = classNames('toggle', 'fa', {
+      'fa-bars': !this.props.active,
+      'fa-times-circle': this.props.active,
+    });
+
     return (
-      <div className={cx}>
+      <div className={wrapperCx}>
 
         <Tappable onTap={this.props.toggleNav}>
-          <i className="toggle fa fa-bars"></i>
+          <i className={toggleCx}></i>
         </Tappable>
 
         {info}

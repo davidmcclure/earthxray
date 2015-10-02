@@ -10,7 +10,7 @@ import Nav from './nav';
 
 
 @connect(state => ({
-  started: state.xray.active,
+  xray: state.xray,
   errors: state.errors,
 }))
 export default class extends Component {
@@ -31,10 +31,10 @@ export default class extends Component {
         {this.props.errors.orientation ?
           <OrientationError /> : null}
 
-        {this.props.started ?
+        {this.props.xray.active ?
           <Nav /> : null}
 
-        {this.props.started ?
+        {this.props.xray.active ?
           <Center /> : null}
 
       </div>

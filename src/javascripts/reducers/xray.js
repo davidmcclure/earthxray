@@ -4,6 +4,7 @@ import { createReducer } from '../utils';
 
 import {
   START_XRAY,
+  ZOOM_XRAY,
 } from '../constants';
 
 

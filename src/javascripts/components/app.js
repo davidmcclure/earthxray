@@ -7,11 +7,13 @@ import GPSError from './gps-error';
 import OrientationError from './orientation-error';
 import Center from './center';
 import Nav from './nav';
+import ZoomTip from './zoom-tip';
 
 
 @connect(state => ({
   xray: state.xray,
   errors: state.errors,
+  nav: state.nav,
 }))
 export default class extends Component {
 
@@ -36,6 +38,11 @@ export default class extends Component {
 
         {this.props.xray.active ?
           <Center /> : null}
+
+        {this.props.xray.active &&
+          !this.props.xray.hasZoomed &&
+          !this.props.nav.active ?
+          <ZoomTip /> : null}
 
       </div>
     );

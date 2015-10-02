@@ -7,17 +7,30 @@ import classNames from 'classnames';
 export default class extends Component {
 
 
+  static defaultProps = {
+    animation: 'flipInX'
+  }
+
+
   /**
    * Render an error overlay.
    */
   render() {
 
-    // Merge in passed classes.
-    let cx = classNames('overlay', this.props.className);
+    let wrapperCx = classNames(
+      'overlay',
+      this.props.className
+    );
+
+    let contentCx = classNames(
+      'content',
+      'animated',
+      this.props.animation
+    );
 
     return (
-      <div className={cx}>
-        <div className="content animated flipInX">
+      <div className={wrapperCx}>
+        <div className={contentCx}>
           {this.props.children}
         </div>
       </div>

@@ -26,9 +26,6 @@ export default class extends Component {
       info = (
         <Overlay className="info">
           <h1>Earth Xray</h1>
-          <p>Earth Xray hooks into your phone's GPS location and accelerometer to render a 3d "xray" of world geography - as it exists in real-world, physical space below your feet.</p>
-          <p>Point your device towards the ground.</p>
-          <p>Pinch to zoom.</p>
           <p>See through the world!</p>
         </Overlay>
       );

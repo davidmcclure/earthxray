@@ -36,13 +36,18 @@ export default class extends Component {
         {this.props.xray.active ?
           <Nav /> : null}
 
-        {this.props.xray.active ?
-          <Center /> : null}
+        {
+          this.props.xray.active &&
+          !this.props.nav.active ?
+          <Center /> : null
+        }
 
-        {this.props.xray.active &&
+        {
+          this.props.xray.active &&
           !this.props.xray.hasZoomed &&
           !this.props.nav.active ?
-          <ZoomTip /> : null}
+          <ZoomTip /> : null
+        }
 
       </div>
     );

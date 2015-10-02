@@ -4,8 +4,8 @@ import { connect } from 'react-redux';
 import React, { Component } from 'react';
 import classNames from 'classnames';
 import Tappable from 'react-tappable';
-import Overlay from './overlay';
 import * as actions from '../actions/nav';
+import Info from './info';
 
 
 @connect(
@@ -20,17 +20,6 @@ export default class extends Component {
    */
   render() {
 
-    let info = null;
-
-    if (this.props.active) {
-      info = (
-        <Overlay className="info">
-          <h1>Earth Xray</h1>
-          <p>See through the world!</p>
-        </Overlay>
-      );
-    }
-
     let cx = classNames('nav', {
       active: this.props.active
     });
@@ -42,7 +31,7 @@ export default class extends Component {
           <i className="toggle fa fa-bars"></i>
         </Tappable>
 
-        {info}
+        {this.props.active ? <Info /> : null}
 
       </div>
     );

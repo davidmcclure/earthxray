@@ -12,7 +12,7 @@ export default class extends Component {
   render() {
     return (
       <div className="zoom-tip">
-        <h4>Pinch to zoom</h4>
+        <span>Pinch to zoom</span>
       </div>
     );
   }

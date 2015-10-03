@@ -39,6 +39,10 @@ export default class extends Component {
             By <a href="https://twitter.com/clured">@clured</a>
             {' '}&bull;{' '}
             <a href="https://dclure.org">Blog post</a>
+            {' '}&bull;{' '}
+            <a href="https://github.com/davidmcclure/earthxray">
+              <i className="fa fa-github"></i> Code
+            </a>
           </p>
 
         </Overlay>

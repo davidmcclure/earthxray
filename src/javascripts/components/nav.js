@@ -35,6 +35,12 @@ export default class extends Component {
             <button className="btn btn-primary btn-lg">Got it</button>
           </Tappable>
 
+          <p className="links">
+            By <a href="https://twitter.com/clured">@clured</a>
+            {' '}&bull;{' '}
+            <a href="https://dclure.org">Blog post</a>
+          </p>
+
         </Overlay>
       );
     }

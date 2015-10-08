@@ -59,6 +59,6 @@
     "three": "^0.71.0",
     "three-bmfont-text": "davidmcclure/three-bmfont-text",
     "turf": "^2.0.2",
-    "tween.js": "^15.0.0"
+    "tween.js": "^16.3.1"
   }
 }

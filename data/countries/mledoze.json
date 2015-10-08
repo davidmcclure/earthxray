@@ -2803,7 +2803,7 @@
 			"spa": {"official": "Rep\u00fablica de Djibouti", "common": "Yibuti"},
 			"fin": {"official": "Dijiboutin tasavalta", "common": "Dijibouti"}
 		},
-		"latlng": [11.5, 43],
+		"latlng": [11.90829, 42.51886],
 		"demonym": "Djibouti",
 		"landlocked": false,
 		"borders": ["ERI", "ETH", "SOM"],
@@ -3067,7 +3067,7 @@
 			"spa": {"official": "Rep\u00fablica \u00c1rabe de Egipto", "common": "Egipto"},
 			"fin": {"official": "Egyptin arabitasavalta", "common": "Egypti"}
 		},
-		"latlng": [26.80674, 29.84064],
+		"latlng": [26.30958, 29.48414],
 		"demonym": "Egyptian",
 		"landlocked": false,
 		"borders": ["ISR", "LBY", "SDN"],
@@ -3121,7 +3121,7 @@
 			"spa": {"official": "Estado de Eritrea", "common": "Eritrea"},
 			"fin": {"official": "Eritrean valtio", "common": "Eritrea"}
 		},
-		"latlng": [15, 39],
+		"latlng": [15.83821, 38.03551],
 		"demonym": "Eritrean",
 		"landlocked": false,
 		"borders": ["DJI", "ETH", "SDN"],
@@ -3281,7 +3281,7 @@
 			"spa": {"official": "Rep\u00fablica de Estonia", "common": "Estonia"},
 			"fin": {"official": "Viron tasavalta", "common": "Viro"}
 		},
-		"latlng": [58.78581, 25.69879],
+		"latlng": [58.60761, 25.82660],
 		"demonym": "Estonian",
 		"landlocked": false,
 		"borders": ["LVA", "RUS"],
@@ -6149,7 +6149,7 @@
 			"spa": {"official": "Rep\u00fablica de Lituania", "common": "Lituania"},
 			"fin": {"official": "Liettuan tasavalta", "common": "Liettua"}
 		},
-		"latlng": [55.37969, 24.09479],
+		"latlng": [55.26581, 23.98089],
 		"demonym": "Lithuanian",
 		"landlocked": false,
 		"borders": ["BLR", "LVA", "POL", "RUS"],
@@ -6245,7 +6245,7 @@
 			"spa": {"official": "Rep\u00fablica de Letonia", "common": "Letonia"},
 			"fin": {"official": "Latvian tasavalta", "common": "Latvia"}
 		},
-		"latlng": [56.89756, 26.13824],
+		"latlng": [56.76401, 26.30999],
 		"demonym": "Latvian",
 		"landlocked": false,
 		"borders": ["BLR", "EST", "LTU", "RUS"],
@@ -9681,7 +9681,7 @@
 			"spa": {"official": "Reino de Suecia", "common": "Suecia"},
 			"fin": {"official": "Ruotsin kuningaskunta", "common": "Ruotsi"}
 		},
-		"latlng": [62, 15],
+		"latlng": [60.03124, 15.32367],
 		"demonym": "Swedish",
 		"landlocked": false,
 		"borders": ["FIN", "NOR"],
@@ -10343,7 +10343,7 @@
 			"spa": {"official": "Rep\u00fablica de Trinidad y Tobago", "common": "Trinidad y Tobago"},
 			"fin": {"official": "Trinidadin ja Tobagon tasavalta", "common": "Trinidad ja Tobago"}
 		},
-		"latlng": [11, -61],
+		"latlng": [10.43966, -61.24878],
 		"demonym": "Trinidadian",
 		"landlocked": false,
 		"borders": [],
@@ -11291,7 +11291,7 @@
 			"spa": {"official": "Rep\u00fablica de Yemen", "common": "Yemen"},
 			"fin": {"official": "Jemenin tasavalta", "common": "Jemen"}
 		},
-		"latlng": [15.88092, 47.59454],
+		"latlng": [15.68135, 47.65945],
 		"demonym": "Yemeni",
 		"landlocked": false,
 		"borders": ["OMN", "SAU"],

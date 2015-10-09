@@ -198,7 +198,14 @@ export default class extends Component {
 
     if (!this.orientation || !this.eye) return;
 
-    let a = THREE.Math.degToRad(this.orientation.alpha);
+    let alpha = this.orientation.alpha;
+
+    // iOS fix.
+    if (this.orientation.webkitCompassHeading) {
+      alpha = 360 - this.orientation.webkitCompassHeading;
+    }
+
+    let a = THREE.Math.degToRad(alpha);
     let b = THREE.Math.degToRad(this.orientation.beta);
     let g = THREE.Math.degToRad(this.orientation.gamma);
 

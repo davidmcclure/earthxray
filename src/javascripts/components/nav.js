@@ -27,9 +27,10 @@ export default class extends Component {
       info = (
         <Overlay className="info" animation="zoomIn">
 
-          <div dangerouslySetInnerHTML={{
-            __html: markdown
-          }} />
+          <h1>Earth Xray</h1>
+
+          <div dangerouslySetInnerHTML={{ __html: markdown }} />
+          <img src="images/xray.png" />
 
           <Tappable onTap={this.props.toggleNav}>
             <button className="btn btn-primary btn-lg">Got it</button>

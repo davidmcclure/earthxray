@@ -50,6 +50,7 @@
     "load-bmfont": "^1.2.3",
     "lodash": "^3.10.0",
     "markdownify": "^0.1.0",
+    "platform": "^1.3.0",
     "rbush": "^1.4.0",
     "rbush-knn": "^1.0.2",
     "react": "^0.13.3",

@@ -13,6 +13,7 @@ export default {
         ]
       }],
 
+      'stringify',
       'markdownify',
       'yamlify',
 

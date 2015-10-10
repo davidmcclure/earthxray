@@ -6,7 +6,7 @@ import classNames from 'classnames';
 import Tappable from 'react-tappable';
 import * as actions from '../actions/nav';
 import Overlay from './overlay';
-import markdown from './nav.md';
+import infoHTML from '../content/info.html';
 
 
 @connect(
@@ -27,10 +27,9 @@ export default class extends Component {
       info = (
         <Overlay className="info" animation="zoomIn">
 
-          <h1>Earth Xray</h1>
-
-          <div dangerouslySetInnerHTML={{ __html: markdown }} />
-          <img src="images/xray.png" />
+          <div dangerouslySetInnerHTML={{
+            __html: infoHTML
+          }} />
 
           <Tappable onTap={this.props.toggleNav}>
             <button className="btn btn-primary btn-lg">Got it</button>

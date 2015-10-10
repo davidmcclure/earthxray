@@ -30,6 +30,7 @@
     "grunt-gh-pages": "^0.10.0",
     "jit-grunt": "^0.9.1",
     "load-grunt-config": "^0.17.2",
+    "stringify": "^3.1.0",
     "time-grunt": "^1.2.1",
     "yamlify": "^0.1.2"
   },

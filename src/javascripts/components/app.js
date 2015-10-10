@@ -6,7 +6,7 @@ import Scene from './scene';
 import GPSError from './gps-error';
 import OrientationError from './orientation-error';
 import Center from './center';
-import Nav from './nav';
+import Info from './info';
 import ZoomTip from './zoom-tip';
 
 
@@ -34,7 +34,7 @@ export default class extends Component {
           <OrientationError /> : null}
 
         {this.props.xray.active ?
-          <Nav /> : null}
+          <Info /> : null}
 
         {
           this.props.xray.active &&

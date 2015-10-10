@@ -6,8 +6,7 @@ import classNames from 'classnames';
 import Tappable from 'react-tappable';
 import * as actions from '../actions/nav';
 import Overlay from './overlay';
-import Content from './content';
-import linksHTML from '../content/links.html';
+import Static from './static';
 import infoHTML from '../content/info.html';
 
 
@@ -29,13 +28,11 @@ export default class extends Component {
       info = (
         <Overlay className="info" animation="zoomIn">
 
-          <Content markup={infoHTML} />
+          <Static html={infoHTML} />
 
           <Tappable onTap={this.props.toggleNav}>
             <button className="btn btn-primary btn-lg">Got it</button>
           </Tappable>
-
-          <Content markup={linksHTML} />
 
         </Overlay>
       );

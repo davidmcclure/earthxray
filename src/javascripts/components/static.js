@@ -11,7 +11,7 @@ export default class extends Component {
    */
   render() {
     return <div dangerouslySetInnerHTML={{
-      __html: this.props.markup
+      __html: this.props.html
     }} />
   }
 

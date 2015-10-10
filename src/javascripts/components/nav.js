@@ -6,6 +6,8 @@ import classNames from 'classnames';
 import Tappable from 'react-tappable';
 import * as actions from '../actions/nav';
 import Overlay from './overlay';
+import Content from './content';
+import linksHTML from '../content/links.html';
 import infoHTML from '../content/info.html';
 
 
@@ -27,23 +29,13 @@ export default class extends Component {
       info = (
         <Overlay className="info" animation="zoomIn">
 
-          <div dangerouslySetInnerHTML={{
-            __html: infoHTML
-          }} />
+          <Content markup={infoHTML} />
 
           <Tappable onTap={this.props.toggleNav}>
             <button className="btn btn-primary btn-lg">Got it</button>
           </Tappable>
 
-          <p className="links">
-            By <a href="https://twitter.com/clured">@clured</a>
-            {' '}&bull;{' '}
-            <a href="https://dclure.org">Blog post</a>
-            {' '}&bull;{' '}
-            <a href="https://github.com/davidmcclure/earthxray">
-              <i className="fa fa-github"></i> Code
-            </a>
-          </p>
+          <Content markup={linksHTML} />
 
         </Overlay>
       );

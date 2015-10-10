@@ -7,7 +7,7 @@ import Tappable from 'react-tappable';
 import * as actions from '../actions/nav';
 import Overlay from './overlay';
 import Static from './static';
-import infoHTML from '../content/info.html';
+import infoHTML from './info.html';
 
 
 @connect(

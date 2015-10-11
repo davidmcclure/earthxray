@@ -59,8 +59,9 @@ export default class extends Component {
    */
   render() {
 
-    let cx = classNames('zoom-tip', 'animated', {
-      bounceIn: this.state.pulse
+    let cx = classNames('zoom-tip', {
+      animated: this.state.pulse,
+      bounceIn: this.state.pulse,
     });
 
     return (

@@ -57,7 +57,7 @@ export default class extends RadioComponent {
       distance = (
         <div className="distance">
           <div>{miles.toLocaleString()}</div>{' '}
-          <div className="miles">miles</div>
+          <div className="unit">miles</div>
         </div>
       );
 
@@ -67,7 +67,7 @@ export default class extends RadioComponent {
     else {
       distance = (
         <div className="distance">
-          <div className="space">Outer space!</div>
+          <div className="unit">Outer space!</div>
         </div>
       );
     }

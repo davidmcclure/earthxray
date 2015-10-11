@@ -7,8 +7,10 @@ import Tappable from 'react-tappable';
 import * as actions from '../actions/nav';
 import Overlay from './overlay';
 import Static from './static';
-import linksHTML from './links.html';
+
+import ribbonHTML from './ribbon.html';
 import infoHTML from './info.html';
+import linksHTML from './links.html';
 
 
 @connect(
@@ -27,17 +29,23 @@ export default class extends Component {
 
     if (this.props.active) {
       info = (
-        <Overlay className="info" animation="zoomIn">
+        <div>
 
-          <Static html={infoHTML} />
+          <Static html={ribbonHTML} />
 
-          <Tappable onTap={this.props.toggleNav}>
-            <button className="btn btn-primary btn-lg">Got it</button>
-          </Tappable>
+          <Overlay className="info" animation="zoomIn">
 
-          <Static html={linksHTML} className="social" />
+            <Static html={infoHTML} />
 
-        </Overlay>
+            <Tappable onTap={this.props.toggleNav}>
+              <button className="btn btn-primary btn-lg">Got it</button>
+            </Tappable>
+
+            <Static html={linksHTML} className="social" />
+
+          </Overlay>
+
+        </div>
       );
     }
 

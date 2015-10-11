@@ -35,7 +35,7 @@ export default class extends Component {
             <button className="btn btn-primary btn-lg">Got it</button>
           </Tappable>
 
-          <Static html={linksHTML} />
+          <Static html={linksHTML} className="social" />
 
         </Overlay>
       );

@@ -23,4 +23,12 @@
     opacity: 0.6;
   }
 
+  &.flash path {
+    fill: red;
+  }
+
+  &:not(.flash) path {
+    .transition(fill 0.5s ease-in);
+  }
+
 }

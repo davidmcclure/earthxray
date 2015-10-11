@@ -18,7 +18,8 @@ export default class extends Component {
     super(props);
 
     this.state = {
-      pulse: false
+      pulse: false,
+      flash: false,
     };
 
   }
@@ -45,7 +46,11 @@ export default class extends Component {
    */
   pulse() {
 
-    this.setState({ pulse: true });
+    this.setState({ pulse: true, flash: true });
+
+    setTimeout(() => {
+      this.setState({ flash: false });
+    }, 300);
 
     setTimeout(() => {
       this.setState({ pulse: false });
@@ -62,6 +67,7 @@ export default class extends Component {
     let cx = classNames('zoom-tip', {
       animated: this.state.pulse,
       bounceIn: this.state.pulse,
+      flash: this.state.flash,
     });
 
     return (

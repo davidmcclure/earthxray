@@ -7,6 +7,7 @@ import Tappable from 'react-tappable';
 import * as actions from '../actions/nav';
 import Overlay from './overlay';
 import Static from './static';
+import linksHTML from './links.html';
 import infoHTML from './info.html';
 
 
@@ -33,6 +34,8 @@ export default class extends Component {
           <Tappable onTap={this.props.toggleNav}>
             <button className="btn btn-primary btn-lg">Got it</button>
           </Tappable>
+
+          <Static html={linksHTML} />
 
         </Overlay>
       );

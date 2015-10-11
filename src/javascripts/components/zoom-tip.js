@@ -66,7 +66,7 @@ export default class extends Component {
     return (
       <div className={cx}>
         <Isvg src="images/pinch.svg" />
-        <span>Pinch to zoom</span>
+        <p>Pinch to zoom</p>
       </div>
     );
 

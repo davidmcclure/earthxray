@@ -85,9 +85,7 @@ export default class extends Component {
       antialias: true,
     });
 
-    if (platform.os.family != 'Android') {
-      this.renderer.setPixelRatio(window.devicePixelRatio || 1);
-    }
+    this.renderer.setPixelRatio(window.devicePixelRatio || 1);
 
     // Inject the WebGL container.
     this.$el.append(this.renderer.domElement);

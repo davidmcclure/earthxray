@@ -1,6 +1,7 @@
 
 
 import React, { Component, findDOMElement } from 'react';
+import Isvg from 'react-inlinesvg';
 import classNames from 'classnames';
 
 
@@ -64,7 +65,7 @@ export default class extends Component {
 
     return (
       <div className={cx}>
-        <img src="images/pinch.png" />
+        <Isvg src="images/pinch.svg" />
         <span>Pinch to zoom</span>
       </div>
     );

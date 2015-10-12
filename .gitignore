@@ -3,9 +3,10 @@
 *.pyc
 
 /node_modules
+/bower_components
 /_site
 /.grunt
 /env
 /build
-/dist
 /tmp
+/dist

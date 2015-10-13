@@ -107,37 +107,17 @@ export default class extends Component {
    */
   listenForOrientation() {
 
-    return new Promise((resolve, reject) => {
-
-      if (window.DeviceOrientationEvent) {
-
-        // Check for the accelerometer.
-        $(window).bind('deviceorientation.check', e => {
-
-          // Error if no data.
-          if (_.isNull(e.originalEvent.alpha)) {
-            this.props.showOrientationError();
-          } else {
-            resolve();
-          }
-
-          $(window).unbind('deviceorientation.check');
-
-        });
-
-        // Save the orientation data.
-        $(window).bind('deviceorientation', e => {
-          this.orientation = e.originalEvent;
-        });
-
-      }
-
-      // Error if no support.
-      else {
-        this.props.showOrientationError();
-      }
-
+    let tilt = new FULLTILT.getDeviceOrientation({
+      type: 'world'
     });
+
+    tilt
+      .then(data => {
+        this.orientation = data;
+      })
+      .catch(msg => {
+        // TODO: Flash error.
+      });
 
   }
 
@@ -199,9 +179,11 @@ export default class extends Component {
 
     if (!this.orientation || !this.eye) return;
 
-    let a = THREE.Math.degToRad(this.orientation.alpha);
-    let b = THREE.Math.degToRad(this.orientation.beta);
-    let g = THREE.Math.degToRad(this.orientation.gamma);
+    let euler = this.orientation.getScreenAdjustedEuler();
+
+    let a = THREE.Math.degToRad(euler.alpha);
+    let b = THREE.Math.degToRad(euler.beta);
+    let g = THREE.Math.degToRad(euler.gamma);
 
     let ra = new THREE.Matrix4();
     let rb = new THREE.Matrix4();

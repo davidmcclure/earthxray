@@ -107,17 +107,20 @@ export default class extends Component {
    */
   listenForOrientation() {
 
-    let tilt = new FULLTILT.getDeviceOrientation({
-      type: 'world'
-    });
+    return new Promise((resolve, reject) => {
 
-    tilt
+      new FULLTILT.getDeviceOrientation({ type: 'world' })
+
       .then(data => {
         this.orientation = data;
+        resolve();
       })
+
       .catch(msg => {
-        // TODO: Flash error.
+        this.props.showOrientationError();
       });
+
+    });
 
   }
 

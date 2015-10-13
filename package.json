@@ -43,6 +43,7 @@
     "classnames": "^2.1.5",
     "es6-error": "^2.0.0",
     "font-awesome": "^4.4.0",
+    "fulltilt": "davidmcclure/Full-Tilt#umd",
     "grunt-shell": "^1.1.2",
     "hammerjs": "^2.0.4",
     "jquery": "^2.1.4",

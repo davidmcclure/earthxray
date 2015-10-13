@@ -8,6 +8,7 @@ import { bindActionCreators } from 'redux';
 import THREE from 'three';
 import Promise from 'bluebird';
 import Hammer from 'hammerjs';
+import FULLTILT from 'fulltilt';
 
 import * as xrayActions from '../actions/xray';
 import * as errorActions from '../actions/errors';

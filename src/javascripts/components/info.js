@@ -12,6 +12,8 @@ import ribbonHTML from './ribbon.html';
 import infoHTML from './info.html';
 import linksHTML from './links.html';
 
+import xraySVG from '../../images/xray.svg';
+
 
 @connect(
   state => state.nav,
@@ -35,6 +37,7 @@ export default class extends Component {
 
           <Overlay animation="zoomIn">
 
+            <Static html={xraySVG} />
             <Static html={infoHTML} />
 
             <Tappable onTap={this.props.toggleNav}>

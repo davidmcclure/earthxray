@@ -33,7 +33,7 @@ export default class extends Component {
 
           <Static html={ribbonHTML} />
 
-          <Overlay className="info" animation="zoomIn">
+          <Overlay animation="zoomIn">
 
             <Static html={infoHTML} />
 
@@ -49,7 +49,7 @@ export default class extends Component {
       );
     }
 
-    let wrapperCx = classNames('nav', {
+    let wrapperCx = classNames('info', {
       active: this.props.active
     });
 

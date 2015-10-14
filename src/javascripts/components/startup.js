@@ -49,7 +49,7 @@ export default class extends Component {
       this.drawLabels(),
     ])
 
-    .then(this.props.finishStartup)
+    .then(this.props.finishStartup);
 
   }
 

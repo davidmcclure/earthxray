@@ -1,10 +1,10 @@
 
 
-import React, { Component, findDOMElement } from 'react';
-import Isvg from 'react-inlinesvg';
 import classNames from 'classnames';
+import React, { Component, findDOMElement } from 'react';
 import Static from './static';
-import pinchSVG from '../../images/pinch.svg';
+
+import pinchSVG from '../images/pinch.svg';
 
 
 export default class extends Component {

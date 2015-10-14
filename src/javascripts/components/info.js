@@ -12,7 +12,7 @@ import ribbonHTML from './ribbon.html';
 import infoHTML from './info.html';
 import linksHTML from './links.html';
 
-import xraySVG from '../../images/xray.svg';
+import xraySVG from '../images/xray.svg';
 
 
 @connect(

@@ -3,6 +3,8 @@
 import React, { Component, findDOMElement } from 'react';
 import Isvg from 'react-inlinesvg';
 import classNames from 'classnames';
+import Static from './static';
+import pinchSVG from '../../images/pinch.svg';
 
 
 export default class extends Component {
@@ -72,7 +74,7 @@ export default class extends Component {
 
     return (
       <div className={cx}>
-        <Isvg src="images/pinch.svg" />
+        <Static html={pinchSVG} />
         <p>Pinch to zoom</p>
       </div>
     );

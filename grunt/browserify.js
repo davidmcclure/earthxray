@@ -13,7 +13,10 @@ export default {
         ]
       }],
 
-      'stringify',
+      ['stringify', {
+        extensions: ['.html', '.svg']
+      }],
+
       'markdownify',
       'yamlify',
 

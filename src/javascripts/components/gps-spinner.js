@@ -12,7 +12,10 @@ export default class extends Component {
    */
   render() {
     return (
-      <p>Getting location...</p>
+      <div className="spinner">
+        <i className="fa fa-spin fa-spinner"></i>
+        <p>Getting location...</p>
+      </div>
     );
   }
 

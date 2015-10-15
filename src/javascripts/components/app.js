@@ -5,8 +5,9 @@ import React, { Component } from 'react';
 import Scene from './scene';
 import GPSError from './gps-error';
 import OrientationError from './orientation-error';
-import Center from './center';
 import Info from './info';
+import GPSSpinner from './gps-spinner';
+import Center from './center';
 import ZoomTip from './zoom-tip';
 
 
@@ -14,6 +15,7 @@ import ZoomTip from './zoom-tip';
   xray: state.xray,
   errors: state.errors,
   nav: state.nav,
+  scene: state.scene,
 }))
 export default class extends Component {
 
@@ -27,14 +29,26 @@ export default class extends Component {
 
         <Scene />
 
-        {this.props.errors.gps ?
-          <GPSError /> : null}
+        {
+          this.props.errors.gps ?
+          <GPSError /> : null
+        }
 
-        {this.props.errors.orientation ?
-          <OrientationError /> : null}
+        {
+          this.props.errors.orientation ?
+          <OrientationError /> : null
+        }
 
-        {this.props.xray.active ?
-          <Info /> : null}
+        {
+          this.props.xray.active ?
+          <Info /> : null
+        }
+
+        {
+          this.props.scene.drivers.startup &&
+          !this.props.errors.gps ?
+          <GPSSpinner /> : null
+        }
 
         {
           this.props.xray.active &&

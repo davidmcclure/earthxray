@@ -154,19 +154,23 @@ export default class extends Component {
   render() {
 
     if (this.state.mounted) {
-
-      // Is an error visible?
-      let isError = _.includes(this.props.errors, true);
-
       return (
         <div id="scene">
-          {this.props.drivers.startup ? <Startup /> : null}
-          {this.props.drivers.zoom ? <Zoom /> : null}
-          {this.props.drivers.xray ? <Xray /> : null}
-          {isError ? <Spin /> : null}
+
+          {this.props.drivers.startup ?
+            <Startup /> : null}
+
+          {this.props.drivers.zoom ?
+            <Zoom /> : null}
+
+          {this.props.drivers.xray ?
+            <Xray /> : null}
+
+          {_.includes(this.props.errors, true) ?
+            <Spin /> : null}
+
         </div>
       );
-
     }
 
     else return (

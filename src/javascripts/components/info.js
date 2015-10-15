@@ -34,7 +34,7 @@ export default class extends Component {
 
           <Static html={ribbonHTML} />
 
-          <Overlay animation="zoomIn">
+          <Overlay>
 
             <Logo />
             <Static html={infoHTML} />

@@ -8,7 +8,7 @@ export default class extends Component {
 
 
   static defaultProps = {
-    animation: 'flipInX'
+    animation: 'zoomIn'
   }
 
 

@@ -2,6 +2,10 @@
 
 import React, { Component } from 'react';
 import Overlay from './overlay';
+import Logo from './logo';
+import Static from './static';
+
+import errorHTML from './error.html';
 
 
 export default class extends Component {
@@ -13,9 +17,12 @@ export default class extends Component {
   render() {
     return (
       <Overlay className="error">
-        <i className="fa fa-exclamation-circle"></i>
+
+        <Logo />
+
         <h1>Whoops, no accelerometer</h1>
-        <p>Try it on your phone!</p>
+        <Static html={errorHTML} />
+
       </Overlay>
     );
   }

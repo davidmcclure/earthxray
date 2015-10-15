@@ -12,7 +12,7 @@ export default class extends Component {
    * Render the logo.
    */
   render() {
-    return <Static html={xraySVG} />
+    return <Static className="logo" html={xraySVG} />
   }
 
 

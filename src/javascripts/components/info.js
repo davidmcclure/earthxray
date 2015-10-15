@@ -6,13 +6,12 @@ import classNames from 'classnames';
 import Tappable from 'react-tappable';
 import * as actions from '../actions/nav';
 import Overlay from './overlay';
+import Logo from './logo';
 import Static from './static';
 
 import ribbonHTML from './ribbon.html';
 import infoHTML from './info.html';
 import linksHTML from './links.html';
-
-import xraySVG from '../images/xray.svg';
 
 
 @connect(
@@ -37,7 +36,7 @@ export default class extends Component {
 
           <Overlay animation="zoomIn">
 
-            <Static html={xraySVG} />
+            <Logo />
             <Static html={infoHTML} />
 
             <Tappable onTap={this.props.toggleNav}>

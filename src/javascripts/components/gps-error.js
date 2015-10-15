@@ -1,7 +1,7 @@
 
 
 import React, { Component } from 'react';
-import Overlay from './overlay';
+import Err from './err';
 
 
 export default class extends Component {
@@ -11,13 +11,7 @@ export default class extends Component {
    * Render the GPS error modal.
    */
   render() {
-    return (
-      <Overlay className="error">
-        <i className="fa fa-exclamation-circle"></i>
-        <h1>Whoops, can't get a GPS location</h1>
-        <p>Try it on your phone!</p>
-      </Overlay>
-    );
+    return <Err msg="Whoops, can't get a GPS location" />;
   }
 
 

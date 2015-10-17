@@ -12,4 +12,9 @@ export default {
     dest: '<%= site %>/bm-fonts'
   },
 
+  cname: {
+    src: 'src/templates/CNAME',
+    dest: '<%= site %>/CNAME'
+  },
+
 };

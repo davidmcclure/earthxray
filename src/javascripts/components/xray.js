@@ -89,7 +89,7 @@ export default class extends Component {
     let geometry = new THREE.SphereGeometry(30, 32, 32);
 
     let material = new THREE.MeshLambertMaterial({
-      color: 0xff0000
+      color: 0xE0A106
     });
 
     this.dot = new THREE.Mesh(geometry, material);

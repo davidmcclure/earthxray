@@ -9,7 +9,6 @@ lonlat:
     linewidth: 0.5
 
 country:
-  #color: 0x2a7bbf
   color: 0x2a89bf
   linewidth: 0.5
 

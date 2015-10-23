@@ -9,9 +9,12 @@ lonlat:
     linewidth: 0.5
 
 country:
-  color: 0x2a89bf
+  color: 0x2A89Bf
   linewidth: 0.5
 
 state:
   color: 0x555555
   linewidth: 0.5
+
+dot:
+  color: 0xE0A106

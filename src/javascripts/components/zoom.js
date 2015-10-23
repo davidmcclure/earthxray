@@ -6,8 +6,9 @@ import THREE from 'three';
 import TWEEN from 'tween.js';
 
 import * as utils from '../utils';
-import opts from '../opts.yml';
 import * as actions from '../actions/scene';
+import opts from '../opts.yml';
+import mats from './materials.yml';
 
 
 @connect(
@@ -45,9 +46,7 @@ export default class extends Component {
 
     let geometry = new THREE.SphereGeometry(50, 32, 32);
 
-    let material = new THREE.MeshLambertMaterial({
-      color: 0xE0A106
-    });
+    let material = new THREE.MeshLambertMaterial(mats.dot);
 
     this.dot = new THREE.Mesh(geometry, material);
 

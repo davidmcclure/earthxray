@@ -10,6 +10,7 @@ import Promise from 'bluebird';
 import Hammer from 'hammerjs';
 import FULLTILT from 'fulltilt';
 
+import mats from './materials.yml';
 import * as xrayActions from '../actions/xray';
 import * as errorActions from '../actions/errors';
 import * as events from '../events/xray';
@@ -88,9 +89,7 @@ export default class extends Component {
 
     let geometry = new THREE.SphereGeometry(30, 32, 32);
 
-    let material = new THREE.MeshLambertMaterial({
-      color: 0xE0A106
-    });
+    let material = new THREE.MeshLambertMaterial(mats.dot);
 
     this.dot = new THREE.Mesh(geometry, material);
     this.dot.visible = false;

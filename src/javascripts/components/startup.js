@@ -203,8 +203,8 @@ export default class extends Component {
         let material = new THREE.MeshBasicMaterial({
           map: texture,
           side: THREE.DoubleSide,
-          color: 0xffffff,
           transparent: true,
+          ...mats.label,
         });
 
         let mesh = new THREE.Mesh(geometry, material);

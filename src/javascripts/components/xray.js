@@ -193,6 +193,7 @@ export default class extends Component {
     rg.makeRotationY(g);
 
     let r = this.eye.clone();
+
     r.multiply(ra);
     r.multiply(rb);
     r.multiply(rg);

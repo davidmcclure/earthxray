@@ -66,11 +66,8 @@ export default class extends Component {
 
     let [x, y, z] = this.props.location;
 
-    // Store the default heading.
-    this.context.camera.lookAt(new THREE.Vector3(0, 0, 0));
-    this.eye = this.context.camera.matrix.clone();
+    this.eye = new THREE.Matrix4();
 
-    // Compass north, winter in my blood.
     this.eye.lookAt(
       new THREE.Vector3(x, y, z),
       new THREE.Vector3(0, 0.001, 0),

@@ -63,6 +63,8 @@ export default class extends Component {
           <ZoomTip /> : null
         }
 
+        <div id="debug"></div>
+
       </div>
     );
   }

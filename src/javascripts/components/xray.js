@@ -200,7 +200,7 @@ export default class extends Component {
 
     this.context.camera.quaternion.setFromRotationMatrix(r);
 
-    $('#debug').text(euler.alpha);
+    $('#debug2').text(euler.alpha);
 
   }
 

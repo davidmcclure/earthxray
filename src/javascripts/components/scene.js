@@ -157,17 +157,25 @@ export default class extends Component {
       return (
         <div id="scene">
 
-          {this.props.drivers.startup ?
-            <Startup /> : null}
+          {
+            this.props.drivers.startup ?
+            <Startup /> : null
+          }
 
-          {this.props.drivers.zoom ?
-            <Zoom /> : null}
+          {
+            this.props.drivers.zoom ?
+            <Zoom /> : null
+          }
 
-          {this.props.drivers.xray ?
-            <Xray /> : null}
+          {
+            this.props.drivers.xray ?
+            <Xray /> : null
+          }
 
-          {_.includes(this.props.errors, true) ?
-            <Spin /> : null}
+          {
+            _.includes(this.props.errors, true) ?
+            <Spin /> : null
+          }
 
         </div>
       );

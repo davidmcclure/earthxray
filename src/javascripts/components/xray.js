@@ -10,6 +10,7 @@ import Promise from 'bluebird';
 import Hammer from 'hammerjs';
 import FULLTILT from 'fulltilt';
 
+import Orientation from '../lib/orientation';
 import mats from './materials.yml';
 import * as xrayActions from '../actions/xray';
 import * as errorActions from '../actions/errors';
@@ -103,18 +104,47 @@ export default class extends Component {
    */
   listenForOrientation() {
 
-    return new Promise((resolve, reject) => {
+    //return new Promise((resolve, reject) => {
 
-      new FULLTILT.getDeviceOrientation({ type: 'world' })
+      //new FULLTILT.getDeviceOrientation({ type: 'world' })
 
-      .then(data => {
-        this.orientation = data;
+      //.then(data => {
+        //this.orientation = data;
+        //resolve();
+      //})
+
+      //.catch(msg => {
+        //this.props.showOrientationError();
+      //});
+
+    //});
+
+    return new Promise(resolve => {
+
+      let orientation = new Orientation();
+
+      orientation.on('supported', () => {
+        this.orientation = orientation;
         resolve();
-      })
+      });
 
-      .catch(msg => {
+      orientation.on('unsupported', () => {
         this.props.showOrientationError();
       });
+
+      orientation.on('startcalibration', () => {
+        //this.props.startCalibration();
+      });
+
+      orientation.on('finishcalibration', () => {
+        //this.props.stopCalibration();
+      });
+
+      orientation.on('calibrate', data => {
+        //this.props.calibrate();
+      });
+
+      orientation.start();
 
     });
 
@@ -178,7 +208,7 @@ export default class extends Component {
 
     if (!this.orientation || !this.eye) return;
 
-    let euler = this.orientation.getScreenAdjustedEuler();
+    let euler = this.orientation.getEuler();
 
     let a = THREE.Math.degToRad(euler.alpha);
     let b = THREE.Math.degToRad(euler.beta);

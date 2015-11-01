@@ -103,11 +103,6 @@ export default class Orientation extends EventEmitter {
       matrix.makeRotationFromEuler(this.alphaOffset);
       euler.setFromRotationMatrix(matrix);
 
-      if (euler.x < 0) {
-        euler.x += 2*Math.PI;
-      }
-
-      euler.x %= 360;
       a -= euler.x;
 
     }

@@ -13,39 +13,20 @@ export default class Orientation extends EventEmitter {
    */
   start() {
 
-    // top-level listener
-
     window.addEventListener('deviceorientation', e => {
       this.data = e;
     });
 
-    // calibration
+    this.checkSupport();
+    this.calibrateCompass();
 
-    let t = 0, maxt = 1000;
-    let s = 0, maxs = 200;
+  }
 
-    let calibrate = e => {
 
-      if (e.absolute !== true && e.webkitCompassAccuracy > 0) {
-
-        this.compassHeading = e.webkitCompassHeading
-
-        if (++s > maxs) {
-          window.removeEventListener('deviceorientation', calibrate);
-          alert(this.compassHeading);
-        }
-
-      }
-
-      if (++t > maxt) {
-        window.removeEventListener('deviceorientation', calibrate);
-      }
-
-    };
-
-    window.addEventListener('deviceorientation', calibrate);
-
-    // is there an accelerometer?
+  /**
+   * Does the device have an accelerometer?
+   */
+  checkSupport() {
 
     let check = (i=0) => {
 
@@ -69,17 +50,56 @@ export default class Orientation extends EventEmitter {
 
 
   /**
+   * Calibrate the compass.
+   */
+  calibrateCompass() {
+
+    let t = 0, maxt = 1000;
+    let s = 0, maxs = 200;
+
+    let calibrate = e => {
+
+      if (e.absolute !== true && e.webkitCompassAccuracy > 0) {
+
+        // Store the base heading.
+        this.heading = e.webkitCompassHeading;
+
+        // Stop after N successful samples.
+        if (++s > maxs) {
+          window.removeEventListener('deviceorientation', calibrate);
+        }
+
+      }
+
+      // Stop after N attempts.
+      if (++t > maxt) {
+        window.removeEventListener('deviceorientation', calibrate);
+      }
+
+    };
+
+    window.addEventListener('deviceorientation', calibrate);
+
+  }
+
+
+  /**
    * Get screen-adjusted Euler angles.
    *
    * @return {Object}
    */
   getEuler() {
+
     // TODO|dev
+
+    let alpha = this.data.alpha - (this.heading || 0);
+
     return {
-      alpha: this.compassHeading ? this.data.alpha - this.compassHeading : this.data.alpha,
-      beta: this.data.beta,
-      gamma: this.data.gamma,
+      alpha,
+      beta:   this.data.beta,
+      gamma:  this.data.gamma,
     };
+
   }
 
 

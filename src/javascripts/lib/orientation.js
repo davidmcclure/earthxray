@@ -97,6 +97,21 @@ export default class Orientation extends EventEmitter {
     let b = THREE.Math.degToRad(this.data.beta);
     let g = THREE.Math.degToRad(this.data.gamma);
 
+    if (this.alphaOffset) {
+
+      let matrix = new THREE.Matrix4();
+      matrix.makeRotationFromEuler(this.alphaOffset);
+      euler.setFromRotationMatrix(matrix);
+
+      if (euler.x < 0) {
+        euler.x += 2*Math.PI;
+      }
+
+      euler.x %= 360;
+      a -= euler.x;
+
+    }
+
     euler.set(a, b, g);
 
     return euler;

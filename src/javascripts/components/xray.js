@@ -183,13 +183,17 @@ export default class extends Component {
 
     let euler = this.orientation.getEuler();
 
+    let a = THREE.Math.degToRad(euler.alpha);
+    let b = THREE.Math.degToRad(euler.beta);
+    let g = THREE.Math.degToRad(euler.gamma);
+
     let ra = new THREE.Matrix4();
     let rb = new THREE.Matrix4();
     let rg = new THREE.Matrix4();
 
-    rb.makeRotationX(euler.y);
-    rg.makeRotationY(euler.z);
-    ra.makeRotationZ(euler.x);
+    rb.makeRotationX(b);
+    rg.makeRotationY(g);
+    ra.makeRotationZ(a);
 
     let r = this.eye.clone();
 

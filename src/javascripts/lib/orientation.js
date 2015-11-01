@@ -62,8 +62,7 @@ export default class Orientation extends EventEmitter {
       if (e.absolute !== true && e.webkitCompassAccuracy > 0) {
 
         // Store the base heading.
-        let heading = THREE.Math.degToRad(e.webkitCompassHeading);
-        this.alphaOffset = new THREE.Euler(heading, 0, 0);
+        this.heading = e.webkitCompassHeading;
 
         // Stop after N successful samples.
         if (++s > maxs) {
@@ -91,25 +90,15 @@ export default class Orientation extends EventEmitter {
    */
   getEuler() {
 
-    let euler = new THREE.Euler();
+    let alpha = this.data.alpha - (this.heading || 0);
 
-    let a = THREE.Math.degToRad(this.data.alpha);
-    let b = THREE.Math.degToRad(this.data.beta);
-    let g = THREE.Math.degToRad(this.data.gamma);
+    // TODO: Screen rotation.
 
-    if (this.alphaOffset) {
-
-      let matrix = new THREE.Matrix4();
-      matrix.makeRotationFromEuler(this.alphaOffset);
-      euler.setFromRotationMatrix(matrix);
-
-      a -= euler.x;
-
-    }
-
-    euler.set(a, b, g);
-
-    return euler;
+    return {
+      alpha:  alpha,
+      beta:   this.data.beta,
+      gamma:  this.data.gamma,
+    };
 
   }
 

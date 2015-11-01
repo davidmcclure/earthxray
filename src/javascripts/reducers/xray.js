@@ -5,8 +5,8 @@ import { createReducer } from '../utils';
 import {
   START_XRAY,
   ZOOM_XRAY,
-  START_CALIBRATING,
-  END_CALIBRATING,
+  START_CALIBRATION,
+  END_CALIBRATION,
 } from '../constants';
 
 
@@ -27,11 +27,11 @@ const handlers = {
     hasZoomed: true
   }),
 
-  [START_CALIBRATING]: () => ({
+  [START_CALIBRATION]: () => ({
     isCalibrating: true
   }),
 
-  [END_CALIBRATING]: () => ({
+  [END_CALIBRATION]: () => ({
     isCalibrating: false
   }),
 

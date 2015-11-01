@@ -104,21 +104,6 @@ export default class extends Component {
    */
   listenForOrientation() {
 
-    //return new Promise((resolve, reject) => {
-
-      //new FULLTILT.getDeviceOrientation({ type: 'world' })
-
-      //.then(data => {
-        //this.orientation = data;
-        //resolve();
-      //})
-
-      //.catch(msg => {
-        //this.props.showOrientationError();
-      //});
-
-    //});
-
     return new Promise(resolve => {
 
       let orientation = new Orientation();
@@ -130,18 +115,6 @@ export default class extends Component {
 
       orientation.on('unsupported', () => {
         this.props.showOrientationError();
-      });
-
-      orientation.on('startcalibration', () => {
-        //this.props.startCalibration();
-      });
-
-      orientation.on('finishcalibration', () => {
-        //this.props.stopCalibration();
-      });
-
-      orientation.on('calibrate', data => {
-        //this.props.calibrate();
       });
 
       orientation.start();
@@ -210,17 +183,13 @@ export default class extends Component {
 
     let euler = this.orientation.getEuler();
 
-    let a = THREE.Math.degToRad(euler.alpha);
-    let b = THREE.Math.degToRad(euler.beta);
-    let g = THREE.Math.degToRad(euler.gamma);
-
     let ra = new THREE.Matrix4();
     let rb = new THREE.Matrix4();
     let rg = new THREE.Matrix4();
 
-    ra.makeRotationZ(a);
-    rb.makeRotationX(b);
-    rg.makeRotationY(g);
+    rb.makeRotationX(euler.y);
+    rg.makeRotationY(euler.z);
+    ra.makeRotationZ(euler.x);
 
     let r = this.eye.clone();
 

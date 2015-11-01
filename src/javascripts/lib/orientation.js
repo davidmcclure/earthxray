@@ -71,7 +71,7 @@ export default class Orientation extends EventEmitter {
         // Stop after N successful samples.
         if (++s > maxs) {
           window.removeEventListener('deviceorientation', calibrate);
-          this.emit('finishcalibration');
+          this.emit('endcalibration');
         }
 
       }

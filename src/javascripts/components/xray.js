@@ -117,6 +117,14 @@ export default class extends Component {
         this.props.showOrientationError();
       });
 
+      orientation.on('startcalibration', () => {
+        this.props.startCalibration();
+      });
+
+      orientation.on('endcalibration', () => {
+        this.props.endCalibration();
+      });
+
       orientation.start();
 
     });

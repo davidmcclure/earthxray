@@ -33,10 +33,10 @@ export default class Orientation extends EventEmitter {
    */
   start() {
 
-    // TODO: Bind to a separate setOrientationData().
-    window.addEventListener('deviceorientation', e => {
-      this.data = e;
-    });
+    window.addEventListener(
+      'deviceorientation',
+      this.setOrientationData.bind(this)
+    );
 
     window.addEventListener(
       'orientationchange',
@@ -46,6 +46,16 @@ export default class Orientation extends EventEmitter {
     this.checkSupport();
     this.calibrateCompass();
 
+  }
+
+
+  /**
+   * Set the raw orientation data.
+   *
+   * @param {Object} data
+   */
+  setOrientationData(data) {
+    this.data = data;
   }
 
 

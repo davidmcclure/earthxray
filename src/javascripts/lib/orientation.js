@@ -8,6 +8,40 @@ import THREE from 'three';
 export default class Orientation extends EventEmitter {
 
 
+  constructor() {
+    super();
+    this.trackScreenAngle();
+  }
+
+
+  /**
+   * Monitor the screen rotation angle.
+   */
+  trackScreenAngle() {
+
+    // Check for orientation API.
+    let angle = _.get(window, 'screen.orientation.angle')
+    this.hasScreenAngleAPI = _.isNumber(angle);
+
+    this.setScreenAngle();
+
+  }
+
+
+  /**
+   * Set the current screen angle.
+   */
+  setScreenAngle() {
+
+    let angle = this.hasScreenAngleAPI ?
+      (window.screen.orientation.angle || 0) :
+      (window.orientation || 0);
+
+    this.screenAngle = THREE.Math.degToRad(angle);
+
+  }
+
+
   /**
    * Listen for orientation.
    */

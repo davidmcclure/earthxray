@@ -66,14 +66,14 @@ export default class extends Component {
    */
   render() {
 
-    let cx = classNames('zoom-tip', {
+    let cx = classNames({
       animated: this.state.pulse,
       bounceIn: this.state.pulse,
       flash: this.state.flash,
     });
 
     return (
-      <div className={cx}>
+      <div id="zoom-tip" className={cx}>
         <Static html={pinchSVG} />
         <p>Pinch to zoom</p>
       </div>

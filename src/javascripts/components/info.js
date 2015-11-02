@@ -51,7 +51,7 @@ export default class extends Component {
       );
     }
 
-    let wrapperCx = classNames('info', {
+    let wrapperCx = classNames({
       active: this.props.active
     });
 
@@ -61,7 +61,7 @@ export default class extends Component {
     });
 
     return (
-      <div className={wrapperCx}>
+      <div id="info" className={wrapperCx}>
 
         <Tappable onTap={this.props.toggleNav}>
           <i className={toggleCx}></i>

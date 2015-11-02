@@ -8,7 +8,6 @@ import OrientationError from './orientation-error';
 import Info from './info';
 import GPSSpinner from './gps-spinner';
 import Center from './center';
-import Calibrate from './calibrate';
 import ZoomTip from './zoom-tip';
 
 
@@ -62,13 +61,6 @@ export default class extends Component {
           !this.props.xray.hasZoomed &&
           !this.props.nav.active ?
           <ZoomTip /> : null
-        }
-
-        {
-          this.props.xray.active &&
-          this.props.xray.isCalibrating &&
-          !this.props.nav.active ?
-          <Calibrate /> : null
         }
 
       </div>

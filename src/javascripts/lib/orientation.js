@@ -55,7 +55,7 @@ export default class Orientation extends EventEmitter {
   calibrateCompass() {
 
     let t = 0, maxt = 1000;
-    let s = 0, maxs = 200;
+    let s = 0, maxs = 100;
 
     let calibrate = e => {
 
@@ -65,13 +65,16 @@ export default class Orientation extends EventEmitter {
           this.emit('startcalibration');
         }
 
-        // Store the base heading.
-        this.heading = e.webkitCompassHeading;
-
         // Stop after N successful samples.
         if (++s > maxs) {
+
+          // Store the base heading.
+          this.heading = e.webkitCompassHeading;
+
+          // Strip off the listener.
           window.removeEventListener('deviceorientation', calibrate);
           this.emit('endcalibration');
+
         }
 
       }

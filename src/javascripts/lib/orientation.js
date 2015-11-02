@@ -10,21 +10,43 @@ export default class Orientation extends EventEmitter {
 
   constructor() {
     super();
-    this.trackScreenAngle();
+    this.initScreenAngle();
   }
 
 
   /**
-   * Monitor the screen rotation angle.
+   * Set the initial screen angle.
    */
-  trackScreenAngle() {
+  initScreenAngle() {
 
-    // Check for orientation API.
+    // Check for API.
     let angle = _.get(window, 'screen.orientation.angle')
     this.hasScreenAngleAPI = _.isNumber(angle);
 
     this.setScreenAngle();
 
+  }
+
+
+  /**
+   * Get the current screen angle.
+   *
+   * @return {Number}
+   */
+  getScreenAngle() {
+
+    return this.hasScreenAngleAPI ?
+      (window.screen.orientation.angle || 0) :
+      (window.orientation || 0);
+
+  }
+
+
+  /**
+   * Set the current screen angle.
+   */
+  setScreenAngle() {
+    this.screenAngle = this.getScreenAngle();
   }
 
 
@@ -56,20 +78,6 @@ export default class Orientation extends EventEmitter {
    */
   setOrientationData(data) {
     this.data = data;
-  }
-
-
-  /**
-   * Set the current screen angle.
-   */
-  setScreenAngle() {
-
-    let angle = this.hasScreenAngleAPI ?
-      (window.screen.orientation.angle || 0) :
-      (window.orientation || 0);
-
-    this.screenAngle = THREE.Math.degToRad(angle);
-
   }
 
 
@@ -120,6 +128,7 @@ export default class Orientation extends EventEmitter {
 
           // Store the base heading.
           this.heading = e.webkitCompassHeading;
+          // TODO: Store screen rotation.
 
           // Strip off the listener.
           window.removeEventListener('deviceorientation', calibrate);

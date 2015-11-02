@@ -29,6 +29,27 @@ export default class Orientation extends EventEmitter {
 
 
   /**
+   * Listen for orientation.
+   */
+  start() {
+
+    // TODO: Bind to a separate setOrientationData().
+    window.addEventListener('deviceorientation', e => {
+      this.data = e;
+    });
+
+    window.addEventListener(
+      'orientationchange',
+      this.setScreenAngle.bind(this)
+    );
+
+    this.checkSupport();
+    this.calibrateCompass();
+
+  }
+
+
+  /**
    * Set the current screen angle.
    */
   setScreenAngle() {
@@ -38,21 +59,6 @@ export default class Orientation extends EventEmitter {
       (window.orientation || 0);
 
     this.screenAngle = THREE.Math.degToRad(angle);
-
-  }
-
-
-  /**
-   * Listen for orientation.
-   */
-  start() {
-
-    window.addEventListener('deviceorientation', e => {
-      this.data = e;
-    });
-
-    this.checkSupport();
-    this.calibrateCompass();
 
   }
 

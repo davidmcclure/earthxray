@@ -8,7 +8,6 @@ import { bindActionCreators } from 'redux';
 import THREE from 'three';
 import Promise from 'bluebird';
 import Hammer from 'hammerjs';
-import FULLTILT from 'fulltilt';
 
 import Orientation from '../lib/orientation';
 import mats from './materials.yml';

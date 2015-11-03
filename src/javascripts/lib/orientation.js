@@ -158,21 +158,34 @@ export default class Orientation extends EventEmitter {
 
 
   /**
-   * Get screen-adjusted Euler angles.
+   * Get a screen-adjusted rotation matrix.
    *
-   * @return {Object}
+   * @return {THREE.Matrix4}
    */
-  getEuler() {
+  getRotationMatrix() {
 
+    // Adjust for screen orientation.
     let alpha = this.data.alpha - (this.heading || 0);
 
-    // TODO: Screen rotation.
+    let a = THREE.Math.degToRad(alpha);
+    let b = THREE.Math.degToRad(this.data.beta);
+    let g = THREE.Math.degToRad(this.data.gamma);
 
-    return {
-      alpha:  alpha,
-      beta:   this.data.beta,
-      gamma:  this.data.gamma,
-    };
+    let ra = new THREE.Matrix4();
+    let rb = new THREE.Matrix4();
+    let rg = new THREE.Matrix4();
+
+    ra.makeRotationZ(a);
+    rb.makeRotationX(b);
+    rg.makeRotationY(g);
+
+    let matrix = new THREE.Matrix4();
+
+    matrix.multiply(ra);
+    matrix.multiply(rb);
+    matrix.multiply(rg);
+
+    return matrix;
 
   }
 

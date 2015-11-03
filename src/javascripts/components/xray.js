@@ -60,15 +60,15 @@ export default class extends Component {
 
 
   /**
-   * Store the base orientation matrix.
+   * Store the base heading matrix.
    */
   initializeHeading() {
 
     let [x, y, z] = this.props.location;
 
-    this.eye = new THREE.Matrix4();
+    this.down = new THREE.Matrix4();
 
-    this.eye.lookAt(
+    this.down.lookAt(
       new THREE.Vector3(x, y, z),
       new THREE.Vector3(0, 0.001, 0),
       new THREE.Vector3(x, y, z).normalize()
@@ -178,29 +178,19 @@ export default class extends Component {
    */
   point() {
 
-    if (!this.orientation || !this.eye) return;
+    if (!this.orientation || !this.down) {
+      return;
+    }
 
-    let euler = this.orientation.getEuler();
+    // Look down.
+    let heading = this.down.clone();
 
-    let a = THREE.Math.degToRad(euler.alpha);
-    let b = THREE.Math.degToRad(euler.beta);
-    let g = THREE.Math.degToRad(euler.gamma);
+    // Apply the device orientation.
+    let rotation = this.orientation.getRotationMatrix();
+    heading.multiply(rotation);
 
-    let ra = new THREE.Matrix4();
-    let rb = new THREE.Matrix4();
-    let rg = new THREE.Matrix4();
-
-    rb.makeRotationX(b);
-    rg.makeRotationY(g);
-    ra.makeRotationZ(a);
-
-    let r = this.eye.clone();
-
-    r.multiply(ra);
-    r.multiply(rb);
-    r.multiply(rg);
-
-    this.context.camera.quaternion.setFromRotationMatrix(r);
+    // Update the camera.
+    this.context.camera.quaternion.setFromRotationMatrix(heading);
 
   }
 
@@ -212,11 +202,11 @@ export default class extends Component {
 
     let camera = this.context.camera;
 
-    // Heading vector.
+    // Get the heading vector.
     let heading = new THREE.Vector3(0, 0, -1);
     heading.applyQuaternion(camera.quaternion);
 
-    // Scaling coefficient.
+    // Get the scaling factor.
     let a = heading.dot(heading);
     let b = 2 * heading.dot(camera.position);
     let u = (-2*b) / (2*a);

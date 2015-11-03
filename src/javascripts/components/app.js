@@ -14,7 +14,7 @@ import ZoomTip from './zoom-tip';
 @connect(state => ({
   xray: state.xray,
   errors: state.errors,
-  nav: state.nav,
+  info: state.info,
   scene: state.scene,
 }))
 export default class extends Component {
@@ -52,14 +52,14 @@ export default class extends Component {
 
         {
           this.props.xray.active &&
-          !this.props.nav.active ?
+          !this.props.info.active ?
           <Center /> : null
         }
 
         {
           this.props.xray.active &&
           !this.props.xray.hasZoomed &&
-          !this.props.nav.active ?
+          !this.props.info.active ?
           <ZoomTip /> : null
         }
 

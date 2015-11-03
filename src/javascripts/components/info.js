@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import React, { Component } from 'react';
 import classNames from 'classnames';
 import Tappable from 'react-tappable';
-import * as actions from '../actions/nav';
+import * as actions from '../actions/info';
 import Overlay from './overlay';
 import Logo from './logo';
 import Static from './static';
@@ -15,14 +15,14 @@ import linksHTML from './links.html';
 
 
 @connect(
-  state => state.nav,
+  state => state.info,
   actions
 )
 export default class extends Component {
 
 
   /**
-   * Render navigation.
+   * Render info.
    */
   render() {
 
@@ -39,7 +39,7 @@ export default class extends Component {
             <Logo />
             <Static html={infoHTML} />
 
-            <Tappable onTap={this.props.toggleNav}>
+            <Tappable onTap={this.props.toggleInfo}>
               <button className="btn btn-primary btn-lg">Got it</button>
             </Tappable>
 
@@ -63,7 +63,7 @@ export default class extends Component {
     return (
       <div id="info" className={wrapperCx}>
 
-        <Tappable onTap={this.props.toggleNav}>
+        <Tappable onTap={this.props.toggleInfo}>
           <i className={toggleCx}></i>
         </Tappable>
 

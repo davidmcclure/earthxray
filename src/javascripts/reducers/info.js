@@ -4,7 +4,7 @@ import { createReducer } from '../utils';
 
 import {
   START_XRAY,
-  TOGGLE_NAV,
+  TOGGLE_INFO,
 } from '../constants';
 
 
@@ -19,7 +19,7 @@ const handlers = {
     active: true
   }),
 
-  [TOGGLE_NAV]: (state) => ({
+  [TOGGLE_INFO]: (state) => ({
     active: !state.active
   }),
 

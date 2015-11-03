@@ -189,19 +189,16 @@ export default class extends Component {
     let ra = new THREE.Matrix4();
     let rb = new THREE.Matrix4();
     let rg = new THREE.Matrix4();
-    let rs = new THREE.Matrix4();
 
     rb.makeRotationX(b);
     rg.makeRotationY(g);
     ra.makeRotationZ(a);
-    rs.makeRotationZ(-THREE.Math.degToRad(this.orientation.getScreenAngle()));
 
     let r = this.eye.clone();
 
     r.multiply(ra);
     r.multiply(rb);
     r.multiply(rg);
-    r.multiply(rs);
 
     this.context.camera.quaternion.setFromRotationMatrix(r);
 

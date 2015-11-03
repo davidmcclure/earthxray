@@ -35,9 +35,11 @@ export default class Orientation extends EventEmitter {
    */
   getScreenAngle() {
 
-    return this.hasScreenAngleAPI ?
+    let angle = this.hasScreenAngleAPI ?
       (window.screen.orientation.angle || 0) :
       (window.orientation || 0);
+
+    return THREE.Math.degToRad(angle);
 
   }
 
@@ -164,7 +166,7 @@ export default class Orientation extends EventEmitter {
    */
   getRotationMatrix() {
 
-    // Adjust for screen orientation.
+    // Apply compass offset.
     let alpha = this.data.alpha - (this.heading || 0);
 
     let a = THREE.Math.degToRad(alpha);
@@ -174,16 +176,21 @@ export default class Orientation extends EventEmitter {
     let ra = new THREE.Matrix4();
     let rb = new THREE.Matrix4();
     let rg = new THREE.Matrix4();
+    let rs = new THREE.Matrix4();
 
     ra.makeRotationZ(a);
     rb.makeRotationX(b);
     rg.makeRotationY(g);
+
+    // Adjust for screen angle.
+    rs.makeRotationZ(-this.screenAngle);
 
     let matrix = new THREE.Matrix4();
 
     matrix.multiply(ra);
     matrix.multiply(rb);
     matrix.multiply(rg);
+    matrix.multiply(rs);
 
     return matrix;
 

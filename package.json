@@ -38,7 +38,7 @@
     "animate.css": "^3.4.0",
     "backbone": "^1.2.3",
     "backbone.radio": "^1.0.2",
-    "bluebird": "^2.9.34",
+    "bluebird": "^3.0.5",
     "bootstrap": "^3.3.5",
     "classnames": "^2.1.5",
     "es6-error": "^2.0.0",

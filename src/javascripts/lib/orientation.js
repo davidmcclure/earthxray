@@ -3,6 +3,7 @@
 import _ from 'lodash';
 import EventEmitter from 'events';
 import THREE from 'three';
+import Promise from 'bluebird';
 
 
 export default class Orientation extends EventEmitter {
@@ -67,7 +68,6 @@ export default class Orientation extends EventEmitter {
       this.setScreenAngle.bind(this)
     );
 
-    this.checkSupport();
     this.calibrateCompass();
 
   }
@@ -85,26 +85,32 @@ export default class Orientation extends EventEmitter {
 
   /**
    * Does the device have an accelerometer?
+   *
+   * @param {Function} cb
    */
   checkSupport() {
 
-    let check = (i=0) => {
+    return new Promise((resolve, reject) => {
 
-      if (_.isNumber(_.get(this, 'data.alpha'))) {
-        this.emit('supported');
-      }
+      let check = (i=0) => {
 
-      else if (++i < 10) {
-        _.delay(check, 50, i);
-      }
+        if (_.isNumber(_.get(this, 'data.alpha'))) {
+          resolve();
+        }
 
-      else {
-        this.emit('unsupported');
-      }
+        else if (++i < 10) {
+          _.delay(check, 50, i);
+        }
 
-    };
+        else {
+          reject(new Error('No data.'));
+        }
 
-    check();
+      };
+
+      check();
+
+    });
 
   }
 

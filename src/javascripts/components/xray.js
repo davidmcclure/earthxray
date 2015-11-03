@@ -51,10 +51,12 @@ export default class extends Component {
       this.drawCenterDot(),
       this.listenForOrientation(),
       this.listenForZoom(),
-      this.listenForRender(),
     ])
 
-    .then(this.props.startXray);
+    .then(() => {
+      this.listenForRender();
+      this.props.startXray();
+    });
 
   }
 
@@ -177,10 +179,6 @@ export default class extends Component {
    * Point the camera.
    */
   point() {
-
-    if (!this.orientation || !this.down) {
-      return;
-    }
 
     // Look down.
     let heading = this.down.clone();

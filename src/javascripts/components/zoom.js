@@ -12,7 +12,9 @@ import mats from './materials.yml';
 
 
 @connect(
-  state => ({ location: state.scene.location }),
+  state => ({
+    location: state.scene.location
+  }),
   actions
 )
 export default class extends Component {

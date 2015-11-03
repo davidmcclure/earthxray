@@ -130,7 +130,6 @@ export default class Orientation extends EventEmitter {
 
           // Store the base heading.
           this.heading = e.webkitCompassHeading;
-          // TODO: Store screen rotation.
 
           // Strip off the listener.
           window.removeEventListener('deviceorientation', calibrate);

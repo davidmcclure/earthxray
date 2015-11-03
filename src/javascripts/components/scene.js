@@ -2,12 +2,11 @@
 
 import _ from 'lodash';
 import $ from 'jquery';
+import { connect } from 'react-redux';
 import React, { Component, findDOMNode, PropTypes } from 'react';
 import THREE from 'three';
 import EventEmitter from 'events';
 import TWEEN from 'tween.js';
-import { connect } from 'react-redux';
-import platform from 'platform';
 
 import Startup from './startup';
 import Zoom from './zoom';

@@ -405,7 +405,7 @@ export function bearingToDir(bearing) {
     'NW',
   ];
 
-  let i = (bearing / 360) * 8;
-  return dirs[Math.round(i % 8)];
+  let i = Math.round((bearing / 360) * 8);
+  return dirs[i % 8];
 
 };

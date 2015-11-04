@@ -9,6 +9,7 @@ import Info from './info';
 import GPSSpinner from './gps-spinner';
 import Center from './center';
 import ZoomTip from './zoom-tip';
+import Compass from './compass';
 
 
 @connect(state => ({
@@ -54,6 +55,12 @@ export default class extends Component {
           this.props.xray.active &&
           !this.props.info.active ?
           <Center /> : null
+        }
+
+        {
+          this.props.xray.active &&
+          !this.props.info.active ?
+          <Compass /> : null
         }
 
         {

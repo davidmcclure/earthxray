@@ -50,13 +50,35 @@ export default class extends RadioComponent {
    */
   render() {
 
-    let degrees = Math.round(this.state.bearing);
-    let direction = bearingToDir(degrees);
+    let bearing;
+
+    // If we're below the horizon.
+    if (this.state.bearing) {
+
+      let degrees = Math.round(this.state.bearing);
+      let direction = bearingToDir(degrees);
+
+      bearing = (
+        <div className="bearing">
+          <span className="direction">{direction}</span>{' '}
+          <span className="degrees">{degrees}&deg;</span>
+        </div>
+      );
+
+    }
+
+    // If we're looking into space.
+    else {
+      bearing = (
+        <div className="bearing">
+          <div className="degrees">Up!</div>
+        </div>
+      );
+    }
 
     return (
       <div id="compass">
-        <span className="direction">{direction}</span>{' '}
-        <span className="degrees">{degrees}&deg;</span>
+        {bearing}
       </div>
     );
 

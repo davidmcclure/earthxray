@@ -50,7 +50,7 @@ export default class extends RadioComponent {
    */
   render() {
 
-    let bearing;
+    let bearing = null;
 
     // If we're below the horizon.
     if (this.state.bearing) {
@@ -65,15 +65,6 @@ export default class extends RadioComponent {
         </div>
       );
 
-    }
-
-    // If we're looking into space.
-    else {
-      bearing = (
-        <div className="bearing">
-          <div className="degrees">Up!</div>
-        </div>
-      );
     }
 
     return (

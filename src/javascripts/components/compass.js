@@ -47,11 +47,15 @@ export default class extends RadioComponent {
    * Render the compass data.
    */
   render() {
+
+    let degrees = Math.round(this.state.bearing);
+
     return (
       <div id="compass">
-        <span>{this.state.bearing}</span>
+        <span className="degrees">{degrees}&deg;</span>
       </div>
     );
+
   }
 
 

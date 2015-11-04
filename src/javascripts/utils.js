@@ -385,3 +385,27 @@ export function bearing(lon1, lat1, lon2, lat2) {
   return (b + 360) % 360;
 
 };
+
+
+/**
+ * Convert a compass bearing to a direction.
+ *
+ * @param {Number} bearing
+ */
+export function bearingToDir(bearing) {
+
+  let dirs = [
+    'N',
+    'NE',
+    'E',
+    'SE',
+    'S',
+    'SW',
+    'W',
+    'NW',
+  ];
+
+  let i = (bearing / 360) * 8;
+  return dirs[Math.round(i % 8)];
+
+};

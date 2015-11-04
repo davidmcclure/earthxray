@@ -2,6 +2,7 @@
 
 import React from 'react';
 import RadioComponent from '../lib/radio-component';
+import { bearingToDir } from '../utils';
 
 import {
   XRAY,
@@ -50,9 +51,11 @@ export default class extends RadioComponent {
   render() {
 
     let degrees = Math.round(this.state.bearing);
+    let direction = bearingToDir(degrees);
 
     return (
       <div id="compass">
+        <span className="direction">{direction}</span>{' '}
         <span className="degrees">{degrees}&deg;</span>
       </div>
     );

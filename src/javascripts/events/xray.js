@@ -4,7 +4,6 @@ import Radio from 'backbone.radio';
 
 import {
   XRAY,
-  POINT_CAMERA,
   TRACE_CENTER,
 } from '../constants';
 
@@ -13,20 +12,11 @@ const channel = Radio.channel(XRAY);
 
 
 /**
- * When the camera heading is updated.
- *
- * @param {Number} bearing
- */
-export function pointCamera(bearing) {
-  channel.trigger(POINT_CAMERA, bearing);
-}
-
-
-/**
  * When the far-side intersection is traced.
  *
  * @param {Number} distance
+ * @param {Number} bearing
  */
-export function traceCenter(distance) {
-  channel.trigger(TRACE_CENTER, distance);
+export function traceCenter(distance, bearing) {
+  channel.trigger(TRACE_CENTER, distance, bearing);
 }

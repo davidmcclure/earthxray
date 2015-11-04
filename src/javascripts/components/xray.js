@@ -237,7 +237,8 @@ export default class extends Component {
       this.dot.visible = false;
     }
 
-    events.traceCenter(distance);
+    // Publish the far-side data.
+    events.traceCenter(distance, bearing);
 
   }
 

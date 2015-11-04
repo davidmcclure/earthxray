@@ -5,7 +5,7 @@ import RadioComponent from '../lib/radio-component';
 
 import {
   XRAY,
-  POINT_CAMERA
+  TRACE_CENTER
 } from '../constants';
 
 
@@ -14,7 +14,7 @@ export default class extends RadioComponent {
 
   static events = {
     [XRAY]: {
-      [POINT_CAMERA]: 'setBearing'
+      [TRACE_CENTER]: 'setBearing'
     }
   }
 
@@ -36,9 +36,10 @@ export default class extends RadioComponent {
   /**
    * Set the bearing.
    *
+   * @param {Number} distance
    * @param {Number} bearing
    */
-  setBearing(bearing) {
+  setBearing(distance, bearing) {
     this.setState({ bearing });
   }
 

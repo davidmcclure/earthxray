@@ -1,9 +1,45 @@
 
 
-import React, { Component } from 'react';
+import React from 'react';
+import RadioComponent from '../lib/radio-component';
+
+import {
+  POINT_CAMERA
+} from '../constants';
 
 
-export default class extends Component {
+export default class extends RadioComponent {
+
+
+  static events = {
+    xray: {
+      [POINT_CAMERA]: 'setBearing'
+    }
+  }
+
+
+  /**
+   * Set initial state.
+   */
+  constructor(props) {
+
+    super(props);
+
+    this.state = {
+      bearing: null
+    };
+
+  }
+
+
+  /**
+   * Set the bearing.
+   *
+   * @param {Number} bearing
+   */
+  setBearing(bearing) {
+    this.setState({ bearing });
+  }
 
 
   /**
@@ -12,7 +48,7 @@ export default class extends Component {
   render() {
     return (
       <div id="compass">
-        <span>compass</span>
+        <span>{this.state.bearing}</span>
       </div>
     );
   }

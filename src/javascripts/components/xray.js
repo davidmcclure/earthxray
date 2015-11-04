@@ -187,8 +187,12 @@ export default class extends Component {
     let rotation = this.orientation.getRotationMatrix();
     heading.multiply(rotation);
 
-    // Update the camera.
+    // Update the camera heading.
     this.context.camera.quaternion.setFromRotationMatrix(heading);
+
+    // Emit the compass bearing.
+    let bearing = this.orientation.getCompassBearing();
+    events.pointCamera(bearing);
 
   }
 

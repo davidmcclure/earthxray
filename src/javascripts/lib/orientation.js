@@ -160,11 +160,11 @@ export default class Orientation extends EventEmitter {
 
 
   /**
-   * Get the current compass heading.
+   * Get the current compass bearing.
    *
    * @return {Number}
    */
-  getCompassHeading() {
+  getCompassBearing() {
 
     let alpha = this.data.alpha - (this.heading || 0);
     if (alpha < 0) alpha += 360;
@@ -181,7 +181,7 @@ export default class Orientation extends EventEmitter {
    */
   getRotationMatrix() {
 
-    let alpha = this.getCompassHeading();
+    let alpha = this.getCompassBearing();
 
     let a = THREE.Math.degToRad(alpha);
     let b = THREE.Math.degToRad(this.data.beta);

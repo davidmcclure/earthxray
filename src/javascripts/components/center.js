@@ -12,9 +12,6 @@ import {
 export default class extends RadioComponent {
 
 
-  static channelName = 'center'
-
-
   static events = {
     xray: {
       [TRACE_CENTER]: 'trace'

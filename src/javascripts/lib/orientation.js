@@ -84,7 +84,7 @@ export default class Orientation extends EventEmitter {
 
 
   /**
-   * Does the device have an accelerometer?
+   * Is the device reporting data?
    *
    * @param {Function} cb
    */
@@ -165,14 +165,28 @@ export default class Orientation extends EventEmitter {
 
 
   /**
+   * Get the current compass heading.
+   *
+   * @return {Number}
+   */
+  getCompassHeading() {
+
+    let alpha = this.data.alpha - (this.heading || 0);
+    if (alpha < 0) alpha += 360;
+
+    return alpha;
+
+  }
+
+
+  /**
    * Get a screen-adjusted rotation matrix.
    *
    * @return {THREE.Matrix4}
    */
   getRotationMatrix() {
 
-    // Apply compass offset.
-    let alpha = this.data.alpha - (this.heading || 0);
+    let alpha = this.getCompassHeading();
 
     let a = THREE.Math.degToRad(alpha);
     let b = THREE.Math.degToRad(this.data.beta);

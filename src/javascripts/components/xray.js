@@ -14,6 +14,7 @@ import mats from './materials.yml';
 import * as xrayActions from '../actions/xray';
 import * as errorActions from '../actions/errors';
 import * as events from '../events/xray';
+import * as utils from '../utils';
 
 
 @connect(
@@ -209,7 +210,7 @@ export default class extends Component {
     let b = 2 * heading.dot(camera.position);
     let u = (-2*b) / (2*a);
 
-    let distance;
+    let distance, bearing;
 
     // Looking down.
     if (u > 0) {
@@ -219,6 +220,11 @@ export default class extends Component {
       // Get far-side intersection.
       let c = camera.position.clone().add(heading);
       distance = camera.position.distanceTo(c);
+
+      // Calculate compass bearing.
+      let [lon1, lat1] = this.props.location.lonlat;
+      let [lon2, lat2] = utils.xyzToLonLat(c.x, c.y, c.z);
+      bearing = utils.bearing(lon1, lat1, lon2, lat2);
 
       // Update center dot.
       this.dot.position.copy(c);

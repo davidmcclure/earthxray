@@ -355,3 +355,33 @@ export function intermediatePoint(lon1, lat1, lon2, lat2, f) {
   return [dLon, dLat];
 
 };
+
+
+/**
+ * Given two coordinates, compute the compass bearing from the first point
+ * along the great-circle path to the second point.
+ *
+ * http://www.movable-type.co.uk/scripts/latlong.html#bearing
+ *
+ * @param {Number} lon1
+ * @param {Number} lat1
+ * @param {Number} lon2
+ * @param {Number} lat2
+ */
+export function bearing(lon1, lat1, lon2, lat2) {
+
+  let φ1 = THREE.Math.degToRad(lat1);
+  let φ2 = THREE.Math.degToRad(lat2);
+
+  let λ1 = THREE.Math.degToRad(lon1);
+  let λ2 = THREE.Math.degToRad(lon2);
+
+  let y = Math.sin(λ2-λ1) * Math.cos(φ2);
+
+  let x = (Math.cos(φ1) * Math.sin(φ2)) -
+          (Math.sin(φ1) * Math.cos(φ2) * Math.cos(λ2-λ1));
+
+  let b = THREE.Math.radToDeg(Math.atan2(y, x));
+  return (b + 360) % 360;
+
+};

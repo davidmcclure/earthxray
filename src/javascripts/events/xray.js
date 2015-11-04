@@ -3,7 +3,7 @@
 import Radio from 'backbone.radio';
 
 import {
-  TRACE_XRAY_CENTER
+  TRACE_CENTER
 } from '../constants';
 
 
@@ -15,6 +15,6 @@ const channel = Radio.channel('xray');
  *
  * @param {Number} distance
  */
-export function traceXrayCenter(distance) {
-  channel.trigger(TRACE_XRAY_CENTER, distance);
+export function traceCenter(distance) {
+  channel.trigger(TRACE_CENTER, distance);
 }

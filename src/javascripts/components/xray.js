@@ -231,7 +231,7 @@ export default class extends Component {
       this.dot.visible = false;
     }
 
-    events.traceXrayCenter(distance);
+    events.traceCenter(distance);
 
   }
 

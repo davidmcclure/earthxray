@@ -8,7 +8,7 @@ export const FINISH_STARTUP = 'FINISH_STARTUP';
 export const FINISH_ZOOM = 'FINISH_ZOOM';
 
 export const START_XRAY = 'START_XRAY';
-export const TRACE_XRAY_CENTER = 'TRACE_XRAY_CENTER';
+export const TRACE_CENTER = 'TRACE_CENTER';
 export const ZOOM_XRAY = 'ZOOM_XRAY';
 
 export const TOGGLE_INFO = 'TOGGLE_INFO';

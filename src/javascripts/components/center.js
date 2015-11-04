@@ -5,6 +5,7 @@ import RadioComponent from '../lib/radio-component';
 import { kmToMi } from '../utils';
 
 import {
+  XRAY,
   TRACE_CENTER,
 } from '../constants';
 
@@ -13,7 +14,7 @@ export default class extends RadioComponent {
 
 
   static events = {
-    xray: {
+    [XRAY]: {
       [TRACE_CENTER]: 'trace'
     }
   }

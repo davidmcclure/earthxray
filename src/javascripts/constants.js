@@ -10,6 +10,7 @@ export const FINISH_STARTUP = 'FINISH_STARTUP';
 export const FINISH_ZOOM = 'FINISH_ZOOM';
 
 // XRAY
+export const XRAY = 'XRAY';
 export const START_XRAY = 'START_XRAY';
 export const POINT_CAMERA = 'POINT_CAMERA';
 export const TRACE_CENTER = 'TRACE_CENTER';

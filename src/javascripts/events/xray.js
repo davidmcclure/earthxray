@@ -3,12 +3,13 @@
 import Radio from 'backbone.radio';
 
 import {
+  XRAY,
   POINT_CAMERA,
   TRACE_CENTER,
 } from '../constants';
 
 
-const channel = Radio.channel('xray');
+const channel = Radio.channel(XRAY);
 
 
 /**

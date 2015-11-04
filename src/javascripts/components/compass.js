@@ -4,6 +4,7 @@ import React from 'react';
 import RadioComponent from '../lib/radio-component';
 
 import {
+  XRAY,
   POINT_CAMERA
 } from '../constants';
 
@@ -12,7 +13,7 @@ export default class extends RadioComponent {
 
 
   static events = {
-    xray: {
+    [XRAY]: {
       [POINT_CAMERA]: 'setBearing'
     }
   }

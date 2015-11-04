@@ -68,6 +68,7 @@ export default class Orientation extends EventEmitter {
       this.setScreenAngle.bind(this)
     );
 
+    this.checkSupport();
     this.calibrateCompass();
 
   }
@@ -85,32 +86,26 @@ export default class Orientation extends EventEmitter {
 
   /**
    * Is the device reporting data?
-   *
-   * @param {Function} cb
    */
   checkSupport() {
 
-    return new Promise((resolve, reject) => {
+    let check = (i=0) => {
 
-      let check = (i=0) => {
+      if (_.isNumber(_.get(this, 'data.alpha'))) {
+        this.emit('supported');
+      }
 
-        if (_.isNumber(_.get(this, 'data.alpha'))) {
-          resolve();
-        }
+      else if (++i < 10) {
+        _.delay(check, 50, i);
+      }
 
-        else if (++i < 10) {
-          _.delay(check, 50, i);
-        }
+      else {
+        this.emit('unsupported');
+      }
 
-        else {
-          reject(new Error('No data.'));
-        }
+    };
 
-      };
-
-      check();
-
-    });
+    check();
 
   }
 

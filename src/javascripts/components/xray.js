@@ -108,19 +108,17 @@ export default class extends Component {
     return new Promise(resolve => {
 
       let orientation = new Orientation();
+
+      orientation.on('supported', () => {
+        this.orientation = orientation;
+        resolve();
+      });
+
+      orientation.on('unsupported', () => {
+        this.props.showOrientationError();
+      });
+
       orientation.start();
-
-      // Ping accelerometer.
-      orientation.checkSupport()
-
-        .then(() => {
-          this.orientation = orientation;
-          resolve();
-        })
-
-        .catch(e => {
-          this.props.showOrientationError();
-        });
 
     });
 

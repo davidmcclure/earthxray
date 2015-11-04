@@ -15,7 +15,7 @@ export default class extends RadioComponent {
 
   static events = {
     [XRAY]: {
-      [TRACE_CENTER]: 'trace'
+      [TRACE_CENTER]: 'setDistance'
     }
   }
 
@@ -24,8 +24,13 @@ export default class extends RadioComponent {
    * Set initial state.
    */
   constructor(props) {
+
     super(props);
-    this.state = { distance: null };
+
+    this.state = {
+      distance: null
+    };
+
   }
 
 
@@ -34,7 +39,7 @@ export default class extends RadioComponent {
    *
    * @param {Number} distance
    */
-  trace(distance) {
+  setDistance(distance) {
     this.setState({ distance });
   }
 

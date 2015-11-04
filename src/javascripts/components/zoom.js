@@ -53,7 +53,7 @@ export default class extends Component {
     this.dot = new THREE.Mesh(geometry, material);
 
     // Place dot on GPS location.
-    let [x, y, z] = this.props.location;
+    let [x, y, z] = this.props.location.xyz;
     this.dot.position.set(x, y, z);
 
     // Sync light with camera.
@@ -85,7 +85,7 @@ export default class extends Component {
     let [lon0, lat0] = utils.xyzToLonLat(x0, y0, z0);
 
     // GPS coordinates.
-    let [x1, y1, z1] = this.props.location;
+    let [x1, y1, z1] = this.props.location.xyz;
     let [lon1, lat1] = utils.xyzToLonLat(x1, y1, z1);
 
     let r0 = camera.position.z;

@@ -62,14 +62,18 @@ export default class extends Component {
     return new Promise((resolve, reject) => {
       window.navigator.geolocation.getCurrentPosition(pos => {
 
-        // Get 3d location.
-        let location = utils.lonLatToXYZ(
+        let lonlat = [
+          pos.coords.longitude,
+          pos.coords.latitude
+        ];
+
+        let xyz = utils.lonLatToXYZ(
           pos.coords.longitude,
           pos.coords.latitude
         );
 
         // Set in store.
-        this.props.geolocate(location);
+        this.props.geolocate({ lonlat, xyz });
         resolve();
 
       }, () => {

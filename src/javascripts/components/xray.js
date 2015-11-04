@@ -66,7 +66,7 @@ export default class extends Component {
    */
   initializeHeading() {
 
-    let [x, y, z] = this.props.location;
+    let [x, y, z] = this.props.location.xyz;
 
     this.down = new THREE.Matrix4();
 

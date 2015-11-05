@@ -120,14 +120,14 @@ export default class Orientation extends EventEmitter {
 
     let calibrate = e => {
 
-      if (e.absolute !== true && e.webkitCompassAccuracy > 0) {
+      if (e.absolute !== true && _.isNumber(e.webkitCompassHeading)) {
 
         if (s == 0) {
           this.emit('startcalibration');
         }
 
         // Stop after N successful samples.
-        if (++s > maxs) {
+        if (++s >= maxs) {
 
           // Store the base heading.
           this.heading = e.webkitCompassHeading;

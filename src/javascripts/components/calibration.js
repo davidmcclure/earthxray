@@ -1,5 +1,6 @@
 
 
+import { connect} from 'react-redux';
 import React from 'react';
 import RadioComponent from '../lib/radio-component';
 import classNames from 'classnames';
@@ -11,15 +12,10 @@ import {
 } from '../constants';
 
 
+@connect(state => ({
+  calibrating: state.xray.calibrating
+}))
 export default class extends RadioComponent {
-
-
-  static events = {
-    [XRAY]: {
-      [START_CALIBRATION]: 'start',
-      [END_CALIBRATION]: 'end',
-    }
-  }
 
 
   /**
@@ -31,7 +27,6 @@ export default class extends RadioComponent {
     super(props);
 
     this.state = {
-      calibrating: false,
       success: false,
     };
 
@@ -39,30 +34,23 @@ export default class extends RadioComponent {
 
 
   /**
-   * Start calibration.
+   * When calibration starts / stops.
+   *
+   * @param {Object} prevProps
    */
-  start() {
-    this.setState({
-      calibrating: true,
-    });
-  }
+  componentDidUpdate(prevProps) {
 
+    if (prevProps.calibrating && !this.props.calibrating) {
 
-  /**
-   * End calibration.
-   */
-  end() {
+      // Flash success.
+      this.setState({ success: true });
 
-    this.setState({
-      calibrating: false,
-      success: true,
-    });
+      // Hide after 2s.
+      setTimeout(() => {
+        this.setState({ success: false });
+      }, 2000);
 
-    setTimeout(() => {
-      this.setState({
-        success: false
-      });
-    }, 2000);
+    }
 
   }
 
@@ -72,9 +60,11 @@ export default class extends RadioComponent {
    */
   render() {
 
+    console.log(this.props);
+
     let content = null;
 
-    if (this.state.calibrating) {
+    if (this.props.calibrating) {
       content = (
         <div>
           <div className="calibrating">Calibrating compass...</div>

@@ -118,37 +118,40 @@ export default class Orientation extends EventEmitter {
     let t = 0, maxt = 1000;
     let s = 0, maxs = 100;
 
+    let first = true;
+
     let calibrate = e => {
 
-      if (e.absolute !== true && _.isNumber(e.webkitCompassHeading)) {
+      if (first) {
 
-        if (s == 0) {
+        // If Android, break out immediately.
+        if (e.absolute === true) {
+          window.removeEventListener('deviceorientation', calibrate);
+        }
+
+        // Otherwise, notify that calibration is starting.
+        else {
           this.emit('startcalibration');
         }
 
-        // Stop after N successful samples.
-        if (++s >= maxs) {
-
-          // Store the base heading.
-          this.heading = e.webkitCompassHeading;
-
-          // Strip off the listener.
-          window.removeEventListener('deviceorientation', calibrate);
-          this.emit('endcalibration');
-
-        }
+        first = false;
 
       }
 
-      // Stop after N attempts.
-      if (++t > maxt) {
+      // Is the sensor giving a non-zero heading?
+      let isHeading = (
+        _.isNumber(e.webkitCompassHeading) &&
+        e.webkitCompassHeading !== 0
+      );
 
+      if (isHeading && ++s >= maxs) {
+
+        // Store the heading.
+        this.heading = e.webkitCompassHeading;
+
+        // Strip off the listener.
         window.removeEventListener('deviceorientation', calibrate);
-
-        // If calibration started, notify failure.
-        if (s !== 0) {
-          this.emit('failcalibration');
-        }
+        this.emit('endcalibration');
 
       }
 

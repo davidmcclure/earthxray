@@ -115,9 +115,7 @@ export default class Orientation extends EventEmitter {
    */
   calibrateCompass() {
 
-    let t = 0, maxt = 1000;
     let s = 0, maxs = 100;
-
     let first = true;
 
     let calibrate = e => {

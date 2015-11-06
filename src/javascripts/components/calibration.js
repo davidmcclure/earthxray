@@ -20,7 +20,6 @@ export default class extends RadioComponent {
 
   /**
    * Set initial state.
-   * TODO
    */
   constructor(props) {
 
@@ -48,7 +47,7 @@ export default class extends RadioComponent {
       // Hide after 2s.
       setTimeout(() => {
         this.setState({ success: false });
-      }, 2000);
+      }, 3000);
 
     }
 
@@ -60,22 +59,29 @@ export default class extends RadioComponent {
    */
   render() {
 
-    console.log(this.props);
-
     let content = null;
 
     if (this.props.calibrating) {
       content = (
         <div>
-          <div className="calibrating">Calibrating compass...</div>
-          <div className="instruction">Turn around slowly!</div>
+
+          <div className="sampling">
+            Calibrating compass{' '}
+            <i className="fa fa-fw fa-spin fa-cog"></i>
+          </div>
+
+          <div className="tip">Turn around slowly!</div>
+
         </div>
       );
     }
 
     else if (this.state.success) {
       content = (
-        <div className="success">Success!</div>
+        <div className="success">
+          Success{' '}
+          <i className="fa fa-fw fa-check-circle"></i>
+        </div>
       )
     }
 

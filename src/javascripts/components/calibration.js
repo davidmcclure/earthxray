@@ -67,7 +67,7 @@ export default class extends RadioComponent {
 
           <div className="sampling">
             Calibrating compass{' '}
-            <i className="fa fa-fw fa-spin fa-cog"></i>
+            <i className="fa fa-fw fa-spin fa-spinner"></i>
           </div>
 
           <div className="tip">Turn around slowly!</div>

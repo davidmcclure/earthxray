@@ -2,6 +2,7 @@
 
 import React, { Component } from 'react';
 import Bearing from './bearing';
+import Calibration from './calibration';
 
 
 export default class extends Component {
@@ -14,6 +15,7 @@ export default class extends Component {
     return (
       <div id="compass">
         <Bearing />
+        <Calibration />
       </div>
     );
   }

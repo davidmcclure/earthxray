@@ -14,6 +14,8 @@ export const XRAY = 'XRAY';
 export const START_XRAY = 'START_XRAY';
 export const TRACE_CENTER = 'TRACE_CENTER';
 export const ZOOM_XRAY = 'ZOOM_XRAY';
+export const START_CALIBRATION = 'START_CALIBRATION';
+export const END_CALIBRATION = 'END_CALIBRATION';
 
 // INFO
 export const TOGGLE_INFO = 'TOGGLE_INFO';

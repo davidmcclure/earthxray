@@ -65,9 +65,10 @@ export default class extends RadioComponent {
       content = (
         <div>
 
+          <i className="fa fa-2x fa-spin fa-spinner"></i>
+
           <div className="sampling">
-            Calibrating compass{' '}
-            <i className="fa fa-fw fa-spin fa-spinner"></i>
+            Calibrating compass...
           </div>
 
           <div className="tip">Turn around slowly!</div>
@@ -86,7 +87,7 @@ export default class extends RadioComponent {
     }
 
     return (
-      <div className="calibration">
+      <div className="calibration spinner">
         {content}
       </div>
     );

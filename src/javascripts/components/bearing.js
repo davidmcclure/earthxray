@@ -59,7 +59,7 @@ export default class extends RadioComponent {
       let direction = bearingToDir(degrees);
 
       bearing = (
-        <div className="bearing">
+        <div id="bearing">
           <span className="direction">{direction}</span>{' '}
           <span className="degrees">{degrees}&deg;</span>
         </div>
@@ -70,7 +70,7 @@ export default class extends RadioComponent {
     // If we're looking into space.
     else {
       bearing = (
-        <div className="bearing">
+        <div id="bearing">
           <span className="direction">∞</span>
         </div>
       );

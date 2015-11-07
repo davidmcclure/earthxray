@@ -15,9 +15,9 @@ const initialState = {
 
 const handlers = {
 
-  [START_XRAY]: () => ({
-    active: true
-  }),
+  //[START_XRAY]: () => ({
+    //active: true
+  //}),
 
   [TOGGLE_INFO]: (state) => ({
     active: !state.active

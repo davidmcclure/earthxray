@@ -1,5 +1,6 @@
 
 
+import $ from 'jquery';
 import _ from 'lodash';
 import EventEmitter from 'events';
 import THREE from 'three';
@@ -119,6 +120,12 @@ export default class Orientation extends EventEmitter {
     let first = true;
 
     let calibrate = e => {
+
+      $('#debug').text(`
+        absolute: ${e.absolute} |
+        heading: ${e.webkitCompassHeading} |
+        accruacy: ${e.webkitCompassAccuracy}
+      `);
 
       if (first) {
 

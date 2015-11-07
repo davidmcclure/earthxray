@@ -63,7 +63,7 @@ export default class extends RadioComponent {
 
     if (this.props.calibrating) {
       content = (
-        <div>
+        <div className="waiting">
 
           <i className="fa fa-2x fa-spin fa-spinner"></i>
 
@@ -80,8 +80,8 @@ export default class extends RadioComponent {
     else if (this.state.success) {
       content = (
         <div className="success">
-          Success{' '}
-          <i className="fa fa-fw fa-check-circle"></i>
+          <i className="fa fa-2x fa-check-circle"></i>
+          <div>Success!</div>
         </div>
       )
     }

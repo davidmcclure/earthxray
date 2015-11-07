@@ -2,23 +2,22 @@
 
 #calibration {
 
-  position: fixed;
-  text-align: center;
-  top: 20px;
-
-  .translate(-50%, 0);
-  left: 50vw;
+  .center-top();
 
   pointer-events: none;
   font-size: 12px;
-  color: @color-accent;
+  opacity: 0.8;
 
   i {
     margin: 10px;
+    color: @color-accent;
+  }
+
+  .sampling {
+    color: @color-accent;
   }
 
   .tip {
-    color: @gray-light;
     font-size: 10px;
   }
 

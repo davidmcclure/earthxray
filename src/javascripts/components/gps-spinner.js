@@ -1,8 +1,6 @@
 
 
 import React, { Component } from 'react';
-import Static from './static';
-import iconSVG from '../images/spinner.svg';
 
 
 export default class extends Component {
@@ -14,7 +12,7 @@ export default class extends Component {
   render() {
     return (
       <div className="spinner">
-        <Static className="fa-spin" html={iconSVG} />
+        <i className="fa fa-2x fa-spin fa-spinner"></i>
         <p>Getting location...</p>
       </div>
     );

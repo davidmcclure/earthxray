@@ -144,6 +144,7 @@ export default class Orientation extends EventEmitter {
 
         // Is the compass accurate?
         _.isNumber(e.webkitCompassAccuracy) &&
+        e.webkitCompassAccuracy >= 0 &&
         e.webkitCompassAccuracy < 50
 
       );

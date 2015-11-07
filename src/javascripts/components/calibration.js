@@ -87,7 +87,7 @@ export default class extends RadioComponent {
     }
 
     return (
-      <div className="calibration spinner">
+      <div id="calibration">
         {content}
       </div>
     );

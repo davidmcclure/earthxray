@@ -9,6 +9,7 @@ import Info from './info';
 import GPSSpinner from './gps-spinner';
 import Center from './center';
 import ZoomTip from './zoom-tip';
+import Calibration from './calibration';
 import Bearing from './bearing';
 
 
@@ -61,6 +62,12 @@ export default class extends Component {
           this.props.xray.active &&
           !this.props.info.active ?
           <Bearing /> : null
+        }
+
+        {
+          this.props.xray.active &&
+          !this.props.info.active ?
+          <Calibration /> : null
         }
 
         {

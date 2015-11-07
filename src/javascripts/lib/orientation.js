@@ -136,10 +136,16 @@ export default class Orientation extends EventEmitter {
 
       }
 
-      // Is the sensor giving a non-zero heading?
       let isHeading = (
+
+        // Is a heading defined?
         _.isNumber(e.webkitCompassHeading) &&
-        e.webkitCompassHeading !== 0
+        e.webkitCompassHeading !== 0 &&
+
+        // Is the compass accurate?
+        _.isNumber(e.webkitCompassAccuracy) &&
+        e.webkitCompassAccuracy < 50
+
       );
 
       if (isHeading && ++s >= maxs) {

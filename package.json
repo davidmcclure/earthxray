@@ -48,6 +48,7 @@
     "jquery": "^2.1.4",
     "lesshat": "^3.0.2",
     "load-bmfont": "^1.2.3",
+    "loading-svg": "^1.0.0",
     "lodash": "^3.10.0",
     "markdownify": "^0.1.0",
     "platform": "^1.3.0",

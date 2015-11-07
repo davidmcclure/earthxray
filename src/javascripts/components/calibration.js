@@ -2,8 +2,10 @@
 
 import { connect} from 'react-redux';
 import React from 'react';
-import RadioComponent from '../lib/radio-component';
 import classNames from 'classnames';
+import RadioComponent from '../lib/radio-component';
+import Static from './static';
+import barsSVG from '../images/loading-bars.svg';
 
 import {
   XRAY,
@@ -65,7 +67,7 @@ export default class extends RadioComponent {
       content = (
         <div className="waiting">
 
-          <i className="fa fa-2x fa-spin fa-spinner"></i>
+          <Static html={barsSVG} />
 
           <div className="sampling">
             Calibrating compass...

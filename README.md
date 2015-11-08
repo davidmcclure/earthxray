@@ -1,4 +1,4 @@
-# Earth X-ray
+# Earth Xray
 
 Earth Xray is a virtual reality app that renders a 3d "x-ray" of world geography - as it exists in real-world, physical space below your feet.
 

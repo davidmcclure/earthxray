@@ -14,7 +14,7 @@ export default class extends Component {
   render() {
     return (
       <div id="gps-spinner">
-        <Static html={barsSVG} />
+        <div className="sk-spinner-pulse"></div>
         <p>Getting location...</p>
       </div>
     );

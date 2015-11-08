@@ -87,7 +87,7 @@ export default class extends RadioComponent {
     if (content) {
       return (
         <div id="calibration" className={cx}>
-          <div className="pulse"></div>
+          <div className="sk-spinner-pulse"></div>
           {content}
         </div>
       );

@@ -1,6 +1,7 @@
 
 
 import React, { Component } from 'react';
+import Spinner from './spinner';
 
 
 export default class extends Component {
@@ -12,7 +13,7 @@ export default class extends Component {
   render() {
     return (
       <div id="gps-spinner">
-        <div className="pulse"></div>
+        <Spinner />
         <p>Getting location...</p>
       </div>
     );

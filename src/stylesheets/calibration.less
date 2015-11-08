@@ -8,12 +8,7 @@
   pointer-events: none;
   opacity: 0.8;
 
-  svg {
-    margin: 10px;
-    fill: black;
-  }
-
-  .waiting {
+  &.waiting {
 
     i, .sampling {
       color: @color-accent;
@@ -25,8 +20,15 @@
 
   }
 
-  .success {
+  &.success {
+
+    font-weight: bold;
     color: @brand-success;
+
+    .pulse {
+      visibility: hidden;
+    }
+
   }
 
 }

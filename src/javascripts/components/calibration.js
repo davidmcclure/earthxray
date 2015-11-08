@@ -59,35 +59,37 @@ export default class extends RadioComponent {
    */
   render() {
 
+    let cx = classNames({
+      waiting: this.props.calibrating,
+      success: this.state.success,
+    });
+
     let content = null;
 
     if (this.props.calibrating) {
       content = (
-        <div className="waiting">
-
-          <div className="pulse"></div>
-
-          <div className="sampling">
-            Calibrating compass...
-          </div>
-
+        <div>
+          <div className="sampling">Calibrating compass...</div>
           <div className="tip">Turn around slowly!</div>
-
         </div>
       );
     }
 
     else if (this.state.success) {
       content = (
-        <div className="success">
-          <i className="fa fa-2x fa-check-circle"></i>
-          <div>Success!</div>
+        <div>
+          <i className="fa fa-check-circle"></i>{' '}
+          Success!
         </div>
       )
     }
 
+    // Unmount when complete.
+    else return null;
+
     return (
-      <div id="calibration">
+      <div id="calibration" className={cx}>
+        <div className="pulse"></div>
         {content}
       </div>
     );

@@ -106,6 +106,8 @@ export default class extends Component {
    */
   listenForOrientation() {
 
+    window.props = this.props;
+
     return new Promise(resolve => {
 
       let orientation = new Orientation();

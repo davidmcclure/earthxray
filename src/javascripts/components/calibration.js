@@ -59,12 +59,7 @@ export default class extends RadioComponent {
    */
   render() {
 
-    let cx = classNames({
-      waiting: this.props.calibrating,
-      success: this.state.success,
-    });
-
-    let content = null;
+    let content;
 
     if (this.props.calibrating) {
       content = (
@@ -84,15 +79,24 @@ export default class extends RadioComponent {
       )
     }
 
-    // Unmount when complete.
-    else return null;
+    let cx = classNames({
+      waiting: this.props.calibrating,
+      success: this.state.success,
+    });
 
-    return (
-      <div id="calibration" className={cx}>
-        <div className="pulse"></div>
-        {content}
-      </div>
-    );
+    if (content) {
+      return (
+        <div id="calibration" className={cx}>
+          <div className="pulse"></div>
+          {content}
+        </div>
+      );
+    }
+
+    // Unmount when complete.
+    else {
+      return null;
+    }
 
   }
 

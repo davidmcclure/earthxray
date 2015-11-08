@@ -95,7 +95,7 @@ export default class Orientation extends EventEmitter {
         this.emit('supported');
       }
 
-      else if (++i < 10) {
+      else if (++i < 20) {
         _.delay(check, 50, i);
       }
 

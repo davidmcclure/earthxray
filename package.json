@@ -59,6 +59,7 @@
     "react-redux": "^2.1.2",
     "react-tappable": "^0.6.0",
     "redux": "^3.0.0",
+    "spinkit": "^1.2.2",
     "three": "^0.71.0",
     "three-bmfont-text": "davidmcclure/three-bmfont-text",
     "turf": "^2.0.2",

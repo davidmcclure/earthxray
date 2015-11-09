@@ -17,4 +17,9 @@ export default {
     dest: '<%= site %>/CNAME'
   },
 
+  favicon: {
+    src: 'src/templates/favicon.ico',
+    dest: '<%= site %>/favicon.ico'
+  },
+
 };

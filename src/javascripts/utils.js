@@ -290,18 +290,18 @@ export function mergeLines(segments) {
  */
 export function angularDistance(lon1, lat1, lon2, lat2) {
 
-  let φ1 = THREE.Math.degToRad(lat1);
-  let φ2 = THREE.Math.degToRad(lat2);
+  let phi1 = THREE.Math.degToRad(lat1);
+  let phi2 = THREE.Math.degToRad(lat2);
 
-  let Δφ = THREE.Math.degToRad(lat2-lat1);
-  let Δλ = THREE.Math.degToRad(lon2-lon1);
+  let dphi = THREE.Math.degToRad(lat2-lat1);
+  let dlam = THREE.Math.degToRad(lon2-lon1);
 
-  let a = Math.sin(Δφ/2) *
-          Math.sin(Δφ/2) +
-          Math.cos(φ1) *
-          Math.cos(φ2) *
-          Math.sin(Δλ/2) *
-          Math.sin(Δλ/2);
+  let a = Math.sin(dphi/2) *
+          Math.sin(dphi/2) +
+          Math.cos(phi1) *
+          Math.cos(phi2) *
+          Math.sin(dlam/2) *
+          Math.sin(dlam/2);
 
   return 2 * Math.atan2(
     Math.sqrt(a),
@@ -326,25 +326,25 @@ export function angularDistance(lon1, lat1, lon2, lat2) {
  */
 export function intermediatePoint(lon1, lat1, lon2, lat2, f) {
 
-  let δ = angularDistance(lon1, lat1, lon2, lat2);
+  let d = angularDistance(lon1, lat1, lon2, lat2);
 
-  let φ1 = THREE.Math.degToRad(lat1);
-  let φ2 = THREE.Math.degToRad(lat2);
+  let phi1 = THREE.Math.degToRad(lat1);
+  let phi2 = THREE.Math.degToRad(lat2);
 
-  let λ1 = THREE.Math.degToRad(lon1);
-  let λ2 = THREE.Math.degToRad(lon2);
+  let lam1 = THREE.Math.degToRad(lon1);
+  let lam2 = THREE.Math.degToRad(lon2);
 
-  let a = Math.sin((1-f)*δ) / Math.sin(δ);
-  let b = Math.sin(f*δ) / Math.sin(δ);
+  let a = Math.sin((1-f)*d) / Math.sin(d);
+  let b = Math.sin(f*d) / Math.sin(d);
 
-  let x = (a * Math.cos(φ1) * Math.cos(λ1)) +
-          (b * Math.cos(φ2) * Math.cos(λ2));
+  let x = (a * Math.cos(phi1) * Math.cos(lam1)) +
+          (b * Math.cos(phi2) * Math.cos(lam2));
 
-  let y = (a * Math.cos(φ1) * Math.sin(λ1)) +
-          (b * Math.cos(φ2) * Math.sin(λ2));
+  let y = (a * Math.cos(phi1) * Math.sin(lam1)) +
+          (b * Math.cos(phi2) * Math.sin(lam2));
 
-  let z = (a * Math.sin(φ1)) +
-          (b * Math.sin(φ2));
+  let z = (a * Math.sin(phi1)) +
+          (b * Math.sin(phi2));
 
   let lon = Math.atan2(y, x);
   let lat = Math.atan2(z, Math.sqrt(x*x + y*y));
@@ -370,16 +370,16 @@ export function intermediatePoint(lon1, lat1, lon2, lat2, f) {
  */
 export function bearing(lon1, lat1, lon2, lat2) {
 
-  let φ1 = THREE.Math.degToRad(lat1);
-  let φ2 = THREE.Math.degToRad(lat2);
+  let phi1 = THREE.Math.degToRad(lat1);
+  let phi2 = THREE.Math.degToRad(lat2);
 
-  let λ1 = THREE.Math.degToRad(lon1);
-  let λ2 = THREE.Math.degToRad(lon2);
+  let lam1 = THREE.Math.degToRad(lon1);
+  let lam2 = THREE.Math.degToRad(lon2);
 
-  let y = Math.sin(λ2-λ1) * Math.cos(φ2);
+  let y = Math.sin(lam2-lam1) * Math.cos(phi2);
 
-  let x = (Math.cos(φ1) * Math.sin(φ2)) -
-          (Math.sin(φ1) * Math.cos(φ2) * Math.cos(λ2-λ1));
+  let x = (Math.cos(phi1) * Math.sin(phi2)) -
+          (Math.sin(phi1) * Math.cos(phi2) * Math.cos(lam2-lam1));
 
   let b = THREE.Math.radToDeg(Math.atan2(y, x));
   return (b + 360) % 360;

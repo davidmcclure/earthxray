@@ -10793,7 +10793,7 @@
 			"spa": {"official": "Estados Unidos de Am\u00e9rica", "common": "Estados Unidos"},
 			"fin": {"official": "Amerikan yhdysvallat", "common": "Yhdysvallat"}
 		},
-		"latlng": [38, -97],
+		"latlng": [38.30341, -99.37717],
 		"demonym": "American",
 		"landlocked": false,
 		"borders": ["CAN", "MEX"],

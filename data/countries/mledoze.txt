@@ -1,1 +1,1 @@
-https://raw.githubusercontent.com/mledoze/countries/master/countries.json
+https://github.com/mledoze/countries

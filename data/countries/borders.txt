@@ -1,1 +1,1 @@
-https://github.com/johan/world.geo.json
+http://www.naturalearthdata.com/downloads/110m-cultural-vectors/

@@ -16,7 +16,8 @@ def merge_labels():
 
     labels = cca3_to_label()
     for c in countries['features']:
-        c['properties']['label'] = labels.get(c['id'])
+        cca3 = c['properties']['iso_a3']
+        c['properties']['label'] = labels.get(cca3)
 
     write_countries(countries)
 
@@ -32,7 +33,8 @@ def merge_areas():
 
     areas = cca3_to_area()
     for c in countries['features']:
-        c['properties']['area'] = areas.get(c['id'])
+        cca3 = c['properties']['iso_a3']
+        c['properties']['area'] = areas.get(cca3)
 
     write_countries(countries)
 
@@ -48,7 +50,8 @@ def merge_anchors():
 
     anchors = cca3_to_anchor()
     for c in countries['features']:
-        c['properties']['anchor'] = anchors.get(c['id'])
+        cca3 = c['properties']['iso_a3']
+        c['properties']['anchor'] = anchors.get(cca3)
 
     write_countries(countries)
 
